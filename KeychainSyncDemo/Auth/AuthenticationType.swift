@@ -1,0 +1,2 @@
+
+public typealias AuthenticationType = String
