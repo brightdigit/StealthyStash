@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B39BF14E29A53D50009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14D29A53D50009BBCAC /* FloxBxAuth */; };
+		B39BF15029A53D55009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14F29A53D55009BBCAC /* FloxBxAuth */; };
 		B3AA493C29A5282F002D40C3 /* KeychainSyncDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */; };
 		B3AA493E29A5282F002D40C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493D29A5282F002D40C3 /* ContentView.swift */; };
 		B3AA494029A52831002D40C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA493F29A52831002D40C3 /* Assets.xcassets */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B39BF14A29A53CF9009BBCAC /* FloxBxAuth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FloxBxAuth; sourceTree = "<group>"; };
+		B39BF14B29A53D37009BBCAC /* KeychainSyncDemoWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "KeychainSyncDemoWatch Watch App.entitlements"; sourceTree = "<group>"; };
 		B3AA493829A5282F002D40C3 /* KeychainSyncDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeychainSyncDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSyncDemoApp.swift; sourceTree = "<group>"; };
 		B3AA493D29A5282F002D40C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B39BF15029A53D55009BBCAC /* FloxBxAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,18 +48,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B39BF14E29A53D50009BBCAC /* FloxBxAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B39BF14C29A53D50009BBCAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B3AA492F29A5282F002D40C3 = {
 			isa = PBXGroup;
 			children = (
+				B39BF14A29A53CF9009BBCAC /* FloxBxAuth */,
 				B3AA493A29A5282F002D40C3 /* KeychainSyncDemo */,
 				B3AA494F29A52851002D40C3 /* KeychainSyncDemoWatch Watch App */,
 				B3AA493929A5282F002D40C3 /* Products */,
+				B39BF14C29A53D50009BBCAC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +105,7 @@
 		B3AA494F29A52851002D40C3 /* KeychainSyncDemoWatch Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				B39BF14B29A53D37009BBCAC /* KeychainSyncDemoWatch Watch App.entitlements */,
 				B3AA495029A52851002D40C3 /* KeychainSyncDemoWatchApp.swift */,
 				B3AA495229A52851002D40C3 /* ContentView.swift */,
 				B3AA495429A52852002D40C3 /* Assets.xcassets */,
@@ -122,6 +138,9 @@
 			dependencies = (
 			);
 			name = KeychainSyncDemo;
+			packageProductDependencies = (
+				B39BF14F29A53D55009BBCAC /* FloxBxAuth */,
+			);
 			productName = KeychainSyncDemo;
 			productReference = B3AA493829A5282F002D40C3 /* KeychainSyncDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -139,6 +158,9 @@
 			dependencies = (
 			);
 			name = "KeychainSyncDemoWatch Watch App";
+			packageProductDependencies = (
+				B39BF14D29A53D50009BBCAC /* FloxBxAuth */,
+			);
 			productName = "KeychainSyncDemoWatch Watch App";
 			productReference = B3AA494E29A52851002D40C3 /* KeychainSyncDemoWatch Watch App.app */;
 			productType = "com.apple.product-type.application";
@@ -413,6 +435,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "KeychainSyncDemoWatch Watch App/KeychainSyncDemoWatch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KeychainSyncDemoWatch Watch App/Preview Content\"";
@@ -444,6 +467,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "KeychainSyncDemoWatch Watch App/KeychainSyncDemoWatch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KeychainSyncDemoWatch Watch App/Preview Content\"";
@@ -502,6 +526,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B39BF14D29A53D50009BBCAC /* FloxBxAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FloxBxAuth;
+		};
+		B39BF14F29A53D55009BBCAC /* FloxBxAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FloxBxAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B3AA493029A5282F002D40C3 /* Project object */;
 }
