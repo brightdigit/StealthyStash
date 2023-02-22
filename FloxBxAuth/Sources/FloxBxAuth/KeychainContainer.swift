@@ -1,5 +1,4 @@
 #if canImport(Security)
-  import FelinePine
   import Foundation
   import Security
 
@@ -18,6 +17,7 @@
       self.serviceName = serviceName
     }
 
+    @available(*, deprecated)
     private func upsertAccount(
       _ account: String,
       andToken token: String
@@ -47,6 +47,7 @@
       }
     }
 
+    @available(*, deprecated)
     private func upsertAccount(
       _ account: String,
       andPassword password: String
@@ -108,6 +109,7 @@
       }
     }
 
+    @available(*, deprecated)
     @discardableResult
     private func deleteToken() throws -> Bool {
       let tokenQuery: [String: Any] = [
@@ -129,6 +131,7 @@
       }
     }
 
+    @available(*, deprecated)
     @discardableResult
     private func deletePassword() throws -> Bool {
       let tokenStatus = SecItemDelete(deletePasswordQuery)
@@ -145,6 +148,7 @@
       }
     }
 
+    @available(*, deprecated)
     public func reset() throws -> Credentials.ResetResult {
       let didDeleteToken = try deleteToken()
       let didDeletePassword = try deletePassword()
@@ -159,11 +163,4 @@
     }
   }
 
-  extension KeychainContainer: LoggerCategorized {
-    public typealias LoggersType = FloxBxLogging.Loggers
-
-    public static var loggingCategory: FloxBxLogging.LoggerCategory {
-      .keychain
-    }
-  }
 #endif

@@ -1,5 +1,6 @@
 import Foundation
 
+@available(*, deprecated)
 public protocol CredentialsContainer {
   func fetch() throws -> Credentials?
   func save(credentials: Credentials) throws
