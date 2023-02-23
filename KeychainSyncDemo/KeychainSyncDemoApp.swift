@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FloxBxAuth
 
 @main
 struct KeychainSyncDemoApp: App {

@@ -6,16 +6,22 @@
 //
 
 import Foundation
-import FloxBxAuth
 
 
-struct KeychainRepository : CredentialRepository {
+public struct KeychainRepository : CredentialRepository {
+  public init(defaultServiceName: String, defaultServerName: String, defaultAccessGroup: String? = nil, defaultSynchronizable: Bool? = nil) {
+    self.defaultServiceName = defaultServiceName
+    self.defaultServerName = defaultServerName
+    self.defaultAccessGroup = defaultAccessGroup
+    self.defaultSynchronizable = defaultSynchronizable
+  }
+  
   let defaultServiceName : String
   let defaultServerName : String
   let defaultAccessGroup : String?
   let defaultSynchronizable : Bool?
   
-  func addItem(_ item: CredentialItem) throws {
+  public func addItem(_ item: CredentialItem) throws {
     let dictionaryAny = [
       kSecClass as String: item.itemClass.classValue,
       kSecAttrAccount as String: item.account,
