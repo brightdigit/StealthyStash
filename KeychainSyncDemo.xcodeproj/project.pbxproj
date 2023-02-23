@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B341704F29A7D9E100617F86 /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B341704E29A7D9E100617F86 /* KeychainRepository.swift */; };
+		B341705029A7ED0500617F86 /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B341704E29A7D9E100617F86 /* KeychainRepository.swift */; };
 		B39BF14E29A53D50009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14D29A53D50009BBCAC /* FloxBxAuth */; };
 		B39BF15029A53D55009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14F29A53D55009BBCAC /* FloxBxAuth */; };
 		B39BF15329A6C116009BBCAC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493D29A5282F002D40C3 /* ContentView.swift */; };
@@ -20,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B341704E29A7D9E100617F86 /* KeychainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainRepository.swift; sourceTree = "<group>"; };
 		B39BF14A29A53CF9009BBCAC /* FloxBxAuth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FloxBxAuth; sourceTree = "<group>"; };
 		B39BF14B29A53D37009BBCAC /* KeychainSyncDemoWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "KeychainSyncDemoWatch Watch App.entitlements"; sourceTree = "<group>"; };
 		B3AA493829A5282F002D40C3 /* KeychainSyncDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeychainSyncDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +91,7 @@
 				B3AA493F29A52831002D40C3 /* Assets.xcassets */,
 				B3AA494129A52831002D40C3 /* KeychainSyncDemo.entitlements */,
 				B3AA494229A52831002D40C3 /* Preview Content */,
+				B341704E29A7D9E100617F86 /* KeychainRepository.swift */,
 			);
 			path = KeychainSyncDemo;
 			sourceTree = "<group>";
@@ -225,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3AA493E29A5282F002D40C3 /* ContentView.swift in Sources */,
+				B341704F29A7D9E100617F86 /* KeychainRepository.swift in Sources */,
 				B3AA493C29A5282F002D40C3 /* KeychainSyncDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B39BF15329A6C116009BBCAC /* ContentView.swift in Sources */,
+				B341705029A7ED0500617F86 /* KeychainRepository.swift in Sources */,
 				B39BF15429A6C116009BBCAC /* KeychainSyncDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
