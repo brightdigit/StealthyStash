@@ -116,7 +116,7 @@ extension InternetPasswordItemBuilder {
       self.protocol != source.protocol,
       self.port != source.port,
       self.path != source.path
-    ].first {!$0}
+    ].first {!$0} ?? true
   }
 }
 
@@ -176,11 +176,12 @@ struct InternetPasswordView: View {
   internal init(object: InternetPasswordObject) {
     self._object = .init(wrappedValue: object)
   }
-  
+  @Environment(\.dismiss) private var dismiss
+  @State var shouldConfirmDismiss = false
   @StateObject var object : InternetPasswordObject
   
-  var body: some View {
-    Form{
+  fileprivate func InternetPasswordFormContent() -> some View {
+    Group{
       Section("Account") {
         TextField("account", text: $object.item.account)
       }
@@ -217,6 +218,12 @@ struct InternetPasswordView: View {
       Section("Description") {
         TextEditor(text: $object.item.descriptionText).frame(height: 80.0)
       }
+    }
+  }
+  
+  var body: some View {
+    Form{
+      InternetPasswordFormContent()
     }.toolbar {
       ToolbarItemGroup(placement: .navigationBarLeading) {
         Button("Back") {
