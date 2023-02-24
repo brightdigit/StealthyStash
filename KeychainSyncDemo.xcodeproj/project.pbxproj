@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B31EAE4529A8F820004C4A56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31EAE4429A8F820004C4A56 /* ContentView.swift */; };
+		B31EAE4729A8F8E7004C4A56 /* InternetPasswordRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31EAE4629A8F8E7004C4A56 /* InternetPasswordRootView.swift */; };
+		B31EAE4929A90B83004C4A56 /* InternetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31EAE4829A90B83004C4A56 /* InternetPasswordView.swift */; };
+		B31EAE4B29A915B9004C4A56 /* internet-passwords.json in Resources */ = {isa = PBXBuildFile; fileRef = B31EAE4A29A915B9004C4A56 /* internet-passwords.json */; };
+		B31EAE4D29A915E2004C4A56 /* InternetPasswordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31EAE4C29A915E2004C4A56 /* InternetPasswordData.swift */; };
 		B39BF14E29A53D50009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14D29A53D50009BBCAC /* FloxBxAuth */; };
 		B39BF15029A53D55009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14F29A53D55009BBCAC /* FloxBxAuth */; };
 		B39BF15329A6C116009BBCAC /* LegacyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493D29A5282F002D40C3 /* LegacyContentView.swift */; };
@@ -20,6 +25,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B31EAE4429A8F820004C4A56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B31EAE4629A8F8E7004C4A56 /* InternetPasswordRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetPasswordRootView.swift; sourceTree = "<group>"; };
+		B31EAE4829A90B83004C4A56 /* InternetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetPasswordView.swift; sourceTree = "<group>"; };
+		B31EAE4A29A915B9004C4A56 /* internet-passwords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "internet-passwords.json"; sourceTree = "<group>"; };
+		B31EAE4C29A915E2004C4A56 /* InternetPasswordData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetPasswordData.swift; sourceTree = "<group>"; };
 		B39BF14A29A53CF9009BBCAC /* FloxBxAuth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FloxBxAuth; sourceTree = "<group>"; };
 		B39BF14B29A53D37009BBCAC /* KeychainSyncDemoWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "KeychainSyncDemoWatch Watch App.entitlements"; sourceTree = "<group>"; };
 		B3AA493829A5282F002D40C3 /* KeychainSyncDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeychainSyncDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,11 +93,16 @@
 		B3AA493A29A5282F002D40C3 /* KeychainSyncDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B31EAE4A29A915B9004C4A56 /* internet-passwords.json */,
 				B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */,
 				B3AA493D29A5282F002D40C3 /* LegacyContentView.swift */,
 				B3AA493F29A52831002D40C3 /* Assets.xcassets */,
 				B3AA494129A52831002D40C3 /* KeychainSyncDemo.entitlements */,
 				B3AA494229A52831002D40C3 /* Preview Content */,
+				B31EAE4429A8F820004C4A56 /* ContentView.swift */,
+				B31EAE4629A8F8E7004C4A56 /* InternetPasswordRootView.swift */,
+				B31EAE4829A90B83004C4A56 /* InternetPasswordView.swift */,
+				B31EAE4C29A915E2004C4A56 /* InternetPasswordData.swift */,
 			);
 			path = KeychainSyncDemo;
 			sourceTree = "<group>";
@@ -204,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3AA494429A52831002D40C3 /* Preview Assets.xcassets in Resources */,
+				B31EAE4B29A915B9004C4A56 /* internet-passwords.json in Resources */,
 				B3AA494029A52831002D40C3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,8 +240,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B31EAE4729A8F8E7004C4A56 /* InternetPasswordRootView.swift in Sources */,
 				B3AA493E29A5282F002D40C3 /* LegacyContentView.swift in Sources */,
 				B3AA493C29A5282F002D40C3 /* KeychainSyncDemoApp.swift in Sources */,
+				B31EAE4D29A915E2004C4A56 /* InternetPasswordData.swift in Sources */,
+				B31EAE4529A8F820004C4A56 /* ContentView.swift in Sources */,
+				B31EAE4929A90B83004C4A56 /* InternetPasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

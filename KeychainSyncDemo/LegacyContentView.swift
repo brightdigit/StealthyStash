@@ -50,13 +50,13 @@ struct LegacyContentView: View {
             Toggle("Use Type", isOn: $object.item.containsType)
             Group{
 #if os(watchOS)
-              Stepper( value: $object.item.type) {
-                Text(self.object.item.type, format: .number)
+              Stepper( value: $object.item.typeValue) {
+                Text(self.object.item.typeValue, format: .number)
               }
 #else
               HStack{
-                Stepper("Type", value: $object.item.type)
-                TextField("Type Value", value:  $object.item.type, formatter: NumberFormatter())
+                Stepper("Type", value: $object.item.typeValue)
+                TextField("Type Value", value:  $object.item.typeValue, formatter: NumberFormatter())
                 
               }
 #endif
@@ -104,7 +104,7 @@ struct LegacyContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct LegacyContentView_Previews: PreviewProvider {
     static var previews: some View {
       LegacyContentView(repository: LegacyPreviewRepository(), lastError: KeychainError.unexpectedPasswordData)
     }
