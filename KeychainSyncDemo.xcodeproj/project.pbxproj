@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		B39BF14E29A53D50009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14D29A53D50009BBCAC /* FloxBxAuth */; };
 		B39BF15029A53D55009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14F29A53D55009BBCAC /* FloxBxAuth */; };
-		B39BF15329A6C116009BBCAC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493D29A5282F002D40C3 /* ContentView.swift */; };
+		B39BF15329A6C116009BBCAC /* LegacyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493D29A5282F002D40C3 /* LegacyContentView.swift */; };
 		B39BF15429A6C116009BBCAC /* KeychainSyncDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */; };
 		B3AA493C29A5282F002D40C3 /* KeychainSyncDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */; };
-		B3AA493E29A5282F002D40C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493D29A5282F002D40C3 /* ContentView.swift */; };
+		B3AA493E29A5282F002D40C3 /* LegacyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493D29A5282F002D40C3 /* LegacyContentView.swift */; };
 		B3AA494029A52831002D40C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA493F29A52831002D40C3 /* Assets.xcassets */; };
 		B3AA494429A52831002D40C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA494329A52831002D40C3 /* Preview Assets.xcassets */; };
 		B3AA495529A52852002D40C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA495429A52852002D40C3 /* Assets.xcassets */; };
@@ -24,7 +24,7 @@
 		B39BF14B29A53D37009BBCAC /* KeychainSyncDemoWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "KeychainSyncDemoWatch Watch App.entitlements"; sourceTree = "<group>"; };
 		B3AA493829A5282F002D40C3 /* KeychainSyncDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeychainSyncDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSyncDemoApp.swift; sourceTree = "<group>"; };
-		B3AA493D29A5282F002D40C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B3AA493D29A5282F002D40C3 /* LegacyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyContentView.swift; sourceTree = "<group>"; };
 		B3AA493F29A52831002D40C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3AA494129A52831002D40C3 /* KeychainSyncDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeychainSyncDemo.entitlements; sourceTree = "<group>"; };
 		B3AA494329A52831002D40C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */,
-				B3AA493D29A5282F002D40C3 /* ContentView.swift */,
+				B3AA493D29A5282F002D40C3 /* LegacyContentView.swift */,
 				B3AA493F29A52831002D40C3 /* Assets.xcassets */,
 				B3AA494129A52831002D40C3 /* KeychainSyncDemo.entitlements */,
 				B3AA494229A52831002D40C3 /* Preview Content */,
@@ -224,7 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3AA493E29A5282F002D40C3 /* ContentView.swift in Sources */,
+				B3AA493E29A5282F002D40C3 /* LegacyContentView.swift in Sources */,
 				B3AA493C29A5282F002D40C3 /* KeychainSyncDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,7 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B39BF15329A6C116009BBCAC /* ContentView.swift in Sources */,
+				B39BF15329A6C116009BBCAC /* LegacyContentView.swift in Sources */,
 				B39BF15429A6C116009BBCAC /* KeychainSyncDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,9 +8,9 @@
 import Foundation
 import Combine
 
-public struct PreviewRepository : CredentialRepository {
+public struct LegacyPreviewRepository : LegacyCredentialRepository {
   public init () {}
-  public func addItem(_ item: CredentialItem) {
+  public func addItem(_ item: LegacyCredentialItem) {
     
   }
   
@@ -18,13 +18,13 @@ public struct PreviewRepository : CredentialRepository {
 }
 
 
-
-public protocol CredentialRepository {
-  func addItem(_ item: CredentialItem) throws
+@available(*, deprecated)
+public protocol LegacyCredentialRepository {
+  func addItem(_ item: LegacyCredentialItem) throws
 }
 
-public struct CreditialItemBuilder {
-  public  init(itemClass: ItemClass = .generic, dataString: String = "", account: String = "", type: Int = 0, containsType: Bool = false, label: String = "", containsLabel: Bool = false) {
+public struct LegacyCreditialItemBuilder {
+  public  init(itemClass: LegacyItemClass = .generic, dataString: String = "", account: String = "", type: Int = 0, containsType: Bool = false, label: String = "", containsLabel: Bool = false) {
     self.itemClass = itemClass
     self.dataString = dataString
     self.account = account
@@ -34,7 +34,7 @@ public struct CreditialItemBuilder {
     self.containsLabel = containsLabel
   }
   
-  public var itemClass : ItemClass = .generic
+  public var itemClass : LegacyItemClass = .generic
   public var dataString : String = ""
   public var account: String = ""
   public var type : Int = 0
@@ -42,8 +42,8 @@ public struct CreditialItemBuilder {
   public var label : String = ""
   public var containsLabel : Bool = false
 }
-public struct CredentialItem {
-  public  init(itemClass: ItemClass, data: Data, account: String, type: Int? = nil, label: String? = nil, isSynchronizable : Bool? = nil) {
+public struct LegacyCredentialItem {
+  public  init(itemClass: LegacyItemClass, data: Data, account: String, type: Int? = nil, label: String? = nil, isSynchronizable : Bool? = nil) {
     self.itemClass = itemClass
     self.data = data
     self.account = account
@@ -55,7 +55,7 @@ public struct CredentialItem {
     self.isSynchronizable = isSynchronizable
   }
   
-  let itemClass : ItemClass
+  let itemClass : LegacyItemClass
   let data : Data
   let account: String
   let type : Int?
@@ -66,8 +66,8 @@ public struct CredentialItem {
   let isSynchronizable : Bool?
 }
 
-public extension CredentialItem {
-  init (builder : CreditialItemBuilder) {
+public extension LegacyCredentialItem {
+  init (builder : LegacyCreditialItemBuilder) {
     guard let data = builder.dataString.data(
       using: .utf8,
       allowLossyConversion: false
@@ -80,15 +80,16 @@ public extension CredentialItem {
   }
 }
 
-public class AddItemObject : ObservableObject {
-  public  init(repository: CredentialRepository, item: CreditialItemBuilder = CreditialItemBuilder(), lastError: KeychainError? = nil) {
+@available(*, deprecated)
+public class LegacyAddItemObject : ObservableObject {
+  public  init(repository: LegacyCredentialRepository, item: LegacyCreditialItemBuilder = LegacyCreditialItemBuilder(), lastError: KeychainError? = nil) {
     self.repository = repository
     self.item = item
     self.lastError = lastError
     
     let itemAddResult = self.triggerAddSubject
       .map { self.item  }
-      .map(CredentialItem.init(builder:))
+      .map(LegacyCredentialItem.init(builder:))
       .map { item in
         Result {
           try self.repository.addItem(item)
@@ -97,7 +98,7 @@ public class AddItemObject : ObservableObject {
     
     
     itemAddResult.compactMap{try? $0.get()}.map {
-      CreditialItemBuilder()
+      LegacyCreditialItemBuilder()
     }.assign(to: &self.$item)
     
     itemAddResult.compactMap{ result -> KeychainError? in
@@ -111,9 +112,9 @@ public class AddItemObject : ObservableObject {
   }
   
   
-  let repository : CredentialRepository
+  let repository : LegacyCredentialRepository
   
-  @Published public var item = CreditialItemBuilder()
+  @Published public var item = LegacyCreditialItemBuilder()
   let triggerAddSubject = PassthroughSubject<Void, Never>()
   @Published public var lastError : KeychainError?
   
@@ -123,7 +124,8 @@ public class AddItemObject : ObservableObject {
   }
 }
 
-public enum ItemClass : Int, CaseIterable, CustomStringConvertible, Identifiable, Hashable {
+@available(*, deprecated)
+public enum LegacyItemClass : Int, CaseIterable, CustomStringConvertible, Identifiable, Hashable {
 
   
  

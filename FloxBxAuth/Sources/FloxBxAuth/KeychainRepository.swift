@@ -8,7 +8,7 @@
 import Foundation
 
 
-public struct KeychainRepository : CredentialRepository {
+public struct KeychainRepository : LegacyCredentialRepository {
   public init(defaultServiceName: String, defaultServerName: String, defaultAccessGroup: String? = nil, defaultSynchronizable: Bool? = nil) {
     self.defaultServiceName = defaultServiceName
     self.defaultServerName = defaultServerName
@@ -21,7 +21,7 @@ public struct KeychainRepository : CredentialRepository {
   let defaultAccessGroup : String?
   let defaultSynchronizable : Bool?
   
-  public func addItem(_ item: CredentialItem) throws {
+  public func addItem(_ item: LegacyCredentialItem) throws {
     let dictionaryAny = [
       kSecClass as String: item.itemClass.classValue,
       kSecAttrAccount as String: item.account,

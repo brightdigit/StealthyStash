@@ -9,17 +9,12 @@ import SwiftUI
 import Combine
 import FloxBxAuth
 
-
-struct SheetErrorModel : Identifiable {
-  let id : UUID
-  let error: Error
-}
-
-struct ContentView: View {
-  @StateObject var object : AddItemObject
+@available(*, deprecated)
+struct LegacyContentView: View {
+  @StateObject var object : LegacyAddItemObject
   @State var shouldDisplayAlert : Bool = false
   
-  init(repository : CredentialRepository,item: CreditialItemBuilder = CreditialItemBuilder(), lastError: KeychainError? = nil) {
+  init(repository : LegacyCredentialRepository,item: LegacyCreditialItemBuilder = LegacyCreditialItemBuilder(), lastError: KeychainError? = nil) {
     self._object = StateObject(wrappedValue: .init(repository: repository, item: item, lastError: lastError))
   }
     var body: some View {
@@ -27,7 +22,7 @@ struct ContentView: View {
         Form{
           Section{
             Picker("Type", selection: $object.item.itemClass) {
-              ForEach(ItemClass.allCases) { type in
+              ForEach(LegacyItemClass.allCases) { type in
                 Text(type.description).tag(type)
               }
             }
@@ -111,6 +106,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-      ContentView(repository: PreviewRepository(), lastError: KeychainError.unexpectedPasswordData)
+      LegacyContentView(repository: LegacyPreviewRepository(), lastError: KeychainError.unexpectedPasswordData)
     }
 }
