@@ -80,6 +80,26 @@ extension InternetPasswordItem {
     )
   }
 }
+
+extension InternetPasswordItem {
+  init(builder: InternetPasswordItemBuilder) {
+    self.init(
+      account: builder.account,
+      data: builder.data,
+      accessGroup: builder.accessGroup,
+      createdAt: builder.createdAt,
+      modifiedAt: builder.modifiedAt,
+      description: builder.description,
+      type: builder.type,
+      label: builder.label,
+      server: builder.server,
+      protocol: builder.protocol,
+      port: builder.port,
+      path: builder.path,
+      isSynchronizable: builder.isSynchronizable
+    )
+  }
+}
 class PreviewInternetPasswordObject : ObservableObject {
   let internetPasswords : [InternetPasswordItem]
   

@@ -6,8 +6,17 @@
 //
 
 import SwiftUI
+import Combine
 
 struct PreviewRepository : CredentialsRepository {
+  func create(_ item: InternetPasswordItem) throws {
+    
+  }
+  
+  func update(_ item: InternetPasswordItem) throws {
+    
+  }
+  
   
 }
 public struct InternetPasswordItemBuilder {
@@ -148,7 +157,8 @@ extension InternetPasswordItemBuilder {
 }
 
 protocol CredentialsRepository {
-  
+  func create(_ item: InternetPasswordItem) throws
+  func update(_ item: InternetPasswordItem) throws
 }
 
 class InternetPasswordObject : ObservableObject {
@@ -156,12 +166,32 @@ class InternetPasswordObject : ObservableObject {
     self.item = item
     self.repository = repository
     self.isNew = isNew
+    
+    let createError = createTriggerSubject
+      .map{self.item}
+      .map(InternetPasswordItem.init)
+      .tryMap(self.repository.create(_:))
+      .map{Optional<Error>.none}
+      .catch{Just(Optional.some($0))}
+      
+    
+    let updateError = updateTriggerSubject
+      .map{self.item}
+      .map(InternetPasswordItem.init)
+      .tryMap(self.repository.update)
+      .map{Optional<Error>.none}
+      .catch{Just(Optional.some($0))}
+    
+    Publishers.Merge(createError, updateError)
+      .compactMap{$0}
+      .assign(to: &self.$lastError)
   }
   
   
-  
-  
+  @Published var lastError: Error?
   @Published var item : InternetPasswordItemBuilder
+  let createTriggerSubject = PassthroughSubject<Void, Never>()
+  let updateTriggerSubject = PassthroughSubject<Void, Never>()
   let repository : CredentialsRepository
   let isNew : Bool
 }
@@ -224,10 +254,28 @@ struct InternetPasswordView: View {
   var body: some View {
     Form{
       InternetPasswordFormContent()
-    }.toolbar {
+    }
+    .alert("Unsaved Changes", isPresented: self.$shouldConfirmDismiss, actions: {
+      Button("Save and Go Back.") {
+        
+      }
+      Button("Undo Changes and Go Back.") {
+        
+      }
+      
+      Button("Cancel") {
+        
+      }
+    }, message: {
+      Text("You have unsaved changes.")
+    })
+    .toolbar {
       ToolbarItemGroup(placement: .navigationBarLeading) {
         Button("Back") {
-          
+          guard self.object.item.isModified else {
+            dismiss()
+            return
+          }
         }
       }
       ToolbarItemGroup(placement: .navigationBarTrailing) {
