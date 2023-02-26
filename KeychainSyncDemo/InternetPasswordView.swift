@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import FloxBxAuth
 
 struct PreviewRepository : CredentialsRepository {
   func create(_ item: InternetPasswordItem) throws {
@@ -167,33 +168,57 @@ class InternetPasswordObject : ObservableObject {
     self.repository = repository
     self.isNew = isNew
     
-    let createError = createTriggerSubject
+    let savePublisher = saveTriggerSubject
       .map{self.item}
       .map(InternetPasswordItem.init)
-      .tryMap(self.repository.create(_:))
-      .map{Optional<Error>.none}
-      .catch{Just(Optional.some($0))}
+      .tryMap { item in
+        if self.isNew {
+          try self.repository.create(item)
+        } else {
+          try self.repository.update(item)
+        }
+      }
+      .share()
+    
+    self.saveCompletedCancellable = savePublisher
+      .map(Optional<Void>.some)
+      .replaceError(with: Optional<Void>.none)
+      .compactMap{$0}
+      .subscribe(self.saveCompletedSubject)
       
     
-    let updateError = updateTriggerSubject
-      .map{self.item}
-      .map(InternetPasswordItem.init)
-      .tryMap(self.repository.update)
+    savePublisher
       .map{Optional<Error>.none}
       .catch{Just(Optional.some($0))}
-    
-    Publishers.Merge(createError, updateError)
-      .compactMap{$0}
+      .compactMap{$0 as? KeychainError}
+      .receive(on: DispatchQueue.main)
       .assign(to: &self.$lastError)
+   
+    clearErrorSubject
+      .filter{$0 == self.lastError}
+      .map{_ in Optional<KeychainError>.none}
+      .receive(on: DispatchQueue.main)
+      .assign(to: &self.$lastError)
+    
+  }
+  
+  func save () {
+    self.saveTriggerSubject.send()
+  }
+  
+  func clearError (_ error: KeychainError) {
+    self.clearErrorSubject.send(error)
   }
   
   
-  @Published var lastError: Error?
+  @Published var lastError: KeychainError?
   @Published var item : InternetPasswordItemBuilder
-  let createTriggerSubject = PassthroughSubject<Void, Never>()
-  let updateTriggerSubject = PassthroughSubject<Void, Never>()
+  let saveTriggerSubject = PassthroughSubject<Void, Never>()
+  let clearErrorSubject = PassthroughSubject<KeychainError, Never>()
+  let saveCompletedSubject = PassthroughSubject<Void, Never>()
   let repository : CredentialsRepository
   let isNew : Bool
+  var saveCompletedCancellable : AnyCancellable!
 }
 
 extension InternetPasswordObject {
@@ -208,6 +233,8 @@ struct InternetPasswordView: View {
   }
   @Environment(\.dismiss) private var dismiss
   @State var shouldConfirmDismiss = false
+  @State var isErrorAlertVisible = false
+  @State var dismissOnSave = false
   @StateObject var object : InternetPasswordObject
   
   fileprivate func InternetPasswordFormContent() -> some View {
@@ -255,9 +282,18 @@ struct InternetPasswordView: View {
     Form{
       InternetPasswordFormContent()
     }
+    .alert(isPresented: self.$isErrorAlertVisible, error: self.object.lastError, actions: { error in
+      
+      Button("OK") {
+        self.object.clearError(error)
+      }
+    }, message: { error in
+      Text(error.localizedDescription)
+    })
     .alert("Unsaved Changes", isPresented: self.$shouldConfirmDismiss, actions: {
       Button("Save and Go Back.") {
-        
+        dismissOnSave = true
+        self.object.save()
       }
       Button("Undo Changes and Go Back.") {
         
@@ -280,7 +316,7 @@ struct InternetPasswordView: View {
       }
       ToolbarItemGroup(placement: .navigationBarTrailing) {
         Button("Save") {
-          
+          self.object.save()
         }
       }
     }.navigationBarBackButtonHidden(true)
