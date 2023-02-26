@@ -9,9 +9,46 @@ import SwiftUI
 import Combine
 import FloxBxAuth
 
+struct KeychainRepository : CredentialsRepository {
+  public init(defaultServiceName: String, defaultServerName: String, defaultAccessGroup: String? = nil, defaultSynchronizable: Bool? = nil) {
+    self.defaultServiceName = defaultServiceName
+    self.defaultServerName = defaultServerName
+    self.defaultAccessGroup = defaultAccessGroup
+    self.defaultSynchronizable = defaultSynchronizable
+  }
+  
+  let defaultServiceName : String
+  let defaultServerName : String
+  let defaultAccessGroup : String?
+  let defaultSynchronizable : Bool?
+  
+  func create(_ item: InternetPasswordItem) throws {
+    let dictionaryAny = [
+      kSecClass as String: kSecClassInternetPassword,
+      kSecAttrAccount as String: item.account,
+      kSecValueData as String: item.data,
+      kSecAttrServer as String: item.server,
+      kSecAttrAccessGroup as String: item.accessGroup ?? defaultAccessGroup as Any,
+      kSecAttrSynchronizable as String: item.isSynchronizable ?? self.defaultSynchronizable
+    ] as [String : Any?]
+    
+    let query = dictionaryAny.compactMapValues{ $0} as CFDictionary
+    
+    let status = SecItemAdd(query, nil)
+    
+    guard status == errSecSuccess else {
+      throw KeychainError.unhandledError(status: status)
+    }
+  }
+  
+  func update(_ item: InternetPasswordItem) throws {
+    
+  }
+}
+
 struct PreviewRepository : CredentialsRepository {
   func create(_ item: InternetPasswordItem) throws {
-    
+  
   }
   
   func update(_ item: InternetPasswordItem) throws {
