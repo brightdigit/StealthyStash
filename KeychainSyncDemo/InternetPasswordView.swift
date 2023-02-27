@@ -44,6 +44,33 @@ struct KeychainRepository : CredentialsRepository {
   func update(_ item: InternetPasswordItem) throws {
     
   }
+  
+  func query(_ query: Query) throws -> [InternetPasswordItem] {
+    let dictionaryAny = [
+      kSecClass as String: kSecClassInternetPassword,
+      kSecAttrServer as String: defaultServerName,
+      kSecReturnAttributes as String: true,
+      kSecReturnData as String: true,
+      kSecAttrAccessGroup as String: defaultAccessGroup,
+      kSecAttrSynchronizable as String: kSecAttrSynchronizableAny
+    ] as [String : Any?]
+    
+    var item: CFTypeRef?
+    let query = dictionaryAny.compactMapValues{$0} as CFDictionary
+    
+    let status = SecItemCopyMatching(query, &item)
+    
+    dump(item)
+    
+    guard status != errSecItemNotFound else {
+      return []
+    }
+    guard let itemDictionaries = item as? [[String : Any]], status == errSecSuccess else {
+      throw KeychainError.unhandledError(status: status)
+    }
+    
+    fatalError()
+  }
 }
 
 struct PreviewRepository : CredentialsRepository {
@@ -55,6 +82,9 @@ struct PreviewRepository : CredentialsRepository {
     
   }
   
+  func query(_ query: Query) throws -> [InternetPasswordItem] {
+    fatalError()
+  }
   
 }
 public struct InternetPasswordItemBuilder {
@@ -197,6 +227,7 @@ extension InternetPasswordItemBuilder {
 protocol CredentialsRepository {
   func create(_ item: InternetPasswordItem) throws
   func update(_ item: InternetPasswordItem) throws
+  func query(_ query: Query) throws -> [InternetPasswordItem]  
 }
 
 class InternetPasswordObject : ObservableObject {

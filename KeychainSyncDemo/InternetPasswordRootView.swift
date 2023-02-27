@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Combine
+import FloxBxAuth
 
 public typealias ServerProtocol = String
 public typealias AuthenticationType = String
@@ -107,11 +109,72 @@ class PreviewInternetPasswordObject : ObservableObject {
     self.internetPasswords = internetPasswords
   }
 }
+
+struct Query {
+  init (string : String?) {
+    
+  }
+}
+
+class InternetPasswordListObject : ObservableObject {
+  internal init(repository: CredentialsRepository, internetPasswords: [InternetPasswordItem]? = nil) {
+    self.repository = repository
+    self.internetPasswords = internetPasswords
+    
+    let queryPublisher = self.querySubject
+      .map(Query.init)
+      .tryMap(self.repository.query)
+      .share()
+    
+    
+    queryPublisher
+      .map{_ in Optional<Error>.none}
+      .catch{Just(Optional<Error>.some($0))}
+      .compactMap{ $0 as? KeychainError }
+      .assign(to: &self.$lastError)
+    
+    queryPublisher
+      .map(Optional<[InternetPasswordItem]>.some)
+      .replaceError(with: nil)
+      .print()
+      .assign(to: &self.$internetPasswords)
+  }
+  
+  let repository : CredentialsRepository
+  @Published var internetPasswords: [InternetPasswordItem]?
+  let querySubject  = PassthroughSubject<String?, Never> ()
+  @Published var lastError : KeychainError?
+  
+
+  func query (_ string: String?) {
+    self.querySubject.send(string)
+  }
+}
 struct InternetPasswordRootView: View {
-  let object : PreviewInternetPasswordObject
+  internal init(object: InternetPasswordListObject, query: String? = nil, createNewItem: Bool = false) {
+    self.object = object
+    self.query = query
+    self.createNewItem = createNewItem
+  }
+  
+  let object : InternetPasswordListObject
   @State var query : String?
   @State var createNewItem = false
-    var body: some View {
+  fileprivate func InternetPasswordList(internetPasswords: [InternetPasswordItem]) -> some View {
+    return List(internetPasswords)
+    { item in
+      NavigationLink(value: item) {
+        HStack{
+          Text(item.account)
+          Spacer()
+          Text(item.dataString).bold()
+        }
+        
+      }
+    }
+  }
+  
+  var body: some View {
       NavigationStack {
         Form{
           Section{
@@ -136,17 +199,11 @@ struct InternetPasswordRootView: View {
 
           }
           Section{
-            List(self.object.internetPasswords)
-              { item in
-                NavigationLink(value: item) {
-                  HStack{
-                    Text(item.account)
-                    Spacer()
-                    Text(item.dataString).bold()
-                  }
-                  
-                }
-              }
+            if let internetPasswords = self.object.internetPasswords {
+              InternetPasswordList(internetPasswords: internetPasswords)
+            } else {
+              ProgressView()
+            }
             
           } header: {
             HStack{
@@ -167,6 +224,8 @@ struct InternetPasswordRootView: View {
             InternetPasswordView(repository: PreviewRepository(), item: item).navigationTitle(item.account)
           }.navigationDestination(isPresented: self.$createNewItem) {
             InternetPasswordView(repository: PreviewRepository())
+          }.onAppear {
+            self.object.query(self.query)
           }
       }
     }
@@ -174,7 +233,7 @@ struct InternetPasswordRootView: View {
 
 struct InternetPasswordRootView_Previews: PreviewProvider {
     static var previews: some View {
-      InternetPasswordRootView(object: .init(internetPasswords:
+      InternetPasswordRootView(object: .init(repository: PreviewRepository(), internetPasswords:
                                               InternetPasswordItem.previewCollection
                                             ))
     }
