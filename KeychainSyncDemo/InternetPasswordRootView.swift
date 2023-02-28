@@ -9,15 +9,133 @@ import SwiftUI
 import Combine
 import FloxBxAuth
 
-public typealias ServerProtocol = String
+extension Int {
+  func trimZero () -> Int? {
+    return self == 0 ? nil : self
+  }
+}
+public enum ServerProtocol : String {
+  case ftp
+  case ftpaccount
+  case http
+  case irc
+  case nntp
+  case pop3
+  case smtp
+  case socks
+  case imap
+  case ldap
+  case appletalk
+  case afp
+  case telnet
+  case ssh
+  case ftps
+  case https
+  case httpproxy
+  case httpsproxy
+  case ftpproxy
+  case smb
+  case rtsp
+  case rtspproxy
+  case daap
+  case eppc
+  case ipp
+  case nntps
+  case ldaps
+  case telnets
+  case imaps
+  case ircs
+  case pop3s
+  
+  init?(scheme : String) {
+    switch scheme {
+    case "http": self = .http
+    default: return nil
+    }
+  }
+  init?(number : CFString) {
+    switch number {
+    case kSecAttrProtocolFTP: self = .ftp
+      
+    case kSecAttrProtocolFTPAccount: self = .ftpaccount
+      
+    case kSecAttrProtocolHTTP: self = .http
+
+    case kSecAttrProtocolIRC: self = .irc
+
+    case kSecAttrProtocolNNTP: self = .nntp
+
+    case kSecAttrProtocolPOP3: self = .pop3
+
+    case kSecAttrProtocolSMTP: self = .smtp
+
+    case kSecAttrProtocolSOCKS: self = .socks
+
+    case kSecAttrProtocolIMAP: self = .imap
+
+    case kSecAttrProtocolLDAP: self = .ldap
+
+    case kSecAttrProtocolAppleTalk: self = .appletalk
+
+    case kSecAttrProtocolAFP: self = .afp
+
+    case kSecAttrProtocolTelnet: self = .telnet
+
+    case kSecAttrProtocolSSH: self = .ssh
+
+    case kSecAttrProtocolFTPS: self = .ftps
+
+    case kSecAttrProtocolHTTPS: self = .https
+
+    case kSecAttrProtocolHTTPProxy: self = .httpproxy
+
+    case kSecAttrProtocolHTTPSProxy: self = .httpsproxy
+
+    case kSecAttrProtocolFTPProxy: self = .ftpproxy
+
+    case kSecAttrProtocolSMB: self = .smb
+
+    case kSecAttrProtocolRTSP: self = .rtsp
+
+    case kSecAttrProtocolRTSPProxy: self = .rtspproxy
+
+    case kSecAttrProtocolDAAP: self = .daap
+
+    case kSecAttrProtocolEPPC: self = .eppc
+
+    case kSecAttrProtocolIPP: self = .ipp
+
+    case kSecAttrProtocolNNTPS: self = .nntps
+
+    case kSecAttrProtocolLDAPS: self = .ldaps
+
+    case kSecAttrProtocolTelnetS: self = .telnets
+
+    case kSecAttrProtocolIMAPS: self = .imaps
+
+    case kSecAttrProtocolIRCS: self = .ircs
+
+    case kSecAttrProtocolPOP3S: self = .pop3s
+    default:
+      return nil
+    }
+  }
+}
 public typealias AuthenticationType = String
 
 extension Dictionary {
   enum MissingValueError<Output>: Error {
     case missingKey(Key)
     case mismatchType(Value)
+
+
+    
   }
 
+  func requireOptional<Output>(_ key: CFString) throws -> Output? where Key == String {
+    try self.requireOptional(key as String)
+  }
+  
   func requireOptional<Output>(_ key: Key) throws -> Output? {
     try requireOptional(key, as: Output.self)
   }
@@ -32,8 +150,12 @@ extension Dictionary {
     return value
   }
 
-  private func require<Output>(_ key: Key) throws -> Output {
+  func require<Output>(_ key: Key) throws -> Output {
     try require(key, as: Output.self)
+  }
+  
+  func require<Output>(_ key: CFString) throws -> Output where Key == String {
+    try require(key as String)
   }
 
   private func require<Output>(_ key: Key, as _: Output.Type) throws -> Output {
@@ -52,7 +174,7 @@ public struct InternetPasswordItem : Identifiable, Hashable{
     
     [self.account,
     self.server,
-    self.protocol,
+     self.protocol?.rawValue,
     self.authenticationType,
      self.port?.description,
      self.path].compactMap{$0}.joined()
@@ -110,7 +232,7 @@ extension InternetPasswordItem {
       type: data.type,
       label: data.label,
       server: data.url?.host,
-      protocol: data.url?.scheme,
+      protocol: data.url?.scheme.flatMap(ServerProtocol.init(scheme:)),
       port: data.url?.port,
       path: data.url?.path,
       isSynchronizable: data.isSynchronizable
@@ -120,21 +242,36 @@ extension InternetPasswordItem {
 
 extension InternetPasswordItem {
   init(dictionary : [String : Any]) throws {
-    fatalError()
-//    let account : String = try dictionary.require(CodingKeys.account)
-//    let data : Data = try dictionary.require(.data)
-//    let accessGroup : String? = try dictionary.requireOptional(.accessGroup)
-//let createdAt : Date?
-//let modifiedAt : Date?
-//let description: String?
-//let type : Int?
-//let label : String?
-//let server : String?
-//let `protocol` : ServerProtocol?
-//let authenticationType : AuthenticationType?
-//let port: Int?
-//let path: String?
-//let isSynchronizable : Bool?
+    let account : String = try dictionary.require(kSecAttrAccount)
+    let data : Data = try dictionary.require(kSecValueData)
+    let accessGroup : String? = try dictionary.requireOptional(kSecAttrAccessGroup)
+    let createdAt : Date? = try dictionary.requireOptional(kSecAttrCreationDate)
+    let modifiedAt : Date? = try dictionary.requireOptional(kSecAttrModificationDate)
+    let description: String? = try dictionary.requireOptional(kSecAttrDescription)
+    let type : Int? = try dictionary.requireOptional(kSecAttrType)
+    let label : String? = try dictionary.requireOptional(kSecAttrLabel)
+    let server : String? = try dictionary.requireOptional(kSecAttrServer)
+    let protocolString : CFString? = try dictionary.requireOptional(kSecAttrProtocol)
+    let `protocol` : ServerProtocol? = protocolString.flatMap(ServerProtocol.init(number: ))
+    //let authenticationType : AuthenticationType? = try dictionary.requireOptional(kSecAttrAuthenticationType)
+    let port: Int? = try dictionary.requireOptional(kSecAttrPort)
+    let path: String? = try dictionary.requireOptional(kSecAttrPath)
+    let isSynchronizable : Bool? = try dictionary.requireOptional(kSecAttrSynchronizable)
+    self.init(
+      account: account,
+      data: data,
+      accessGroup: accessGroup,
+      createdAt: createdAt,
+      modifiedAt: modifiedAt,
+      description: description,
+      type: type?.trimZero(),
+      label: label,
+      server: server,
+      protocol: `protocol`,
+      port: port?.trimZero(),
+      path: path,
+      isSynchronizable: isSynchronizable
+    )
   }
 }
 
@@ -193,7 +330,6 @@ class InternetPasswordListObject : ObservableObject {
       .map(Optional<[InternetPasswordItem]>.some)
       .replaceError(with: nil)
       .receive(on: DispatchQueue.main)
-      .print()
       .assign(to: &self.$internetPasswords)
   }
   

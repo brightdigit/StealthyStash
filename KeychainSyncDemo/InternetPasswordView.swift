@@ -68,9 +68,12 @@ struct KeychainRepository : CredentialsRepository {
       throw KeychainError.unhandledError(status: status)
     }
     
-    dump(dictionaries)
-    
-    fatalError()
+    do {
+      return try dictionaries.map(InternetPasswordItem.init(dictionary:))
+    } catch {
+      assertionFailure(error.localizedDescription)
+      return []
+    }
     
   }
 }
@@ -144,7 +147,7 @@ extension InternetPasswordItemBuilder {
   
   public var url : URL? {
     var components = URLComponents()
-    components.scheme = self.protocol
+    components.scheme = self.protocol?.rawValue
     components.host = self.server
     components.path = self.path ?? ""
     components.port = self.port
@@ -352,8 +355,7 @@ struct InternetPasswordView: View {
     Form{
       InternetPasswordFormContent()
     }
-    .alert(isPresented: self.$isErrorAlertVisible, error: self.object.lastError, actions: { error in
-      
+    .alert(isPresented: self.$isErrorAlertVisible, error: self.object.lastError, actions: { error in      
       Button("OK") {
         self.object.clearError(error)
       }
