@@ -9,6 +9,12 @@ import SwiftUI
 import Combine
 import FloxBxAuth
 
+extension String {
+  func nilTrimmed ()  -> String? {
+    let trimmed = self.trimmingCharacters(in: .whitespacesAndNewlines)
+    return trimmed.isEmpty ? nil : trimmed
+  }
+}
 struct KeychainRepository : CredentialsRepository {
   public init(defaultServiceName: String, defaultServerName: String, defaultAccessGroup: String? = nil, defaultSynchronizable: Bool? = nil) {
     self.defaultServiceName = defaultServiceName
@@ -27,10 +33,12 @@ struct KeychainRepository : CredentialsRepository {
       kSecClass as String: kSecClassInternetPassword,
       kSecAttrAccount as String: item.account,
       kSecValueData as String: item.data,
-      kSecAttrServer as String: item.server,
-      kSecAttrAccessGroup as String: item.accessGroup ?? defaultAccessGroup as Any,
+      kSecAttrServer as String: item.server?.nilTrimmed() ?? self.defaultServerName,
+      kSecAttrAccessGroup as String: item.accessGroup?.nilTrimmed() ?? defaultAccessGroup as Any,
       kSecAttrSynchronizable as String: item.isSynchronizable ?? self.defaultSynchronizable
     ] as [String : Any?]
+    
+    dump(dictionaryAny)
     
     let query = dictionaryAny.compactMapValues{ $0} as CFDictionary
     
@@ -265,6 +273,7 @@ class InternetPasswordObject : ObservableObject {
       .catch{Just(Optional.some($0))}
       .compactMap{$0 as? KeychainError}
       .receive(on: DispatchQueue.main)
+      .print()
       .assign(to: &self.$lastError)
    
     clearErrorSubject
@@ -355,7 +364,10 @@ struct InternetPasswordView: View {
     Form{
       InternetPasswordFormContent()
     }
-    .alert(isPresented: self.$isErrorAlertVisible, error: self.object.lastError, actions: { error in      
+    .onReceive(self.object.$lastError, perform: { error in
+      self.isErrorAlertVisible = error != nil
+    })
+    .alert(isPresented: self.$isErrorAlertVisible, error: self.object.lastError, actions: { error in
       Button("OK") {
         self.object.clearError(error)
       }

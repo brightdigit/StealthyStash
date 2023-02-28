@@ -416,9 +416,9 @@ struct InternetPasswordRootView: View {
             }
             
           }.navigationDestination(for: InternetPasswordItem.self) { item in
-            InternetPasswordView(repository: PreviewRepository(), item: item).navigationTitle(item.account)
+            InternetPasswordView(repository: self.object.repository, item: item).navigationTitle(item.account)
           }.navigationDestination(isPresented: self.$createNewItem) {
-            InternetPasswordView(repository: PreviewRepository())
+            InternetPasswordView(repository: self.object.repository)
           }.onAppear {
             self.object.query(self.query)
           }
