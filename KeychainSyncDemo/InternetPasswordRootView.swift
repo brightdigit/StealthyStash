@@ -53,6 +53,41 @@ public enum ServerProtocol : String {
     default: return nil
     }
   }
+  var cfValue : CFString {
+    switch self {
+    case .ftp: return kSecAttrProtocolFTP
+    case .ftpaccount: return kSecAttrProtocolFTPAccount
+    case .http: return kSecAttrProtocolHTTP
+    case .irc: return kSecAttrProtocolIRC
+    case .nntp: return kSecAttrProtocolNNTP
+    case .pop3: return kSecAttrProtocolPOP3
+    case .smtp: return kSecAttrProtocolSMTP
+    case .socks: return kSecAttrProtocolSOCKS
+    case .imap: return kSecAttrProtocolIMAP
+    case .ldap: return kSecAttrProtocolLDAP
+    case .appletalk: return kSecAttrProtocolAppleTalk
+    case .afp: return kSecAttrProtocolAFP
+    case .telnet: return kSecAttrProtocolTelnet
+    case .ssh: return kSecAttrProtocolSSH
+    case .ftps: return kSecAttrProtocolFTPS
+    case .https: return kSecAttrProtocolHTTPS
+    case .httpproxy: return kSecAttrProtocolHTTPProxy
+    case .httpsproxy: return kSecAttrProtocolHTTPSProxy
+    case .ftpproxy: return kSecAttrProtocolFTPProxy
+    case .smb: return kSecAttrProtocolSMB
+    case .rtsp: return kSecAttrProtocolRTSP
+    case .rtspproxy: return kSecAttrProtocolRTSPProxy
+    case .daap: return kSecAttrProtocolDAAP
+    case .eppc: return kSecAttrProtocolEPPC
+    case .ipp: return kSecAttrProtocolIPP
+    case .nntps: return kSecAttrProtocolNNTPS
+    case .ldaps: return kSecAttrProtocolLDAPS
+    case .telnets: return kSecAttrProtocolTelnetS
+    case .imaps: return kSecAttrProtocolIMAPS
+    case .ircs: return kSecAttrProtocolIRCS
+    case .pop3s: return kSecAttrProtocolPOP3S
+    }
+  }
   init?(number : CFString) {
     switch number {
     case kSecAttrProtocolFTP: self = .ftp
@@ -132,6 +167,14 @@ extension Dictionary {
     
   }
 
+  func requireOptionalCF<Output>(_ key: CFString) throws -> Output? where Key == String {
+    guard let cfString : CFNumber = try self.requireOptional(key as String) else {
+      return nil
+    }
+    let value = cfString as? Output
+    return value
+  }
+  
   func requireOptional<Output>(_ key: CFString) throws -> Output? where Key == String {
     try self.requireOptional(key as String)
   }
@@ -180,6 +223,25 @@ public struct InternetPasswordItem : Identifiable, Hashable{
      self.path].compactMap{$0}.joined()
   }
   
+  
+  func addQuery () -> [String : Any?]
+  {
+    [
+     kSecClass as String: kSecClassInternetPassword,
+     kSecAttrAccount as String: self.account,
+     kSecValueData as String: self.data,
+     kSecAttrServer as String: self.server?.nilTrimmed(),
+     kSecAttrAccessGroup as String: self.accessGroup?.nilTrimmed(),
+     kSecAttrSynchronizable as String: self.isSynchronizable,
+     kSecAttrDescription as String : description?.nilTrimmed(),
+     kSecAttrType as String : type,
+     kSecAttrLabel as String : label,
+     kSecAttrProtocol as String : self.protocol?.cfValue,
+     kSecAttrAuthenticationType as String : authenticationType,
+     kSecAttrPort as String : port,
+     kSecAttrPath as String : path
+   ]
+  }
   public init(account: String, data: Data, accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, type: Int? = nil, label: String? = nil, server: String? = nil, `protocol`: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
     self.account = account
     self.data = data
@@ -248,8 +310,8 @@ extension InternetPasswordItem {
     let createdAt : Date? = try dictionary.requireOptional(kSecAttrCreationDate)
     let modifiedAt : Date? = try dictionary.requireOptional(kSecAttrModificationDate)
     let description: String? = try dictionary.requireOptional(kSecAttrDescription)
-    let type : Int? = try dictionary.requireOptional(kSecAttrType)
-    let label : String? = try dictionary.requireOptional(kSecAttrLabel)
+    let type : Int? = try dictionary.requireOptionalCF(kSecAttrType)
+    let label : String? = try dictionary.requireOptionalCF(kSecAttrLabel)
     let server : String? = try dictionary.requireOptional(kSecAttrServer)
     let protocolString : CFString? = try dictionary.requireOptional(kSecAttrProtocol)
     let `protocol` : ServerProtocol? = protocolString.flatMap(ServerProtocol.init(number: ))

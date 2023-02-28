@@ -28,19 +28,20 @@ struct KeychainRepository : CredentialsRepository {
   let defaultAccessGroup : String?
   let defaultSynchronizable : Bool?
   
+  func defaultAddQuery () -> [String : Any?] {
+    return [
+      kSecAttrServer as String: self.defaultServerName,
+      kSecAttrAccessGroup as String: defaultAccessGroup,
+      kSecAttrSynchronizable as String: self.defaultSynchronizable
+    ]
+  }
   func create(_ item: InternetPasswordItem) throws {
-    let dictionaryAny = [
-      kSecClass as String: kSecClassInternetPassword,
-      kSecAttrAccount as String: item.account,
-      kSecValueData as String: item.data,
-      kSecAttrServer as String: item.server?.nilTrimmed() ?? self.defaultServerName,
-      kSecAttrAccessGroup as String: item.accessGroup?.nilTrimmed() ?? defaultAccessGroup as Any,
-      kSecAttrSynchronizable as String: item.isSynchronizable ?? self.defaultSynchronizable
-    ] as [String : Any?]
+    let itemDictionary = item.addQuery()
     
-    dump(dictionaryAny)
     
-    let query = dictionaryAny.compactMapValues{ $0} as CFDictionary
+    let query =     itemDictionary.merging(defaultAddQuery()) {
+      return $0 ?? $1
+    }.compactMapValues{ $0} as CFDictionary
     
     let status = SecItemAdd(query, nil)
     
@@ -208,6 +209,26 @@ extension InternetPasswordItemBuilder {
       self.path != source.path
     ].first {!$0} ?? true
   }
+  
+  public func saved () -> InternetPasswordItemBuilder {
+    return .init(
+      source: .init(builder: self),
+      account : self.account,
+      data : self.data,
+      accessGroup : self.accessGroup,
+      createdAt : self.createdAt,
+      modifiedAt : self.modifiedAt,
+      description : self.description,
+      type : self.type,
+      label : self.label,
+      server : self.server,
+      protocol : self.protocol,
+      authenticationType : self.authenticationType,
+      port : self.port,
+      path : self.path,
+      isSynchronizable : self.isSynchronizable
+    )
+  }
 }
 
 extension InternetPasswordItemBuilder {
@@ -261,12 +282,19 @@ class InternetPasswordObject : ObservableObject {
       }
       .share()
     
-    self.saveCompletedCancellable = savePublisher
+    let successPublisher = savePublisher
       .map(Optional<Void>.some)
       .replaceError(with: Optional<Void>.none)
       .compactMap{$0}
+      .share()
+    
+    successPublisher
+      .map{self.item.saved()}
+      .receive(on: DispatchQueue.main)
+      .assign(to: &self.$item)
+    
+    saveCompletedCancellable = successPublisher
       .subscribe(self.saveCompletedSubject)
-      
     
     savePublisher
       .map{Optional<Error>.none}
@@ -301,6 +329,10 @@ class InternetPasswordObject : ObservableObject {
   let repository : CredentialsRepository
   let isNew : Bool
   var saveCompletedCancellable : AnyCancellable!
+  
+  var saveCompleted : AnyPublisher<Void, Never> {
+    return self.saveCompletedSubject.eraseToAnyPublisher()
+  }
 }
 
 extension InternetPasswordObject {
@@ -316,7 +348,6 @@ struct InternetPasswordView: View {
   @Environment(\.dismiss) private var dismiss
   @State var shouldConfirmDismiss = false
   @State var isErrorAlertVisible = false
-  @State var dismissOnSave = false
   @StateObject var object : InternetPasswordObject
   
   fileprivate func InternetPasswordFormContent() -> some View {
@@ -367,6 +398,9 @@ struct InternetPasswordView: View {
     .onReceive(self.object.$lastError, perform: { error in
       self.isErrorAlertVisible = error != nil
     })
+    .onReceive(self.object.saveCompleted, perform: { _ in
+      self.dismiss()
+    })
     .alert(isPresented: self.$isErrorAlertVisible, error: self.object.lastError, actions: { error in
       Button("OK") {
         self.object.clearError(error)
@@ -376,7 +410,6 @@ struct InternetPasswordView: View {
     })
     .alert("Unsaved Changes", isPresented: self.$shouldConfirmDismiss, actions: {
       Button("Save and Go Back.") {
-        dismissOnSave = true
         self.object.save()
       }
       Button("Undo Changes and Go Back.") {
