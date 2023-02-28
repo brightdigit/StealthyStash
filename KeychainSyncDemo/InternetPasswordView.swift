@@ -364,7 +364,7 @@ struct InternetPasswordView: View {
         self.object.save()
       }
       Button("Undo Changes and Go Back.") {
-        
+        dismiss()
       }
       
       Button("Cancel") {
@@ -379,6 +379,9 @@ struct InternetPasswordView: View {
           guard self.object.item.isModified else {
             dismiss()
             return
+          }
+          Task { @MainActor in
+            self.shouldConfirmDismiss = true
           }
         }
       }

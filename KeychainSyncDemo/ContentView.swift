@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
       TabView {
-        InternetPasswordRootView(object: .init(repository: KeychainRepository(defaultServiceName: "", defaultServerName: ""))).tabItem{
+        InternetPasswordRootView(repository: KeychainRepository(defaultServiceName: "com.brightdigit.KeychainSyncDemo", defaultServerName: "com.brightdigit.KeychainSyncDemo")).tabItem{
           Image(systemName: "network")
           Text("Internet")
         }

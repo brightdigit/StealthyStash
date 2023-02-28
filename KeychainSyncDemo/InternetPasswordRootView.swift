@@ -131,11 +131,13 @@ class InternetPasswordListObject : ObservableObject {
       .map{_ in Optional<Error>.none}
       .catch{Just(Optional<Error>.some($0))}
       .compactMap{ $0 as? KeychainError }
+      .receive(on: DispatchQueue.main)
       .assign(to: &self.$lastError)
     
     queryPublisher
       .map(Optional<[InternetPasswordItem]>.some)
       .replaceError(with: nil)
+      .receive(on: DispatchQueue.main)
       .print()
       .assign(to: &self.$internetPasswords)
   }
@@ -151,17 +153,17 @@ class InternetPasswordListObject : ObservableObject {
   }
 }
 struct InternetPasswordRootView: View {
-  internal init(object: InternetPasswordListObject, query: String? = nil, createNewItem: Bool = false) {
-    self.object = object
+  internal init(repository: CredentialsRepository, internetPasswords: [InternetPasswordItem]? = nil, query: String? = nil, createNewItem: Bool = false) {
+    self._object = StateObject(wrappedValue: .init(repository: repository, internetPasswords: internetPasswords))
     self.query = query
     self.createNewItem = createNewItem
   }
   
-  let object : InternetPasswordListObject
+  @StateObject var object : InternetPasswordListObject
   @State var query : String?
   @State var createNewItem = false
   fileprivate func InternetPasswordList(internetPasswords: [InternetPasswordItem]) -> some View {
-    return List(internetPasswords)
+    List(internetPasswords)
     { item in
       NavigationLink(value: item) {
         HStack{
@@ -199,10 +201,12 @@ struct InternetPasswordRootView: View {
 
           }
           Section{
-            if let internetPasswords = self.object.internetPasswords {
-              InternetPasswordList(internetPasswords: internetPasswords)
-            } else {
-              ProgressView()
+            Group{
+              if let internetPasswords = self.object.internetPasswords {
+                InternetPasswordList(internetPasswords: internetPasswords)
+              } else {
+                ProgressView()
+              }
             }
             
           } header: {
@@ -233,8 +237,9 @@ struct InternetPasswordRootView: View {
 
 struct InternetPasswordRootView_Previews: PreviewProvider {
     static var previews: some View {
-      InternetPasswordRootView(object: .init(repository: PreviewRepository(), internetPasswords:
-                                              InternetPasswordItem.previewCollection
-                                            ))
+      InternetPasswordRootView(repository: PreviewRepository(), internetPasswords: InternetPasswordItem.previewCollection)
+//      InternetPasswordRootView(object: .init(repository: PreviewRepository(), internetPasswords:
+//                                              InternetPasswordItem.previewCollection
+//                                            ))
     }
 }
