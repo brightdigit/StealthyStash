@@ -52,24 +52,26 @@ struct KeychainRepository : CredentialsRepository {
       kSecReturnAttributes as String: true,
       kSecReturnData as String: true,
       kSecAttrAccessGroup as String: defaultAccessGroup,
-      kSecAttrSynchronizable as String: kSecAttrSynchronizableAny
+      kSecAttrSynchronizable as String: kSecAttrSynchronizableAny,
+      kSecMatchLimit as String: kSecMatchLimitAll
     ] as [String : Any?]
     
     var item: CFTypeRef?
     let query = dictionaryAny.compactMapValues{$0} as CFDictionary
     
     let status = SecItemCopyMatching(query, &item)
-    
-    dump(item)
-    
+        
     guard status != errSecItemNotFound else {
       return []
     }
-    guard let itemDictionaries = item as? [[String : Any]], status == errSecSuccess else {
+    guard let dictionaries = item as? [[String : Any]], status == errSecSuccess else {
       throw KeychainError.unhandledError(status: status)
     }
     
+    dump(dictionaries)
+    
     fatalError()
+    
   }
 }
 

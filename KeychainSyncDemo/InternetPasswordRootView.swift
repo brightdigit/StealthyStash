@@ -12,7 +12,42 @@ import FloxBxAuth
 public typealias ServerProtocol = String
 public typealias AuthenticationType = String
 
-public struct InternetPasswordItem : Identifiable,Hashable {
+extension Dictionary {
+  enum MissingValueError<Output>: Error {
+    case missingKey(Key)
+    case mismatchType(Value)
+  }
+
+  func requireOptional<Output>(_ key: Key) throws -> Output? {
+    try requireOptional(key, as: Output.self)
+  }
+
+  private func requireOptional<Output>(_ key: Key, as _: Output.Type) throws -> Output? {
+    guard let value = self[key] else {
+      return nil
+    }
+    guard let value = value as? Output else {
+      throw MissingValueError<Output>.mismatchType(value)
+    }
+    return value
+  }
+
+  private func require<Output>(_ key: Key) throws -> Output {
+    try require(key, as: Output.self)
+  }
+
+  private func require<Output>(_ key: Key, as _: Output.Type) throws -> Output {
+    guard let value = self[key] else {
+      throw MissingValueError<Output>.missingKey(key)
+    }
+    guard let value = value as? Output else {
+      throw MissingValueError<Output>.mismatchType(value)
+    }
+    return value
+  }
+}
+
+public struct InternetPasswordItem : Identifiable, Hashable{
   public var id: String {
     
     [self.account,
@@ -80,6 +115,26 @@ extension InternetPasswordItem {
       path: data.url?.path,
       isSynchronizable: data.isSynchronizable
     )
+  }
+}
+
+extension InternetPasswordItem {
+  init(dictionary : [String : Any]) throws {
+    fatalError()
+//    let account : String = try dictionary.require(CodingKeys.account)
+//    let data : Data = try dictionary.require(.data)
+//    let accessGroup : String? = try dictionary.requireOptional(.accessGroup)
+//let createdAt : Date?
+//let modifiedAt : Date?
+//let description: String?
+//let type : Int?
+//let label : String?
+//let server : String?
+//let `protocol` : ServerProtocol?
+//let authenticationType : AuthenticationType?
+//let port: Int?
+//let path: String?
+//let isSynchronizable : Bool?
   }
 }
 
