@@ -15,7 +15,11 @@ struct CredentialPropertyFormContentView: View {
       }
       
       Section("Data") {
+#if os(watchOS)
+        TextField("data", text: $object.item.dataString)
+        #else
         TextEditor(text: $object.item.dataString).frame(height: 80.0)
+        #endif
       }
       
       Section("Is Syncronizable") {
@@ -24,7 +28,12 @@ struct CredentialPropertyFormContentView: View {
       }
       
       Section("Access Group") {
+        
+  #if os(watchOS)
+        TextField("access group", text: $object.item.accessGroupText)
+          #else
         TextEditor(text: $object.item.accessGroupText).frame(height: 60.0)
+        #endif
       }
       
       Section("Type") {
@@ -51,7 +60,12 @@ struct CredentialPropertyFormContentView: View {
       }
       
       Section("Description") {
+        
+  #if os(watchOS)
+        TextField("description", text: $object.item.descriptionText)
+          #else
         TextEditor(text: $object.item.descriptionText).frame(height: 80.0)
+        #endif
       }
     }
 }

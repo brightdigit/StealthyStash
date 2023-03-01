@@ -41,7 +41,7 @@ struct CredentialPropertyView: View {
       Text("You have unsaved changes.")
     })
     .toolbar {
-      ToolbarItemGroup(placement: .navigation) {
+      ToolbarItemGroup(placement: .cancellationAction) {
         Button("Back") {
           guard self.object.item.isModified else {
             dismiss()

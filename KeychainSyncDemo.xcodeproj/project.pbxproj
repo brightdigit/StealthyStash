@@ -27,6 +27,27 @@
 		B34ADDDC29AF88E80072B59F /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDDA29AF88E80072B59F /* KeychainRepository.swift */; };
 		B34ADDDE29AF88F50072B59F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDDD29AF88F50072B59F /* String.swift */; };
 		B34ADDE029AF89F60072B59F /* GenericPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDDF29AF89F60072B59F /* GenericPasswordItem.swift */; };
+		B34ADDE129B00B4E0072B59F /* GenericPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDDF29AF89F60072B59F /* GenericPasswordItem.swift */; };
+		B34ADDE229B00B4E0072B59F /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDB229AF84750072B59F /* Query.swift */; };
+		B34ADDE329B00B4E0072B59F /* CredentialsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDD929AF88E80072B59F /* CredentialsRepository.swift */; };
+		B34ADDE429B00B4E0072B59F /* AuthenticationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDB529AF84750072B59F /* AuthenticationType.swift */; };
+		B34ADDE529B00B4E0072B59F /* ServerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDB429AF84750072B59F /* ServerProtocol.swift */; };
+		B34ADDE629B00B4E0072B59F /* CredentialProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F984F729AF953000C0266F /* CredentialProperty.swift */; };
+		B34ADDE729B00B4E0072B59F /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDDA29AF88E80072B59F /* KeychainRepository.swift */; };
+		B34ADDE829B00B4E0072B59F /* InternetPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDB129AF84750072B59F /* InternetPasswordItem.swift */; };
+		B34ADDE929B00B550072B59F /* CredentialPropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDD529AF886C0072B59F /* CredentialPropertyView.swift */; };
+		B34ADDEA29B00B550072B59F /* CredentialPropertyFormContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDD029AF86AB0072B59F /* CredentialPropertyFormContentView.swift */; };
+		B34ADDEB29B00B550072B59F /* CredentialPropertyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDC329AF856A0072B59F /* CredentialPropertyBuilder.swift */; };
+		B34ADDEC29B00B550072B59F /* CredentialPropertyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDC829AF856A0072B59F /* CredentialPropertyObject.swift */; };
+		B34ADDED29B00B550072B59F /* CredentialPropertyListObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDB829AF84750072B59F /* CredentialPropertyListObject.swift */; };
+		B34ADDEE29B00B550072B59F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31EAE4429A8F820004C4A56 /* ContentView.swift */; };
+		B34ADDEF29B00B550072B59F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDDD29AF88F50072B59F /* String.swift */; };
+		B34ADDF029B00B550072B59F /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDB629AF84750072B59F /* Int.swift */; };
+		B34ADDF129B00B550072B59F /* CredentialPropertyRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDB329AF84750072B59F /* CredentialPropertyRootView.swift */; };
+		B34ADDF229B00B550072B59F /* CredentialPropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDD229AF87F00072B59F /* CredentialPropertyList.swift */; };
+		B34ADDF329B00B550072B59F /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDB029AF84750072B59F /* Dictionary.swift */; };
+		B34ADDF429B00B760072B59F /* PreviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDC229AF856A0072B59F /* PreviewRepository.swift */; };
+		B34ADDF529B00B760072B59F /* InternetPasswordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31EAE4C29A915E2004C4A56 /* InternetPasswordData.swift */; };
 		B39BF14E29A53D50009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14D29A53D50009BBCAC /* FloxBxAuth */; };
 		B39BF15029A53D55009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14F29A53D55009BBCAC /* FloxBxAuth */; };
 		B39BF15429A6C116009BBCAC /* KeychainSyncDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */; };
@@ -342,7 +363,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B34ADDE329B00B4E0072B59F /* CredentialsRepository.swift in Sources */,
+				B34ADDF329B00B550072B59F /* Dictionary.swift in Sources */,
+				B34ADDE629B00B4E0072B59F /* CredentialProperty.swift in Sources */,
+				B34ADDE929B00B550072B59F /* CredentialPropertyView.swift in Sources */,
 				B39BF15429A6C116009BBCAC /* KeychainSyncDemoApp.swift in Sources */,
+				B34ADDE529B00B4E0072B59F /* ServerProtocol.swift in Sources */,
+				B34ADDE229B00B4E0072B59F /* Query.swift in Sources */,
+				B34ADDF029B00B550072B59F /* Int.swift in Sources */,
+				B34ADDE829B00B4E0072B59F /* InternetPasswordItem.swift in Sources */,
+				B34ADDE429B00B4E0072B59F /* AuthenticationType.swift in Sources */,
+				B34ADDED29B00B550072B59F /* CredentialPropertyListObject.swift in Sources */,
+				B34ADDF129B00B550072B59F /* CredentialPropertyRootView.swift in Sources */,
+				B34ADDEA29B00B550072B59F /* CredentialPropertyFormContentView.swift in Sources */,
+				B34ADDEB29B00B550072B59F /* CredentialPropertyBuilder.swift in Sources */,
+				B34ADDEE29B00B550072B59F /* ContentView.swift in Sources */,
+				B34ADDEC29B00B550072B59F /* CredentialPropertyObject.swift in Sources */,
+				B34ADDF429B00B760072B59F /* PreviewRepository.swift in Sources */,
+				B34ADDF529B00B760072B59F /* InternetPasswordData.swift in Sources */,
+				B34ADDE129B00B4E0072B59F /* GenericPasswordItem.swift in Sources */,
+				B34ADDF229B00B550072B59F /* CredentialPropertyList.swift in Sources */,
+				B34ADDEF29B00B550072B59F /* String.swift in Sources */,
+				B34ADDE729B00B4E0072B59F /* KeychainRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

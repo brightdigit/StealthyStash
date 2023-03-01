@@ -14,11 +14,13 @@ struct CredentialPropertyList: View {
       { item in
         NavigationLink(value: item) {
           HStack{
+            #if !os(watchOS)
             Image(systemName: item.propertyType.sfSymbolName)
+            #endif
             Text(item.account)
             Spacer()
             Text(item.dataString).bold()
-          }
+          }.lineLimit(1)
           
         }
       }
