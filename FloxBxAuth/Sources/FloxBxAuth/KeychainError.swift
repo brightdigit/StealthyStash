@@ -15,6 +15,8 @@ public enum KeychainError: Error, LocalizedError, Equatable {
   case noPassword
   case unhandledError(status: OSStatus)
   
+  case unsupportedClass(String)
+  
   public var errorDescription: String? {
     switch self {
     case .unexpectedPasswordData:
@@ -27,6 +29,8 @@ public enum KeychainError: Error, LocalizedError, Equatable {
       } else {
         return "Status code: \(status)\n"
       }
+    case .unsupportedClass(let className):
+      return "Unsupported class: \(className)"
     }
   }
 }

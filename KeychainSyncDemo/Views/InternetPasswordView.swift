@@ -62,8 +62,12 @@ struct InternetPasswordView: View {
 }
 
 extension InternetPasswordView {
-  init(repository: CredentialsRepository, item: InternetPasswordItem? = nil) {
+  init(repository: CredentialsRepository, item: AnyCredentialProperty) {
     self.init(object: .init(repository: repository, item: item))
+  }
+  
+  init(repository: CredentialsRepository, type: CredentialPropertyType) {
+    self.init(object: .init(repository: repository, type: type))
   }
 }
 
@@ -72,10 +76,10 @@ struct InternetPasswordView_Previews: PreviewProvider {
     TabView{
       NavigationStack{
         InternetPasswordView(
-          repository: PreviewRepository(),
-          item: .previewCollection.first(where: { item in
+          repository: PreviewRepository(items: []),
+          item: InternetPasswordItem.previewCollection.first(where: { item in
             item.accessGroup != nil
-          })
+          }).map(AnyCredentialProperty.init(property:))!
         )
       }.tabItem{
         Image(systemName: "key.fill")

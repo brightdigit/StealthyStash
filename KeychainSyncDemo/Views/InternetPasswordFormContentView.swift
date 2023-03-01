@@ -48,9 +48,11 @@ struct InternetPasswordFormContentView: View {
       }
     }
 }
-
-struct InternetPasswordFormContentView_Previews: PreviewProvider {
-    static var previews: some View {
-      InternetPasswordFormContentView(object: InternetPasswordObject(repository: PreviewRepository()))
-    }
-}
+//
+//struct InternetPasswordFormContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//      InternetPasswordFormContentView(object: InternetPasswordObject(repository: PreviewRepository(items: InternetPasswordItem.previewCollection.map({
+//        $0.eraseToAnyProperty()
+//      }))))
+//    }
+//}

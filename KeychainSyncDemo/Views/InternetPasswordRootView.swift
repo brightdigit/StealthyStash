@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct InternetPasswordRootView: View {
-  internal init(repository: CredentialsRepository, internetPasswords: [InternetPasswordItem]? = nil, query: String? = nil, createNewItem: Bool = false) {
+  internal init(repository: CredentialsRepository, internetPasswords: [AnyCredentialProperty]? = nil, query: String? = nil, createNewItem: Bool = false) {
     self._object = StateObject(wrappedValue: .init(repository: repository, internetPasswords: internetPasswords))
     self.query = query
     self.createNewItem = createNewItem
@@ -10,6 +10,7 @@ struct InternetPasswordRootView: View {
   @StateObject var object : InternetPasswordListObject
   @State var query : String?
   @State var createNewItem = false
+  @State var isErrorAlertVisible = false
   
   var body: some View {
       NavigationStack {
@@ -51,7 +52,18 @@ struct InternetPasswordRootView: View {
               Text("data")
             }
           }
-        }.navigationTitle("Internet Passwords")
+        }
+        .onReceive(self.object.$lastError, perform: { error in
+          self.isErrorAlertVisible = error != nil
+        })
+        .alert(isPresented: self.$isErrorAlertVisible, error: self.object.lastError, actions: { error in
+          Button("OK") {
+            
+          }
+        }, message: { error in
+          Text(error.localizedDescription)
+        })
+        .navigationTitle("Internet Passwords")
           .toolbar {
             Button {
               self.createNewItem = true
@@ -59,10 +71,10 @@ struct InternetPasswordRootView: View {
               Image(systemName: "plus")
             }
             
-          }.navigationDestination(for: InternetPasswordItem.self) { item in
+          }.navigationDestination(for: AnyCredentialProperty.self) { item in
             InternetPasswordView(repository: self.object.repository, item: item).navigationTitle(item.account)
           }.navigationDestination(isPresented: self.$createNewItem) {
-            InternetPasswordView(repository: self.object.repository)
+            InternetPasswordView(repository: self.object.repository, type: .internet)
           }.onAppear {
             self.object.query(self.query)
           }
@@ -72,6 +84,12 @@ struct InternetPasswordRootView: View {
 
 struct InternetPasswordRootView_Previews: PreviewProvider {
     static var previews: some View {
-      InternetPasswordRootView(repository: PreviewRepository(), internetPasswords: InternetPasswordItem.previewCollection)
+      InternetPasswordRootView(repository: PreviewRepository(
+        items: InternetPasswordItem.previewCollection.map({
+          $0.eraseToAnyProperty()
+        })
+      ), internetPasswords: InternetPasswordItem.previewCollection.map({
+        $0.eraseToAnyProperty()
+      }))
     }
 }

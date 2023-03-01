@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct InternetPasswordList: View {
-  let internetPasswords : [InternetPasswordItem]
+  let internetPasswords : [AnyCredentialProperty]
     var body: some View {
       List(internetPasswords)
       { item in
         NavigationLink(value: item) {
           HStack{
+            Image(systemName: item.propertyType.sfSymbolName)
             Text(item.account)
             Spacer()
             Text(item.dataString).bold()
@@ -26,6 +27,8 @@ struct InternetPasswordList: View {
 
 struct InternetPasswordList_Previews: PreviewProvider {
     static var previews: some View {
-      InternetPasswordList(internetPasswords: InternetPasswordItem.previewCollection)
+      InternetPasswordList(internetPasswords: InternetPasswordItem.previewCollection.map{
+        $0.eraseToAnyProperty()
+      })
     }
 }

@@ -10,7 +10,7 @@ class InternetPasswordObject : ObservableObject {
     
     let savePublisher = saveTriggerSubject
       .map{self.item}
-      .map(InternetPasswordItem.init)
+      .tryMap(AnyCredentialProperty.init)
       .tryMap { item in
         if self.isNew {
           try self.repository.create(item)
@@ -27,7 +27,8 @@ class InternetPasswordObject : ObservableObject {
       .share()
     
     successPublisher
-      .map{self.item.saved()}
+      .tryMap{try self.item.saved()}
+      .assertNoFailure()
       .receive(on: DispatchQueue.main)
       .assign(to: &self.$item)
     
@@ -73,7 +74,11 @@ class InternetPasswordObject : ObservableObject {
 }
 
 extension InternetPasswordObject {
-  convenience init(repository: CredentialsRepository, item: InternetPasswordItem? = nil) {
-    self.init(repository: repository, item: .init(item: item), isNew: item == nil)
+  convenience init(repository: CredentialsRepository, item: AnyCredentialProperty) {
+    self.init(repository: repository, item: .init(item: item), isNew:false)
+  }
+  
+  convenience init(repository: CredentialsRepository, type:  CredentialPropertyType) {
+    self.init(repository: repository, item: .init(secClass: type), isNew:true)
   }
 }

@@ -1,7 +1,9 @@
 import Security
 import Foundation
 
-public struct InternetPasswordItem : Identifiable, Hashable{
+public struct InternetPasswordItem : Identifiable, Hashable, CredentialProperty{
+  public static let propertyType: CredentialPropertyType = .internet
+  
   public var id: String {
     
     [self.account,
@@ -13,7 +15,7 @@ public struct InternetPasswordItem : Identifiable, Hashable{
   }
   
   
-  func addQuery () -> [String : Any?]
+  public func addQuery () -> [String : Any?]
   {
     [
      kSecClass as String: kSecClassInternetPassword,
@@ -67,11 +69,6 @@ public struct InternetPasswordItem : Identifiable, Hashable{
   public let isSynchronizable : Bool?
 }
 
-extension InternetPasswordItem {
-  public var dataString : String {
-    String(data: self.data, encoding: .utf8) ?? ""
-  }
-}
 
 extension InternetPasswordItem {
   init(data: InternetPasswordData) {
@@ -94,7 +91,7 @@ extension InternetPasswordItem {
 }
 
 extension InternetPasswordItem {
-  init(dictionary : [String : Any]) throws {
+  public init(dictionary : [String : Any]) throws {
     let account : String = try dictionary.require(kSecAttrAccount)
     let data : Data = try dictionary.require(kSecValueData)
     let accessGroup : String? = try dictionary.requireOptional(kSecAttrAccessGroup)
@@ -129,7 +126,7 @@ extension InternetPasswordItem {
 }
 
 extension InternetPasswordItem {
-  init(builder: InternetPasswordItemBuilder) {
+  public init(builder: InternetPasswordItemBuilder) {
     self.init(
       account: builder.account,
       data: builder.data,

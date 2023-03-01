@@ -37,6 +37,7 @@
 		B3AA494429A52831002D40C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA494329A52831002D40C3 /* Preview Assets.xcassets */; };
 		B3AA495529A52852002D40C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA495429A52852002D40C3 /* Assets.xcassets */; };
 		B3AA495829A52852002D40C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA495729A52852002D40C3 /* Preview Assets.xcassets */; };
+		B3F984F829AF953000C0266F /* CredentialProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F984F729AF953000C0266F /* CredentialProperty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		B3AA494E29A52851002D40C3 /* KeychainSyncDemoWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KeychainSyncDemoWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AA495429A52852002D40C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3AA495729A52852002D40C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B3F984F729AF953000C0266F /* CredentialProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialProperty.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				B34ADDB129AF84750072B59F /* InternetPasswordItem.swift */,
 				B34ADDB229AF84750072B59F /* Query.swift */,
 				B34ADDB429AF84750072B59F /* ServerProtocol.swift */,
+				B3F984F729AF953000C0266F /* CredentialProperty.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 			files = (
 				B34ADDDB29AF88E80072B59F /* CredentialsRepository.swift in Sources */,
 				B3AA493C29A5282F002D40C3 /* KeychainSyncDemoApp.swift in Sources */,
+				B3F984F829AF953000C0266F /* CredentialProperty.swift in Sources */,
 				B34ADDCA29AF856A0072B59F /* InternetPasswordItemBuilder.swift in Sources */,
 				B34ADDD129AF86AB0072B59F /* InternetPasswordFormContentView.swift in Sources */,
 				B34ADDC929AF856A0072B59F /* PreviewRepository.swift in Sources */,

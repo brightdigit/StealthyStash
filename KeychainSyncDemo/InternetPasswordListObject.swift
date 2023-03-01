@@ -3,13 +3,13 @@ import Combine
 import FloxBxAuth
 
 class InternetPasswordListObject : ObservableObject {
-  internal init(repository: CredentialsRepository, internetPasswords: [InternetPasswordItem]? = nil) {
+  internal init(repository: CredentialsRepository, internetPasswords: [AnyCredentialProperty]? = nil) {
     self.repository = repository
     self.internetPasswords = internetPasswords
     
     let queryPublisher = self.querySubject
       .map(Query.init)
-      .tryMap(self.repository.query)
+      .tryMap(self.repository.query(_:))
       .share()
     
     
@@ -21,14 +21,15 @@ class InternetPasswordListObject : ObservableObject {
       .assign(to: &self.$lastError)
     
     queryPublisher
-      .map(Optional<[InternetPasswordItem]>.some)
+      .map(Optional<[AnyCredentialProperty]>.some)
       .replaceError(with: nil)
+      .print()
       .receive(on: DispatchQueue.main)
       .assign(to: &self.$internetPasswords)
   }
   
   let repository : CredentialsRepository
-  @Published var internetPasswords: [InternetPasswordItem]?
+  @Published var internetPasswords: [AnyCredentialProperty]?
   let querySubject  = PassthroughSubject<String?, Never> ()
   @Published var lastError : KeychainError?
   

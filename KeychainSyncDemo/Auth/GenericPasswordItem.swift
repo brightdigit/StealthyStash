@@ -1,39 +1,19 @@
 import Security
 import Foundation
 
-public struct GenericPasswordItem : Identifiable, Hashable{
-  public var id: String {
-    
-    [self.account,
-    self.server,
-     self.protocol?.rawValue,
-    self.authenticationType,
-     self.port?.description,
-     self.path].compactMap{$0}.joined()
+public struct GenericPasswordItem : Identifiable, Hashable, CredentialProperty{
+  public init(builder: InternetPasswordItemBuilder) throws {
+    fatalError()
   }
   
-  
-  func addQuery () -> [String : Any?]
-  {
-    [
-     kSecClass as String: kSecClassInternetPassword,
-     kSecAttrAccount as String: self.account,
-     kSecValueData as String: self.data,
-     kSecAttrServer as String: self.server?.nilTrimmed(),
-     kSecAttrAccessGroup as String: self.accessGroup?.nilTrimmed(),
-     kSecAttrSynchronizable as String: self.isSynchronizable,
-     kSecAttrDescription as String : description?.nilTrimmed(),
-     kSecAttrType as String : type,
-     kSecAttrLabel as String : label,
-     kSecAttrProtocol as String : self.protocol?.cfValue,
-     kSecAttrAuthenticationType as String : authenticationType,
-     kSecAttrPort as String : port,
-     kSecAttrPath as String : path
-   ]
+  public static var propertyType: CredentialPropertyType {
+    return .generic
   }
-  public init(account: String, data: Data, accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, comment : String? = nil, type: Int? = nil, label: String? = nil, server: String? = nil, `protocol`: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
+  
+  internal init(account: String, data: Data, service: String? = nil, accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, comment: String? = nil, type: Int? = nil, label: String? = nil, gerneic: Data? = nil, isSynchronizable: Bool? = nil) {
     self.account = account
     self.data = data
+    self.service = service
     self.accessGroup = accessGroup
     self.createdAt = createdAt
     self.modifiedAt = modifiedAt
@@ -41,17 +21,37 @@ public struct GenericPasswordItem : Identifiable, Hashable{
     self.comment = comment
     self.type = type
     self.label = label
-    self.server = server
-    self.`protocol` = `protocol`
-    self.authenticationType = authenticationType
-    self.port = port
-    self.path = path
+    self.gerneic = gerneic
     self.isSynchronizable = isSynchronizable
+  }
+  
+  public var id: String {
+    
+    [self.account,
+    self.service].compactMap{$0}.joined()
+  }
+  
+  
+  public func addQuery () -> [String : Any?]
+  {
+    [
+     kSecClass as String: kSecClassInternetPassword,
+     kSecAttrAccount as String: self.account,
+     kSecValueData as String: self.data,
+     kSecAttrService as String: self.service?.nilTrimmed(),
+     kSecAttrGeneric as String: self.gerneic,
+     kSecAttrAccessGroup as String: self.accessGroup?.nilTrimmed(),
+     kSecAttrSynchronizable as String: self.isSynchronizable,
+     kSecAttrDescription as String : description?.nilTrimmed(),
+     kSecAttrComment as String : comment?.nilTrimmed(),
+     kSecAttrType as String : type,
+     kSecAttrLabel as String : label
+   ]
   }
   
   public let account : String
   public let data : Data
-   
+  public let service : String?
   public let accessGroup : String?
   public let createdAt : Date?
   public let modifiedAt : Date?
@@ -59,11 +59,7 @@ public struct GenericPasswordItem : Identifiable, Hashable{
   public let comment : String?
   public let type : Int?
   public let label : String?
-  public let server : String?
-  public let `protocol` : ServerProtocol?
-  public let authenticationType : AuthenticationType?
-  public let port: Int?
-  public let path: String?
+  public let gerneic : Data?
   public let isSynchronizable : Bool?
 }
 
@@ -94,7 +90,7 @@ extension GenericPasswordItem {
 //}
 
 extension GenericPasswordItem {
-  init(dictionary : [String : Any]) throws {
+  public init(dictionary : [String : Any]) throws {
     let account : String = try dictionary.require(kSecAttrAccount)
     let data : Data = try dictionary.require(kSecValueData)
     let accessGroup : String? = try dictionary.requireOptional(kSecAttrAccessGroup)
@@ -103,26 +99,20 @@ extension GenericPasswordItem {
     let description: String? = try dictionary.requireOptional(kSecAttrDescription)
     let type : Int? = try dictionary.requireOptionalCF(kSecAttrType)
     let label : String? = try dictionary.requireOptionalCF(kSecAttrLabel)
-    let server : String? = try dictionary.requireOptional(kSecAttrServer)
-    let protocolString : CFString? = try dictionary.requireOptional(kSecAttrProtocol)
-    let `protocol` : ServerProtocol? = protocolString.flatMap(ServerProtocol.init(number: ))
-    //let authenticationType : AuthenticationType? = try dictionary.requireOptional(kSecAttrAuthenticationType)
-    let port: Int? = try dictionary.requireOptional(kSecAttrPort)
-    let path: String? = try dictionary.requireOptional(kSecAttrPath)
+    let service : String = try dictionary.require(kSecAttrService)
+    let generic : Data? = try dictionary.requireOptional(kSecAttrGeneric)
     let isSynchronizable : Bool? = try dictionary.requireOptional(kSecAttrSynchronizable)
     self.init(
       account: account,
       data: data,
+      service: service,
       accessGroup: accessGroup,
       createdAt: createdAt,
       modifiedAt: modifiedAt,
       description: description,
       type: type?.trimZero(),
       label: label,
-      server: server,
-      protocol: `protocol`,
-      port: port?.trimZero(),
-      path: path,
+      gerneic: generic,
       isSynchronizable: isSynchronizable
     )
   }
