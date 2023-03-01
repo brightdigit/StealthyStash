@@ -7,25 +7,28 @@
 
 import SwiftUI
 
-struct InternetPasswordList: View {
-  let internetPasswords : [InternetPasswordItem]
+struct CredentialPropertyList: View {
+  let properties : [AnyCredentialProperty]
     var body: some View {
-      List(internetPasswords)
+      List(properties)
       { item in
         NavigationLink(value: item) {
           HStack{
+            #if !os(watchOS)
+            Image(systemName: item.propertyType.sfSymbolName)
+            #endif
             Text(item.account)
             Spacer()
             Text(item.dataString).bold()
-          }
+          }.lineLimit(1)
           
         }
       }
     }
 }
 
-struct InternetPasswordList_Previews: PreviewProvider {
+struct CredentialPropertyList_Previews: PreviewProvider {
     static var previews: some View {
-      InternetPasswordList(internetPasswords: InternetPasswordItem.previewCollection)
+      CredentialPropertyList(properties: AnyCredentialProperty.previewCollection)
     }
 }
