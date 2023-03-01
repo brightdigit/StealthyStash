@@ -73,8 +73,5 @@ struct InternetPasswordRootView: View {
 struct InternetPasswordRootView_Previews: PreviewProvider {
     static var previews: some View {
       InternetPasswordRootView(repository: PreviewRepository(), internetPasswords: InternetPasswordItem.previewCollection)
-//      InternetPasswordRootView(object: .init(repository: PreviewRepository(), internetPasswords:
-//                                              InternetPasswordItem.previewCollection
-//                                            ))
     }
 }

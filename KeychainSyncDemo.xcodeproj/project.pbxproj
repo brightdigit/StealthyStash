@@ -28,6 +28,7 @@
 		B34ADDDB29AF88E80072B59F /* CredentialsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDD929AF88E80072B59F /* CredentialsRepository.swift */; };
 		B34ADDDC29AF88E80072B59F /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDDA29AF88E80072B59F /* KeychainRepository.swift */; };
 		B34ADDDE29AF88F50072B59F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDDD29AF88F50072B59F /* String.swift */; };
+		B34ADDE029AF89F60072B59F /* GenericPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDDF29AF89F60072B59F /* GenericPasswordItem.swift */; };
 		B39BF14E29A53D50009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14D29A53D50009BBCAC /* FloxBxAuth */; };
 		B39BF15029A53D55009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14F29A53D55009BBCAC /* FloxBxAuth */; };
 		B39BF15429A6C116009BBCAC /* KeychainSyncDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */; };
@@ -60,6 +61,7 @@
 		B34ADDD929AF88E80072B59F /* CredentialsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsRepository.swift; sourceTree = "<group>"; };
 		B34ADDDA29AF88E80072B59F /* KeychainRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainRepository.swift; sourceTree = "<group>"; };
 		B34ADDDD29AF88F50072B59F /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		B34ADDDF29AF89F60072B59F /* GenericPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericPasswordItem.swift; sourceTree = "<group>"; };
 		B39BF14A29A53CF9009BBCAC /* FloxBxAuth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FloxBxAuth; sourceTree = "<group>"; };
 		B39BF14B29A53D37009BBCAC /* KeychainSyncDemoWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "KeychainSyncDemoWatch Watch App.entitlements"; sourceTree = "<group>"; };
 		B3AA493829A5282F002D40C3 /* KeychainSyncDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeychainSyncDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,7 @@
 		B34ADDD829AF88CA0072B59F /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				B34ADDDF29AF89F60072B59F /* GenericPasswordItem.swift */,
 				B34ADDD929AF88E80072B59F /* CredentialsRepository.swift */,
 				B34ADDDA29AF88E80072B59F /* KeychainRepository.swift */,
 				B34ADDB529AF84750072B59F /* AuthenticationType.swift */,
@@ -322,6 +325,7 @@
 				B34ADDDE29AF88F50072B59F /* String.swift in Sources */,
 				B34ADDD629AF886C0072B59F /* InternetPasswordView.swift in Sources */,
 				B34ADDBC29AF84750072B59F /* InternetPasswordRootView.swift in Sources */,
+				B34ADDE029AF89F60072B59F /* GenericPasswordItem.swift in Sources */,
 				B34ADDBD29AF84750072B59F /* ServerProtocol.swift in Sources */,
 				B34ADDC029AF84750072B59F /* PreviewInternetPasswordObject.swift in Sources */,
 				B34ADDBF29AF84750072B59F /* Int.swift in Sources */,
