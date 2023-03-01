@@ -83,7 +83,6 @@ extension InternetPasswordItem {
     let server : String? = try dictionary.requireOptional(kSecAttrServer)
     let protocolString : CFString? = try dictionary.requireOptional(kSecAttrProtocol)
     let `protocol` : ServerProtocol? = protocolString.flatMap(ServerProtocol.init(number: ))
-    //let authenticationType : AuthenticationType? = try dictionary.requireOptional(kSecAttrAuthenticationType)
     let port: Int? = try dictionary.requireOptional(kSecAttrPort)
     let path: String? = try dictionary.requireOptional(kSecAttrPath)
     let isSynchronizable : Bool? = try dictionary.requireOptional(kSecAttrSynchronizable)

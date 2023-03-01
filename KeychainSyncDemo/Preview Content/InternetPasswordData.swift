@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct InternetPasswordData : Codable {
+struct CredentialPropertyData : Codable {
   let account : String
   let data : String
   let accessGroup : String?
@@ -23,50 +23,40 @@ struct InternetPasswordData : Codable {
 }
 
 
-extension InternetPasswordData {
+extension CredentialPropertyData {
   static let collection = {
     let decoder = JSONDecoder()
-    let url = Bundle.main.url(forResource: "internet-passwords", withExtension: "json")
+    let url = Bundle.main.url(forResource: "credential-properties", withExtension: "json")
     let data = try! Data(contentsOf: url!)
     decoder.dateDecodingStrategy = .secondsSince1970
-    return try! decoder.decode([InternetPasswordData].self, from:  data)
-  }()
-}
-
-extension InternetPasswordItem {
-  static let previewCollection = {
-    InternetPasswordData.collection.map(
-      InternetPasswordItem.init
-    )
+    return try! decoder.decode([CredentialPropertyData].self, from:  data)
   }()
 }
 
 extension AnyCredentialProperty {
-  static let _previewDictionary : [CredentialPropertyType : [any CredentialProperty]] = [
-    .internet : InternetPasswordItem.previewCollection
-  ]
-  
-  static let previewCollections = _previewDictionary.mapValues{
-    $0.map(AnyCredentialProperty.init(property:))
-  }
+//  
+//  static let _previewDictionary : [CredentialPropertyType : [any CredentialProperty]] = [
+//    .internet : InternetPasswordItem.previewCollection
+//  ]
+
 }
 
-extension InternetPasswordItem {
-  init(data: InternetPasswordData) {
-    self.init(
-      account: data.account,
-      data: data.data.data(using: .utf8)!,
-      accessGroup: data.accessGroup,
-      createdAt: data.createdAt,
-      modifiedAt: data.modifiedAt,
-      description: data.description,
-      type: data.type,
-      label: data.label,
-      server: data.url?.host,
-      protocol: data.url?.scheme.flatMap(ServerProtocol.init(scheme:)),
-      port: data.url?.port,
-      path: data.url?.path,
-      isSynchronizable: data.isSynchronizable
-    )
-  }
-}
+//extension InternetPasswordItem {
+//  init(data: InternetPasswordData) {
+//    self.init(
+//      account: data.account,
+//      data: data.data.data(using: .utf8)!,
+//      accessGroup: data.accessGroup,
+//      createdAt: data.createdAt,
+//      modifiedAt: data.modifiedAt,
+//      description: data.description,
+//      type: data.type,
+//      label: data.label,
+//      server: data.url?.host,
+//      protocol: data.url?.scheme.flatMap(ServerProtocol.init(scheme:)),
+//      port: data.url?.port,
+//      path: data.url?.path,
+//      isSynchronizable: data.isSynchronizable
+//    )
+//  }
+//}

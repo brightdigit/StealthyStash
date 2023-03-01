@@ -10,19 +10,7 @@ struct PreviewRepository : CredentialsRepository {
   }
   
   func query(_ query: Query) throws -> [AnyCredentialProperty] {
-    return []
-  }
-  
-  func create(_ item: InternetPasswordItem) throws {
-  
-  }
-  
-  func update(_ item: InternetPasswordItem) throws {
-    
-  }
-  
-  func queryItems(_ query: Query) throws -> [InternetPasswordItem] {
-    fatalError()
+    return self.items
   }
   
 }

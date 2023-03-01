@@ -22,7 +22,6 @@ class CredentialPropertyListObject : ObservableObject {
     queryPublisher
       .map(Optional<[AnyCredentialProperty]>.some)
       .replaceError(with: nil)
-      .print()
       .receive(on: DispatchQueue.main)
       .assign(to: &self.$internetPasswords)
   }
