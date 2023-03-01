@@ -1,7 +1,9 @@
 import Security
 import Foundation
 
-public struct InternetPasswordItem : Identifiable, Hashable{
+public struct InternetPasswordItem : Identifiable, Hashable, CredentialProperty{
+  public static let propertyType: CredentialPropertyType = .internet
+  
   public var id: String {
     
     [self.account,
@@ -13,7 +15,7 @@ public struct InternetPasswordItem : Identifiable, Hashable{
   }
   
   
-  func addQuery () -> [String : Any?]
+  public func addQuery () -> [String : Any?]
   {
     [
      kSecClass as String: kSecClassInternetPassword,
@@ -31,13 +33,14 @@ public struct InternetPasswordItem : Identifiable, Hashable{
      kSecAttrPath as String : path
    ]
   }
-  public init(account: String, data: Data, accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, type: Int? = nil, label: String? = nil, server: String? = nil, `protocol`: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
+  public init(account: String, data: Data, accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, comment : String? = nil, type: Int? = nil, label: String? = nil, server: String? = nil, `protocol`: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
     self.account = account
     self.data = data
     self.accessGroup = accessGroup
     self.createdAt = createdAt
     self.modifiedAt = modifiedAt
     self.description = description
+    self.comment = comment
     self.type = type
     self.label = label
     self.server = server
@@ -55,6 +58,7 @@ public struct InternetPasswordItem : Identifiable, Hashable{
   public let createdAt : Date?
   public let modifiedAt : Date?
   public let description: String?
+  public let comment : String?
   public let type : Int?
   public let label : String?
   public let server : String?
@@ -65,34 +69,9 @@ public struct InternetPasswordItem : Identifiable, Hashable{
   public let isSynchronizable : Bool?
 }
 
-extension InternetPasswordItem {
-  public var dataString : String {
-    String(data: self.data, encoding: .utf8) ?? ""
-  }
-}
 
 extension InternetPasswordItem {
-  init(data: InternetPasswordData) {
-    self.init(
-      account: data.account,
-      data: data.data.data(using: .utf8)!,
-      accessGroup: data.accessGroup,
-      createdAt: data.createdAt,
-      modifiedAt: data.modifiedAt,
-      description: data.description,
-      type: data.type,
-      label: data.label,
-      server: data.url?.host,
-      protocol: data.url?.scheme.flatMap(ServerProtocol.init(scheme:)),
-      port: data.url?.port,
-      path: data.url?.path,
-      isSynchronizable: data.isSynchronizable
-    )
-  }
-}
-
-extension InternetPasswordItem {
-  init(dictionary : [String : Any]) throws {
+  public init(dictionary : [String : Any]) throws {
     let account : String = try dictionary.require(kSecAttrAccount)
     let data : Data = try dictionary.require(kSecValueData)
     let accessGroup : String? = try dictionary.requireOptional(kSecAttrAccessGroup)
@@ -104,7 +83,6 @@ extension InternetPasswordItem {
     let server : String? = try dictionary.requireOptional(kSecAttrServer)
     let protocolString : CFString? = try dictionary.requireOptional(kSecAttrProtocol)
     let `protocol` : ServerProtocol? = protocolString.flatMap(ServerProtocol.init(number: ))
-    //let authenticationType : AuthenticationType? = try dictionary.requireOptional(kSecAttrAuthenticationType)
     let port: Int? = try dictionary.requireOptional(kSecAttrPort)
     let path: String? = try dictionary.requireOptional(kSecAttrPath)
     let isSynchronizable : Bool? = try dictionary.requireOptional(kSecAttrSynchronizable)
@@ -127,7 +105,7 @@ extension InternetPasswordItem {
 }
 
 extension InternetPasswordItem {
-  init(builder: InternetPasswordItemBuilder) {
+  public init(builder: CredentialPropertyBuilder) {
     self.init(
       account: builder.account,
       data: builder.data,

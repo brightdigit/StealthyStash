@@ -1,8 +1,9 @@
 import Foundation
 
-public struct InternetPasswordItemBuilder {
-  
-  public init(source: InternetPasswordItem? = nil, account: String = "", data: Data = .init(), accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, type: Int? = nil, label: String? = nil, server: String? = nil, `protocol`: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
+public struct CredentialPropertyBuilder {
+  public let secClass : CredentialPropertyType
+  public init(secClass : CredentialPropertyType, source: AnyCredentialProperty? = nil, account: String = "", data: Data = .init(), accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, type: Int? = nil, label: String? = nil, service: String? = nil, server: String? = nil, `protocol`: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
+    self.secClass = secClass
     self.source = source
     self.account = account
     self.data = data
@@ -23,7 +24,7 @@ public struct InternetPasswordItemBuilder {
     self.isSynchronizableSet = isSynchronizable != nil
   }
   
-  public var source : InternetPasswordItem?
+  public var source : AnyCredentialProperty?
   public var account : String
   public var data : Data
   public var accessGroup : String?
@@ -34,6 +35,7 @@ public struct InternetPasswordItemBuilder {
   public var hasType : Bool
   public var labelValue : String
   public var hasLabel : Bool
+  public var service : String?
   public var server : String?
   public var `protocol` : ServerProtocol?
   public var authenticationType : AuthenticationType?
@@ -43,7 +45,7 @@ public struct InternetPasswordItemBuilder {
   public var isSynchronizableSet : Bool
 }
 
-extension InternetPasswordItemBuilder {
+extension CredentialPropertyBuilder {
   public var dataString : String {
     get {
       return String(data: self.data, encoding: .utf8) ?? ""
@@ -109,8 +111,9 @@ extension InternetPasswordItemBuilder {
     ].first {!$0} ?? true
   }
   
-  public func saved () -> InternetPasswordItemBuilder {
-    return .init(
+  public func saved () throws -> CredentialPropertyBuilder {
+    return try .init(
+      secClass: self.secClass,
       source: .init(builder: self),
       account : self.account,
       data : self.data,
@@ -130,14 +133,12 @@ extension InternetPasswordItemBuilder {
   }
 }
 
-extension InternetPasswordItemBuilder {
-  init (item: InternetPasswordItem?) {
-    guard let item = item else {
-      self.init()
-      return
-    }
+extension CredentialPropertyBuilder {
+  init (item: AnyCredentialProperty) {
+
     
     self.init(
+      secClass: item.propertyType,
       source: item,
       account : item.account,
       data : item.data,
@@ -149,7 +150,6 @@ extension InternetPasswordItemBuilder {
       label : item.label,
       server : item.server,
       protocol : item.protocol,
-      authenticationType : item.authenticationType,
       port : item.port,
       path : item.path,
       isSynchronizable : item.isSynchronizable
