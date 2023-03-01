@@ -134,7 +134,7 @@ var isSynchronizable : Bool? {
           return property.path
         }
   
-  init (builder : InternetPasswordItemBuilder) throws {
+  init (builder : CredentialPropertyBuilder) throws {
     let property = try builder.secClass.propertyType.init(builder: builder)
     self.init(property: property)
   }
@@ -171,7 +171,7 @@ public protocol CredentialProperty : Identifiable, Hashable {
   
   func addQuery () -> [String : Any?]
   init(dictionary : [String : Any]) throws
-  init(builder: InternetPasswordItemBuilder) throws
+  init(builder: CredentialPropertyBuilder) throws
 }
 
 extension CredentialProperty {

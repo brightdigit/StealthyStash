@@ -2,8 +2,8 @@ import Foundation
 import FloxBxAuth
 import Combine
 
-class InternetPasswordObject : ObservableObject {
-  internal init( repository: CredentialsRepository, item: InternetPasswordItemBuilder, isNew: Bool) {
+class CredentialPropertyObject : ObservableObject {
+  internal init( repository: CredentialsRepository, item: CredentialPropertyBuilder, isNew: Bool) {
     self.item = item
     self.repository = repository
     self.isNew = isNew
@@ -60,7 +60,7 @@ class InternetPasswordObject : ObservableObject {
   
   
   @Published var lastError: KeychainError?
-  @Published var item : InternetPasswordItemBuilder
+  @Published var item : CredentialPropertyBuilder
   let saveTriggerSubject = PassthroughSubject<Void, Never>()
   let clearErrorSubject = PassthroughSubject<KeychainError, Never>()
   let saveCompletedSubject = PassthroughSubject<Void, Never>()
@@ -73,7 +73,7 @@ class InternetPasswordObject : ObservableObject {
   }
 }
 
-extension InternetPasswordObject {
+extension CredentialPropertyObject {
   convenience init(repository: CredentialsRepository, item: AnyCredentialProperty) {
     self.init(repository: repository, item: .init(item: item), isNew:false)
   }

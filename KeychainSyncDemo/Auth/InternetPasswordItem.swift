@@ -71,26 +71,6 @@ public struct InternetPasswordItem : Identifiable, Hashable, CredentialProperty{
 
 
 extension InternetPasswordItem {
-  init(data: InternetPasswordData) {
-    self.init(
-      account: data.account,
-      data: data.data.data(using: .utf8)!,
-      accessGroup: data.accessGroup,
-      createdAt: data.createdAt,
-      modifiedAt: data.modifiedAt,
-      description: data.description,
-      type: data.type,
-      label: data.label,
-      server: data.url?.host,
-      protocol: data.url?.scheme.flatMap(ServerProtocol.init(scheme:)),
-      port: data.url?.port,
-      path: data.url?.path,
-      isSynchronizable: data.isSynchronizable
-    )
-  }
-}
-
-extension InternetPasswordItem {
   public init(dictionary : [String : Any]) throws {
     let account : String = try dictionary.require(kSecAttrAccount)
     let data : Data = try dictionary.require(kSecValueData)
@@ -126,7 +106,7 @@ extension InternetPasswordItem {
 }
 
 extension InternetPasswordItem {
-  public init(builder: InternetPasswordItemBuilder) {
+  public init(builder: CredentialPropertyBuilder) {
     self.init(
       account: builder.account,
       data: builder.data,

@@ -2,7 +2,7 @@ import Security
 import Foundation
 
 public struct GenericPasswordItem : Identifiable, Hashable, CredentialProperty{
-  public init(builder: InternetPasswordItemBuilder) throws {
+  public init(builder: CredentialPropertyBuilder) throws {
     fatalError()
   }
   

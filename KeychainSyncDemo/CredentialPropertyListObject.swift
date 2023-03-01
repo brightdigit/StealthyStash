@@ -2,13 +2,12 @@ import Foundation
 import Combine
 import FloxBxAuth
 
-class InternetPasswordListObject : ObservableObject {
+class CredentialPropertyListObject : ObservableObject {
   internal init(repository: CredentialsRepository, internetPasswords: [AnyCredentialProperty]? = nil) {
     self.repository = repository
     self.internetPasswords = internetPasswords
     
-    let queryPublisher = self.querySubject
-      .map(Query.init)
+    let queryPublisher = self.querySubject      
       .tryMap(self.repository.query(_:))
       .share()
     
@@ -30,11 +29,11 @@ class InternetPasswordListObject : ObservableObject {
   
   let repository : CredentialsRepository
   @Published var internetPasswords: [AnyCredentialProperty]?
-  let querySubject  = PassthroughSubject<String?, Never> ()
+  let querySubject  = PassthroughSubject<Query, Never> ()
   @Published var lastError : KeychainError?
   
 
-  func query (_ string: String?) {
-    self.querySubject.send(string)
+  func query (_ query: Query) {
+    self.querySubject.send(query)
   }
 }

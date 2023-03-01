@@ -40,3 +40,33 @@ extension InternetPasswordItem {
     )
   }()
 }
+
+extension AnyCredentialProperty {
+  static let _previewDictionary : [CredentialPropertyType : [any CredentialProperty]] = [
+    .internet : InternetPasswordItem.previewCollection
+  ]
+  
+  static let previewCollections = _previewDictionary.mapValues{
+    $0.map(AnyCredentialProperty.init(property:))
+  }
+}
+
+extension InternetPasswordItem {
+  init(data: InternetPasswordData) {
+    self.init(
+      account: data.account,
+      data: data.data.data(using: .utf8)!,
+      accessGroup: data.accessGroup,
+      createdAt: data.createdAt,
+      modifiedAt: data.modifiedAt,
+      description: data.description,
+      type: data.type,
+      label: data.label,
+      server: data.url?.host,
+      protocol: data.url?.scheme.flatMap(ServerProtocol.init(scheme:)),
+      port: data.url?.port,
+      path: data.url?.path,
+      isSynchronizable: data.isSynchronizable
+    )
+  }
+}

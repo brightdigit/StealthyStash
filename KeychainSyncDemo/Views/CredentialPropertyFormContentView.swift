@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct InternetPasswordFormContentView: View {
-  @ObservedObject var object : InternetPasswordObject
+struct CredentialPropertyFormContentView: View {
+  @ObservedObject var object : CredentialPropertyObject
     var body: some View {
       Section("Account") {
         TextField("account", text: $object.item.account)
@@ -48,11 +48,15 @@ struct InternetPasswordFormContentView: View {
       }
     }
 }
-//
-//struct InternetPasswordFormContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//      InternetPasswordFormContentView(object: InternetPasswordObject(repository: PreviewRepository(items: InternetPasswordItem.previewCollection.map({
-//        $0.eraseToAnyProperty()
-//      }))))
-//    }
-//}
+
+struct CredentialPropertyFormContentView_Previews: PreviewProvider {
+    static var previews: some View {
+      Form{
+        CredentialPropertyFormContentView(object: CredentialPropertyObject(repository: PreviewRepository(items: InternetPasswordItem.previewCollection.map({
+          $0.eraseToAnyProperty()
+        })), item: InternetPasswordItem.previewCollection.map({
+          $0.eraseToAnyProperty()
+        }).first!))
+      }
+    }
+}

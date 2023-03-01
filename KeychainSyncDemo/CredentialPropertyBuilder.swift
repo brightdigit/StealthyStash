@@ -1,6 +1,6 @@
 import Foundation
 
-public struct InternetPasswordItemBuilder {
+public struct CredentialPropertyBuilder {
   public let secClass : CredentialPropertyType
   public init(secClass : CredentialPropertyType, source: AnyCredentialProperty? = nil, account: String = "", data: Data = .init(), accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, type: Int? = nil, label: String? = nil, service: String? = nil, server: String? = nil, `protocol`: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
     self.secClass = secClass
@@ -45,7 +45,7 @@ public struct InternetPasswordItemBuilder {
   public var isSynchronizableSet : Bool
 }
 
-extension InternetPasswordItemBuilder {
+extension CredentialPropertyBuilder {
   public var dataString : String {
     get {
       return String(data: self.data, encoding: .utf8) ?? ""
@@ -111,7 +111,7 @@ extension InternetPasswordItemBuilder {
     ].first {!$0} ?? true
   }
   
-  public func saved () throws -> InternetPasswordItemBuilder {
+  public func saved () throws -> CredentialPropertyBuilder {
     return try .init(
       secClass: self.secClass,
       source: .init(builder: self),
@@ -133,7 +133,7 @@ extension InternetPasswordItemBuilder {
   }
 }
 
-extension InternetPasswordItemBuilder {
+extension CredentialPropertyBuilder {
   init (item: AnyCredentialProperty) {
 
     

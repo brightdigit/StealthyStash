@@ -1,7 +1,9 @@
 
 struct Query {
-  public let type : CredentialPropertyType
-  init (string : String?) {
-    self.type = .internet
+  internal init(type: CredentialPropertyType) {
+    self.type = type
   }
+  
+  public let type : CredentialPropertyType
+
 }
