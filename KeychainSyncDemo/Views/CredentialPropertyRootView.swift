@@ -12,6 +12,24 @@ struct CredentialPropertyRootView: View {
   @State var createNewItem = false
   @State var isErrorAlertVisible = false
   
+  var navigationTitle : String {
+    switch query.type {
+    case .generic:
+      return "Generic Passwords"
+    case .internet:
+      return "Internet Passwords"
+    }
+  }
+  
+  var newNavigationTitle : String {
+    switch query.type {
+    case .generic:
+      return "New Generic Passwords"
+    case .internet:
+      return "New Internet Passwords"
+    }
+  }
+  
   var body: some View {
       NavigationStack {
         Form{
@@ -38,7 +56,7 @@ struct CredentialPropertyRootView: View {
           }
           Section{
             Group{
-              if let internetPasswords = self.object.internetPasswords {
+              if let internetPasswords = self.object.credentialProperties {
                 CredentialPropertyList(properties: internetPasswords)
               } else {
                 ProgressView()
@@ -63,7 +81,7 @@ struct CredentialPropertyRootView: View {
         }, message: { error in
           Text(error.localizedDescription)
         })
-        .navigationTitle("Internet Passwords")
+        .navigationTitle(self.navigationTitle)
           .toolbar {
             Button {
               self.createNewItem = true
@@ -74,7 +92,7 @@ struct CredentialPropertyRootView: View {
           }.navigationDestination(for: AnyCredentialProperty.self) { item in
             CredentialPropertyView(repository: self.object.repository, item: item).navigationTitle(item.account)
           }.navigationDestination(isPresented: self.$createNewItem) {
-            CredentialPropertyView(repository: self.object.repository, type: .internet)
+            CredentialPropertyView(repository: self.object.repository, type: self.query.type).navigationTitle(self.newNavigationTitle)
           }.onAppear {
             self.object.query(self.query)
           }
@@ -85,11 +103,7 @@ struct CredentialPropertyRootView: View {
 struct CredentialPropertyRootView_Previews: PreviewProvider {
     static var previews: some View {
       CredentialPropertyRootView(repository: PreviewRepository(
-        items: InternetPasswordItem.previewCollection.map({
-          $0.eraseToAnyProperty()
-        })
-      ), internetPasswords: InternetPasswordItem.previewCollection.map({
-        $0.eraseToAnyProperty()
-      }), query: .init(type: .internet))
+        items: AnyCredentialProperty.previewCollection
+      ), internetPasswords: AnyCredentialProperty.previewCollection, query: .init(type: .internet))
     }
 }

@@ -3,7 +3,17 @@ import Foundation
 
 public struct GenericPasswordItem : Identifiable, Hashable, CredentialProperty{
   public init(builder: CredentialPropertyBuilder) throws {
-    fatalError()
+    self.init(
+      account: builder.account,
+      data: builder.data,
+      accessGroup: builder.accessGroup,
+      createdAt: builder.createdAt,
+      modifiedAt: builder.modifiedAt,
+      description: builder.description,
+      type: builder.type,
+      label: builder.label,
+      isSynchronizable: builder.isSynchronizable
+    )
   }
   
   public static var propertyType: CredentialPropertyType {

@@ -39,8 +39,15 @@ struct CredentialPropertyFormContentView: View {
         TextField("label", text: $object.item.labelValue)
       }
       
-      Section("URL"){
-        Text(object.item.url?.description ?? "")
+      switch self.object.item.secClass {
+      case .internet:
+        Section("URL"){
+          Text(object.item.url?.description ?? "")
+        }
+      case .generic:
+        Section("Service") {
+          Text(object.item.service ?? "")
+        }
       }
       
       Section("Description") {
@@ -52,11 +59,7 @@ struct CredentialPropertyFormContentView: View {
 struct CredentialPropertyFormContentView_Previews: PreviewProvider {
     static var previews: some View {
       Form{
-        CredentialPropertyFormContentView(object: CredentialPropertyObject(repository: PreviewRepository(items: InternetPasswordItem.previewCollection.map({
-          $0.eraseToAnyProperty()
-        })), item: InternetPasswordItem.previewCollection.map({
-          $0.eraseToAnyProperty()
-        }).first!))
+        CredentialPropertyFormContentView(object: CredentialPropertyObject(repository: PreviewRepository(items: AnyCredentialProperty.previewCollection), item: AnyCredentialProperty.previewCollection.randomElement()!))
       }
     }
 }

@@ -15,6 +15,8 @@ struct CredentialPropertyData : Codable {
   let createdAt: Date
   let modifiedAt : Date
   let description: String?
+  let service: String?
+  let comments: String?
   let type : Int?
   let label: String?
   let url : URL?
@@ -33,30 +35,56 @@ extension CredentialPropertyData {
   }()
 }
 
-extension AnyCredentialProperty {
-//  
-//  static let _previewDictionary : [CredentialPropertyType : [any CredentialProperty]] = [
-//    .internet : InternetPasswordItem.previewCollection
-//  ]
 
+
+extension GenericPasswordItem {
+  init(data: CredentialPropertyData) {
+    self.init(
+      account: data.account,
+      data: data.data.data(using: .utf8)!,
+      service: data.service,
+      accessGroup: data.accessGroup,
+      createdAt: data.createdAt,
+      modifiedAt: data.modifiedAt,
+      description: data.description,
+      type: data.type,
+      label: data.label,
+      isSynchronizable: data.isSynchronizable
+    )
+  }
 }
 
-//extension InternetPasswordItem {
-//  init(data: InternetPasswordData) {
-//    self.init(
-//      account: data.account,
-//      data: data.data.data(using: .utf8)!,
-//      accessGroup: data.accessGroup,
-//      createdAt: data.createdAt,
-//      modifiedAt: data.modifiedAt,
-//      description: data.description,
-//      type: data.type,
-//      label: data.label,
-//      server: data.url?.host,
-//      protocol: data.url?.scheme.flatMap(ServerProtocol.init(scheme:)),
-//      port: data.url?.port,
-//      path: data.url?.path,
-//      isSynchronizable: data.isSynchronizable
-//    )
-//  }
-//}
+extension InternetPasswordItem {
+  init(data: CredentialPropertyData) {
+    self.init(
+      account: data.account,
+      data: data.data.data(using: .utf8)!,
+      accessGroup: data.accessGroup,
+      createdAt: data.createdAt,
+      modifiedAt: data.modifiedAt,
+      description: data.description,
+      type: data.type,
+      label: data.label,
+      server: data.url?.host,
+      protocol: data.url?.scheme.flatMap(ServerProtocol.init(scheme:)),
+      port: data.url?.port,
+      path: data.url?.path,
+      isSynchronizable: data.isSynchronizable
+    )
+  }
+}
+
+
+extension AnyCredentialProperty {
+  init(data: CredentialPropertyData) {
+    let property : any CredentialProperty
+    if data.service != nil {
+      property = GenericPasswordItem(data: data)
+    } else {
+      property = InternetPasswordItem(data: data)
+    }
+    self.init(property: property)
+  }
+  
+  static let previewCollection = CredentialPropertyData.collection.map(Self.init(data: ))
+}

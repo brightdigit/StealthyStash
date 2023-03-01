@@ -77,9 +77,9 @@ struct InternetPasswordView_Previews: PreviewProvider {
       NavigationStack{
         CredentialPropertyView(
           repository: PreviewRepository(items: []),
-          item: InternetPasswordItem.previewCollection.first(where: { item in
+          item: AnyCredentialProperty.previewCollection.first(where: { item in
             item.accessGroup != nil
-          }).map(AnyCredentialProperty.init(property:))!
+          })!
         )
       }.tabItem{
         Image(systemName: "key.fill")

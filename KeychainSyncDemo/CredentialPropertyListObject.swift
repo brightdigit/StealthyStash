@@ -5,7 +5,7 @@ import FloxBxAuth
 class CredentialPropertyListObject : ObservableObject {
   internal init(repository: CredentialsRepository, internetPasswords: [AnyCredentialProperty]? = nil) {
     self.repository = repository
-    self.internetPasswords = internetPasswords
+    self.credentialProperties = internetPasswords
     
     let queryPublisher = self.querySubject      
       .tryMap(self.repository.query(_:))
@@ -23,11 +23,11 @@ class CredentialPropertyListObject : ObservableObject {
       .map(Optional<[AnyCredentialProperty]>.some)
       .replaceError(with: nil)
       .receive(on: DispatchQueue.main)
-      .assign(to: &self.$internetPasswords)
+      .assign(to: &self.$credentialProperties)
   }
   
   let repository : CredentialsRepository
-  @Published var internetPasswords: [AnyCredentialProperty]?
+  @Published var credentialProperties: [AnyCredentialProperty]?
   let querySubject  = PassthroughSubject<Query, Never> ()
   @Published var lastError : KeychainError?
   

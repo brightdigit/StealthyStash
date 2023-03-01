@@ -27,8 +27,6 @@ struct CredentialPropertyList: View {
 
 struct CredentialPropertyList_Previews: PreviewProvider {
     static var previews: some View {
-      CredentialPropertyList(properties: InternetPasswordItem.previewCollection.map{
-        $0.eraseToAnyProperty()
-      })
+      CredentialPropertyList(properties: AnyCredentialProperty.previewCollection)
     }
 }
