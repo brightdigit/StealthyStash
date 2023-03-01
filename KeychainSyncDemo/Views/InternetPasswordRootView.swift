@@ -10,19 +10,6 @@ struct InternetPasswordRootView: View {
   @StateObject var object : InternetPasswordListObject
   @State var query : String?
   @State var createNewItem = false
-  fileprivate func InternetPasswordList(internetPasswords: [InternetPasswordItem]) -> some View {
-    List(internetPasswords)
-    { item in
-      NavigationLink(value: item) {
-        HStack{
-          Text(item.account)
-          Spacer()
-          Text(item.dataString).bold()
-        }
-        
-      }
-    }
-  }
   
   var body: some View {
       NavigationStack {

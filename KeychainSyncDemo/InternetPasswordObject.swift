@@ -39,7 +39,6 @@ class InternetPasswordObject : ObservableObject {
       .catch{Just(Optional.some($0))}
       .compactMap{$0 as? KeychainError}
       .receive(on: DispatchQueue.main)
-      .print()
       .assign(to: &self.$lastError)
    
     clearErrorSubject
