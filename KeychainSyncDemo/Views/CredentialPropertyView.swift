@@ -1,17 +1,17 @@
 import SwiftUI
 
-struct InternetPasswordView: View {
-  internal init(object: InternetPasswordObject) {
+struct CredentialPropertyView: View {
+  internal init(object: CredentialPropertyObject) {
     self._object = .init(wrappedValue: object)
   }
   @Environment(\.dismiss) private var dismiss
   @State var shouldConfirmDismiss = false
   @State var isErrorAlertVisible = false
-  @StateObject var object : InternetPasswordObject
+  @StateObject var object : CredentialPropertyObject
   
   var body: some View {
     Form{
-      InternetPasswordFormContentView(object: object)
+      CredentialPropertyFormContentView(object: object)
     }
     .onReceive(self.object.$lastError, perform: { error in
       self.isErrorAlertVisible = error != nil
@@ -41,7 +41,7 @@ struct InternetPasswordView: View {
       Text("You have unsaved changes.")
     })
     .toolbar {
-      ToolbarItemGroup(placement: .navigationBarLeading) {
+      ToolbarItemGroup(placement: .cancellationAction) {
         Button("Back") {
           guard self.object.item.isModified else {
             dismiss()
@@ -52,7 +52,7 @@ struct InternetPasswordView: View {
           }
         }
       }
-      ToolbarItemGroup(placement: .navigationBarTrailing) {
+      ToolbarItemGroup(placement: .confirmationAction) {
         Button("Save") {
           self.object.save()
         }
@@ -61,9 +61,13 @@ struct InternetPasswordView: View {
   }
 }
 
-extension InternetPasswordView {
-  init(repository: CredentialsRepository, item: InternetPasswordItem? = nil) {
+extension CredentialPropertyView {
+  init(repository: CredentialsRepository, item: AnyCredentialProperty) {
     self.init(object: .init(repository: repository, item: item))
+  }
+  
+  init(repository: CredentialsRepository, type: CredentialPropertyType) {
+    self.init(object: .init(repository: repository, type: type))
   }
 }
 
@@ -71,11 +75,11 @@ struct InternetPasswordView_Previews: PreviewProvider {
   static var previews: some View {
     TabView{
       NavigationStack{
-        InternetPasswordView(
-          repository: PreviewRepository(),
-          item: .previewCollection.first(where: { item in
+        CredentialPropertyView(
+          repository: PreviewRepository(items: []),
+          item: AnyCredentialProperty.previewCollection.first(where: { item in
             item.accessGroup != nil
-          })
+          })!
         )
       }.tabItem{
         Image(systemName: "key.fill")

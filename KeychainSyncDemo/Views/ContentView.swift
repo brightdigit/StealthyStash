@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+  let repository = KeychainRepository(defaultServiceName: "com.brightdigit.KeychainSyncDemo", defaultServerName: "com.brightdigit.KeychainSyncDemo", defaultAccessGroup: "MLT7M394S7.com.brightdigit.KeychainSyncDemo")
     var body: some View {
       TabView {
-        InternetPasswordRootView(repository: KeychainRepository(defaultServiceName: "com.brightdigit.KeychainSyncDemo", defaultServerName: "com.brightdigit.KeychainSyncDemo", defaultAccessGroup: "MLT7M394S7.com.brightdigit.KeychainSyncDemo")).tabItem{
+        CredentialPropertyRootView(repository: repository, query: .init(type: .internet)).tabItem{
           Image(systemName: "network")
           Text("Internet")
         }
         
-        NavigationView {
-          
-        }.tabItem{
+          CredentialPropertyRootView(repository: repository, query: .init(type: .generic))
+        .tabItem{
           Image(systemName: "key.fill")
           Text("Generic")
         }
