@@ -1,15 +1,25 @@
 
-struct PreviewRepository : CredentialsRepository {
-  let items : [AnyCredentialProperty]
-  func create(_ item: AnyCredentialProperty) throws {
+struct PreviewRepository : SecretsRepository {
+
+  
+  func delete(_ item: AnySecretProperty) throws {
     
   }
   
-  func update(_ item: AnyCredentialProperty) throws {
+  let items : [AnySecretProperty]
+  func create(_ item: AnySecretProperty) throws {
     
   }
   
-  func query(_ query: Query) throws -> [AnyCredentialProperty] {
+  func update(_ item: AnySecretProperty) throws {
+    
+  }
+  
+  func update<SecretPropertyType>(_ item: SecretPropertyType, from previousItem: SecretPropertyType) throws where SecretPropertyType : SecretProperty {
+    
+  }
+  
+  func query(_ query: Query) throws -> [AnySecretProperty] {
     return self.items
   }
   
