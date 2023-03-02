@@ -75,9 +75,9 @@ extension InternetPasswordItem {
 }
 
 
-extension AnyCredentialProperty {
+extension AnySecretProperty {
   init(data: CredentialPropertyData) {
-    let property : any CredentialProperty
+    let property : any SecretProperty
     if data.service != nil {
       property = GenericPasswordItem(data: data)
     } else {

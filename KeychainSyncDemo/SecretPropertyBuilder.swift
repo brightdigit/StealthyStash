@@ -1,8 +1,8 @@
 import Foundation
 
-public struct CredentialPropertyBuilder {
-  public let secClass : CredentialPropertyType
-  public init(secClass : CredentialPropertyType, source: AnyCredentialProperty? = nil, account: String = "", data: Data = .init(), accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, type: Int? = nil, label: String? = nil, service: String? = nil, server: String? = nil, `protocol`: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
+public struct SecretPropertyBuilder {
+  public let secClass : SecretPropertyType
+  public init(secClass : SecretPropertyType, source: AnySecretProperty? = nil, account: String = "", data: Data = .init(), accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, type: Int? = nil, label: String? = nil, service: String? = nil, server: String? = nil, `protocol`: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
     self.secClass = secClass
     self.source = source
     self.account = account
@@ -24,7 +24,7 @@ public struct CredentialPropertyBuilder {
     self.isSynchronizableSet = isSynchronizable != nil
   }
   
-  public var source : AnyCredentialProperty?
+  public var source : AnySecretProperty?
   public var account : String
   public var data : Data
   public var accessGroup : String?
@@ -45,7 +45,7 @@ public struct CredentialPropertyBuilder {
   public var isSynchronizableSet : Bool
 }
 
-extension CredentialPropertyBuilder {
+extension SecretPropertyBuilder {
   public var dataString : String {
     get {
       return String(data: self.data, encoding: .utf8) ?? ""
@@ -111,7 +111,7 @@ extension CredentialPropertyBuilder {
     ].first {!$0} ?? true
   }
   
-  public func saved () throws -> CredentialPropertyBuilder {
+  public func saved () throws -> SecretPropertyBuilder {
     return try .init(
       secClass: self.secClass,
       source: .init(builder: self),
@@ -133,8 +133,8 @@ extension CredentialPropertyBuilder {
   }
 }
 
-extension CredentialPropertyBuilder {
-  init (item: AnyCredentialProperty) {
+extension SecretPropertyBuilder {
+  init (item: AnySecretProperty) {
 
     
     self.init(
