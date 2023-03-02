@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CredentialPropertyList: View {
-  let properties : [AnyCredentialProperty]
+  let properties : [AnySecretProperty]
     var body: some View {
       #if os(iOS) || os(watchOS)
       List(properties)
@@ -46,6 +46,6 @@ struct CredentialPropertyList: View {
 
 struct CredentialPropertyList_Previews: PreviewProvider {
     static var previews: some View {
-      CredentialPropertyList(properties: AnyCredentialProperty.previewCollection)
+      CredentialPropertyList(properties: AnySecretProperty.previewCollection)
     }
 }

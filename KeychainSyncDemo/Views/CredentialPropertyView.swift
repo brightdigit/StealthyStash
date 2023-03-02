@@ -62,11 +62,11 @@ struct CredentialPropertyView: View {
 }
 
 extension CredentialPropertyView {
-  init(repository: CredentialsRepository, item: AnyCredentialProperty) {
+  init(repository: SecretsRepository, item: AnySecretProperty) {
     self.init(object: .init(repository: repository, item: item))
   }
   
-  init(repository: CredentialsRepository, type: CredentialPropertyType) {
+  init(repository: SecretsRepository, type: SecretPropertyType) {
     self.init(object: .init(repository: repository, type: type))
   }
 }
@@ -77,7 +77,7 @@ struct InternetPasswordView_Previews: PreviewProvider {
       NavigationStack{
         CredentialPropertyView(
           repository: PreviewRepository(items: []),
-          item: AnyCredentialProperty.previewCollection.first(where: { item in
+          item: AnySecretProperty.previewCollection.first(where: { item in
             item.accessGroup != nil
           })!
         )

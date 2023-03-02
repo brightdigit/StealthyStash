@@ -1,10 +1,10 @@
 import Security
 import FloxBxAuth
 
-struct KeychainRepository : CredentialsRepository {
+struct KeychainRepository : SecretsRepository {
 
   
-  func create(_ item: AnyCredentialProperty) throws {
+  func create(_ item: AnySecretProperty) throws {
     let itemDictionary = item.property.addQuery()
     
     let query = itemDictionary.merging(defaultAddQuery(forType: item.propertyType)) {
@@ -18,11 +18,11 @@ struct KeychainRepository : CredentialsRepository {
     }
   }
   
-  func update(_ item: AnyCredentialProperty) throws {
+  func update(_ item: AnySecretProperty) throws {
     
   }
   
-  func query(_ query: Query) throws -> [AnyCredentialProperty] {
+  func query(_ query: Query) throws -> [AnySecretProperty] {
     let dictionaryAny = [
       kSecClass as String: query.type.secClass,
       kSecAttrServer as String: query.type == .internet ? defaultServerName : nil,
@@ -47,7 +47,7 @@ struct KeychainRepository : CredentialsRepository {
     }
     
     do {
-      return try dictionaries.map(query.type.propertyType.init(dictionary:)).map(AnyCredentialProperty.init(property:))
+      return try dictionaries.map(query.type.propertyType.init(dictionary:)).map(AnySecretProperty.init(property:))
     } catch {
       assertionFailure(error.localizedDescription)
       return []
@@ -66,7 +66,7 @@ struct KeychainRepository : CredentialsRepository {
   let defaultAccessGroup : String?
   let defaultSynchronizable : Bool?
   
-  func defaultAddQuery (forType type: CredentialPropertyType) -> [String : Any?] {
+  func defaultAddQuery (forType type: SecretPropertyType) -> [String : Any?] {
     return [
       kSecAttrService as String: type == .generic ? self.defaultServiceName : nil,
       kSecAttrServer as String: type == .internet ? self.defaultServerName : nil,

@@ -1,8 +1,8 @@
 import Security
 import Foundation
 
-public struct InternetPasswordItem : Identifiable, Hashable, CredentialProperty{
-  public static let propertyType: CredentialPropertyType = .internet
+public struct InternetPasswordItem : Identifiable, Hashable, SecretProperty{
+  public static let propertyType: SecretPropertyType = .internet
   
   public var id: String {
     
@@ -105,7 +105,7 @@ extension InternetPasswordItem {
 }
 
 extension InternetPasswordItem {
-  public init(builder: CredentialPropertyBuilder) {
+  public init(builder: SecretPropertyBuilder) {
     self.init(
       account: builder.account,
       data: builder.data,

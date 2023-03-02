@@ -1,8 +1,8 @@
 import Security
 import Foundation
 
-public struct GenericPasswordItem : Identifiable, Hashable, CredentialProperty{
-  public init(builder: CredentialPropertyBuilder) throws {
+public struct GenericPasswordItem : Identifiable, Hashable, SecretProperty{
+  public init(builder: SecretPropertyBuilder) throws {
     self.init(
       account: builder.account,
       data: builder.data,
@@ -16,7 +16,7 @@ public struct GenericPasswordItem : Identifiable, Hashable, CredentialProperty{
     )
   }
   
-  public static var propertyType: CredentialPropertyType {
+  public static var propertyType: SecretPropertyType {
     return .generic
   }
   

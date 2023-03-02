@@ -1,15 +1,15 @@
 
-struct PreviewRepository : CredentialsRepository {
-  let items : [AnyCredentialProperty]
-  func create(_ item: AnyCredentialProperty) throws {
+struct PreviewRepository : SecretsRepository {
+  let items : [AnySecretProperty]
+  func create(_ item: AnySecretProperty) throws {
     
   }
   
-  func update(_ item: AnyCredentialProperty) throws {
+  func update(_ item: AnySecretProperty) throws {
     
   }
   
-  func query(_ query: Query) throws -> [AnyCredentialProperty] {
+  func query(_ query: Query) throws -> [AnySecretProperty] {
     return self.items
   }
   
