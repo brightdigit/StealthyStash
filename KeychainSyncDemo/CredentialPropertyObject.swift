@@ -3,37 +3,31 @@ import FloxBxAuth
 import Combine
 
 class CredentialPropertyObject : ObservableObject {
-  internal init( repository: CredentialsRepository, item: CredentialPropertyBuilder, isNew: Bool) {
+  internal init( repository: SecretsRepository, item: SecretPropertyBuilder, original: AnySecretProperty?) {
     self.item = item
     self.repository = repository
-    self.isNew = isNew
+    self.originalItem = original
     
     let savePublisher = saveTriggerSubject
       .map{self.item}
-      .tryMap(AnyCredentialProperty.init)
+      .tryMap(AnySecretProperty.init)
       .tryMap { item in
-        if self.isNew {
-          try self.repository.create(item)
-        } else {
-          try self.repository.update(item)
-        }
+        try self.repository.upsert(from: self.originalItem, to: item.property)
+       
       }
       .share()
     
-    let successPublisher = savePublisher
+    let successSavePublisher = savePublisher
       .map(Optional<Void>.some)
       .replaceError(with: Optional<Void>.none)
       .compactMap{$0}
       .share()
     
-    successPublisher
+    successSavePublisher
       .tryMap{try self.item.saved()}
       .assertNoFailure()
       .receive(on: DispatchQueue.main)
       .assign(to: &self.$item)
-    
-    saveCompletedCancellable = successPublisher
-      .subscribe(self.saveCompletedSubject)
     
     savePublisher
       .map{Optional<Error>.none}
@@ -48,6 +42,30 @@ class CredentialPropertyObject : ObservableObject {
       .receive(on: DispatchQueue.main)
       .assign(to: &self.$lastError)
     
+    let deletePublisher = deleteTriggerSubject
+      .map{self.item}
+      .tryMap(AnySecretProperty.init)
+      .tryMap { item in
+        try self.repository.delete(item)
+       
+      }
+      .share()
+    let successDeletePublisher = deletePublisher
+      .map(Optional<Void>.some)
+      .replaceError(with: Optional<Void>.none)
+      .compactMap{$0}
+      .share()
+    
+    deletePublisher
+      .map{Optional<Error>.none}
+      .catch{Just(Optional.some($0))}
+      .compactMap{$0 as? KeychainError}
+      .receive(on: DispatchQueue.main)
+      .assign(to: &self.$lastError)
+    
+    
+    saveCompletedCancellable = Publishers.Merge(successSavePublisher, successDeletePublisher)
+      .subscribe(self.updateCompletedSubject)
   }
   
   func save () {
@@ -58,27 +76,32 @@ class CredentialPropertyObject : ObservableObject {
     self.clearErrorSubject.send(error)
   }
   
+  func delete () {
+    self.deleteTriggerSubject.send()
+  }
+  
   
   @Published var lastError: KeychainError?
-  @Published var item : CredentialPropertyBuilder
+  @Published var item : SecretPropertyBuilder
   let saveTriggerSubject = PassthroughSubject<Void, Never>()
+  let deleteTriggerSubject = PassthroughSubject<Void, Never>()
   let clearErrorSubject = PassthroughSubject<KeychainError, Never>()
-  let saveCompletedSubject = PassthroughSubject<Void, Never>()
-  let repository : CredentialsRepository
-  let isNew : Bool
+  let updateCompletedSubject = PassthroughSubject<Void, Never>()
+  let repository : SecretsRepository
+  let originalItem : AnySecretProperty?
   var saveCompletedCancellable : AnyCancellable!
   
-  var saveCompleted : AnyPublisher<Void, Never> {
-    return self.saveCompletedSubject.eraseToAnyPublisher()
+  var updateCompleted : AnyPublisher<Void, Never> {
+    return self.updateCompletedSubject.eraseToAnyPublisher()
   }
 }
 
 extension CredentialPropertyObject {
-  convenience init(repository: CredentialsRepository, item: AnyCredentialProperty) {
-    self.init(repository: repository, item: .init(item: item), isNew:false)
+  convenience init(repository: SecretsRepository, item: AnySecretProperty) {
+    self.init(repository: repository, item: .init(item: item), original: item)
   }
   
-  convenience init(repository: CredentialsRepository, type:  CredentialPropertyType) {
-    self.init(repository: repository, item: .init(secClass: type), isNew:true)
+  convenience init(repository: SecretsRepository, type:  SecretPropertyType) {
+    self.init(repository: repository, item: .init(secClass: type), original: nil)
   }
 }

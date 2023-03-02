@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct CredentialPropertyList: View {
-  let properties : [AnyCredentialProperty]
+  let properties : [AnySecretProperty]
     var body: some View {
+      #if os(iOS) || os(watchOS)
       List(properties)
       { item in
         NavigationLink(value: item) {
@@ -24,11 +25,27 @@ struct CredentialPropertyList: View {
           
         }
       }
+      #else
+      Table(properties) {
+        TableColumn("") { item in
+          HStack{
+            Button("Edit") {
+              
+            }
+            Button("Delete") {
+              
+            }
+          }
+        }
+        TableColumn("Account", value: \.account)
+        TableColumn("Data", value: \.dataString)
+      }
+      #endif
     }
 }
 
 struct CredentialPropertyList_Previews: PreviewProvider {
     static var previews: some View {
-      CredentialPropertyList(properties: AnyCredentialProperty.previewCollection)
+      CredentialPropertyList(properties: AnySecretProperty.previewCollection)
     }
 }

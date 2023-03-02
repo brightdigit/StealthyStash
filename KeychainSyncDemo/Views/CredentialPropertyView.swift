@@ -16,7 +16,7 @@ struct CredentialPropertyView: View {
     .onReceive(self.object.$lastError, perform: { error in
       self.isErrorAlertVisible = error != nil
     })
-    .onReceive(self.object.saveCompleted, perform: { _ in
+    .onReceive(self.object.updateCompleted, perform: { _ in
       self.dismiss()
     })
     .alert(isPresented: self.$isErrorAlertVisible, error: self.object.lastError, actions: { error in
@@ -52,6 +52,11 @@ struct CredentialPropertyView: View {
           }
         }
       }
+      ToolbarItemGroup(placement: .destructiveAction) {
+        Button("Delete") {
+          self.object.delete()
+        }
+      }
       ToolbarItemGroup(placement: .confirmationAction) {
         Button("Save") {
           self.object.save()
@@ -62,11 +67,11 @@ struct CredentialPropertyView: View {
 }
 
 extension CredentialPropertyView {
-  init(repository: CredentialsRepository, item: AnyCredentialProperty) {
+  init(repository: SecretsRepository, item: AnySecretProperty) {
     self.init(object: .init(repository: repository, item: item))
   }
   
-  init(repository: CredentialsRepository, type: CredentialPropertyType) {
+  init(repository: SecretsRepository, type: SecretPropertyType) {
     self.init(object: .init(repository: repository, type: type))
   }
 }
@@ -77,7 +82,7 @@ struct InternetPasswordView_Previews: PreviewProvider {
       NavigationStack{
         CredentialPropertyView(
           repository: PreviewRepository(items: []),
-          item: AnyCredentialProperty.previewCollection.first(where: { item in
+          item: AnySecretProperty.previewCollection.first(where: { item in
             item.accessGroup != nil
           })!
         )
