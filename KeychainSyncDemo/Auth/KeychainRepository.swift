@@ -7,8 +7,7 @@ struct KeychainRepository : CredentialsRepository {
   func create(_ item: AnyCredentialProperty) throws {
     let itemDictionary = item.property.addQuery()
     
-    
-    let query =     itemDictionary.merging(defaultAddQuery(forType: item.propertyType)) {
+    let query = itemDictionary.merging(defaultAddQuery(forType: item.propertyType)) {
       return $0 ?? $1
     }.compactMapValues{ $0} as CFDictionary
     

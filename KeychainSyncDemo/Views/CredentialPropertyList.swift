@@ -10,6 +10,7 @@ import SwiftUI
 struct CredentialPropertyList: View {
   let properties : [AnyCredentialProperty]
     var body: some View {
+      #if os(iOS) || os(watchOS)
       List(properties)
       { item in
         NavigationLink(value: item) {
@@ -24,6 +25,22 @@ struct CredentialPropertyList: View {
           
         }
       }
+      #else
+      Table(properties) {
+        TableColumn("") { item in
+          HStack{
+            Button("Edit") {
+              
+            }
+            Button("Delete") {
+              
+            }
+          }
+        }
+        TableColumn("Account", value: \.account)
+        TableColumn("Data", value: \.dataString)
+      }
+      #endif
     }
 }
 

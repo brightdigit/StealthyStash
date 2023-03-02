@@ -78,26 +78,6 @@ extension GenericPasswordItem {
     String(data: self.data, encoding: .utf8) ?? ""
   }
 }
-//
-//extension GenericPasswordItem {
-//  init(data: InternetPasswordData) {
-//    self.init(
-//      account: data.account,
-//      data: data.data.data(using: .utf8)!,
-//      accessGroup: data.accessGroup,
-//      createdAt: data.createdAt,
-//      modifiedAt: data.modifiedAt,
-//      description: data.description,
-//      type: data.type,
-//      label: data.label,
-//      server: data.url?.host,
-//      protocol: data.url?.scheme.flatMap(ServerProtocol.init(scheme:)),
-//      port: data.url?.port,
-//      path: data.url?.path,
-//      isSynchronizable: data.isSynchronizable
-//    )
-//  }
-//}
 
 extension GenericPasswordItem {
   public init(dictionary : [String : Any]) throws {
@@ -127,23 +107,3 @@ extension GenericPasswordItem {
     )
   }
 }
-//
-//extension GenericPasswordItem {
-//  init(builder: InternetPasswordItemBuilder) {
-//    self.init(
-//      account: builder.account,
-//      data: builder.data,
-//      accessGroup: builder.accessGroup,
-//      createdAt: builder.createdAt,
-//      modifiedAt: builder.modifiedAt,
-//      description: builder.description,
-//      type: builder.type,
-//      label: builder.label,
-//      server: builder.server,
-//      protocol: builder.protocol,
-//      port: builder.port,
-//      path: builder.path,
-//      isSynchronizable: builder.isSynchronizable
-//    )
-//  }
-//}
