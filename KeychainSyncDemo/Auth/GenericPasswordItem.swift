@@ -1,8 +1,51 @@
 import Security
 import Foundation
 
-public struct GenericPasswordItem : Identifiable, Hashable, CredentialProperty{
-  public init(builder: CredentialPropertyBuilder) throws {
+public struct GenericPasswordItem : Identifiable, Hashable, SecretProperty{
+  public func otherProperties() -> SecretDictionary {
+    [
+          kSecAttrGeneric as String: self.gerneic,
+          kSecAttrSynchronizable as String: self.isSynchronizable,
+          kSecAttrDescription as String : description?.nilTrimmed(),
+          kSecAttrComment as String : comment?.nilTrimmed(),
+          kSecAttrType as String : type,
+          kSecAttrLabel as String : label
+    ]
+  }
+  
+//  public func deleteQuery() -> [String : Any?] {
+//    let addQuery = addQuery()
+//    let uniqueKeys = [kSecAttrService as String, kSecAttrAccount as String]
+//    var query = [String : Any?]()
+//    var attributes = [String : Any?]()
+//    for (key, value) in addQuery {
+//      if uniqueKeys.contains(key) {
+//        query[key] = value
+//      } else {
+//        attributes[key] = value
+//      }
+//    }
+//    query[kSecClass as String] = Self.propertyType.secClass
+//    return query
+//  }
+//  
+//  public func updateQuerySet() -> UpdateQuerySet {
+//    let addQuery = addQuery()
+//    let uniqueKeys = [kSecAttrService as String, kSecAttrAccount as String]
+//    var query = [String : Any?]()
+//    var attributes = [String : Any?]()
+//    for (key, value) in addQuery {
+//      if uniqueKeys.contains(key) {
+//        query[key] = value
+//      } else {
+//        attributes[key] = value
+//      }
+//    }
+//    query[kSecClass as String] = Self.propertyType.secClass
+//    return .init(query: query, attributes: attributes, id: self.id)
+//  }
+  
+  public init(builder: SecretPropertyBuilder) throws {
     self.init(
       account: builder.account,
       data: builder.data,
@@ -16,7 +59,7 @@ public struct GenericPasswordItem : Identifiable, Hashable, CredentialProperty{
     )
   }
   
-  public static var propertyType: CredentialPropertyType {
+  public static var propertyType: SecretPropertyType {
     return .generic
   }
   
@@ -42,22 +85,14 @@ public struct GenericPasswordItem : Identifiable, Hashable, CredentialProperty{
   }
   
   
-  public func addQuery () -> [String : Any?]
-  {
-    [
-     kSecClass as String: kSecClassInternetPassword,
-     kSecAttrAccount as String: self.account,
-     kSecValueData as String: self.data,
-     kSecAttrService as String: self.service?.nilTrimmed(),
-     kSecAttrGeneric as String: self.gerneic,
-     kSecAttrAccessGroup as String: self.accessGroup?.nilTrimmed(),
-     kSecAttrSynchronizable as String: self.isSynchronizable,
-     kSecAttrDescription as String : description?.nilTrimmed(),
-     kSecAttrComment as String : comment?.nilTrimmed(),
-     kSecAttrType as String : type,
-     kSecAttrLabel as String : label
-   ]
+  public func uniqueAttributes() -> SecretDictionary {
+    return [
+      kSecAttrAccount as String : self.account,
+      kSecAttrService as String: self.service,
+      kSecAttrAccessGroup as String : self.accessGroup
+    ]
   }
+  
   
   public let account : String
   public let data : Data
@@ -78,26 +113,6 @@ extension GenericPasswordItem {
     String(data: self.data, encoding: .utf8) ?? ""
   }
 }
-//
-//extension GenericPasswordItem {
-//  init(data: InternetPasswordData) {
-//    self.init(
-//      account: data.account,
-//      data: data.data.data(using: .utf8)!,
-//      accessGroup: data.accessGroup,
-//      createdAt: data.createdAt,
-//      modifiedAt: data.modifiedAt,
-//      description: data.description,
-//      type: data.type,
-//      label: data.label,
-//      server: data.url?.host,
-//      protocol: data.url?.scheme.flatMap(ServerProtocol.init(scheme:)),
-//      port: data.url?.port,
-//      path: data.url?.path,
-//      isSynchronizable: data.isSynchronizable
-//    )
-//  }
-//}
 
 extension GenericPasswordItem {
   public init(dictionary : [String : Any]) throws {
@@ -127,23 +142,3 @@ extension GenericPasswordItem {
     )
   }
 }
-//
-//extension GenericPasswordItem {
-//  init(builder: InternetPasswordItemBuilder) {
-//    self.init(
-//      account: builder.account,
-//      data: builder.data,
-//      accessGroup: builder.accessGroup,
-//      createdAt: builder.createdAt,
-//      modifiedAt: builder.modifiedAt,
-//      description: builder.description,
-//      type: builder.type,
-//      label: builder.label,
-//      server: builder.server,
-//      protocol: builder.protocol,
-//      port: builder.port,
-//      path: builder.path,
-//      isSynchronizable: builder.isSynchronizable
-//    )
-//  }
-//}
