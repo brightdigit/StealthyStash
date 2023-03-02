@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct CredentialPropertyRootView: View {
-  internal init(repository: CredentialsRepository, internetPasswords: [AnyCredentialProperty]? = nil, query: Query, createNewItem: Bool = false) {
+  internal init(repository: SecretsRepository, internetPasswords: [AnySecretProperty]? = nil, query: Query, createNewItem: Bool = false) {
     self._object = StateObject(wrappedValue: .init(repository: repository, internetPasswords: internetPasswords))
-    self.query = query
+    self._query = .init(initialValue: query)
     self.createNewItem = createNewItem
   }
   
@@ -89,7 +89,7 @@ struct CredentialPropertyRootView: View {
               Image(systemName: "plus")
             }
             
-          }.navigationDestination(for: AnyCredentialProperty.self) { item in
+          }.navigationDestination(for: AnySecretProperty.self) { item in
             CredentialPropertyView(repository: self.object.repository, item: item).navigationTitle(item.account)
           }.navigationDestination(isPresented: self.$createNewItem) {
             CredentialPropertyView(repository: self.object.repository, type: self.query.type).navigationTitle(self.newNavigationTitle)
@@ -103,7 +103,7 @@ struct CredentialPropertyRootView: View {
 struct CredentialPropertyRootView_Previews: PreviewProvider {
     static var previews: some View {
       CredentialPropertyRootView(repository: PreviewRepository(
-        items: AnyCredentialProperty.previewCollection
-      ), internetPasswords: AnyCredentialProperty.previewCollection, query: .init(type: .internet))
+        items: AnySecretProperty.previewCollection
+      ), internetPasswords: AnySecretProperty.previewCollection, query: TypeQuery(type: .internet))
     }
 }
