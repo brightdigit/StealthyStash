@@ -1,6 +1,10 @@
 import Security
 
-struct Query {
+protocol Query {
+  var type : SecretPropertyType { get }
+  func keychainDictionary (withDefaults defaults : [String : Any?]?) -> [String : Any?]
+}
+struct TypeQuery : Query {
   internal init(type: SecretPropertyType) {
     self.type = type
   }

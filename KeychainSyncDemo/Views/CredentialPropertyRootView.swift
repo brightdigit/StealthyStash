@@ -3,7 +3,7 @@ import SwiftUI
 struct CredentialPropertyRootView: View {
   internal init(repository: SecretsRepository, internetPasswords: [AnySecretProperty]? = nil, query: Query, createNewItem: Bool = false) {
     self._object = StateObject(wrappedValue: .init(repository: repository, internetPasswords: internetPasswords))
-    self.query = query
+    self._query = .init(initialValue: query)
     self.createNewItem = createNewItem
   }
   
@@ -104,6 +104,6 @@ struct CredentialPropertyRootView_Previews: PreviewProvider {
     static var previews: some View {
       CredentialPropertyRootView(repository: PreviewRepository(
         items: AnySecretProperty.previewCollection
-      ), internetPasswords: AnySecretProperty.previewCollection, query: .init(type: .internet))
+      ), internetPasswords: AnySecretProperty.previewCollection, query: TypeQuery(type: .internet))
     }
 }
