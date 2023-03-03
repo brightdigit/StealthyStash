@@ -71,15 +71,15 @@ protocol ModelQueryBuilder {
   
   static func model(from properties: [String : [AnySecretProperty]]) throws -> SecretModelType?
   
-  func queriesForAdding() -> [[String : Any?]]
+  static func propertiesForAdding(_ model: SecretModelType) -> [AnySecretProperty]
   
-  func queriesForFetching() -> [String : [String : Any]]
+  static func queriesForFetching(_ model: SecretModelType) -> [String : [String : Any]]
   
-  func attributesForUpdating() -> [String : [String : Any]]
+  static func attributesForUpdating(_ model: SecretModelType) -> [String : [String : Any]]
   
-  func queriesForDeleting() -> [[String : Any?]]
+  static func queriesForDeleting(_ model: SecretModelType) -> [[String : Any?]]
   
-  func queriesForUpdating()  -> [UpdateQuerySet]
+  static func queriesForUpdating(_ model: SecretModelType)  -> [UpdateQuerySet]
 }
 protocol SecretModel {
   associatedtype QueryBuilder : ModelQueryBuilder where QueryBuilder.SecretModelType == Self
@@ -89,9 +89,14 @@ protocol SingletonModel : SecretModel where Self.QueryBuilder.QueryType == Void 
   
 }
 extension SecretsRepository {
-  func create(_ model: any SecretModel) throws {
-    
+  func create<SecretModelType: SecretModel>(_ model: SecretModelType) throws {
+    let properties = SecretModelType.QueryBuilder.propertiesForAdding(model)
+    for property in properties {
+      try self.create(property)
+    }
   }
+  
+  func update
   
 //  func fetch<SecretModelType : SingletonModel>() async throws -> SecretModelType? {
 //    try await self.fetch(.init())
@@ -128,23 +133,23 @@ struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
   
   typealias SecretModelType = CompositeCredentials
   
-  func queriesForAdding() -> [[String : Any?]] {
+  func queriesForAdding(_ model: CompositeCredentials) -> [[String : Any?]] {
     fatalError()
   }
   
-  func queriesForFetching() -> [String : [String : Any]] {
+  func queriesForFetching(_ model: CompositeCredentials) -> [String : [String : Any]] {
     fatalError()
   }
   
-  func attributesForUpdating() -> [String : [String : Any]] {
+  func attributesForUpdating(_ model: CompositeCredentials) -> [String : [String : Any]] {
     fatalError()
   }
   
-  func queriesForDeleting() -> [[String : Any?]] {
+  func queriesForDeleting(_ model: CompositeCredentials) -> [[String : Any?]] {
     fatalError()
   }
   
-  func queriesForUpdating() -> [UpdateQuerySet] {
+  func queriesForUpdating(_ model: CompositeCredentials) -> [UpdateQuerySet] {
     fatalError()
   }
   
