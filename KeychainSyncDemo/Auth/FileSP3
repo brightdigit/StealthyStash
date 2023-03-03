@@ -1,0 +1,9 @@
+
+extension Dictionary {
+  func merging (with rhs: Self, overwrite : Bool) -> Self {
+    self.merging(rhs) { lhs, rhs in
+      overwrite ? rhs : lhs
+    }
+  }
+}
+ -|

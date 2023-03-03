@@ -1,0 +1,47 @@
+//
+//  CompositeSecret.swift
+//  KeychainSyncDemo
+//
+//  Created by Leo Dion on 3/2/23.
+//
+
+import Foundation
+
+extension Data {
+  func string (encoding: String.Encoding = .utf8) -> String? {
+    return String(data: self, encoding: encoding)
+  }
+}
+//
+//protocol QueryCollection {
+//  var queries : [String : Query] { get }
+//}
+
+//
+//struct CredentialsQueryCollection : SingletonQuery {
+//  let queries: [String : Query] = {
+//    return [
+//      SecretPropertyType.generic.secClass as String: TypeQuery(type: .generic),
+//      SecretPropertyType.internet.secClass as String: TypeQuery(type: .internet)
+//    ]
+//  }()
+//
+//
+//
+//}
+//protocol SingletonQuery : QueryCollection {
+//  init()
+//}
+
+public struct UpdateQuerySet {
+  public init(query: [String : Any?], attributes: [String : Any?], id: String) {
+    self.query = query
+    self.attributes = attributes
+    self.id = id
+  }
+  
+  public let query : [String : Any?]
+  public let attributes : [String : Any?]
+  public let id : String
+}
+ -|

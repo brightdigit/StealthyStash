@@ -12,26 +12,26 @@ extension Data {
     return String(data: self, encoding: encoding)
   }
 }
+//
+//protocol QueryCollection {
+//  var queries : [String : Query] { get }
+//}
 
-protocol QueryCollection {
-  var queries : [String : Query] { get }
-}
-
-
-struct CredentialsQueryCollection : SingletonQuery {
-  let queries: [String : Query] = {
-    return [
-      SecretPropertyType.generic.secClass as String: TypeQuery(type: .generic),
-      SecretPropertyType.internet.secClass as String: TypeQuery(type: .internet)
-    ]
-  }()
-  
-  
-  
-}
-protocol SingletonQuery : QueryCollection {
-  init()
-}
+//
+//struct CredentialsQueryCollection : SingletonQuery {
+//  let queries: [String : Query] = {
+//    return [
+//      SecretPropertyType.generic.secClass as String: TypeQuery(type: .generic),
+//      SecretPropertyType.internet.secClass as String: TypeQuery(type: .internet)
+//    ]
+//  }()
+//
+//
+//
+//}
+//protocol SingletonQuery : QueryCollection {
+//  init()
+//}
 
 public struct UpdateQuerySet {
   public init(query: [String : Any?], attributes: [String : Any?], id: String) {
@@ -161,6 +161,7 @@ struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
   
   
 }
+
 struct CompositeCredentials : SingletonModel {
   typealias QueryBuilder = CompositeCredentialsQueryBuilder
   
