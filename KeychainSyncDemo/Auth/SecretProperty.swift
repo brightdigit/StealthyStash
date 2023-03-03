@@ -8,6 +8,7 @@
 import Foundation
 import FloxBxAuth
 
+public typealias SecretDictionary = [String : Any?]
 
 public protocol SecretProperty : Identifiable, Hashable {
   static var propertyType : SecretPropertyType { get }
@@ -24,9 +25,23 @@ public protocol SecretProperty : Identifiable, Hashable {
   var label : String? { get }
   var isSynchronizable : Bool? { get }
   
-  func addQuery () -> [String : Any?]
+  func addQuery () -> SecretDictionary
+  func deleteQuery () -> SecretDictionary
+  func updateQuerySet () -> UpdateQuerySet
+  
+  func uniqueAttributes () -> SecretDictionary
+  func otherProperties () -> SecretDictionary
+  
   init(dictionary : [String : Any]) throws
   init(builder: SecretPropertyBuilder) throws
+}
+
+extension Dictionary {
+  func merging (with rhs: Self, overwrite : Bool) -> Self {
+    self.merging(rhs) { lhs, rhs in
+      overwrite ? rhs : lhs
+    }
+  }
 }
 
 extension SecretProperty {
@@ -36,5 +51,33 @@ extension SecretProperty {
   
   public var dataString : String {
     String(data: self.data, encoding: .utf8) ?? ""
+  }
+  
+  func dataDictionary () -> SecretDictionary {
+    return [kSecValueData as String : self.data]
+  }
+  
+  func attributesDictionary () -> SecretDictionary {
+    self.otherProperties().merging(with: dataDictionary(), overwrite: true)
+  }
+  
+  func classDictionary () -> SecretDictionary {
+    return [kSecClass as String : Self.propertyType.secClass]
+  }
+  
+  func fetchQuery() -> SecretDictionary {
+    self.uniqueAttributes().merging(with: classDictionary(), overwrite: false)
+  }
+  
+  public func addQuery () -> SecretDictionary {
+    return self.fetchQuery().merging(with: attributesDictionary(), overwrite: false)
+  }
+  
+  public func deleteQuery () -> SecretDictionary {
+    return  self.fetchQuery()
+  }
+  
+  public func updateQuerySet () -> UpdateQuerySet {
+    return .init(query: self.fetchQuery(), attributes: self.attributesDictionary(), id: self.id)
   }
 }

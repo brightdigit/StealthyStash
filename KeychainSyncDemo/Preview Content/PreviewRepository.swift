@@ -1,5 +1,9 @@
 
 struct PreviewRepository : SecretsRepository {
+  func delete(_ item: AnySecretProperty) throws {
+    
+  }
+  
   let items : [AnySecretProperty]
   func create(_ item: AnySecretProperty) throws {
     

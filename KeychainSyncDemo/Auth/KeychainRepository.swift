@@ -1,6 +1,12 @@
 import Security
 import FloxBxAuth
 
+extension Dictionary where Key == String, Value == Any? {
+  func asCFDictionary() -> CFDictionary {
+    self.compactMapValues{$0} as CFDictionary
+  }
+}
+
 struct KeychainRepository : SecretsRepository {
 
   
@@ -20,6 +26,22 @@ struct KeychainRepository : SecretsRepository {
   
   func update(_ item: AnySecretProperty) throws {
     
+    let querySet : UpdateQuerySet = item.property.updateQuerySet()
+    
+    let status = SecItemUpdate(querySet.query.asCFDictionary(), querySet.attributes.asCFDictionary())
+    
+    guard status == errSecSuccess else {
+      throw KeychainError.unhandledError(status: status)
+    }
+  }
+  
+  func delete(_ item: AnySecretProperty) throws {
+    
+    let status = SecItemDelete(item.property.deleteQuery().asCFDictionary())
+    
+    guard status == errSecSuccess else {
+      throw KeychainError.unhandledError(status: status)
+    }
   }
   
   func query(_ query: Query) throws -> [AnySecretProperty] {

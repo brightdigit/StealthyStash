@@ -12,30 +12,6 @@ extension Data {
     return String(data: self, encoding: encoding)
   }
 }
-//
-//@propertyWrapper class SecretField<Value, ModelType> {
-//  internal init(queryID: String, key: String) {
-//    self.queryID = queryID
-//    self.key = key
-//  }
-//
-//  let queryID : String
-//  let key : String
-//  var value : Value?
-//
-//  var wrappedValue: Value {
-//      get {
-//          guard let value = self.value else {
-//              fatalError("Cannot access field before it is initialized or fetched: \(self.key)")
-//          }
-//          return value
-//      }
-//      set {
-//          self.value = newValue
-//      }
-//  }
-//
-//}
 
 protocol QueryCollection {
   var queries : [String : Query] { get }
@@ -57,10 +33,22 @@ protocol SingletonQuery : QueryCollection {
   init()
 }
 
-struct UpdateQuerySet {
-  let query : [String : Any?]
-  let attributes : [String : Any?]
-  let id : String
+public struct UpdateQuerySet {
+  public init(query: [String : Any?], attributes: [String : Any?], id: String) {
+    self.query = query
+    self.attributes = attributes
+    self.id = id
+  }
+  
+  public let query : [String : Any?]
+  public let attributes : [String : Any?]
+  public let id : String
+}
+
+enum ModelOperation {
+  case adding
+  case updating
+  case deleting
 }
 
 protocol ModelQueryBuilder {
@@ -71,36 +59,39 @@ protocol ModelQueryBuilder {
   
   static func model(from properties: [String : [AnySecretProperty]]) throws -> SecretModelType?
   
-  static func propertiesForAdding(_ model: SecretModelType) -> [AnySecretProperty]
+  static func properties(from model: SecretModelType, for operation: ModelOperation) -> [AnySecretProperty]
   
-  static func queriesForFetching(_ model: SecretModelType) -> [String : [String : Any]]
-  
-  static func attributesForUpdating(_ model: SecretModelType) -> [String : [String : Any]]
-  
-  static func queriesForDeleting(_ model: SecretModelType) -> [[String : Any?]]
-  
-  static func queriesForUpdating(_ model: SecretModelType)  -> [UpdateQuerySet]
 }
+
 protocol SecretModel {
   associatedtype QueryBuilder : ModelQueryBuilder where QueryBuilder.SecretModelType == Self
-  //init?(properties : [String : [AnySecretProperty]]) throws
 }
+
 protocol SingletonModel : SecretModel where Self.QueryBuilder.QueryType == Void {
   
 }
+
 extension SecretsRepository {
   func create<SecretModelType: SecretModel>(_ model: SecretModelType) throws {
-    let properties = SecretModelType.QueryBuilder.propertiesForAdding(model)
+    let properties = SecretModelType.QueryBuilder.properties(from: model, for: .adding)
     for property in properties {
       try self.create(property)
     }
   }
   
-  func update
+  func update<SecretModelType: SecretModel>(_ model: SecretModelType) throws {
+    let properties = SecretModelType.QueryBuilder.properties(from: model, for: .updating)
+    for property in properties {
+      try self.update(property)
+    }
+  }
   
-//  func fetch<SecretModelType : SingletonModel>() async throws -> SecretModelType? {
-//    try await self.fetch(.init())
-//  }
+  func delete<SecretModelType: SecretModel>(_ model: SecretModelType) throws {
+    let properties = SecretModelType.QueryBuilder.properties(from: model, for: .updating)
+    for property in properties {
+      try self.delete(property)
+    }
+  }
   
   func fetch<SecretModelType : SecretModel>(_ query: SecretModelType.QueryBuilder.QueryType) async throws -> SecretModelType? {
     let properties = try await withThrowingTaskGroup(of: (String, [AnySecretProperty]).self, returning: [String: [AnySecretProperty]].self) { taskGroup in
@@ -120,45 +111,36 @@ extension SecretsRepository {
     return try SecretModelType.QueryBuilder.model(from: properties)
   }
 }
+
 struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
+  static func properties(from model: CompositeCredentials, for operation: ModelOperation) -> [AnySecretProperty] {
+    let passwordProperty : (any SecretProperty)? = model.password.flatMap{
+      $0.data(using: .utf8)
+    }
+    .map{
+      InternetPasswordItem(account: model.userName, data: $0)
+    }
+    
+    let tokenProperty : (any SecretProperty)? =  model.token.flatMap{
+      $0.data(using: .utf8)
+    }
+    .map{
+      GenericPasswordItem(account: model.userName, data: $0)
+    }
+    
+    return [passwordProperty, tokenProperty]
+      .compactMap{$0}
+      .map(AnySecretProperty.init(property:))
+  }
+  
   static func queries(from query: Void) -> [String : Query] {
-    fatalError()
+    return [
+      "password" : TypeQuery(type: .internet),
+      "token" : TypeQuery(type: .generic)
+    ]
   }
   
   static func model(from properties: [String : [AnySecretProperty]]) throws -> CompositeCredentials? {
-    fatalError()
-  }
-  
-  typealias QueryType = Void
-  
-  typealias SecretModelType = CompositeCredentials
-  
-  func queriesForAdding(_ model: CompositeCredentials) -> [[String : Any?]] {
-    fatalError()
-  }
-  
-  func queriesForFetching(_ model: CompositeCredentials) -> [String : [String : Any]] {
-    fatalError()
-  }
-  
-  func attributesForUpdating(_ model: CompositeCredentials) -> [String : [String : Any]] {
-    fatalError()
-  }
-  
-  func queriesForDeleting(_ model: CompositeCredentials) -> [[String : Any?]] {
-    fatalError()
-  }
-  
-  func queriesForUpdating(_ model: CompositeCredentials) -> [UpdateQuerySet] {
-    fatalError()
-  }
-  
-  
-}
-struct CompositeCredentials : SingletonModel {
-  typealias QueryBuilder = CompositeCredentialsQueryBuilder
-  
-  init?(properties: [String : [AnySecretProperty]]) throws {
     let properties = properties.values.flatMap{$0}
     
     guard let username = properties.map({$0.account}).first else {
@@ -169,8 +151,20 @@ struct CompositeCredentials : SingletonModel {
       .data
     let token = properties.first{$0.propertyType == .generic}?.data
     
-    self.init(userName: username, password: password?.string()  , token: token?.string())
+    return CompositeCredentials(userName: username, password: password?.string()  , token: token?.string())
   }
+  
+  typealias QueryType = Void
+  
+  typealias SecretModelType = CompositeCredentials
+  
+  
+  
+}
+struct CompositeCredentials : SingletonModel {
+  typealias QueryBuilder = CompositeCredentialsQueryBuilder
+  
+
   
   
   internal init(userName: String, password: String?, token: String?) {
