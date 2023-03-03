@@ -53,3 +53,18 @@ extension Dictionary {
     return value
   }
 }
+
+
+extension Dictionary where Key == String, Value == Any? {
+  func asCFDictionary() -> CFDictionary {
+    self.compactMapValues{$0} as CFDictionary
+  }
+}
+
+extension Dictionary {
+  func merging (with rhs: Self, overwrite : Bool) -> Self {
+    self.merging(rhs) { lhs, rhs in
+      overwrite ? rhs : lhs
+    }
+  }
+}

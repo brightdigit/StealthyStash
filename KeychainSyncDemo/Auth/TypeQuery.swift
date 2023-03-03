@@ -1,3 +1,4 @@
+import Security
 
 struct TypeQuery : Query {
   internal init(type: SecretPropertyType) {
@@ -19,4 +20,3 @@ struct TypeQuery : Query {
       ]
   }
 }
- -|

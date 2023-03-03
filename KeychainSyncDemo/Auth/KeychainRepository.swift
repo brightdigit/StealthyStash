@@ -1,12 +1,5 @@
 import Security
 import FloxBxAuth
-
-extension Dictionary where Key == String, Value == Any? {
-  func asCFDictionary() -> CFDictionary {
-    self.compactMapValues{$0} as CFDictionary
-  }
-}
-
 struct KeychainRepository : SecretsRepository {
 
   
@@ -101,3 +94,4 @@ struct KeychainRepository : SecretsRepository {
   
  
 }
+ 

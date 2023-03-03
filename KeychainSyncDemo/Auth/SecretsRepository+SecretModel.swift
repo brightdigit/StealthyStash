@@ -39,4 +39,3 @@ extension SecretsRepository {
     return try SecretModelType.QueryBuilder.model(from: properties)
   }
 }
- -|

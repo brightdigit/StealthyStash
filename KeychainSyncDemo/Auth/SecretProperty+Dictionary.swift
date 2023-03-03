@@ -1,3 +1,5 @@
+import Security
+
 
 extension SecretProperty {
   func eraseToAnyProperty () -> AnySecretProperty {
@@ -36,4 +38,4 @@ extension SecretProperty {
     return .init(query: self.fetchQuery(), attributes: self.attributesDictionary(), id: self.id)
   }
 }
- -|
+ 

@@ -10,4 +10,3 @@ protocol ModelQueryBuilder {
   static func properties(from model: SecretModelType, for operation: ModelOperation) -> [AnySecretProperty]
   
 }
- -|
