@@ -21,6 +21,12 @@ struct ContentView: View {
           Image(systemName: "key.fill")
           Text("Generic")
         }
+        
+        CompositeSecretView(repository: repository)
+          .tabItem{
+            Image(systemName: "person.badge.key.fill")
+            Text("Person")
+          }
       }
     }
 }

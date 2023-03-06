@@ -1,23 +1,37 @@
 
 struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
-  static func properties(from model: CompositeCredentials, for operation: ModelOperation) -> [AnySecretProperty] {
-    let passwordProperty : (any SecretProperty)? = model.password.flatMap{
+  static func properties(from model: CompositeCredentials, for operation: ModelOperation) -> [SecretPropertyUpdate] {
+    let passwordData = model.password.flatMap{
       $0.data(using: .utf8)
-    }
-    .map{
-      InternetPasswordItem(account: model.userName, data: $0)
     }
     
-    let tokenProperty : (any SecretProperty)? =  model.token.flatMap{
+    let passwordProperty : SecretPropertyUpdate = SecretPropertyUpdate(
+      property: .init(
+        property: InternetPasswordItem(
+          account: model.userName,
+          data: passwordData ?? .init()
+        )
+      ),
+      shouldDelete: passwordData == nil
+    )
+    
+    
+    
+    let tokenData  =  model.token.flatMap{
       $0.data(using: .utf8)
     }
-    .map{
-      GenericPasswordItem(account: model.userName, data: $0)
-    }
+    
+    let tokenProperty : SecretPropertyUpdate = SecretPropertyUpdate(
+      property: .init(
+        property: GenericPasswordItem(
+          account: model.userName,
+          data: tokenData ?? .init()
+        )
+      ),
+      shouldDelete: tokenData == nil
+    )
     
     return [passwordProperty, tokenProperty]
-      .compactMap{$0}
-      .map(AnySecretProperty.init(property:))
   }
   
   static func queries(from query: Void) -> [String : Query] {

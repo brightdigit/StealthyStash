@@ -19,7 +19,7 @@ struct KeychainRepository : SecretsRepository {
   
   func update(_ item: AnySecretProperty) throws {
     
-    let querySet : UpdateQuerySet = item.property.updateQuerySet()
+    let querySet : UpdateQuerySet = item.property.updateQuerySet().merging(with: self.defaultAddQuery(forType: item.propertyType), overwrite: false)
     
     let status = SecItemUpdate(querySet.query.asCFDictionary(), querySet.attributes.asCFDictionary())
     

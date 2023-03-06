@@ -3,21 +3,25 @@ extension SecretsRepository {
   func create<SecretModelType: SecretModel>(_ model: SecretModelType) throws {
     let properties = SecretModelType.QueryBuilder.properties(from: model, for: .adding)
     for property in properties {
-      try self.create(property)
+      try self.create(property.property)
     }
   }
   
   func update<SecretModelType: SecretModel>(_ model: SecretModelType) throws {
     let properties = SecretModelType.QueryBuilder.properties(from: model, for: .updating)
     for property in properties {
-      try self.update(property)
+      if property.shouldDelete {
+        try self.delete(property.property)
+      } else {
+        try self.update(property.property)
+      }
     }
   }
   
   func delete<SecretModelType: SecretModel>(_ model: SecretModelType) throws {
-    let properties = SecretModelType.QueryBuilder.properties(from: model, for: .updating)
+    let properties = SecretModelType.QueryBuilder.properties(from: model, for: .deleting)
     for property in properties {
-      try self.delete(property)
+      try self.delete(property.property)
     }
   }
   
@@ -37,5 +41,9 @@ extension SecretsRepository {
       }
     }
     return try SecretModelType.QueryBuilder.model(from: properties)
+  }
+  
+  func fetch<SecretModelType : SecretModel> () async throws -> SecretModelType? where SecretModelType.QueryBuilder.QueryType == Void {
+    try await self.fetch(())
   }
 }

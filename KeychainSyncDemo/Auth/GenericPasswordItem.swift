@@ -13,37 +13,37 @@ public struct GenericPasswordItem : Identifiable, Hashable, SecretProperty{
     ]
   }
   
-  public func deleteQuery() -> [String : Any?] {
-    let addQuery = addQuery()
-    let uniqueKeys = [kSecAttrService as String, kSecAttrAccount as String]
-    var query = [String : Any?]()
-    var attributes = [String : Any?]()
-    for (key, value) in addQuery {
-      if uniqueKeys.contains(key) {
-        query[key] = value
-      } else {
-        attributes[key] = value
-      }
-    }
-    query[kSecClass as String] = Self.propertyType.secClass
-    return query
-  }
-  
-  public func updateQuerySet() -> UpdateQuerySet {
-    let addQuery = addQuery()
-    let uniqueKeys = [kSecAttrService as String, kSecAttrAccount as String]
-    var query = [String : Any?]()
-    var attributes = [String : Any?]()
-    for (key, value) in addQuery {
-      if uniqueKeys.contains(key) {
-        query[key] = value
-      } else {
-        attributes[key] = value
-      }
-    }
-    query[kSecClass as String] = Self.propertyType.secClass
-    return .init(query: query, attributes: attributes, id: self.id)
-  }
+//  public func deleteQuery() -> [String : Any?] {
+//    let addQuery = addQuery()
+//    let uniqueKeys = [kSecAttrService as String, kSecAttrAccount as String]
+//    var query = [String : Any?]()
+//    var attributes = [String : Any?]()
+//    for (key, value) in addQuery {
+//      if uniqueKeys.contains(key) {
+//        query[key] = value
+//      } else {
+//        attributes[key] = value
+//      }
+//    }
+//    query[kSecClass as String] = Self.propertyType.secClass
+//    return query
+//  }
+//  
+//  public func updateQuerySet() -> UpdateQuerySet {
+//    let addQuery = addQuery()
+//    let uniqueKeys = [kSecAttrService as String, kSecAttrAccount as String]
+//    var query = [String : Any?]()
+//    var attributes = [String : Any?]()
+//    for (key, value) in addQuery {
+//      if uniqueKeys.contains(key) {
+//        query[key] = value
+//      } else {
+//        attributes[key] = value
+//      }
+//    }
+//    query[kSecClass as String] = Self.propertyType.secClass
+//    return .init(query: query, attributes: attributes, id: self.id)
+//  }
   
   public init(builder: SecretPropertyBuilder) throws {
     self.init(

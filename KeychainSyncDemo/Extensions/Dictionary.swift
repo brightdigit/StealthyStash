@@ -64,7 +64,9 @@ extension Dictionary where Key == String, Value == Any? {
 extension Dictionary {
   func merging (with rhs: Self, overwrite : Bool) -> Self {
     self.merging(rhs) { lhs, rhs in
-      overwrite ? rhs : lhs
+      let value = overwrite ? (rhs ?? lhs) : (lhs ?? rhs)
+      assert(value != nil)
+      return value
     }
   }
 }

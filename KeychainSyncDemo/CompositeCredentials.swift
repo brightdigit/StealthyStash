@@ -11,11 +11,11 @@ struct CompositeCredentials : SingletonModel {
     self.token = token
   }
   
-  var userName : String
+  let userName : String
   
-  var password : String?
+  let password : String?
   
-  var token : String?
+  let token : String?
   
   
 }
