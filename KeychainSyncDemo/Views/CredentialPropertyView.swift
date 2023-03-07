@@ -16,7 +16,7 @@ struct CredentialPropertyView: View {
     .onReceive(self.object.$lastError, perform: { error in
       self.isErrorAlertVisible = error != nil
     })
-    .onReceive(self.object.saveCompleted, perform: { _ in
+    .onReceive(self.object.updateCompleted, perform: { _ in
       self.dismiss()
     })
     .alert(isPresented: self.$isErrorAlertVisible, error: self.object.lastError, actions: { error in
@@ -50,6 +50,11 @@ struct CredentialPropertyView: View {
           Task { @MainActor in
             self.shouldConfirmDismiss = true
           }
+        }
+      }
+      ToolbarItemGroup(placement: .destructiveAction) {
+        Button("Delete") {
+          self.object.delete()
         }
       }
       ToolbarItemGroup(placement: .confirmationAction) {

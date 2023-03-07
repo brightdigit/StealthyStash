@@ -47,7 +47,7 @@ struct KeychainRepository : SecretsRepository {
 //  }
   
   func delete(_ item: AnySecretProperty) throws {
-    let deleteQuery = item.property.deleteQuery()
+    let deleteQuery = item.property.deleteQuery().deepCompactMapValues()
     
     self.logger?.debug("Deleting: \(deleteQuery.loggingDescription())")
     let status = SecItemDelete(deleteQuery.asCFDictionary())
