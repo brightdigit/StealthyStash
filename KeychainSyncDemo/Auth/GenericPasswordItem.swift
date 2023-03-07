@@ -93,22 +93,6 @@ public struct GenericPasswordItem : Identifiable, Hashable, SecretProperty{
     ]
   }
   
-  public func addQuery () -> [String : Any?]
-  {
-    [
-     kSecClass as String: kSecClassInternetPassword,
-     kSecAttrAccount as String: self.account,
-     kSecValueData as String: self.data,
-     kSecAttrService as String: self.service?.nilTrimmed(),
-     kSecAttrGeneric as String: self.gerneic,
-     kSecAttrAccessGroup as String: self.accessGroup?.nilTrimmed(),
-     kSecAttrSynchronizable as String: self.isSynchronizable,
-     kSecAttrDescription as String : description?.nilTrimmed(),
-     kSecAttrComment as String : comment?.nilTrimmed(),
-     kSecAttrType as String : type,
-     kSecAttrLabel as String : label
-   ]
-  }
   
   public let account : String
   public let data : Data

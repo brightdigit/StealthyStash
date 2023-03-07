@@ -102,7 +102,11 @@ class CompositeSecretObject : ObservableObject {
       .map{ self.secret }
       .compactMap(CompositeCredentials.init(builder:))
       .tryMap{ model in
-        try self.repository.update(model)
+        if let source = self.source {
+          try self.repository.update(from: source, to: model)
+        } else {
+          try self.repository.create(model)
+        }
         return model
       }
       .share()

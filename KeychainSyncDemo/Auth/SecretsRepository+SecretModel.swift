@@ -7,13 +7,13 @@ extension SecretsRepository {
     }
   }
   
-  func update<SecretModelType: SecretModel>(_ model: SecretModelType) throws {
-    let properties = SecretModelType.QueryBuilder.properties(from: model, for: .updating)
-    for property in properties {
-      if property.shouldDelete {
-        try self.delete(property.property)
-      } else {
-        try self.update(property.property)
+  func update<SecretModelType : SecretModel>(from previousItem: SecretModelType, to newItem: SecretModelType) throws {
+    let updates = SecretModelType.QueryBuilder.updates(from: previousItem, to: newItem)
+    for update in updates {
+      if let newProperty = update.newProperty?.property {
+        try self.upsert(from: update.previousProperty, to: newProperty)
+      } else if let previousProperty = update.previousProperty {
+        try self.delete(previousProperty)
       }
     }
   }

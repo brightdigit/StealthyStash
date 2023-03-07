@@ -1,11 +1,43 @@
 
 struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
-  static func properties(from model: CompositeCredentials, for operation: ModelOperation) -> [SecretPropertyUpdate] {
+  
+  static func updates(from previousItem: CompositeCredentials, to newItem: CompositeCredentials) -> [SecretPropertyUpdate] {
+    let newPasswordData = newItem.password.flatMap{
+      $0.data(using: .utf8)
+    }.map{
+      InternetPasswordItem(account: newItem.userName, data: $0)
+    }
+    
+    let oldPasswordData = previousItem.password.flatMap{
+      $0.data(using: .utf8)
+    }.map{
+      InternetPasswordItem(account: previousItem.userName, data: $0)
+    }
+    
+    
+    let previousTokenData  = previousItem.token.flatMap{
+      $0.data(using: .utf8)
+    }.map{
+      GenericPasswordItem(account: previousItem.userName, data: $0)
+    }
+    
+    let newTokenData = newItem.token.flatMap{
+      $0.data(using: .utf8)
+    }.map{
+      GenericPasswordItem(account: newItem.userName, data: $0)
+    }
+    
+    let passwordUpdate = SecretPropertyUpdate(previousProperty: oldPasswordData, newProperty: newPasswordData)
+    let tokenUpdate = SecretPropertyUpdate(previousProperty: previousTokenData, newProperty: newTokenData)
+    return [passwordUpdate, tokenUpdate]
+  }
+  
+  static func properties(from model: CompositeCredentials, for operation: ModelOperation) -> [DefunctSecretPropertyUpdate] {
     let passwordData = model.password.flatMap{
       $0.data(using: .utf8)
     }
     
-    let passwordProperty : SecretPropertyUpdate = SecretPropertyUpdate(
+    let passwordProperty : DefunctSecretPropertyUpdate = DefunctSecretPropertyUpdate(
       property: .init(
         property: InternetPasswordItem(
           account: model.userName,
@@ -21,7 +53,7 @@ struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
       $0.data(using: .utf8)
     }
     
-    let tokenProperty : SecretPropertyUpdate = SecretPropertyUpdate(
+    let tokenProperty : DefunctSecretPropertyUpdate = DefunctSecretPropertyUpdate(
       property: .init(
         property: GenericPasswordItem(
           account: model.userName,

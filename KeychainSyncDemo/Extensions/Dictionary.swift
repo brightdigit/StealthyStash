@@ -53,20 +53,50 @@ extension Dictionary {
     return value
   }
 }
-
-
 extension Dictionary where Key == String, Value == Any? {
+  func loggingDescription() -> String {
+    return self.compactMap { (key: String, value: Optional<Any>) in
+      guard let value = value._deepUnwrapped else {
+        assertionFailure()
+        return nil
+      }
+      
+      return [key, "\(value)"].joined(separator: ": ")
+    }.joined(separator: ", ")
+  }
   func asCFDictionary() -> CFDictionary {
     self.compactMapValues{$0} as CFDictionary
   }
 }
 
 extension Dictionary {
+  fileprivate typealias DeepUnwrappable = _OptionalProtocol
+  
+  static func deepUnwrap(_ any: Any) -> Any? {
+      if let optional = any as? _OptionalProtocol {
+          return optional._deepUnwrapped
+      }
+      return any
+  }
   func merging (with rhs: Self, overwrite : Bool) -> Self {
     self.merging(rhs) { lhs, rhs in
-      let value = overwrite ? (rhs ?? lhs) : (lhs ?? rhs)
-      assert(value != nil)
+      let value = overwrite ? (rhs ) : (lhs )
       return value
     }
   }
+  
+  internal func deepCompactMapValues () -> Self where Value == Any? {
+    self.compactMapValues{$0}.compactMapValues(Self.deepUnwrap).compactMapValues{$0}
+  }
+}
+
+private protocol _OptionalProtocol {
+    var _deepUnwrapped: Any? { get }
+}
+
+extension Optional: Dictionary.DeepUnwrappable {
+    fileprivate var _deepUnwrapped: Any? {
+        if let wrapped = self { return Dictionary<String, Any?>.deepUnwrap(wrapped) }
+        return nil
+    }
 }

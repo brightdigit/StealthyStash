@@ -1,5 +1,7 @@
 
 struct PreviewRepository : SecretsRepository {
+
+  
   func delete(_ item: AnySecretProperty) throws {
     
   }
@@ -10,6 +12,10 @@ struct PreviewRepository : SecretsRepository {
   }
   
   func update(_ item: AnySecretProperty) throws {
+    
+  }
+  
+  func update<SecretPropertyType>(_ item: SecretPropertyType, from previousItem: SecretPropertyType) throws where SecretPropertyType : SecretProperty {
     
   }
   

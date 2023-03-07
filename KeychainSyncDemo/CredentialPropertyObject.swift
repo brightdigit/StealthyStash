@@ -3,20 +3,17 @@ import FloxBxAuth
 import Combine
 
 class CredentialPropertyObject : ObservableObject {
-  internal init( repository: SecretsRepository, item: SecretPropertyBuilder, isNew: Bool) {
+  internal init( repository: SecretsRepository, item: SecretPropertyBuilder, original: AnySecretProperty?) {
     self.item = item
     self.repository = repository
-    self.isNew = isNew
+    self.originalItem = original
     
     let savePublisher = saveTriggerSubject
       .map{self.item}
       .tryMap(AnySecretProperty.init)
       .tryMap { item in
-        if self.isNew {
-          try self.repository.create(item)
-        } else {
-          try self.repository.update(item)
-        }
+        try self.repository.upsert(from: self.originalItem, to: item.property)
+       
       }
       .share()
     
@@ -65,7 +62,7 @@ class CredentialPropertyObject : ObservableObject {
   let clearErrorSubject = PassthroughSubject<KeychainError, Never>()
   let saveCompletedSubject = PassthroughSubject<Void, Never>()
   let repository : SecretsRepository
-  let isNew : Bool
+  let originalItem : AnySecretProperty?
   var saveCompletedCancellable : AnyCancellable!
   
   var saveCompleted : AnyPublisher<Void, Never> {
@@ -75,10 +72,10 @@ class CredentialPropertyObject : ObservableObject {
 
 extension CredentialPropertyObject {
   convenience init(repository: SecretsRepository, item: AnySecretProperty) {
-    self.init(repository: repository, item: .init(item: item), isNew:false)
+    self.init(repository: repository, item: .init(item: item), original: item)
   }
   
   convenience init(repository: SecretsRepository, type:  SecretPropertyType) {
-    self.init(repository: repository, item: .init(secClass: type), isNew:true)
+    self.init(repository: repository, item: .init(secClass: type), original: nil)
   }
 }

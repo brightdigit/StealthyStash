@@ -33,3 +33,9 @@ public protocol SecretProperty : Identifiable, Hashable {
   init(dictionary : [String : Any]) throws
   init(builder: SecretPropertyBuilder) throws
 }
+
+extension SecretProperty {
+  func castAsSameType(secretProperty : (any SecretProperty)?) -> Self? {
+    return secretProperty as? Self
+  }
+}

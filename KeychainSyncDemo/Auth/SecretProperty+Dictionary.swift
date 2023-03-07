@@ -30,6 +30,11 @@ extension SecretProperty {
     return self.fetchQuery().merging(with: attributesDictionary(), overwrite: false)
   }
   
+  public func updateQuery () -> SecretDictionary {
+    self.uniqueAttributes().merging(with: attributesDictionary(), overwrite: false)
+    
+  }
+  
   public func deleteQuery () -> SecretDictionary {
     return  self.fetchQuery()
   }

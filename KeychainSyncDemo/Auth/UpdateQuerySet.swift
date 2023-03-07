@@ -12,30 +12,20 @@ public struct UpdateQuerySet {
 }
 
 extension UpdateQuerySet {
-  fileprivate typealias DeepUnwrappable = _OptionalProtocol
-  
-  static func deepUnwrap(_ any: Any) -> Any? {
-      if let optional = any as? _OptionalProtocol {
-          return optional._deepUnwrapped
-      }
-      return any
+  public init<SecretPropertyType : SecretProperty>(from previousItem: SecretPropertyType, to newItem: SecretPropertyType) {
+    let query = previousItem.fetchQuery()
+    let attributes = newItem.updateQuery()
+    self.init(query: query, attributes: attributes, id: newItem.id)
   }
+}
+
+extension UpdateQuerySet {
+  
   
   func merging (with rhs: SecretDictionary, overwrite : Bool) -> Self {
-    let rhs = rhs.mapValues(Self.deepUnwrap).compactMapValues{$0}
-    let newQuery = query.mapValues(Self.deepUnwrap).compactMapValues{$0}.merging(with: rhs, overwrite: overwrite)
+    let rhs = rhs.deepCompactMapValues()
+    let newQuery = query.deepCompactMapValues().merging(with: rhs, overwrite: overwrite)
     //let attributes = attributes.merging(with: rhs, overwrite: overwrite)
     return .init(query: newQuery, attributes: attributes, id: id)
   }
-}
-
-private protocol _OptionalProtocol {
-    var _deepUnwrapped: Any? { get }
-}
-
-extension Optional: UpdateQuerySet.DeepUnwrappable {
-    fileprivate var _deepUnwrapped: Any? {
-        if let wrapped = self { return UpdateQuerySet.deepUnwrap(wrapped) }
-        return nil
-    }
 }
