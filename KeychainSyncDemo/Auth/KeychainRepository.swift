@@ -34,20 +34,9 @@ struct KeychainRepository : SecretsRepository {
       throw KeychainError.unhandledError(status: status)
     }
   }
-//
-//
-//  func update(_ item: AnySecretProperty) throws {
-//    let querySet : UpdateQuerySet = item.property.updateQuerySet().merging(with: self.defaultAddQuery(forType: item.propertyType), overwrite: false)
-//
-//    let status = SecItemUpdate(querySet.query.asCFDictionary(), querySet.attributes.asCFDictionary())
-//
-//    guard status == errSecSuccess else {
-//      throw KeychainError.unhandledError(status: status)
-//    }
-//  }
   
   func delete(_ item: AnySecretProperty) throws {
-    let deleteQuery = item.property.deleteQuery().deepCompactMapValues()
+    let deleteQuery = item.property.deleteQuery().deepCompactMapValues().merging(with: self.defaultAddQuery(forType: item.propertyType), overwrite: false)
     
     self.logger?.debug("Deleting: \(deleteQuery.loggingDescription())")
     let status = SecItemDelete(deleteQuery.asCFDictionary())
@@ -84,7 +73,10 @@ struct KeychainRepository : SecretsRepository {
     }
     
     do {
-      return try dictionaries.map(query.type.propertyType.init(dictionary:)).map(AnySecretProperty.init(property:))
+      return try dictionaries.map{
+        self.logger?.debug("Found Item: \($0.loggingDescription())")
+        return $0
+      }        .map(query.type.propertyType.init(dictionary:)).map(AnySecretProperty.init(property:))
     } catch {
       assertionFailure(error.localizedDescription)
       return []

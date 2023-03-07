@@ -18,7 +18,7 @@ struct CredentialPropertyFormContentView: View {
 #if os(watchOS)
         TextField("data", text: $object.item.dataString)
         #else
-        TextEditor(text: $object.item.dataString).frame(height: 80.0)
+        TextEditor(text: $object.item.dataString).frame(height: 80.0).accessibilityIdentifier("data")
         #endif
       }
       
@@ -40,7 +40,7 @@ struct CredentialPropertyFormContentView: View {
         Toggle("Set Type", isOn: $object.item.hasType)
         Stepper(value: $object.item.typeValue) {
           Text("\(object.item.typeValue)")
-        }
+        }.accessibilityIdentifier("setTypeStepper")
       }
       
       Section("Label") {
