@@ -1,6 +1,8 @@
 
 struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
   
+  
+  
   static func updates(from previousItem: CompositeCredentials, to newItem: CompositeCredentials) -> [SecretPropertyUpdate] {
     let newPasswordData = newItem.password.flatMap{
       $0.data(using: .utf8)
@@ -32,20 +34,17 @@ struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
     return [passwordUpdate, tokenUpdate]
   }
   
-  static func properties(from model: CompositeCredentials, for operation: ModelOperation) -> [DefunctSecretPropertyUpdate] {
+  static func properties(from model: CompositeCredentials, for operation: ModelOperation) -> [AnySecretProperty] {
     let passwordData = model.password.flatMap{
       $0.data(using: .utf8)
     }
     
-    let passwordProperty : DefunctSecretPropertyUpdate = DefunctSecretPropertyUpdate(
-      property: .init(
+    let passwordProperty : AnySecretProperty = .init(
         property: InternetPasswordItem(
           account: model.userName,
           data: passwordData ?? .init()
         )
-      ),
-      shouldDelete: passwordData == nil
-    )
+      )
     
     
     
@@ -53,15 +52,13 @@ struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
       $0.data(using: .utf8)
     }
     
-    let tokenProperty : DefunctSecretPropertyUpdate = DefunctSecretPropertyUpdate(
-      property: .init(
+    let tokenProperty : AnySecretProperty = .init(
         property: GenericPasswordItem(
           account: model.userName,
           data: tokenData ?? .init()
         )
-      ),
-      shouldDelete: tokenData == nil
-    )
+      )
+    
     
     return [passwordProperty, tokenProperty]
   }
