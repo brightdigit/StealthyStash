@@ -15,6 +15,7 @@ public struct SecretPropertyBuilder {
     self.hasType = type != nil
     self.labelValue = label ?? ""
     self.hasLabel = label != nil
+    self.service = service
     self.server = server
     self.`protocol` = `protocol`
     self.authenticationType = authenticationType
@@ -123,6 +124,7 @@ extension SecretPropertyBuilder {
       description : self.description,
       type : self.type,
       label : self.label,
+      service: self.service,
       server : self.server,
       protocol : self.protocol,
       authenticationType : self.authenticationType,
@@ -136,7 +138,7 @@ extension SecretPropertyBuilder {
 extension SecretPropertyBuilder {
   init (item: AnySecretProperty) {
 
-    
+    assert(item.propertyType == .internet || item.service != nil)
     self.init(
       secClass: item.propertyType,
       source: item,
@@ -148,6 +150,7 @@ extension SecretPropertyBuilder {
       description : item.description,
       type : item.type,
       label : item.label,
+      service: item.service,
       server : item.server,
       protocol : item.protocol,
       port : item.port,

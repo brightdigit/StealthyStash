@@ -1,5 +1,5 @@
 
-struct CompositeCredentials : SingletonModel {
+struct CompositeCredentials : SecretModel {
   typealias QueryBuilder = CompositeCredentialsQueryBuilder
   
 
