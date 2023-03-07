@@ -3,7 +3,7 @@ extension SecretsRepository {
   func create<SecretModelType: SecretModel>(_ model: SecretModelType) throws {
     let properties = SecretModelType.QueryBuilder.properties(from: model, for: .adding)
     for property in properties {
-      try self.create(property.property)
+      try self.create(property)
     }
   }
   
@@ -21,7 +21,7 @@ extension SecretsRepository {
   func delete<SecretModelType: SecretModel>(_ model: SecretModelType) throws {
     let properties = SecretModelType.QueryBuilder.properties(from: model, for: .deleting)
     for property in properties {
-      try self.delete(property.property)
+      try self.delete(property)
     }
   }
   

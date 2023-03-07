@@ -37,7 +37,7 @@ struct CredentialPropertyRootView: View {
             Button(role: .none) {
               
             } label: {
-              if let query {
+              if !(query is TypeQuery){
                 HStack{
                   Text("").italic()
                   Spacer()
@@ -57,7 +57,7 @@ struct CredentialPropertyRootView: View {
           Section{
             Group{
               if let internetPasswords = self.object.credentialProperties {
-                CredentialPropertyList(properties: internetPasswords)
+                CredentialPropertyList(properties: internetPasswords).accessibilityIdentifier("propertyList")
               } else {
                 ProgressView()
               }
