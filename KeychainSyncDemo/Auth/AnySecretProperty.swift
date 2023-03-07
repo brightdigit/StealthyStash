@@ -71,6 +71,13 @@ var isSynchronizable : Bool? {
     }
     return property.server
   }
+  
+  var service : String? {
+    guard let property = self.property as? GenericPasswordItem else {
+      return nil
+    }
+    return property.service
+  }
     var `protocol` : ServerProtocol? {
       guard let property = self.property as? InternetPasswordItem else {
         return nil

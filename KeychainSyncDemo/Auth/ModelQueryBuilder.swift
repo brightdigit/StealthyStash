@@ -32,7 +32,7 @@ protocol ModelQueryBuilder {
   
   static func model(from properties: [String : [AnySecretProperty]]) throws -> SecretModelType?
   
-  static func properties(from model: SecretModelType, for operation: ModelOperation) -> [DefunctSecretPropertyUpdate]
+  static func properties(from model: SecretModelType, for operation: ModelOperation) -> [AnySecretProperty]
   
   static func updates(from previousItem: SecretModelType, to newItem: SecretModelType) -> [SecretPropertyUpdate]
   

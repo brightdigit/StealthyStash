@@ -57,7 +57,7 @@ extension Dictionary where Key == String, Value == Any? {
   func loggingDescription() -> String {
     return self.compactMap { (key: String, value: Optional<Any>) in
       guard let value = value._deepUnwrapped else {
-        assertionFailure()
+        //assertionFailure()
         return nil
       }
       
@@ -66,6 +66,19 @@ extension Dictionary where Key == String, Value == Any? {
   }
   func asCFDictionary() -> CFDictionary {
     self.compactMapValues{$0} as CFDictionary
+  }
+}
+
+extension Dictionary where Key == String, Value == Any {
+  func loggingDescription() -> String {
+    return self.compactMap { (key: String, value: Optional<Any>) in
+      guard let value = value._deepUnwrapped else {
+        assertionFailure()
+        return nil
+      }
+      
+      return [key, "\(value)"].joined(separator: ": ")
+    }.joined(separator: ", ")
   }
 }
 

@@ -44,6 +44,8 @@
 		B34ADDF329B00B550072B59F /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDB029AF84750072B59F /* Dictionary.swift */; };
 		B34ADDF429B00B760072B59F /* PreviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDC229AF856A0072B59F /* PreviewRepository.swift */; };
 		B34ADDF529B00B760072B59F /* InternetPasswordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31EAE4C29A915E2004C4A56 /* InternetPasswordData.swift */; };
+		B353398B29B7D783006FF22B /* KeychainSyncDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B353398A29B7D783006FF22B /* KeychainSyncDemoUITests.swift */; };
+		B353398D29B7D783006FF22B /* KeychainSyncDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B353398C29B7D783006FF22B /* KeychainSyncDemoUITestsLaunchTests.swift */; };
 		B37C694829B3ABA800091E0E /* CompositeSecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37C694729B3ABA800091E0E /* CompositeSecretView.swift */; };
 		B37C694929B3AC1900091E0E /* UpdateQuerySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394865929B10166000B51F7 /* UpdateQuerySet.swift */; };
 		B37C694A29B3C43D00091E0E /* CompositeSecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37C694729B3ABA800091E0E /* CompositeSecretView.swift */; };
@@ -86,10 +88,21 @@
 		B3AA494429A52831002D40C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA494329A52831002D40C3 /* Preview Assets.xcassets */; };
 		B3AA495529A52852002D40C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA495429A52852002D40C3 /* Assets.xcassets */; };
 		B3AA495829A52852002D40C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA495729A52852002D40C3 /* Preview Assets.xcassets */; };
+		B3D6C71529C8918B00236D8B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6C71429C8918B00236D8B /* SettingsView.swift */; };
 		B3F984F829AF953000C0266F /* SecretProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F984F729AF953000C0266F /* SecretProperty.swift */; };
 		B3F984FA29B0009200C0266F /* credential-properties.json in Resources */ = {isa = PBXBuildFile; fileRef = B3F984F929B0009200C0266F /* credential-properties.json */; };
 		B3F984FB29B0009200C0266F /* credential-properties.json in Resources */ = {isa = PBXBuildFile; fileRef = B3F984F929B0009200C0266F /* credential-properties.json */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B353398E29B7D783006FF22B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3AA493029A5282F002D40C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B3AA493729A5282F002D40C3;
+			remoteInfo = KeychainSyncDemo;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B31EAE4429A8F820004C4A56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +123,9 @@
 		B34ADDD929AF88E80072B59F /* SecretsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretsRepository.swift; sourceTree = "<group>"; };
 		B34ADDDD29AF88F50072B59F /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B34ADDDF29AF89F60072B59F /* GenericPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericPasswordItem.swift; sourceTree = "<group>"; };
+		B353398829B7D783006FF22B /* KeychainSyncDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeychainSyncDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B353398A29B7D783006FF22B /* KeychainSyncDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSyncDemoUITests.swift; sourceTree = "<group>"; };
+		B353398C29B7D783006FF22B /* KeychainSyncDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSyncDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B37C694729B3ABA800091E0E /* CompositeSecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeSecretView.swift; sourceTree = "<group>"; };
 		B394865529B10109000B51F7 /* SecretPropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretPropertyType.swift; sourceTree = "<group>"; };
 		B394865629B10132000B51F7 /* AnySecretProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnySecretProperty.swift; sourceTree = "<group>"; };
@@ -137,11 +153,19 @@
 		B3AA494E29A52851002D40C3 /* KeychainSyncDemoWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KeychainSyncDemoWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AA495429A52852002D40C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3AA495729A52852002D40C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B3D6C71429C8918B00236D8B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B3F984F729AF953000C0266F /* SecretProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretProperty.swift; sourceTree = "<group>"; };
 		B3F984F929B0009200C0266F /* credential-properties.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "credential-properties.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B353398529B7D783006FF22B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3AA493529A5282F002D40C3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -170,6 +194,7 @@
 				B31EAE4429A8F820004C4A56 /* ContentView.swift */,
 				B34ADDD229AF87F00072B59F /* CredentialPropertyList.swift */,
 				B37C694729B3ABA800091E0E /* CompositeSecretView.swift */,
+				B3D6C71429C8918B00236D8B /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,6 +236,15 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		B353398929B7D783006FF22B /* KeychainSyncDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B353398A29B7D783006FF22B /* KeychainSyncDemoUITests.swift */,
+				B353398C29B7D783006FF22B /* KeychainSyncDemoUITestsLaunchTests.swift */,
+			);
+			path = KeychainSyncDemoUITests;
+			sourceTree = "<group>";
+		};
 		B39BF14C29A53D50009BBCAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +258,7 @@
 				B39BF14A29A53CF9009BBCAC /* FloxBxAuth */,
 				B3AA493A29A5282F002D40C3 /* KeychainSyncDemo */,
 				B3AA494F29A52851002D40C3 /* KeychainSyncDemoWatch Watch App */,
+				B353398929B7D783006FF22B /* KeychainSyncDemoUITests */,
 				B3AA493929A5282F002D40C3 /* Products */,
 				B39BF14C29A53D50009BBCAC /* Frameworks */,
 			);
@@ -234,6 +269,7 @@
 			children = (
 				B3AA493829A5282F002D40C3 /* KeychainSyncDemo.app */,
 				B3AA494E29A52851002D40C3 /* KeychainSyncDemoWatch Watch App.app */,
+				B353398829B7D783006FF22B /* KeychainSyncDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -289,6 +325,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B353398729B7D783006FF22B /* KeychainSyncDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B353399229B7D783006FF22B /* Build configuration list for PBXNativeTarget "KeychainSyncDemoUITests" */;
+			buildPhases = (
+				B353398429B7D783006FF22B /* Sources */,
+				B353398529B7D783006FF22B /* Frameworks */,
+				B353398629B7D783006FF22B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B353398F29B7D783006FF22B /* PBXTargetDependency */,
+			);
+			name = KeychainSyncDemoUITests;
+			productName = KeychainSyncDemoUITests;
+			productReference = B353398829B7D783006FF22B /* KeychainSyncDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B3AA493729A5282F002D40C3 /* KeychainSyncDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3AA494729A52831002D40C3 /* Build configuration list for PBXNativeTarget "KeychainSyncDemo" */;
@@ -339,6 +393,10 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					B353398729B7D783006FF22B = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = B3AA493729A5282F002D40C3;
+					};
 					B3AA493729A5282F002D40C3 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -362,11 +420,19 @@
 			targets = (
 				B3AA493729A5282F002D40C3 /* KeychainSyncDemo */,
 				B3AA494D29A52851002D40C3 /* KeychainSyncDemoWatch Watch App */,
+				B353398729B7D783006FF22B /* KeychainSyncDemoUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B353398629B7D783006FF22B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3AA493629A5282F002D40C3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -390,6 +456,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B353398429B7D783006FF22B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B353398D29B7D783006FF22B /* KeychainSyncDemoUITestsLaunchTests.swift in Sources */,
+				B353398B29B7D783006FF22B /* KeychainSyncDemoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3AA493429A5282F002D40C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -431,6 +506,7 @@
 				B3A2638529B2B75500CC36B4 /* Query.swift in Sources */,
 				B3A2639929B2B75500CC36B4 /* SecretModel.swift in Sources */,
 				B34ADDC129AF84750072B59F /* CredentialPropertyListObject.swift in Sources */,
+				B3D6C71529C8918B00236D8B /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,7 +556,60 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B353398F29B7D783006FF22B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B3AA493729A5282F002D40C3 /* KeychainSyncDemo */;
+			targetProxy = B353398E29B7D783006FF22B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		B353399029B7D783006FF22B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MLT7M394S7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrightDigit.KeychainSyncDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx watchos watchsimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,4";
+				TEST_TARGET_NAME = KeychainSyncDemo;
+			};
+			name = Debug;
+		};
+		B353399129B7D783006FF22B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MLT7M394S7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrightDigit.KeychainSyncDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx watchos watchsimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,4";
+				TEST_TARGET_NAME = KeychainSyncDemo;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		B3AA494529A52831002D40C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -734,6 +863,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B353399229B7D783006FF22B /* Build configuration list for PBXNativeTarget "KeychainSyncDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B353399029B7D783006FF22B /* Debug */,
+				B353399129B7D783006FF22B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B3AA493329A5282F002D40C3 /* Build configuration list for PBXProject "KeychainSyncDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

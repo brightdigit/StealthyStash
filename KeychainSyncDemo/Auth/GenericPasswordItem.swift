@@ -5,7 +5,6 @@ public struct GenericPasswordItem : Identifiable, Hashable, SecretProperty{
   public func otherProperties() -> SecretDictionary {
     [
           kSecAttrGeneric as String: self.gerneic,
-          kSecAttrSynchronizable as String: self.isSynchronizable,
           kSecAttrDescription as String : description?.nilTrimmed(),
           kSecAttrComment as String : comment?.nilTrimmed(),
           kSecAttrType as String : type,
@@ -13,42 +12,12 @@ public struct GenericPasswordItem : Identifiable, Hashable, SecretProperty{
     ]
   }
   
-//  public func deleteQuery() -> [String : Any?] {
-//    let addQuery = addQuery()
-//    let uniqueKeys = [kSecAttrService as String, kSecAttrAccount as String]
-//    var query = [String : Any?]()
-//    var attributes = [String : Any?]()
-//    for (key, value) in addQuery {
-//      if uniqueKeys.contains(key) {
-//        query[key] = value
-//      } else {
-//        attributes[key] = value
-//      }
-//    }
-//    query[kSecClass as String] = Self.propertyType.secClass
-//    return query
-//  }
-//  
-//  public func updateQuerySet() -> UpdateQuerySet {
-//    let addQuery = addQuery()
-//    let uniqueKeys = [kSecAttrService as String, kSecAttrAccount as String]
-//    var query = [String : Any?]()
-//    var attributes = [String : Any?]()
-//    for (key, value) in addQuery {
-//      if uniqueKeys.contains(key) {
-//        query[key] = value
-//      } else {
-//        attributes[key] = value
-//      }
-//    }
-//    query[kSecClass as String] = Self.propertyType.secClass
-//    return .init(query: query, attributes: attributes, id: self.id)
-//  }
   
   public init(builder: SecretPropertyBuilder) throws {
     self.init(
       account: builder.account,
       data: builder.data,
+      service: builder.service,
       accessGroup: builder.accessGroup,
       createdAt: builder.createdAt,
       modifiedAt: builder.modifiedAt,
@@ -64,6 +33,7 @@ public struct GenericPasswordItem : Identifiable, Hashable, SecretProperty{
   }
   
   internal init(account: String, data: Data, service: String? = nil, accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, comment: String? = nil, type: Int? = nil, label: String? = nil, gerneic: Data? = nil, isSynchronizable: Bool? = nil) {
+    //assert(service != nil)
     self.account = account
     self.data = data
     self.service = service
@@ -89,7 +59,8 @@ public struct GenericPasswordItem : Identifiable, Hashable, SecretProperty{
     return [
       kSecAttrAccount as String : self.account,
       kSecAttrService as String: self.service,
-      kSecAttrAccessGroup as String : self.accessGroup
+      kSecAttrAccessGroup as String : self.accessGroup,
+      kSecAttrSynchronizable as String: self.isSynchronizable,
     ]
   }
   
