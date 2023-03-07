@@ -29,4 +29,13 @@ extension SecretsRepository {
       try self.create(AnySecretProperty(property: newItem))
     }
   }
+  
+  func deleteAll(basedOn queries: [Query]) throws {
+    let properties = try queries.flatMap(self.query(_:))
+    try properties.forEach(self.delete(_:))
+  }
+  
+  func clearAll() throws {
+    try self.deleteAll(basedOn: [TypeQuery(type: .internet), TypeQuery(type: .generic)])
+  }
 }

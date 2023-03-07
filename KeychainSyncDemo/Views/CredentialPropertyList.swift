@@ -18,9 +18,9 @@ struct CredentialPropertyList: View {
             #if !os(watchOS)
             Image(systemName: item.propertyType.sfSymbolName)
             #endif
-            Text(item.account)
+            Text(item.account).accessibilityIdentifier("accountProperty")
             Spacer()
-            Text(item.dataString).bold()
+            Text(item.dataString).bold().accessibilityIdentifier("dataProperty")
           }.lineLimit(1)
           
         }

@@ -27,6 +27,11 @@ struct ContentView: View {
             Image(systemName: "person.badge.key.fill")
             Text("Person")
           }
+        
+        SettingsView(repository: repository).tabItem {
+          Image(systemName: "gear")
+          Text("Settings")
+        }
       }
     }
 }

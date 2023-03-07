@@ -164,42 +164,44 @@ struct CompositeSecretView: View {
   @StateObject var object : CompositeSecretObject
   
     var body: some View {
-      Group{
-        if object.isLoaded {
-          Form{
-            Section("User Name") {
-              TextField("User name", text: self.$object.secret.userName)
-            }
-            
-            Section("Password") {
-              TextField("Password", text: self.$object.secret.password)
-            }
-            
-            Section("Token") {
-              TextField("Token", text: self.$object.secret.token)
-            }
-            
-            Section{
-              Button("Save") {
-                self.object.save()
+      NavigationView{
+        Group{
+          if object.isLoaded {
+            Form{
+              Section("User Name") {
+                TextField("User name", text: self.$object.secret.userName)
               }
               
-              Button("Reset", role: .destructive) {
-                self.object.reset()
+              Section("Password") {
+                TextField("Password", text: self.$object.secret.password)
+              }
+              
+              Section("Token") {
+                TextField("Token", text: self.$object.secret.token)
+              }
+              
+              Section{
+                Button("Save") {
+                  self.object.save()
+                }
+                
+                Button("Reset", role: .destructive) {
+                  self.object.reset()
+                }
+              }
+              
+              if let lastError = object.lastError {
+                Section("Error") {
+                  Text(lastError.localizedDescription)
+                }
               }
             }
-            
-            if let lastError = object.lastError {
-              Section("Error") {
-                Text(lastError.localizedDescription)
-              }
-            }
+          } else {
+            ProgressView()
           }
-        } else {
-          ProgressView()
-        }
-      }.onAppear{
-        self.object.load()
+        }.onAppear{
+          self.object.load()
+        }.navigationTitle("Person Entry")
       }
     }
 }
