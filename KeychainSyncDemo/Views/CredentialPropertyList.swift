@@ -24,7 +24,7 @@ struct CredentialPropertyList: View {
           }.lineLimit(1)
           
         }
-      }
+      }.accessibilityIdentifier("propertyList")
       #else
       Table(properties) {
         TableColumn("") { item in

@@ -9,20 +9,22 @@ import XCTest
 
 final class KeychainSyncDemoUITests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+//    override func setUpWithError() throws {
+//        // Put setup code here. This method is called before the invocation of each test method in the class.
+//
+//        // In UI tests it is usually best to stop immediately when a failure occurs.
+//        continueAfterFailure = false
+//
+//        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+//    }
+//
+//    override func tearDownWithError() throws {
+//        // Put teardown code here. This method is called after the invocation of each test method in the class.
+//    }
 
     func testExample() throws {
+      let accountName = "AccountName"
+      let password = "Password"
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
@@ -30,38 +32,60 @@ final class KeychainSyncDemoUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
       app.navigationBars["Internet Passwords"]/*@START_MENU_TOKEN@*/.buttons["Add"]/*[[".otherElements[\"Add\"].buttons[\"Add\"]",".buttons[\"Add\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
       
-      let collectionViewsQuery2 = app.collectionViews
-      collectionViewsQuery2/*@START_MENU_TOKEN@*/.textFields["account"]/*[[".cells.textFields[\"account\"]",".textFields[\"account\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-      
-      let textView = collectionViewsQuery2.children(matching: .cell).element(boundBy: 3).children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .textView).element
-      textView.tap()
-      textView.tap()
-      collectionViewsQuery2.children(matching: .cell).element(boundBy: 8).children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .textView).element.swipeUp()
-      
       let collectionViewsQuery = app.collectionViews
-      collectionViewsQuery/*@START_MENU_TOKEN@*/.switches["Is Syncronizable"]/*[[".cells.switches[\"Is Syncronizable\"]",".switches[\"Is Syncronizable\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeUp()
+      let accountField = collectionViewsQuery.textFields["account"]
+      accountField.tap()
+      accountField.typeText(accountName)
       
-      let setTypeSwitch = collectionViewsQuery/*@START_MENU_TOKEN@*/.switches["Set Type"]/*[[".cells.switches[\"Set Type\"]",".switches[\"Set Type\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-      setTypeSwitch.tap()
-      setTypeSwitch.tap()
-      collectionViewsQuery/*@START_MENU_TOKEN@*/.steppers["0"]/*[[".cells.steppers[\"0\"]",".steppers[\"0\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.buttons["Increment"].tap()
-      collectionViewsQuery/*@START_MENU_TOKEN@*/.steppers["1"]/*[[".cells.steppers[\"1\"]",".steppers[\"1\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.buttons["Increment"].tap()
-      collectionViewsQuery/*@START_MENU_TOKEN@*/.steppers["2"]/*[[".cells.steppers[\"2\"]",".steppers[\"2\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.buttons["Increment"].tap()
-      collectionViewsQuery/*@START_MENU_TOKEN@*/.staticTexts["LABEL"]/*[[".cells.staticTexts[\"LABEL\"]",".staticTexts[\"LABEL\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeUp()
-      collectionViewsQuery/*@START_MENU_TOKEN@*/.switches["Set Label"]/*[[".cells.switches[\"Set Label\"]",".switches[\"Set Label\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+      let passwordField = app.collectionViews.textViews["data"]
+      passwordField.tap()
+      passwordField.typeText(password)
       
-      let labelTextField = collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["label"]/*[[".cells.textFields[\"label\"]",".textFields[\"label\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+      
+      let syncSwitch = app.collectionViews/*@START_MENU_TOKEN@*/.switches["Is Syncronizable"]/*[[".cells.switches[\"Is Syncronizable\"]",".switches[\"Is Syncronizable\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+      syncSwitch.tap()
+      
+      let setTypeSwitch = app.collectionViews/*@START_MENU_TOKEN@*/.switches["Set Type"]/*[[".cells.switches[\"Set Type\"]",".switches[\"Set Type\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+      setTypeSwitch.tap()
+      
+      let setTypeStepper = app.collectionViews.steppers["setTypeStepper"]
+      setTypeStepper.buttons["Increment"].tap()
+      setTypeStepper.buttons["Increment"].tap()
+      setTypeStepper.buttons["Increment"].tap()
+      
+      app.collectionViews/*@START_MENU_TOKEN@*/.switches["Set Label"]/*[[".cells.switches[\"Set Label\"]",".switches[\"Set Label\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+      
+      let labelTextField = app.collectionViews/*@START_MENU_TOKEN@*/.textFields["label"]/*[[".cells.textFields[\"label\"]",".textFields[\"label\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
       labelTextField.tap()
-      labelTextField.tap()
+      labelTextField.typeText("label")
+      
       app.navigationBars["New Internet Passwords"]/*@START_MENU_TOKEN@*/.buttons["Save"]/*[[".otherElements[\"Save\"].buttons[\"Save\"]",".buttons[\"Save\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+      print(app.tables["propertyList"].cells.count)
       
-      let usernamePasswordButton = collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["UserName, Password"]/*[[".cells.buttons[\"UserName, Password\"]",".buttons[\"UserName, Password\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-      usernamePasswordButton.tap()
-      collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["account"]/*[[".cells.textFields[\"account\"]",".textFields[\"account\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-      collectionViewsQuery.children(matching: .cell).element(boundBy: 3).children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.children(matching: .textView).element.tap()
-      app.navigationBars["UserName"]/*@START_MENU_TOKEN@*/.buttons["Back"]/*[[".otherElements[\"Back\"].buttons[\"Back\"]",".buttons[\"Back\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-      usernamePasswordButton.tap()
-                  
+//      let app = XCUIApplication()
+//      let verticalScrollBar1PageCollectionView = app/*@START_MENU_TOKEN@*/.collectionViews.containing(.other, identifier:"Vertical scroll bar, 1 page").element/*[[".collectionViews.containing(.other, identifier:\"Horizontal scroll bar, 1 page\").element",".collectionViews.containing(.other, identifier:\"Vertical scroll bar, 1 page\").element"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//      verticalScrollBar1PageCollectionView.tap()
+//
+//      let collectionViewsQuery = app.collectionViews
+//      collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["Query"]/*[[".cells.buttons[\"Query\"]",".buttons[\"Query\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//      verticalScrollBar1PageCollectionView.tap()
+//      app.navigationBars["Internet Passwords"].buttons["Add"].tap()
+//      collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["account"]/*[[".cells.textFields[\"account\"]",".textFields[\"account\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//
+//      let dataTextView = collectionViewsQuery/*@START_MENU_TOKEN@*/.textViews["data"]/*[[".cells.textViews[\"data\"]",".textViews[\"data\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//      dataTextView.tap()
+//      dataTextView.tap()
+//      app.navigationBars["New Internet Passwords"]/*@START_MENU_TOKEN@*/.buttons["Save"]/*[[".otherElements[\"Save\"].buttons[\"Save\"]",".buttons[\"Save\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//
+      let testTestButton = collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["Test, Test"]/*[[".cells.buttons[\"Test, Test\"]",".buttons[\"Test, Test\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//      testTestButton.tap()
+//      
+//      let backButton = app.navigationBars["Test"]/*@START_MENU_TOKEN@*/.buttons["Back"]/*[[".otherElements[\"Back\"].buttons[\"Back\"]",".buttons[\"Back\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//      backButton.tap()
+//      testTestButton.tap()
+//      backButton.tap()
+//      testTestButton.tap()
+                                                                  
     }
 
 //    func testLaunchPerformance() throws {
