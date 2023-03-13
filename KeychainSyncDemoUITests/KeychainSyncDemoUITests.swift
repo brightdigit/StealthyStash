@@ -32,21 +32,21 @@ final class KeychainSyncDemoUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
       let collectionViewsQuery = app.collectionViews
       
-      let propertyList = collectionViewsQuery.buttons["propertyList"]
-      //print(propertyList.title)
-      let query = app.descendants(matching: .any)
-      for i in 0..<query.count {
-        let element = query.element(boundBy: i)
-        print(i, element.identifier, element.title, element.label)
-      }
+//      propertyList.staticTexts["dataProperty"].label
+//      //print(propertyList.title)
+//      let query = app.descendants(matching: .any)
+//      for i in 0..<query.count {
+//        let element = query.element(boundBy: i)
+//        print(i, element.identifier, element.title, element.label)
+//      }
       //let accountProp = collectionViewsQuery.buttons["propertyList"].staticTexts["accountProperty"]
       //acc
       
       //dump(accountProp.title)
       //dump(testTestButton)
-      return
+      //return
       
-      //app.navigationBars["Internet Passwords"]/*@START_MENU_TOKEN@*/.buttons["Add"]/*[[".otherElements[\"Add\"].buttons[\"Add\"]",".buttons[\"Add\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+      app.navigationBars["Internet Passwords"]/*@START_MENU_TOKEN@*/.buttons["Add"]/*[[".otherElements[\"Add\"].buttons[\"Add\"]",".buttons[\"Add\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
       
       let accountField = collectionViewsQuery.textFields["account"]
       accountField.tap()
@@ -75,7 +75,11 @@ final class KeychainSyncDemoUITests: XCTestCase {
       labelTextField.typeText("label")
       
       app.navigationBars["New Internet Passwords"]/*@START_MENU_TOKEN@*/.buttons["Save"]/*[[".otherElements[\"Save\"].buttons[\"Save\"]",".buttons[\"Save\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-      print(app.tables["propertyList"].cells.count)
+      
+      let propertyList = collectionViewsQuery.buttons["propertyList"].firstMatch
+      
+      XCTAssertEqual(propertyList.staticTexts["accountProperty"].label, "Test")
+      XCTAssertEqual(propertyList.staticTexts["dataProperty"].label, "Test")
       
 //      let app = XCUIApplication()
 //      let verticalScrollBar1PageCollectionView = app/*@START_MENU_TOKEN@*/.collectionViews.containing(.other, identifier:"Vertical scroll bar, 1 page").element/*[[".collectionViews.containing(.other, identifier:\"Horizontal scroll bar, 1 page\").element",".collectionViews.containing(.other, identifier:\"Vertical scroll bar, 1 page\").element"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
