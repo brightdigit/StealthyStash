@@ -30,9 +30,19 @@ final class KeychainSyncDemoUITests: XCTestCase {
         app.launch()
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-      app.navigationBars["Internet Passwords"]/*@START_MENU_TOKEN@*/.buttons["Add"]/*[[".otherElements[\"Add\"].buttons[\"Add\"]",".buttons[\"Add\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-      
       let collectionViewsQuery = app.collectionViews
+      
+      let propertyList = collectionViewsQuery.buttons["propertyList"]
+      
+      let accountProp = collectionViewsQuery.buttons["propertyList"].staticTexts["accountProperty"]
+      //acc
+      
+      dump(accountProp.title)
+      //dump(testTestButton)
+      return
+      
+      //app.navigationBars["Internet Passwords"]/*@START_MENU_TOKEN@*/.buttons["Add"]/*[[".otherElements[\"Add\"].buttons[\"Add\"]",".buttons[\"Add\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+      
       let accountField = collectionViewsQuery.textFields["account"]
       accountField.tap()
       accountField.typeText(accountName)
@@ -77,7 +87,11 @@ final class KeychainSyncDemoUITests: XCTestCase {
 //      dataTextView.tap()
 //      app.navigationBars["New Internet Passwords"]/*@START_MENU_TOKEN@*/.buttons["Save"]/*[[".otherElements[\"Save\"].buttons[\"Save\"]",".buttons[\"Save\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
 //
-      let testTestButton = collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["Test, Test"]/*[[".cells.buttons[\"Test, Test\"]",".buttons[\"Test, Test\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+      
+      
+      //dump(testTestButton)
+      
+      //print(collectionViewsQuery.children(matching: .cell).cells.firstMatch.title)
 //      testTestButton.tap()
 //      
 //      let backButton = app.navigationBars["Test"]/*@START_MENU_TOKEN@*/.buttons["Back"]/*[[".otherElements[\"Back\"].buttons[\"Back\"]",".buttons[\"Back\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
