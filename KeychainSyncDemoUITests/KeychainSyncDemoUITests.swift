@@ -33,11 +33,16 @@ final class KeychainSyncDemoUITests: XCTestCase {
       let collectionViewsQuery = app.collectionViews
       
       let propertyList = collectionViewsQuery.buttons["propertyList"]
-      
-      let accountProp = collectionViewsQuery.buttons["propertyList"].staticTexts["accountProperty"]
+      //print(propertyList.title)
+      let query = app.descendants(matching: .any)
+      for i in 0..<query.count {
+        let element = query.element(boundBy: i)
+        print(i, element.identifier, element.title, element.label)
+      }
+      //let accountProp = collectionViewsQuery.buttons["propertyList"].staticTexts["accountProperty"]
       //acc
       
-      dump(accountProp.title)
+      //dump(accountProp.title)
       //dump(testTestButton)
       return
       
