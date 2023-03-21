@@ -88,6 +88,7 @@
 		B3AA494429A52831002D40C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA494329A52831002D40C3 /* Preview Assets.xcassets */; };
 		B3AA495529A52852002D40C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA495429A52852002D40C3 /* Assets.xcassets */; };
 		B3AA495829A52852002D40C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA495729A52852002D40C3 /* Preview Assets.xcassets */; };
+		B3D6C71529C8918B00236D8B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6C71429C8918B00236D8B /* SettingsView.swift */; };
 		B3F984F829AF953000C0266F /* SecretProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F984F729AF953000C0266F /* SecretProperty.swift */; };
 		B3F984FA29B0009200C0266F /* credential-properties.json in Resources */ = {isa = PBXBuildFile; fileRef = B3F984F929B0009200C0266F /* credential-properties.json */; };
 		B3F984FB29B0009200C0266F /* credential-properties.json in Resources */ = {isa = PBXBuildFile; fileRef = B3F984F929B0009200C0266F /* credential-properties.json */; };
@@ -152,6 +153,7 @@
 		B3AA494E29A52851002D40C3 /* KeychainSyncDemoWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KeychainSyncDemoWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AA495429A52852002D40C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3AA495729A52852002D40C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B3D6C71429C8918B00236D8B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B3F984F729AF953000C0266F /* SecretProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretProperty.swift; sourceTree = "<group>"; };
 		B3F984F929B0009200C0266F /* credential-properties.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "credential-properties.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +194,7 @@
 				B31EAE4429A8F820004C4A56 /* ContentView.swift */,
 				B34ADDD229AF87F00072B59F /* CredentialPropertyList.swift */,
 				B37C694729B3ABA800091E0E /* CompositeSecretView.swift */,
+				B3D6C71429C8918B00236D8B /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 				B3A2638529B2B75500CC36B4 /* Query.swift in Sources */,
 				B3A2639929B2B75500CC36B4 /* SecretModel.swift in Sources */,
 				B34ADDC129AF84750072B59F /* CredentialPropertyListObject.swift in Sources */,
+				B3D6C71529C8918B00236D8B /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
