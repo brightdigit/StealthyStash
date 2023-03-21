@@ -21,6 +21,27 @@ final class KeychainSyncDemoUITests: XCTestCase {
 //    override func tearDownWithError() throws {
 //        // Put teardown code here. This method is called after the invocation of each test method in the class.
 //    }
+  
+  func testClear() {
+    
+    let app = XCUIApplication()
+    let tabBar = app.tabBars["Tab Bar"]
+    tabBar.buttons["Settings"].tap()
+    
+    let collectionViewsQuery = app.collectionViews
+    collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["Erase All Keychain Items"]/*[[".cells.buttons[\"Erase All Keychain Items\"]",".buttons[\"Erase All Keychain Items\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+    app.alerts["Are you sure you want to delete all keychain items?"].scrollViews.otherElements.buttons["Yes"].tap()
+    app.alerts["All Keychain Items Deleted"].scrollViews.otherElements.buttons["Ok"].tap()
+    tabBar.buttons["Internet"].tap()
+    
+    tabBar.buttons["Generic"].tap()
+    tabBar.buttons["Person"].tap()
+    
+    let resetButton = collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["Reset"]/*[[".cells.buttons[\"Reset\"]",".buttons[\"Reset\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+    resetButton.tap()
+    resetButton.tap()
+            
+  }
 
     func testExample() throws {
       let accountName = "AccountName"
@@ -32,26 +53,15 @@ final class KeychainSyncDemoUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
       let collectionViewsQuery = app.collectionViews
       
-      collectionViewsQuery.navigationBars["Settings"].buttons["Erase All Keychain Items"].tap()
+      app.tabBars["Tab Bar"].buttons["Settings"].tap()
+            
+      
       
       app.collectionViews/*@START_MENU_TOKEN@*/.buttons["Erase All Keychain Items"]/*[[".cells.buttons[\"Erase All Keychain Items\"]",".buttons[\"Erase All Keychain Items\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
       app.alerts["Are you sure you want to delete all keychain items?"].scrollViews.otherElements.buttons["Yes"].tap()
       let okButton = app.alerts["All Keychain Items Deleted"].scrollViews.otherElements.buttons["Ok"]
       okButton.tap()
       
-//      propertyList.staticTexts["dataProperty"].label
-//      //print(propertyList.title)
-//      let query = app.descendants(matching: .any)
-//      for i in 0..<query.count {
-//        let element = query.element(boundBy: i)
-//        print(i, element.identifier, element.title, element.label)
-//      }
-      //let accountProp = collectionViewsQuery.buttons["propertyList"].staticTexts["accountProperty"]
-      //acc
-      
-      //dump(accountProp.title)
-      //dump(testTestButton)
-      //return
       
       app.navigationBars["Internet Passwords"]/*@START_MENU_TOKEN@*/.buttons["Add"]/*[[".otherElements[\"Add\"].buttons[\"Add\"]",".buttons[\"Add\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
       
