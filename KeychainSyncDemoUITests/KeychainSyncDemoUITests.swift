@@ -32,6 +32,13 @@ final class KeychainSyncDemoUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
       let collectionViewsQuery = app.collectionViews
       
+      collectionViewsQuery.navigationBars["Settings"].buttons["Erase All Keychain Items"].tap()
+      
+      app.collectionViews/*@START_MENU_TOKEN@*/.buttons["Erase All Keychain Items"]/*[[".cells.buttons[\"Erase All Keychain Items\"]",".buttons[\"Erase All Keychain Items\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+      app.alerts["Are you sure you want to delete all keychain items?"].scrollViews.otherElements.buttons["Yes"].tap()
+      let okButton = app.alerts["All Keychain Items Deleted"].scrollViews.otherElements.buttons["Ok"]
+      okButton.tap()
+      
 //      propertyList.staticTexts["dataProperty"].label
 //      //print(propertyList.title)
 //      let query = app.descendants(matching: .any)
@@ -78,8 +85,8 @@ final class KeychainSyncDemoUITests: XCTestCase {
       
       let propertyList = collectionViewsQuery.buttons["propertyList"].firstMatch
       
-      XCTAssertEqual(propertyList.staticTexts["accountProperty"].label, "Test")
-      XCTAssertEqual(propertyList.staticTexts["dataProperty"].label, "Test")
+      XCTAssertEqual(propertyList.staticTexts["accountProperty"].label, accountName)
+      XCTAssertEqual(propertyList.staticTexts["dataProperty"].label, password)
       
 //      let app = XCUIApplication()
 //      let verticalScrollBar1PageCollectionView = app/*@START_MENU_TOKEN@*/.collectionViews.containing(.other, identifier:"Vertical scroll bar, 1 page").element/*[[".collectionViews.containing(.other, identifier:\"Horizontal scroll bar, 1 page\").element",".collectionViews.containing(.other, identifier:\"Vertical scroll bar, 1 page\").element"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
