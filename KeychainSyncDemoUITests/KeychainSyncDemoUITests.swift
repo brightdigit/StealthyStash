@@ -159,7 +159,7 @@ final class KeychainSyncDemoUITests: XCTestCase {
   fileprivate func internetPasswordTests(_ totalCount: Int, _ app: XCUIApplication)  -> [InternetPasswordItem] {
     return (0..<totalCount).map { count in
       let password : InternetPasswordItem = .random()
-      self.internetPassword(.random(), testApp: app, atCount: count)
+      self.internetPassword(password, testApp: app, atCount: count)
       return password
     }
   }
@@ -171,7 +171,7 @@ final class KeychainSyncDemoUITests: XCTestCase {
     
       return (0..<totalCount).map { count in
         let password : GenericPasswordItem = .random()
-        self.genericPassword(.random(), testApp: app, atCount: count)
+        self.genericPassword(password, testApp: app, atCount: count)
         return password
       }
   }
@@ -187,15 +187,18 @@ final class KeychainSyncDemoUITests: XCTestCase {
     
     let genericPasswords = genericPasswordTests(.random(in: 4...7), app)
     
+    
     app.tabBars["Tab Bar"].buttons["Person"].tap()
     
-//    let collectionViewsQuery = app.collectionViews
-//    XCTAssertEqual(collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["User name"]/*[[".cells.textFields[\"User name\"]",".textFields[\"User name\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.value as? String, internetPasswords.first?.account)
-//    //.tap()
-//    XCTAssertEqual(collectionViewsQuery.textFields["Password"].value as? String, internetPasswords.first?.dataString)
-//    //collectionViewsQuery.textFields["Password"]
-//    //.tap()
-//    XCTAssertEqual(collectionViewsQuery.textFields["Token"].value as? String, genericPasswords.first?.dataString)
+    
+    
+    let collectionViewsQuery = app.collectionViews
+    XCTAssertEqual(collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["User name"]/*[[".cells.textFields[\"User name\"]",".textFields[\"User name\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.value as? String, internetPasswords.first?.account)
+    //.tap()
+    XCTAssertEqual(collectionViewsQuery.textFields["Password"].value as? String, internetPasswords.first?.dataString)
+    //collectionViewsQuery.textFields["Password"]
+    //.tap()
+    XCTAssertEqual(collectionViewsQuery.textFields["Token"].value as? String, genericPasswords.first?.dataString)
     //.tap()
     //collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["Save"]/*[[".cells.buttons[\"Save\"]",".buttons[\"Save\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
     
