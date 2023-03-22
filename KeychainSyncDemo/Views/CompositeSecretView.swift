@@ -33,13 +33,9 @@ extension CompositeCredentials {
       return nil
     }
     
-    guard let password = builder.password.nilTrimmed() else {
-      return nil
-    }
+    let password = builder.password.nilTrimmed() ?? ""
     
-    guard let token = builder.token.nilTrimmed() else {
-      return nil
-    }
+    let token = builder.token.nilTrimmed() ?? ""
     
     self.init(
       userName: userName,

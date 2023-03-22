@@ -72,7 +72,13 @@ struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
   }
   
   static func model(from properties: [String : [AnySecretProperty]]) throws -> CompositeCredentials? {
-    let properties = properties.values.flatMap{$0}
+    let properties = properties.values.flatMap{$0}.enumerated().sorted { lhs, rhs in
+      if lhs.element.propertyType == rhs.element.propertyType {
+        return lhs.offset < rhs.offset
+      } else {
+        return lhs.element.propertyType == .internet
+      }
+    }.map{$0.element}
     
     guard let username = properties.map({$0.account}).first else {
         return nil

@@ -27,6 +27,7 @@
 		B34ADDF529B00B760072B59F /* InternetPasswordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31EAE4C29A915E2004C4A56 /* InternetPasswordData.swift */; };
 		B353398B29B7D783006FF22B /* KeychainSyncDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B353398A29B7D783006FF22B /* KeychainSyncDemoUITests.swift */; };
 		B353398D29B7D783006FF22B /* KeychainSyncDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B353398C29B7D783006FF22B /* KeychainSyncDemoUITestsLaunchTests.swift */; };
+		B369E21329CB9FD7007C4155 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6C71429C8918B00236D8B /* SettingsView.swift */; };
 		B37C694829B3ABA800091E0E /* CompositeSecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37C694729B3ABA800091E0E /* CompositeSecretView.swift */; };
 		B37C694A29B3C43D00091E0E /* CompositeSecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37C694729B3ABA800091E0E /* CompositeSecretView.swift */; };
 		B39BF14E29A53D50009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14D29A53D50009BBCAC /* FloxBxAuth */; };
@@ -394,6 +395,7 @@
 				B34ADDED29B00B550072B59F /* CredentialPropertyListObject.swift in Sources */,
 				B34ADDF129B00B550072B59F /* CredentialPropertyRootView.swift in Sources */,
 				B37C694A29B3C43D00091E0E /* CompositeSecretView.swift in Sources */,
+				B369E21329CB9FD7007C4155 /* SettingsView.swift in Sources */,
 				B34ADDEA29B00B550072B59F /* CredentialPropertyFormContentView.swift in Sources */,
 				B34ADDEE29B00B550072B59F /* ContentView.swift in Sources */,
 				B34ADDEC29B00B550072B59F /* CredentialPropertyObject.swift in Sources */,

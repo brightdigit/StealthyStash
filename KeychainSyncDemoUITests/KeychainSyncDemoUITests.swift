@@ -16,8 +16,64 @@ extension InternetPasswordItem {
   }
   
 }
+
+
+
+extension GenericPasswordItem {
+  
+  static func random() -> GenericPasswordItem {
+    return GenericPasswordItem(account: UUID().uuidString, data: UUID().uuidString.data(using: .utf8)!, type: .random(in: 1...12), label: UUID().uuidString)
+  }
+  
+}
 final class KeychainSyncDemoUITests: XCTestCase {
   
+  fileprivate func genericPassword(_ genericPassword: GenericPasswordItem, testApp app: XCUIApplication, atCount currentCount: Int) {
+    let tabBar = app.tabBars["Tab Bar"]
+    tabBar.buttons["Generic"].tap()
+    let collectionViewsQuery = app.collectionViews
+    XCTAssertEqual(collectionViewsQuery.buttons.matching(identifier: "propertyList").count , currentCount)
+    
+    app.navigationBars["Generic Passwords"]/*@START_MENU_TOKEN@*/.buttons["Add"]/*[[".otherElements[\"Add\"].buttons[\"Add\"]",".buttons[\"Add\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+    let accountField = collectionViewsQuery.textFields["account"]
+    accountField.tap()
+    accountField.typeText(genericPassword.account)
+    
+    let passwordField = app.collectionViews.textViews["data"]
+    passwordField.tap()
+    passwordField.typeText(genericPassword.dataString)
+    
+    //      let syncSwitch = app.collectionViews/*@START_MENU_TOKEN@*/.switches["Is Syncronizable"]/*[[".cells.switches[\"Is Syncronizable\"]",".switches[\"Is Syncronizable\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+    //      syncSwitch.tap()
+    //
+    //      let setTypeSwitch = app.collectionViews/*@START_MENU_TOKEN@*/.switches["Set Type"]/*[[".cells.switches[\"Set Type\"]",".switches[\"Set Type\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+    //      setTypeSwitch.tap()
+    //
+    //      let setTypeStepper = app.collectionViews.steppers["setTypeStepper"]
+    //      setTypeStepper.buttons["Increment"].tap()
+    //      setTypeStepper.buttons["Increment"].tap()
+    //      setTypeStepper.buttons["Increment"].tap()
+    //
+    //      app.collectionViews/*@START_MENU_TOKEN@*/.switches["Set Label"]/*[[".cells.switches[\"Set Label\"]",".switches[\"Set Label\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+    //
+    //      let labelTextField = app.collectionViews/*@START_MENU_TOKEN@*/.textFields["label"]/*[[".cells.textFields[\"label\"]",".textFields[\"label\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+    //      labelTextField.tap()
+    //      labelTextField.typeText("label")
+    
+    app.navigationBars["New Generic Passwords"]/*@START_MENU_TOKEN@*/.buttons["Save"]/*[[".otherElements[\"Save\"].buttons[\"Save\"]",".buttons[\"Save\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+    let propertyListQuery = collectionViewsQuery.buttons.matching(identifier: "propertyList")
+    
+    XCTAssertEqual(propertyListQuery.count, currentCount+1)
+    let propertyList = propertyListQuery.element(boundBy: currentCount)
+    
+    XCTAssertEqual(propertyList.staticTexts["accountProperty"].label, genericPassword.account)
+    XCTAssertEqual(propertyList.staticTexts["dataProperty"].label, genericPassword.dataString)
+    propertyList.tap()
+    XCTAssertEqual(collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["account"]/*[[".cells.textFields[\"account\"]",".textFields[\"account\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.value as? String, genericPassword.account)
+    XCTAssertEqual(collectionViewsQuery/*@START_MENU_TOKEN@*/.textViews["data"]/*[[".cells.textViews[\"data\"]",".textViews[\"data\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.value as? String, genericPassword.dataString)
+    
+    app.navigationBars[genericPassword.account]/*@START_MENU_TOKEN@*/.buttons["Back"]/*[[".otherElements[\"Back\"].buttons[\"Back\"]",".buttons[\"Back\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+  }
   fileprivate func internetPassword(_ internetPassword: InternetPasswordItem, testApp app: XCUIApplication, atCount currentCount: Int) {
     let tabBar = app.tabBars["Tab Bar"]
     tabBar.buttons["Internet"].tap()
@@ -65,9 +121,7 @@ final class KeychainSyncDemoUITests: XCTestCase {
     app.navigationBars[internetPassword.account]/*@START_MENU_TOKEN@*/.buttons["Back"]/*[[".otherElements[\"Back\"].buttons[\"Back\"]",".buttons[\"Back\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
   }
   
-  func testClear() {
-    let app = XCUIApplication()
-    app.launch()
+  fileprivate func clearAll(_ app: XCUIApplication) {
     let tabBar = app.tabBars["Tab Bar"]
     tabBar.buttons["Settings"].tap()
     
@@ -84,9 +138,66 @@ final class KeychainSyncDemoUITests: XCTestCase {
     
     tabBar.buttons["Internet"].tap()
     XCTAssertEqual(collectionViewsQuery.buttons.matching(identifier: "propertyList").count , 0)
+  }
+  
+  
+  func testCompsite () {
+    let app = XCUIApplication()
+    app.launch()
+    clearAll(app)
+  
+  }
+  
+  func testClear() {
+    let app = XCUIApplication()
+    app.launch()
+    clearAll(app)
     
-    self.internetPassword(.random(), testApp: app, atCount: 0)
-    self.internetPassword(.random(), testApp: app, atCount: 1)
-    self.internetPassword(.random(), testApp: app, atCount: 2)
+  }
+  
+  @discardableResult
+  fileprivate func internetPasswordTests(_ totalCount: Int, _ app: XCUIApplication)  -> [InternetPasswordItem] {
+    return (0..<totalCount).map { count in
+      let password : InternetPasswordItem = .random()
+      self.internetPassword(.random(), testApp: app, atCount: count)
+      return password
+    }
+  }
+  
+  
+  @discardableResult
+  fileprivate func genericPasswordTests(_ totalCount: Int, _ app: XCUIApplication) -> [GenericPasswordItem] {
+
+    
+      return (0..<totalCount).map { count in
+        let password : GenericPasswordItem = .random()
+        self.genericPassword(.random(), testApp: app, atCount: count)
+        return password
+      }
+  }
+  
+  
+  func testRunThrough() {
+    let app = XCUIApplication()
+    app.launch()
+    clearAll(app)
+  
+    
+    let internetPasswords = internetPasswordTests(.random(in: 4...7), app)
+    
+    let genericPasswords = genericPasswordTests(.random(in: 4...7), app)
+    
+    app.tabBars["Tab Bar"].buttons["Person"].tap()
+    
+//    let collectionViewsQuery = app.collectionViews
+//    XCTAssertEqual(collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["User name"]/*[[".cells.textFields[\"User name\"]",".textFields[\"User name\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.value as? String, internetPasswords.first?.account)
+//    //.tap()
+//    XCTAssertEqual(collectionViewsQuery.textFields["Password"].value as? String, internetPasswords.first?.dataString)
+//    //collectionViewsQuery.textFields["Password"]
+//    //.tap()
+//    XCTAssertEqual(collectionViewsQuery.textFields["Token"].value as? String, genericPasswords.first?.dataString)
+    //.tap()
+    //collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["Save"]/*[[".cells.buttons[\"Save\"]",".buttons[\"Save\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+    
   }
 }
