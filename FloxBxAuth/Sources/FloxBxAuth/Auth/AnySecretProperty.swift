@@ -30,7 +30,7 @@ public struct AnySecretProperty : Identifiable, Hashable {
   }
 }
 
-extension AnySecretProperty {
+public extension AnySecretProperty {
   var account : String {
     return self.property.account
   }
@@ -112,7 +112,7 @@ extension AnySecretProperty {
 }
 
 extension AnySecretProperty {
-  var propertyType : SecretPropertyType {
+ public var propertyType : SecretPropertyType {
     return Swift.type(of: self.property).propertyType
   }
   

@@ -131,6 +131,25 @@ public struct InternetPasswordItem : Identifiable, Hashable, SecretProperty{
 
 
 extension InternetPasswordItem {
+  
+  public init(account: String, data: Data, accessGroup: String? = nil, url: URL? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, comment : String? = nil, type: Int? = nil, label: String? = nil, authenticationType: AuthenticationType? = nil, isSynchronizable: Bool? = nil) {
+    self.init(
+      account: account,
+      data: data,
+      accessGroup: accessGroup,
+      createdAt: createdAt,
+      modifiedAt: modifiedAt,
+      description: description,
+      type: type?.trimZero(),
+      label: label,
+      server: url?.host,
+      protocol: url.flatMap{$0.scheme}.flatMap(ServerProtocol.init(scheme:)),
+      port: url?.port?.trimZero(),
+      path: url?.path,
+      isSynchronizable: isSynchronizable
+    )
+  }
+  
   public init(dictionary : [String : Any]) throws {
     let account : String = try dictionary.require(kSecAttrAccount)
     let data : Data = try dictionary.require(kSecValueData)
@@ -164,22 +183,3 @@ extension InternetPasswordItem {
   }
 }
 
-extension InternetPasswordItem {
-  public init(builder: SecretPropertyBuilder) {
-    self.init(
-      account: builder.account,
-      data: builder.data,
-      accessGroup: builder.accessGroup,
-      createdAt: builder.createdAt,
-      modifiedAt: builder.modifiedAt,
-      description: builder.description,
-      type: builder.type,
-      label: builder.label,
-      server: builder.server,
-      protocol: builder.protocol,
-      port: builder.port,
-      path: builder.path,
-      isSynchronizable: builder.isSynchronizable
-    )
-  }
-}

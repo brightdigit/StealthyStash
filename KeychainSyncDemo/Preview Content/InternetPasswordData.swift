@@ -6,22 +6,22 @@
 //
 
 import Foundation
+import FloxBxAuth
 
-
-struct CredentialPropertyData : Codable {
-  let account : String
-  let data : String
-  let accessGroup : String?
-  let createdAt: Date
-  let modifiedAt : Date
-  let description: String?
-  let service: String?
-  let comments: String?
-  let type : Int?
-  let label: String?
-  let url : URL?
-  let autenticationType : Int?
-  let isSynchronizable: Bool?
+public struct CredentialPropertyData : Codable {
+  public let account : String
+  public let data : String
+  public let accessGroup : String?
+  public let createdAt: Date
+  public let modifiedAt : Date
+  public let description: String?
+  public let service: String?
+  public let comments: String?
+  public let type : Int?
+  public let label: String?
+  public let url : URL?
+  public let autenticationType : Int?
+  public let isSynchronizable: Bool?
 }
 
 
@@ -75,7 +75,7 @@ extension InternetPasswordItem {
 }
 
 
-extension AnySecretProperty {
+public extension AnySecretProperty {
   init(data: CredentialPropertyData) {
     let property : any SecretProperty
     if data.service != nil {

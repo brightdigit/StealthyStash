@@ -1,4 +1,5 @@
 import SwiftUI
+import FloxBxAuth
 
 struct CredentialPropertyRootView: View {
   internal init(repository: SecretsRepository, internetPasswords: [AnySecretProperty]? = nil, query: Query, createNewItem: Bool = false) {

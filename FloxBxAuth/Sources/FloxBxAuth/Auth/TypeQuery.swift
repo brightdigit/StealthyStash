@@ -1,13 +1,13 @@
 import Security
 
-struct TypeQuery : Query {
-  internal init(type: SecretPropertyType) {
+public struct TypeQuery : Query {
+  public init(type: SecretPropertyType) {
     self.type = type
   }
   
   public let type : SecretPropertyType
 
-  func keychainDictionary (withDefaults defaults : [String : Any?]? = nil) -> [String : Any?] {
+  public func keychainDictionary (withDefaults defaults : [String : Any?]? = nil) -> [String : Any?] {
     return [
         kSecClass as String: type.secClass,
         kSecAttrServer as String: type == .internet ? defaults?[kSecAttrServer as String].flatMap{$0} : nil,

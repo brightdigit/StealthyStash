@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FloxBxAuth
 
 struct CredentialPropertyList: View {
   let properties : [AnySecretProperty]

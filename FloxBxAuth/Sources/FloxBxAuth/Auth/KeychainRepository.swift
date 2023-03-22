@@ -1,9 +1,9 @@
 import Security
-import FloxBxAuth
-struct KeychainRepository : SecretsRepository {
+
+public struct KeychainRepository : SecretsRepository {
 
   
-  func create(_ item: AnySecretProperty) throws {
+  public func create(_ item: AnySecretProperty) throws {
     let itemDictionary = item.property.addQuery()
     
     let query = itemDictionary.merging(defaultAddQuery(forType: item.propertyType)) {
@@ -19,7 +19,7 @@ struct KeychainRepository : SecretsRepository {
     }
   }
   
-  func update<SecretPropertyType: SecretProperty>(_ item: SecretPropertyType, from previousItem: SecretPropertyType) throws {
+  public func update<SecretPropertyType: SecretProperty>(_ item: SecretPropertyType, from previousItem: SecretPropertyType) throws {
     
     let querySet : UpdateQuerySet = UpdateQuerySet(from: previousItem, to: item).merging(with: self.defaultAddQuery(forType: SecretPropertyType.propertyType), overwrite: false)
     
@@ -35,7 +35,7 @@ struct KeychainRepository : SecretsRepository {
     }
   }
   
-  func delete(_ item: AnySecretProperty) throws {
+  public func delete(_ item: AnySecretProperty) throws {
     let deleteQuery = item.property.deleteQuery().deepCompactMapValues().merging(with: self.defaultAddQuery(forType: item.propertyType), overwrite: false)
     
     self.logger?.debug("Deleting: \(deleteQuery.loggingDescription())")
@@ -46,7 +46,7 @@ struct KeychainRepository : SecretsRepository {
     }
   }
   
-  func query(_ query: Query) throws -> [AnySecretProperty] {
+  public func query(_ query: Query) throws -> [AnySecretProperty] {
     let dictionaryAny = [
       kSecClass as String: query.type.secClass,
       kSecAttrServer as String: query.type == .internet ? defaultServerName : nil,

@@ -33,13 +33,13 @@ public enum ServerProtocol : String {
   case ircs
   case pop3s
   
-  init?(scheme : String) {
+public  init?(scheme : String) {
     switch scheme {
     case "http": self = .http
     default: return nil
     }
   }
-  var cfValue : CFString {
+  public var cfValue : CFString {
     switch self {
     case .ftp: return kSecAttrProtocolFTP
     case .ftpaccount: return kSecAttrProtocolFTPAccount
@@ -74,7 +74,7 @@ public enum ServerProtocol : String {
     case .pop3s: return kSecAttrProtocolPOP3S
     }
   }
-  init?(number : CFString) {
+  public init?(number : CFString) {
     switch number {
     case kSecAttrProtocolFTP: self = .ftp
       

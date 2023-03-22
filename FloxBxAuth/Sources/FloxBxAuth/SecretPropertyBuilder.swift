@@ -1,4 +1,5 @@
 import Foundation
+import FloxBxAuth
 
 public struct SecretPropertyBuilder {
   public let secClass : SecretPropertyType
@@ -135,7 +136,7 @@ extension SecretPropertyBuilder {
   }
 }
 
-extension SecretPropertyBuilder {
+public extension SecretPropertyBuilder {
   init (item: AnySecretProperty) {
 
     assert(item.propertyType == .internet || item.service != nil)
@@ -156,6 +157,26 @@ extension SecretPropertyBuilder {
       port : item.port,
       path : item.path,
       isSynchronizable : item.isSynchronizable
+    )
+  }
+}
+
+extension InternetPasswordItem {
+  public init(builder: SecretPropertyBuilder) {
+    self.init(
+      account: builder.account,
+      data: builder.data,
+      accessGroup: builder.accessGroup,
+      createdAt: builder.createdAt,
+      modifiedAt: builder.modifiedAt,
+      description: builder.description,
+      type: builder.type,
+      label: builder.label,
+      server: builder.server,
+      protocol: builder.protocol,
+      port: builder.port,
+      path: builder.path,
+      isSynchronizable: builder.isSynchronizable
     )
   }
 }

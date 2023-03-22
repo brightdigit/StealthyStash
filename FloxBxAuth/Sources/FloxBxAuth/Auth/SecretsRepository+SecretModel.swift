@@ -1,5 +1,5 @@
 
-extension SecretsRepository {
+public extension SecretsRepository {
   func create<SecretModelType: SecretModel>(_ model: SecretModelType) throws {
     let properties = SecretModelType.QueryBuilder.properties(from: model, for: .adding)
     for property in properties {

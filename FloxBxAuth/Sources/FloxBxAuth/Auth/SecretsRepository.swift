@@ -1,7 +1,7 @@
 import os
 import Foundation
 
-protocol SecretsRepository {
+public protocol SecretsRepository {
   var logger : Logger? { get }
   func create(_ item: AnySecretProperty) throws
   func update<SecretPropertyType: SecretProperty>(_ item: SecretPropertyType, from previousItem: SecretPropertyType) throws
@@ -13,7 +13,7 @@ enum SecretsRepositoryDefaultLogger {
   fileprivate static let logger = Bundle.main.bundleIdentifier.map{Logger(subsystem: $0, category: "secrets")}
 }
 
-extension SecretsRepository {
+public extension SecretsRepository {
   public var logger : Logger? {
     return SecretsRepositoryDefaultLogger.logger
   }

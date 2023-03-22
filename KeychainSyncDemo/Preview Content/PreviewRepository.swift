@@ -1,3 +1,4 @@
+import FloxBxAuth
 
 struct PreviewRepository : SecretsRepository {
 

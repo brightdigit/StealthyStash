@@ -13,7 +13,7 @@ public enum SecretPropertyType {
   case generic
 }
 
-extension SecretPropertyType {
+public extension SecretPropertyType {
   var secClass : CFString {
     switch self {
     case .internet:

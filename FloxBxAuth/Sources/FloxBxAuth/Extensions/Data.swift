@@ -8,7 +8,7 @@
 import Foundation
 
 extension Data {
-  func string (encoding: String.Encoding = .utf8) -> String? {
+  public func string (encoding: String.Encoding = .utf8) -> String? {
     return String(data: self, encoding: encoding)
   }
 }

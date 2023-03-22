@@ -8,7 +8,7 @@
 import Foundation
 
 
-public struct KeychainRepository : LegacyCredentialRepository {
+public struct LegacyKeychainRepository : LegacyCredentialRepository {
   public init(defaultServiceName: String, defaultServerName: String, defaultAccessGroup: String? = nil, defaultSynchronizable: Bool? = nil) {
     self.defaultServiceName = defaultServiceName
     self.defaultServerName = defaultServerName

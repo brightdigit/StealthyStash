@@ -5,6 +5,7 @@
 //  Created by Leo Dion on 3/1/23.
 //
 
+import FloxBxAuth
 import SwiftUI
 
 struct CredentialPropertyFormContentView: View {

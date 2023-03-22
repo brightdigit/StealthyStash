@@ -1,4 +1,5 @@
 import SwiftUI
+import FloxBxAuth
 
 struct CredentialPropertyView: View {
   internal init(object: CredentialPropertyObject) {

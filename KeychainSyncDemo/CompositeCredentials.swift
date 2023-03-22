@@ -1,3 +1,4 @@
+import FloxBxAuth
 
 struct CompositeCredentials : SecretModel {
   typealias QueryBuilder = CompositeCredentialsQueryBuilder

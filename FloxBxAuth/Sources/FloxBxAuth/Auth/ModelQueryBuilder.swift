@@ -8,23 +8,23 @@ struct DefunctSecretPropertyUpdate {
 }
 
 
-struct SecretPropertyUpdate {
-  internal init(previousProperty: AnySecretProperty?, newProperty: AnySecretProperty?) {
+public struct SecretPropertyUpdate {
+  public init(previousProperty: AnySecretProperty?, newProperty: AnySecretProperty?) {
     self.previousProperty = previousProperty
     self.newProperty = newProperty
   }
   
-  let previousProperty : AnySecretProperty?
-  let newProperty : AnySecretProperty?
+  public let previousProperty : AnySecretProperty?
+  public let newProperty : AnySecretProperty?
 }
 
 extension SecretPropertyUpdate {
-  init<SecretPropertyType : SecretProperty>(previousProperty: SecretPropertyType?, newProperty: SecretPropertyType?) {
+  public init<SecretPropertyType : SecretProperty>(previousProperty: SecretPropertyType?, newProperty: SecretPropertyType?) {
     self.init(previousProperty: previousProperty.map(AnySecretProperty.init(property:)), newProperty: newProperty.map(AnySecretProperty.init(property:)))
   }
 }
 
-protocol ModelQueryBuilder {
+public protocol ModelQueryBuilder {
   associatedtype QueryType
   associatedtype SecretModelType : SecretModel
   
