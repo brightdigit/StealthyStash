@@ -1,5 +1,5 @@
-import CoreFoundation
-
+import Foundation
+import Security
 extension Dictionary {
   enum MissingValueError<Output>: Error {
     case missingKey(Key)
@@ -71,7 +71,11 @@ extension Dictionary where Key == String, Value == Any? {
 
 extension Dictionary where Key == String, Value == Any {
   func loggingDescription() -> String {
-    return self.compactMap { (key: String, value: Optional<Any>) in
+    var values = [Key: Value]()
+    if let data = self[kSecValueData as String] as? Data {
+      values["data_string"] = String(bytes: data, encoding: .utf8)
+    }
+    return self.merging(with: values, overwrite: false).compactMap { (key: String, value: Optional<Any>) in
       guard let value = value._deepUnwrapped else {
         assertionFailure()
         return nil

@@ -21,8 +21,8 @@ extension InternetPasswordItem {
 
 extension GenericPasswordItem {
   
-  static func random() -> GenericPasswordItem {
-    return GenericPasswordItem(account: UUID().uuidString, data: UUID().uuidString.data(using: .utf8)!, type: .random(in: 1...12), label: UUID().uuidString)
+  static func random(withAccountName accountName : String? = nil) -> GenericPasswordItem {
+    return GenericPasswordItem(account: accountName ?? UUID().uuidString, data: UUID().uuidString.data(using: .utf8)!, type: .random(in: 1...12), label: UUID().uuidString)
   }
   
 }
@@ -166,11 +166,10 @@ final class KeychainSyncDemoUITests: XCTestCase {
   
   
   @discardableResult
-  fileprivate func genericPasswordTests(_ totalCount: Int, _ app: XCUIApplication) -> [GenericPasswordItem] {
+  fileprivate func genericPasswordTests(_ totalCount: Int, _ app: XCUIApplication, withUserName userName : String? = nil, atIndex userNameIndex : Int? = nil) -> [GenericPasswordItem] {
 
-    
       return (0..<totalCount).map { count in
-        let password : GenericPasswordItem = .random()
+        let password : GenericPasswordItem = .random(withAccountName: count == userNameIndex ? userName : nil)
         self.genericPassword(password, testApp: app, atCount: count)
         return password
       }
@@ -183,9 +182,10 @@ final class KeychainSyncDemoUITests: XCTestCase {
     clearAll(app)
   
     
-    let internetPasswords = internetPasswordTests(.random(in: 4...7), app)
+    let internetPasswords = internetPasswordTests(3, app)
     
-    let genericPasswords = genericPasswordTests(.random(in: 4...7), app)
+    let tokenIndex : Int = .random(in: 0...2)
+    let genericPasswords = genericPasswordTests(3, app, withUserName: internetPasswords.first?.account, atIndex: tokenIndex)
     
     
     app.tabBars["Tab Bar"].buttons["Person"].tap()
@@ -198,9 +198,43 @@ final class KeychainSyncDemoUITests: XCTestCase {
     XCTAssertEqual(collectionViewsQuery.textFields["Password"].value as? String, internetPasswords.first?.dataString)
     //collectionViewsQuery.textFields["Password"]
     //.tap()
-    XCTAssertEqual(collectionViewsQuery.textFields["Token"].value as? String, genericPasswords.first?.dataString)
+    XCTAssertEqual(collectionViewsQuery.textFields["Token"].value as? String, genericPasswords[tokenIndex].dataString)
     //.tap()
     //collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["Save"]/*[[".cells.buttons[\"Save\"]",".buttons[\"Save\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+    
+//    let app = XCUIApplication()
+//    let tabBar = app.tabBars["Tab Bar"]
+//    let personButton = tabBar.buttons["Person"]
+//    personButton.tap()
+//
+//    let collectionViewsQuery = app.collectionViews
+//    let userNameTextField = collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["User name"]/*[[".cells.textFields[\"User name\"]",".textFields[\"User name\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//    userNameTextField.tap()
+//    userNameTextField.tap()
+//    userNameTextField.tap()
+//    userNameTextField.tap()
+//
+//    let passwordTextField = collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["Password"]/*[[".cells.textFields[\"Password\"]",".textFields[\"Password\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//    passwordTextField.tap()
+//    passwordTextField.tap()
+//    passwordTextField.tap()
+//    collectionViewsQuery.children(matching: .cell).element(boundBy: 5).children(matching: .other).element(boundBy: 1).children(matching: .other).element.twoFingerTap()
+//
+//    let tokenTextField = collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["Token"]/*[[".cells.textFields[\"Token\"]",".textFields[\"Token\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//    tokenTextField.twoFingerTap()
+//    tokenTextField.tap()
+//    tokenTextField.twoFingerTap()
+//    app.children(matching: .window).element(boundBy: 0).children(matching: .other).element(boundBy: 0).twoFingerTap()
+//    collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["Save"]/*[[".cells.buttons[\"Save\"]",".buttons[\"Save\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.twoFingerTap()
+//
+//    let genericButton = tabBar.buttons["Generic"]
+//    genericButton.twoFingerTap()
+//    tabBar.buttons["Internet"].twoFingerTap()
+//    genericButton.twoFingerTap()
+//    personButton.twoFingerTap()
+//    tokenTextField.tap()
+    
+    
     
   }
 }

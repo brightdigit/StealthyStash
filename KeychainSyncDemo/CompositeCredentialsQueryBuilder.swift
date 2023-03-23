@@ -72,6 +72,13 @@ struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
   }
   
   static func model(from properties: [String : [AnySecretProperty]]) throws -> CompositeCredentials? {
+    for internet in (properties["password"] ?? []) {
+      for generic in (properties["token"] ?? []) {
+        if internet.account == generic.account {
+          return .init(userName: internet.account, password: internet.dataString, token: generic.dataString)
+        }
+      }
+    }
     let properties = properties.values.flatMap{$0}.enumerated().sorted { lhs, rhs in
       if lhs.element.propertyType == rhs.element.propertyType {
         return lhs.offset < rhs.offset
@@ -86,7 +93,7 @@ struct CompositeCredentialsQueryBuilder : ModelQueryBuilder {
     let password = properties
       .first{$0.propertyType == .internet}?
       .data
-    let token = properties.first{$0.propertyType == .generic}?.data
+    let token = properties.first{$0.propertyType == .generic && $0.account == username}?.data
     
     return CompositeCredentials(userName: username, password: password?.string()  , token: token?.string())
   }

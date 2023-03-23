@@ -3,7 +3,7 @@ import FloxBxAuth
 import Combine
 
 class CredentialPropertyObject : ObservableObject {
-  internal init( repository: SecretsRepository, item: SecretPropertyBuilder, original: AnySecretProperty?) {
+  internal init( repository: SecretsRepository, triggerSet: TriggerSet, item: SecretPropertyBuilder, original: AnySecretProperty?) {
     self.item = item
     self.repository = repository
     self.originalItem = original
@@ -64,8 +64,10 @@ class CredentialPropertyObject : ObservableObject {
       .assign(to: &self.$lastError)
     
     
-    saveCompletedCancellable = Publishers.Merge(successSavePublisher, successDeletePublisher)
+    updateCompletedCancellable = Publishers.Merge(successSavePublisher, successDeletePublisher)
       .subscribe(self.updateCompletedSubject)
+    
+    saveCompletedCancellable = self.updateCompleted.subscribe(triggerSet.saveCompletedTrigger)
   }
   
   func save () {
@@ -90,6 +92,7 @@ class CredentialPropertyObject : ObservableObject {
   let repository : SecretsRepository
   let originalItem : AnySecretProperty?
   var saveCompletedCancellable : AnyCancellable!
+  var updateCompletedCancellable : AnyCancellable!
   
   var updateCompleted : AnyPublisher<Void, Never> {
     return self.updateCompletedSubject.eraseToAnyPublisher()
@@ -98,10 +101,10 @@ class CredentialPropertyObject : ObservableObject {
 
 extension CredentialPropertyObject {
   convenience init(repository: SecretsRepository, item: AnySecretProperty) {
-    self.init(repository: repository, item: .init(item: item), original: item)
+    self.init(repository: repository, triggerSet: .init(), item: .init(item: item), original: item)
   }
   
   convenience init(repository: SecretsRepository, type:  SecretPropertyType) {
-    self.init(repository: repository, item: .init(secClass: type), original: nil)
+    self.init(repository: repository, triggerSet: .init(), item: .init(secClass: type), original: nil)
   }
 }

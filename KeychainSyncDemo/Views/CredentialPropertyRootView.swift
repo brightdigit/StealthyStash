@@ -2,8 +2,8 @@ import SwiftUI
 import FloxBxAuth
 
 struct CredentialPropertyRootView: View {
-  internal init(repository: SecretsRepository, internetPasswords: [AnySecretProperty]? = nil, query: Query, createNewItem: Bool = false) {
-    self._object = StateObject(wrappedValue: .init(repository: repository, internetPasswords: internetPasswords))
+  internal init(repository: SecretsRepository, triggerSet: TriggerSet, internetPasswords: [AnySecretProperty] = [], isLoaded : Bool = false, query: Query, createNewItem: Bool = false) {
+    self._object = StateObject(wrappedValue: .init(repository: repository, triggerSet: triggerSet, internetPasswords: internetPasswords, isLoaded: isLoaded))
     self._query = .init(initialValue: query)
     self.createNewItem = createNewItem
   }
@@ -57,8 +57,9 @@ struct CredentialPropertyRootView: View {
           }
           Section{
             Group{
-              if let internetPasswords = self.object.credentialProperties {
-                CredentialPropertyList(properties: internetPasswords).accessibilityIdentifier("propertyList")
+              
+              if self.object.isLoaded {
+                CredentialPropertyList(object: object).accessibilityIdentifier("propertyList")
               } else {
                 ProgressView()
               }
@@ -105,6 +106,6 @@ struct CredentialPropertyRootView_Previews: PreviewProvider {
     static var previews: some View {
       CredentialPropertyRootView(repository: PreviewRepository(
         items: AnySecretProperty.previewCollection
-      ), internetPasswords: AnySecretProperty.previewCollection, query: TypeQuery(type: .internet))
+      ), triggerSet: .init(), internetPasswords: AnySecretProperty.previewCollection, query: TypeQuery(type: .internet))
     }
 }

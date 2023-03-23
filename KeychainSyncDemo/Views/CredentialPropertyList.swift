@@ -9,10 +9,14 @@ import SwiftUI
 import FloxBxAuth
 
 struct CredentialPropertyList: View {
-  let properties : [AnySecretProperty]
+  internal init(object: CredentialPropertyListObject) {
+    self.object = object
+  }
+  
+  @ObservedObject var object : CredentialPropertyListObject
     var body: some View {
       #if os(iOS) || os(watchOS)
-      List(properties)
+      List(object.credentialProperties)
       { item in
         NavigationLink(value: item) {
           HStack{
@@ -47,6 +51,11 @@ struct CredentialPropertyList: View {
 
 struct CredentialPropertyList_Previews: PreviewProvider {
     static var previews: some View {
-      CredentialPropertyList(properties: AnySecretProperty.previewCollection)
+      CredentialPropertyList(
+        object:  .init(repository: PreviewRepository(items: []),
+                       triggerSet: .init(),
+                       internetPasswords: AnySecretProperty.previewCollection,
+                       isLoaded: true)
+      )
     }
 }

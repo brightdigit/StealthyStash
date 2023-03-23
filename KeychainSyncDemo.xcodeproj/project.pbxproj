@@ -28,6 +28,8 @@
 		B353398B29B7D783006FF22B /* KeychainSyncDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B353398A29B7D783006FF22B /* KeychainSyncDemoUITests.swift */; };
 		B353398D29B7D783006FF22B /* KeychainSyncDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B353398C29B7D783006FF22B /* KeychainSyncDemoUITestsLaunchTests.swift */; };
 		B369E21329CB9FD7007C4155 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6C71429C8918B00236D8B /* SettingsView.swift */; };
+		B369E21529CBCEF1007C4155 /* CompositeSecretBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369E21429CBCEF1007C4155 /* CompositeSecretBuilder.swift */; };
+		B369E21729CBCF13007C4155 /* CompositeSecretObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369E21629CBCF13007C4155 /* CompositeSecretObject.swift */; };
 		B37C694829B3ABA800091E0E /* CompositeSecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37C694729B3ABA800091E0E /* CompositeSecretView.swift */; };
 		B37C694A29B3C43D00091E0E /* CompositeSecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37C694729B3ABA800091E0E /* CompositeSecretView.swift */; };
 		B39BF14E29A53D50009BBCAC /* FloxBxAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39BF14D29A53D50009BBCAC /* FloxBxAuth */; };
@@ -72,6 +74,8 @@
 		B353398829B7D783006FF22B /* KeychainSyncDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeychainSyncDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B353398A29B7D783006FF22B /* KeychainSyncDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSyncDemoUITests.swift; sourceTree = "<group>"; };
 		B353398C29B7D783006FF22B /* KeychainSyncDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSyncDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B369E21429CBCEF1007C4155 /* CompositeSecretBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeSecretBuilder.swift; sourceTree = "<group>"; };
+		B369E21629CBCF13007C4155 /* CompositeSecretObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeSecretObject.swift; sourceTree = "<group>"; };
 		B37C694729B3ABA800091E0E /* CompositeSecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeSecretView.swift; sourceTree = "<group>"; };
 		B39BF14A29A53CF9009BBCAC /* FloxBxAuth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FloxBxAuth; sourceTree = "<group>"; };
 		B39BF14B29A53D37009BBCAC /* KeychainSyncDemoWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "KeychainSyncDemoWatch Watch App.entitlements"; sourceTree = "<group>"; };
@@ -183,6 +187,8 @@
 				B3AA494129A52831002D40C3 /* KeychainSyncDemo.entitlements */,
 				B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */,
 				B3AA494229A52831002D40C3 /* Preview Content */,
+				B369E21429CBCEF1007C4155 /* CompositeSecretBuilder.swift */,
+				B369E21629CBCF13007C4155 /* CompositeSecretObject.swift */,
 			);
 			path = KeychainSyncDemo;
 			sourceTree = "<group>";
@@ -373,10 +379,12 @@
 				B3A2639D29B2B75500CC36B4 /* CompositeCredentialsQueryBuilder.swift in Sources */,
 				B34ADDD329AF87F00072B59F /* CredentialPropertyList.swift in Sources */,
 				B3A2637F29B2B75500CC36B4 /* CompositeCredentials.swift in Sources */,
+				B369E21729CBCF13007C4155 /* CompositeSecretObject.swift in Sources */,
 				B34ADDCF29AF856A0072B59F /* CredentialPropertyObject.swift in Sources */,
 				B37C694829B3ABA800091E0E /* CompositeSecretView.swift in Sources */,
 				B34ADDD629AF886C0072B59F /* CredentialPropertyView.swift in Sources */,
 				B34ADDBC29AF84750072B59F /* CredentialPropertyRootView.swift in Sources */,
+				B369E21529CBCEF1007C4155 /* CompositeSecretBuilder.swift in Sources */,
 				B31EAE4D29A915E2004C4A56 /* InternetPasswordData.swift in Sources */,
 				B31EAE4529A8F820004C4A56 /* ContentView.swift in Sources */,
 				B34ADDC129AF84750072B59F /* CredentialPropertyListObject.swift in Sources */,
