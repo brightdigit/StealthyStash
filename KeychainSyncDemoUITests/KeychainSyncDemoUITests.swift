@@ -199,6 +199,23 @@ final class KeychainSyncDemoUITests: XCTestCase {
     //collectionViewsQuery.textFields["Password"]
     //.tap()
     XCTAssertEqual(collectionViewsQuery.textFields["Token"].value as? String, genericPasswords[tokenIndex].dataString)
+    
+    
+      let tabBar = app.tabBars["Tab Bar"]
+    tabBar.buttons["Internet"].tap()
+  
+  
+  let intenetItem = collectionViewsQuery.buttons.matching(identifier: "propertyList").element(boundBy: 0)
+    
+    XCTAssertEqual(intenetItem.staticTexts["accountProperty"].label, internetPasswords.first?.account)
+    XCTAssertEqual(intenetItem.staticTexts["dataProperty"].label, internetPasswords.first?.dataString)
+    
+        tabBar.buttons["Generic"].tap()
+    let genericItem = collectionViewsQuery.buttons.matching(identifier: "propertyList").element(boundBy: tokenIndex)
+    
+    
+    XCTAssertEqual(genericItem.staticTexts["accountProperty"].label, genericPasswords[tokenIndex].account)
+    XCTAssertEqual(genericItem.staticTexts["dataProperty"].label, genericPasswords[tokenIndex].dataString)
     //.tap()
     //collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["Save"]/*[[".cells.buttons[\"Save\"]",".buttons[\"Save\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
     
