@@ -1,46 +1,43 @@
 import Security
 
-
 extension SecretProperty {
-  func eraseToAnyProperty () -> AnySecretProperty {
+  public func eraseToAnyProperty() -> AnySecretProperty {
     .init(property: self)
   }
-  
-  public var dataString : String {
-    String(data: self.data, encoding: .utf8) ?? ""
+
+  public var dataString: String {
+    String(data: data, encoding: .utf8) ?? ""
   }
-  
-  func dataDictionary () -> SecretDictionary {
-    return [kSecValueData as String : self.data]
+
+  public func dataDictionary() -> SecretDictionary {
+    [kSecValueData as String: data]
   }
-  
-  func attributesDictionary () -> SecretDictionary {
-    self.otherProperties().merging(with: dataDictionary(), overwrite: true)
+
+  public func attributesDictionary() -> SecretDictionary {
+    otherProperties().merging(with: dataDictionary(), overwrite: true)
   }
-  
-  func classDictionary () -> SecretDictionary {
-    return [kSecClass as String : Self.propertyType.secClass]
+
+  public func classDictionary() -> SecretDictionary {
+    [kSecClass as String: Self.propertyType.secClass]
   }
-  
-  func fetchQuery() -> SecretDictionary {
-    self.uniqueAttributes().merging(with: classDictionary(), overwrite: false)
+
+  public func fetchQuery() -> SecretDictionary {
+    uniqueAttributes().merging(with: classDictionary(), overwrite: false)
   }
-  
-  public func addQuery () -> SecretDictionary {
-    return self.fetchQuery().merging(with: attributesDictionary(), overwrite: false)
+
+  public func addQuery() -> SecretDictionary {
+    fetchQuery().merging(with: attributesDictionary(), overwrite: false)
   }
-  
-  public func updateQuery () -> SecretDictionary {
-    self.uniqueAttributes().merging(with: attributesDictionary(), overwrite: false)
-    
+
+  public func updateQuery() -> SecretDictionary {
+    uniqueAttributes().merging(with: attributesDictionary(), overwrite: false)
   }
-  
-  public func deleteQuery () -> SecretDictionary {
-    return  self.fetchQuery()
+
+  public func deleteQuery() -> SecretDictionary {
+    fetchQuery()
   }
-  
-  public func updateQuerySet () -> UpdateQuerySet {
-    return .init(query: self.fetchQuery(), attributes: self.attributesDictionary(), id: self.id)
+
+  public func updateQuerySet() -> UpdateQuerySet {
+    .init(query: fetchQuery(), attributes: attributesDictionary(), id: id)
   }
 }
- 

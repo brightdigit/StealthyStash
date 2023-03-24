@@ -1,50 +1,48 @@
-import Foundation
 import Combine
+import Foundation
 import StealthyStash
 
-class CredentialPropertyListObject : ObservableObject {
-  internal init(repository: SecretsRepository, triggerSet: TriggerSet, internetPasswords: [AnySecretProperty] = [], isLoaded : Bool = false) {
+class CredentialPropertyListObject: ObservableObject {
+  internal init(repository: SecretsRepository, triggerSet: TriggerSet, internetPasswords: [AnySecretProperty] = [], isLoaded: Bool = false) {
     self.repository = repository
-    self.credentialProperties = internetPasswords
+    credentialProperties = internetPasswords
     self.isLoaded = isLoaded
-    
-    let queryPublisher = self.querySubject
-      .combineLatest(triggerSet.receiveUpdatePublisher.prepend(()) , {query,_  in query})
+
+    let queryPublisher = querySubject
+      .combineLatest(triggerSet.receiveUpdatePublisher.prepend(())) { query, _ in query }
       .tryMap(self.repository.query(_:))
       .share()
-    
-    
+
     queryPublisher
-      .map{_ in Optional<Error>.none}
-      .catch{Just(Optional<Error>.some($0))}
-      .compactMap{ $0 as? KeychainError }
+      .map { _ in Error?.none }
+      .catch { Just(Error?.some($0)) }
+      .compactMap { $0 as? KeychainError }
       .receive(on: DispatchQueue.main)
-      .assign(to: &self.$lastError)
-    
+      .assign(to: &$lastError)
+
     let loadedCompleted = queryPublisher
-      .map(Optional<[AnySecretProperty]>.some)
+      .map([AnySecretProperty]?.some)
       .replaceError(with: nil)
-      .compactMap{$0}
+      .compactMap { $0 }
       .share()
-    
+
     loadedCompleted
       .receive(on: DispatchQueue.main)
-      .assign(to: &self.$credentialProperties)
-    
+      .assign(to: &$credentialProperties)
+
     loadedCompleted
-      .map{_ in true}
+      .map { _ in true }
       .receive(on: DispatchQueue.main)
-      .assign(to: &self.$isLoaded)
+      .assign(to: &$isLoaded)
   }
-  
-  let repository : SecretsRepository
+
+  let repository: SecretsRepository
   @Published var credentialProperties: [AnySecretProperty]
   @Published var isLoaded = false
-  let querySubject  = PassthroughSubject<Query, Never> ()
-  @Published var lastError : KeychainError?
-  
+  let querySubject = PassthroughSubject<Query, Never>()
+  @Published var lastError: KeychainError?
 
-  func query (_ query: Query) {
-    self.querySubject.send(query)
+  func query(_ query: Query) {
+    querySubject.send(query)
   }
 }
