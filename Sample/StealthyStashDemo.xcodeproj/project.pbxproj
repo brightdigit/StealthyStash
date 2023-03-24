@@ -45,6 +45,8 @@
 		B3B40E8A29CD1DD400015C54 /* StealthyStash in Frameworks */ = {isa = PBXBuildFile; productRef = B3B40E8929CD1DD400015C54 /* StealthyStash */; };
 		B3D3668829CA83F6002A87AC /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D3668729CA83F6002A87AC /* URL.swift */; };
 		B3D6C71529C8918B00236D8B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6C71429C8918B00236D8B /* SettingsView.swift */; };
+		B3DBC2CC29CEA2750039ED78 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DBC2CA29CEA2750039ED78 /* String.swift */; };
+		B3DBC2CD29CEA2750039ED78 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DBC2CB29CEA2750039ED78 /* Data.swift */; };
 		B3F984FA29B0009200C0266F /* credential-properties.json in Resources */ = {isa = PBXBuildFile; fileRef = B3F984F929B0009200C0266F /* credential-properties.json */; };
 		B3F984FB29B0009200C0266F /* credential-properties.json in Resources */ = {isa = PBXBuildFile; fileRef = B3F984F929B0009200C0266F /* credential-properties.json */; };
 /* End PBXBuildFile section */
@@ -89,6 +91,8 @@
 		B3B40E8629CD1DB700015C54 /* StealthyStash */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StealthyStash; path = ..; sourceTree = "<group>"; };
 		B3D3668729CA83F6002A87AC /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		B3D6C71429C8918B00236D8B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B3DBC2CA29CEA2750039ED78 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		B3DBC2CB29CEA2750039ED78 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		B3F984F929B0009200C0266F /* credential-properties.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "credential-properties.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,6 +185,8 @@
 				B3A2636F29B2B75400CC36B4 /* CompositeCredentials.swift */,
 				B3A2637E29B2B75400CC36B4 /* CompositeCredentialsQueryBuilder.swift */,
 				B34ADDB829AF84750072B59F /* CredentialPropertyListObject.swift */,
+				B3DBC2CB29CEA2750039ED78 /* Data.swift */,
+				B3DBC2CA29CEA2750039ED78 /* String.swift */,
 				B322978C29CD1E7E006CCAEE /* CredentialPropertyObject.swift */,
 				B3AA494129A52831002D40C3 /* KeychainSyncDemo.entitlements */,
 				B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */,
@@ -379,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3DBC2CC29CEA2750039ED78 /* String.swift in Sources */,
 				B3AA493C29A5282F002D40C3 /* KeychainSyncDemoApp.swift in Sources */,
 				B34ADDD129AF86AB0072B59F /* CredentialPropertyFormContentView.swift in Sources */,
 				B3A2639D29B2B75500CC36B4 /* CompositeCredentialsQueryBuilder.swift in Sources */,
@@ -389,6 +396,7 @@
 				B369E21729CBCF13007C4155 /* CompositeSecretObject.swift in Sources */,
 				B37C694829B3ABA800091E0E /* CompositeSecretView.swift in Sources */,
 				B34ADDD629AF886C0072B59F /* CredentialPropertyView.swift in Sources */,
+				B3DBC2CD29CEA2750039ED78 /* Data.swift in Sources */,
 				B34ADDBC29AF84750072B59F /* CredentialPropertyRootView.swift in Sources */,
 				B369E21529CBCEF1007C4155 /* CompositeSecretBuilder.swift in Sources */,
 				B31EAE4D29A915E2004C4A56 /* InternetPasswordData.swift in Sources */,

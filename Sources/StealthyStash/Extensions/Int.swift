@@ -1,16 +1,8 @@
-//
-//  InternetPasswordRootView.swift
-//  KeychainSyncDemo
-//
-//  Created by Leo Dion on 2/24/23.
-//
-
-import SwiftUI
 import Combine
-
+import SwiftUI
 
 extension Int {
-  func trimZero () -> Int? {
-    return self == 0 ? nil : self
+  func trimZero() -> Int? {
+    self == 0 ? nil : self
   }
 }
