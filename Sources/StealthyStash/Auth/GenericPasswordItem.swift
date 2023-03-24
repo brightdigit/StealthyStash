@@ -1,18 +1,17 @@
-import Security
 import Foundation
+import Security
 
-public struct GenericPasswordItem : Identifiable, Hashable, SecretProperty{
+public struct GenericPasswordItem: Identifiable, Hashable, SecretProperty {
   public func otherProperties() -> SecretDictionary {
     [
-          kSecAttrGeneric as String: self.gerneic,
-          kSecAttrDescription as String : description?.nilTrimmed(),
-          kSecAttrComment as String : comment?.nilTrimmed(),
-          kSecAttrType as String : type,
-          kSecAttrLabel as String : label
+      kSecAttrGeneric as String: gerneic,
+      kSecAttrDescription as String: description,
+      kSecAttrComment as String: comment,
+      kSecAttrType as String: type,
+      kSecAttrLabel as String: label
     ]
   }
-  
-  
+
   public init(builder: SecretPropertyBuilder) throws {
     self.init(
       account: builder.account,
@@ -27,13 +26,25 @@ public struct GenericPasswordItem : Identifiable, Hashable, SecretProperty{
       isSynchronizable: builder.isSynchronizable
     )
   }
-  
+
   public static var propertyType: SecretPropertyType {
-    return .generic
+    .generic
   }
-  
-  public init(account: String, data: Data, service: String? = nil, accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, comment: String? = nil, type: Int? = nil, label: String? = nil, gerneic: Data? = nil, isSynchronizable: Bool? = nil) {
-    //assert(service != nil)
+
+  public init(
+    account: String,
+    data: Data,
+    service: String? = nil,
+    accessGroup: String? = nil,
+    createdAt: Date? = nil,
+    modifiedAt: Date? = nil,
+    description: String? = nil,
+    comment: String? = nil,
+    type: Int? = nil,
+    label: String? = nil,
+    gerneic: Data? = nil,
+    isSynchronizable: Bool? = nil
+  ) {
     self.account = account
     self.data = data
     self.service = service
@@ -47,57 +58,54 @@ public struct GenericPasswordItem : Identifiable, Hashable, SecretProperty{
     self.gerneic = gerneic
     self.isSynchronizable = isSynchronizable
   }
-  
+
   public var id: String {
-    
-    [self.account,
-    self.service].compactMap{$0}.joined()
+    [account,
+     service].compactMap { $0 }.joined()
   }
-  
-  
+
   public func uniqueAttributes() -> SecretDictionary {
-    return [
-      kSecAttrAccount as String : self.account,
-      kSecAttrService as String: self.service,
-      kSecAttrAccessGroup as String : self.accessGroup,
-      kSecAttrSynchronizable as String: self.isSynchronizable,
+    [
+      kSecAttrAccount as String: account,
+      kSecAttrService as String: service,
+      kSecAttrAccessGroup as String: accessGroup,
+      kSecAttrSynchronizable as String: isSynchronizable
     ]
   }
-  
-  
-  public let account : String
-  public let data : Data
-  public let service : String?
-  public let accessGroup : String?
-  public let createdAt : Date?
-  public let modifiedAt : Date?
+
+  public let account: String
+  public let data: Data
+  public let service: String?
+  public let accessGroup: String?
+  public let createdAt: Date?
+  public let modifiedAt: Date?
   public let description: String?
-  public let comment : String?
-  public let type : Int?
-  public let label : String?
-  public let gerneic : Data?
-  public let isSynchronizable : Bool?
+  public let comment: String?
+  public let type: Int?
+  public let label: String?
+  public let gerneic: Data?
+  public let isSynchronizable: Bool?
 }
 
 extension GenericPasswordItem {
-  public var dataString : String {
-    String(data: self.data, encoding: .utf8) ?? ""
+  public var dataString: String {
+    String(data: data, encoding: .utf8) ?? ""
   }
 }
 
 extension GenericPasswordItem {
-  public init(dictionary : [String : Any]) throws {
-    let account : String = try dictionary.require(kSecAttrAccount)
-    let data : Data = try dictionary.require(kSecValueData)
-    let accessGroup : String? = try dictionary.requireOptional(kSecAttrAccessGroup)
-    let createdAt : Date? = try dictionary.requireOptional(kSecAttrCreationDate)
-    let modifiedAt : Date? = try dictionary.requireOptional(kSecAttrModificationDate)
+  public init(dictionary: [String: Any]) throws {
+    let account: String = try dictionary.require(kSecAttrAccount)
+    let data: Data = try dictionary.require(kSecValueData)
+    let accessGroup: String? = try dictionary.requireOptional(kSecAttrAccessGroup)
+    let createdAt: Date? = try dictionary.requireOptional(kSecAttrCreationDate)
+    let modifiedAt: Date? = try dictionary.requireOptional(kSecAttrModificationDate)
     let description: String? = try dictionary.requireOptional(kSecAttrDescription)
-    let type : Int? = try dictionary.requireOptionalCF(kSecAttrType)
-    let label : String? = try dictionary.requireOptionalCF(kSecAttrLabel)
-    let service : String = try dictionary.require(kSecAttrService)
-    let generic : Data? = try dictionary.requireOptional(kSecAttrGeneric)
-    let isSynchronizable : Bool? = try dictionary.requireOptional(kSecAttrSynchronizable)
+    let type: Int? = try dictionary.requireOptionalCF(kSecAttrType)
+    let label: String? = try dictionary.requireOptionalCF(kSecAttrLabel)
+    let service: String = try dictionary.require(kSecAttrService)
+    let generic: Data? = try dictionary.requireOptional(kSecAttrGeneric)
+    let isSynchronizable: Bool? = try dictionary.requireOptional(kSecAttrSynchronizable)
     self.init(
       account: account,
       data: data,

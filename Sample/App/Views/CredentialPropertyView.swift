@@ -1,17 +1,18 @@
-import SwiftUI
 import StealthyStash
+import SwiftUI
 
 struct CredentialPropertyView: View {
   internal init(object: CredentialPropertyObject) {
-    self._object = .init(wrappedValue: object)
+    _object = .init(wrappedValue: object)
   }
+
   @Environment(\.dismiss) private var dismiss
   @State var shouldConfirmDismiss = false
   @State var isErrorAlertVisible = false
-  @StateObject var object : CredentialPropertyObject
-  
+  @StateObject var object: CredentialPropertyObject
+
   var body: some View {
-    Form{
+    Form {
       CredentialPropertyFormContentView(object: object)
     }
     .onReceive(self.object.$lastError, perform: { error in
@@ -34,10 +35,8 @@ struct CredentialPropertyView: View {
       Button("Undo Changes and Go Back.") {
         dismiss()
       }
-      
-      Button("Cancel") {
-        
-      }
+
+      Button("Cancel") {}
     }, message: {
       Text("You have unsaved changes.")
     })
@@ -71,7 +70,7 @@ extension CredentialPropertyView {
   init(repository: SecretsRepository, item: AnySecretProperty) {
     self.init(object: .init(repository: repository, item: item))
   }
-  
+
   init(repository: SecretsRepository, type: SecretPropertyType) {
     self.init(object: .init(repository: repository, type: type))
   }
@@ -79,15 +78,15 @@ extension CredentialPropertyView {
 
 struct InternetPasswordView_Previews: PreviewProvider {
   static var previews: some View {
-    TabView{
-      NavigationStack{
+    TabView {
+      NavigationStack {
         CredentialPropertyView(
           repository: PreviewRepository(items: []),
           item: AnySecretProperty.previewCollection.first(where: { item in
             item.accessGroup != nil
           })!
         )
-      }.tabItem{
+      }.tabItem {
         Image(systemName: "key.fill")
         Text("Generic")
       }
