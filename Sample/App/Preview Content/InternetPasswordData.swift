@@ -1,29 +1,21 @@
-//
-//  InternetPasswordData.swift
-//  KeychainSyncDemo
-//
-//  Created by Leo Dion on 2/24/23.
-//
-
 import Foundation
 import StealthyStash
 
-public struct CredentialPropertyData : Codable {
-  public let account : String
-  public let data : String
-  public let accessGroup : String?
+public struct CredentialPropertyData: Codable {
+  public let account: String
+  public let data: String
+  public let accessGroup: String?
   public let createdAt: Date
-  public let modifiedAt : Date
+  public let modifiedAt: Date
   public let description: String?
   public let service: String?
   public let comments: String?
-  public let type : Int?
+  public let type: Int?
   public let label: String?
-  public let url : URL?
-  public let autenticationType : Int?
+  public let url: URL?
+  public let autenticationType: Int?
   public let isSynchronizable: Bool?
 }
-
 
 extension CredentialPropertyData {
   static let collection = {
@@ -31,11 +23,9 @@ extension CredentialPropertyData {
     let url = Bundle.main.url(forResource: "credential-properties", withExtension: "json")
     let data = try! Data(contentsOf: url!)
     decoder.dateDecodingStrategy = .secondsSince1970
-    return try! decoder.decode([CredentialPropertyData].self, from:  data)
+    return try! decoder.decode([CredentialPropertyData].self, from: data)
   }()
 }
-
-
 
 extension GenericPasswordItem {
   init(data: CredentialPropertyData) {
@@ -74,10 +64,9 @@ extension InternetPasswordItem {
   }
 }
 
-
-public extension AnySecretProperty {
-  init(data: CredentialPropertyData) {
-    let property : any SecretProperty
+extension AnySecretProperty {
+  public init(data: CredentialPropertyData) {
+    let property: any SecretProperty
     if data.service != nil {
       property = GenericPasswordItem(data: data)
     } else {
@@ -85,6 +74,6 @@ public extension AnySecretProperty {
     }
     self.init(property: property)
   }
-  
-  static let previewCollection = CredentialPropertyData.collection.map(Self.init(data: ))
+
+  public static let previewCollection = CredentialPropertyData.collection.map(Self.init(data:))
 }
