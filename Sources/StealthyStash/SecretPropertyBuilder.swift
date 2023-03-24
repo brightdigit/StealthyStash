@@ -1,9 +1,26 @@
 import Foundation
 
-
 public struct SecretPropertyBuilder {
-  public let secClass : SecretPropertyType
-  public init(secClass : SecretPropertyType, source: AnySecretProperty? = nil, account: String = "", data: Data = .init(), accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, type: Int? = nil, label: String? = nil, service: String? = nil, server: String? = nil, `protocol`: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
+  public let secClass: SecretPropertyType
+  public init(
+    secClass: SecretPropertyType,
+    source: AnySecretProperty? = nil,
+    account: String = "",
+    data: Data = .init(),
+    accessGroup: String? = nil,
+    createdAt: Date? = nil,
+    modifiedAt: Date? = nil,
+    description: String? = nil,
+    type: Int? = nil,
+    label: String? = nil,
+    service: String? = nil,
+    server: String? = nil,
+    protocol: ServerProtocol? = nil,
+    authenticationType: AuthenticationType? = nil,
+    port: Int? = nil,
+    path: String? = nil,
+    isSynchronizable: Bool? = nil
+  ) {
     self.secClass = secClass
     self.source = source
     self.account = account
@@ -12,151 +29,150 @@ public struct SecretPropertyBuilder {
     self.createdAt = createdAt
     self.modifiedAt = modifiedAt
     self.description = description
-    self.typeValue = type ?? 0
-    self.hasType = type != nil
-    self.labelValue = label ?? ""
-    self.hasLabel = label != nil
+    typeValue = type ?? 0
+    hasType = type != nil
+    labelValue = label ?? ""
+    hasLabel = label != nil
     self.service = service
     self.server = server
-    self.`protocol` = `protocol`
+    self.protocol = `protocol`
     self.authenticationType = authenticationType
     self.port = port
     self.path = path
-    self.isSynchronizableValue = isSynchronizable ?? false
-    self.isSynchronizableSet = isSynchronizable != nil
+    isSynchronizableValue = isSynchronizable ?? false
+    isSynchronizableSet = isSynchronizable != nil
   }
-  
-  public var source : AnySecretProperty?
-  public var account : String
-  public var data : Data
-  public var accessGroup : String?
-  public var createdAt : Date?
-  public var modifiedAt : Date?
+
+  public var source: AnySecretProperty?
+  public var account: String
+  public var data: Data
+  public var accessGroup: String?
+  public var createdAt: Date?
+  public var modifiedAt: Date?
   public var description: String?
-  public var typeValue : Int
-  public var hasType : Bool
-  public var labelValue : String
-  public var hasLabel : Bool
-  public var service : String?
-  public var server : String?
-  public var `protocol` : ServerProtocol?
-  public var authenticationType : AuthenticationType?
+  public var typeValue: Int
+  public var hasType: Bool
+  public var labelValue: String
+  public var hasLabel: Bool
+  public var service: String?
+  public var server: String?
+  public var `protocol`: ServerProtocol?
+  public var authenticationType: AuthenticationType?
   public var port: Int?
   public var path: String?
-  public var isSynchronizableValue : Bool
-  public var isSynchronizableSet : Bool
+  public var isSynchronizableValue: Bool
+  public var isSynchronizableSet: Bool
 }
 
 extension SecretPropertyBuilder {
-  public var dataString : String {
+  public var dataString: String {
     get {
-      return String(data: self.data, encoding: .utf8) ?? ""
+      String(data: data, encoding: .utf8) ?? ""
     }
     set {
-      self.data = newValue.data(using: .utf8) ?? .init()
+      data = newValue.data(using: .utf8) ?? .init()
     }
   }
-  
-  public var url : URL? {
+
+  public var url: URL? {
     var components = URLComponents()
     components.scheme = self.protocol?.rawValue
-    components.host = self.server
-    components.path = self.path ?? ""
-    components.port = self.port
+    components.host = server
+    components.path = path ?? ""
+    components.port = port
     return components.url
   }
-  
-  public var descriptionText : String {
+
+  public var descriptionText: String {
     get {
-      return self.description ?? ""
+      description ?? ""
     }
     set {
-      self.description = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
+      description = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
     }
   }
-  
-  public var accessGroupText : String {
+
+  public var accessGroupText: String {
     get {
-      return self.accessGroup ?? ""
+      accessGroup ?? ""
     }
     set {
-      self.accessGroup = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
+      accessGroup = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
     }
   }
-  
-  public var label : String? {
-    return hasLabel ? labelValue : nil
+
+  public var label: String? {
+    hasLabel ? labelValue : nil
   }
-  
-  public var type : Int? {
-    return hasType ? typeValue : nil
+
+  public var type: Int? {
+    hasType ? typeValue : nil
   }
-  
-  public var isSynchronizable : Bool? {
-    return isSynchronizableSet ? isSynchronizableValue : nil
+
+  public var isSynchronizable: Bool? {
+    isSynchronizableSet ? isSynchronizableValue : nil
   }
-  
-  public var isModified : Bool {
+
+  public var isModified: Bool {
     guard let source else {
       return true
     }
     return [
-      self.account != source.account,
-      self.isSynchronizable != source.isSynchronizable,
-      self.type != source.type,
-      self.accessGroup != source.accessGroup,
-      self.authenticationType != source.accessGroup,
-      self.server != source.server,
+      account != source.account,
+      isSynchronizable != source.isSynchronizable,
+      type != source.type,
+      accessGroup != source.accessGroup,
+      authenticationType != source.accessGroup,
+      server != source.server,
       self.protocol != source.protocol,
-      self.port != source.port,
-      self.path != source.path
-    ].first {!$0} ?? true
+      port != source.port,
+      path != source.path
+    ].first { !$0 } ?? true
   }
-  
-  public func saved () throws -> SecretPropertyBuilder {
-    return try .init(
-      secClass: self.secClass,
+
+  public func saved() throws -> SecretPropertyBuilder {
+    try .init(
+      secClass: secClass,
       source: .init(builder: self),
-      account : self.account,
-      data : self.data,
-      accessGroup : self.accessGroup,
-      createdAt : self.createdAt,
-      modifiedAt : self.modifiedAt,
-      description : self.description,
-      type : self.type,
-      label : self.label,
-      service: self.service,
-      server : self.server,
-      protocol : self.protocol,
-      authenticationType : self.authenticationType,
-      port : self.port,
-      path : self.path,
-      isSynchronizable : self.isSynchronizable
+      account: account,
+      data: data,
+      accessGroup: accessGroup,
+      createdAt: createdAt,
+      modifiedAt: modifiedAt,
+      description: description,
+      type: type,
+      label: label,
+      service: service,
+      server: server,
+      protocol: self.protocol,
+      authenticationType: authenticationType,
+      port: port,
+      path: path,
+      isSynchronizable: isSynchronizable
     )
   }
 }
 
-public extension SecretPropertyBuilder {
-  init (item: AnySecretProperty) {
-
+extension SecretPropertyBuilder {
+  public init(item: AnySecretProperty) {
     assert(item.propertyType == .internet || item.service != nil)
     self.init(
       secClass: item.propertyType,
       source: item,
-      account : item.account,
-      data : item.data,
-      accessGroup : item.accessGroup,
-      createdAt : item.createdAt,
-      modifiedAt : item.modifiedAt,
-      description : item.description,
-      type : item.type,
-      label : item.label,
+      account: item.account,
+      data: item.data,
+      accessGroup: item.accessGroup,
+      createdAt: item.createdAt,
+      modifiedAt: item.modifiedAt,
+      description: item.description,
+      type: item.type,
+      label: item.label,
       service: item.service,
-      server : item.server,
-      protocol : item.protocol,
-      port : item.port,
-      path : item.path,
-      isSynchronizable : item.isSynchronizable
+      server: item.server,
+      protocol: item.protocol,
+      port: item.port,
+      path: item.path,
+      isSynchronizable: item.isSynchronizable
     )
   }
 }
