@@ -10,7 +10,7 @@ import StealthyStash
 
 struct ContentView: View {
   let triggerSet = TriggerSet()
-  let repository = KeychainRepository(defaultServiceName: "com.BrightDigit.StealthyStashDemoApp", defaultServerName: "com.BrightDigit.StealthyStashDemoApp", defaultAccessGroup: "MLT7M394S7.com.BrightDigit.StealthyStashDemoApp")
+  let repository = KeychainRepository(defaultServiceName: "com.brightdigit.KeychainSyncDemo", defaultServerName: "com.brightdigit.KeychainSyncDemo", defaultAccessGroup: "MLT7M394S7.com.brightdigit.KeychainSyncDemo")
     var body: some View {
       TabView {
         CredentialPropertyRootView(repository: repository, triggerSet: self.triggerSet, query: TypeQuery(type: .internet)).tabItem{

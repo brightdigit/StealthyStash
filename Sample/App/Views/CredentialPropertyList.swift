@@ -31,7 +31,7 @@ struct CredentialPropertyList: View {
         }
       }
       #else
-      Table(object.credentialProperties) {
+      Table(object.properties) {
         TableColumn("") { item in
           HStack{
             Button("Edit") {
