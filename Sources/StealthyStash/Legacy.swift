@@ -1,30 +1,18 @@
-//
-//  File.swift
-//  
-//
-//  Created by Leo Dion on 2/23/23.
-//
-
-import Foundation
 import Combine
+import Foundation
 
-public struct LegacyPreviewRepository : LegacyCredentialRepository {
-  public init () {}
-  public func addItem(_ item: LegacyCredentialItem) {
-    
-  }
-  
-  
+struct LegacyPreviewRepository: LegacyCredentialRepository {
+  init() {}
+  func addItem(_: LegacyCredentialItem) {}
 }
 
-
 @available(*, deprecated)
-public protocol LegacyCredentialRepository {
+protocol LegacyCredentialRepository {
   func addItem(_ item: LegacyCredentialItem) throws
 }
 
-public struct LegacyCreditialItemBuilder {
-  public  init(itemClass: LegacyItemClass = .generic, dataString: String = "", account: String = "", type: Int = 0, containsType: Bool = false, label: String = "", containsLabel: Bool = false) {
+struct LegacyCreditialItemBuilder {
+  init(itemClass: LegacyItemClass = .generic, dataString: String = "", account: String = "", type: Int = 0, containsType: Bool = false, label: String = "", containsLabel: Bool = false) {
     self.itemClass = itemClass
     self.dataString = dataString
     self.account = account
@@ -33,41 +21,42 @@ public struct LegacyCreditialItemBuilder {
     self.label = label
     self.containsLabel = containsLabel
   }
-  
-  public var itemClass : LegacyItemClass = .generic
-  public var dataString : String = ""
-  public var account: String = ""
-  public var type : Int = 0
-  public var containsType : Bool = false
-  public var label : String = ""
-  public var containsLabel : Bool = false
+
+  var itemClass: LegacyItemClass = .generic
+  var dataString: String = ""
+  var account: String = ""
+  var type: Int = 0
+  var containsType: Bool = false
+  var label: String = ""
+  var containsLabel: Bool = false
 }
-public struct LegacyCredentialItem {
-  public  init(itemClass: LegacyItemClass, data: Data, account: String, type: Int? = nil, label: String? = nil, isSynchronizable : Bool? = nil) {
+
+struct LegacyCredentialItem {
+  init(itemClass: LegacyItemClass, data: Data, account: String, type: Int? = nil, label: String? = nil, isSynchronizable: Bool? = nil) {
     self.itemClass = itemClass
     self.data = data
     self.account = account
     self.type = type
     self.label = label
-    self.serviceName = nil
-    self.server = nil
-    self.accessGroup = nil
+    serviceName = nil
+    server = nil
+    accessGroup = nil
     self.isSynchronizable = isSynchronizable
   }
-  
-  let itemClass : LegacyItemClass
-  let data : Data
+
+  let itemClass: LegacyItemClass
+  let data: Data
   let account: String
-  let type : Int?
-  let label : String?
-  let serviceName : String?
-  let server : String?
-  let accessGroup : String?
-  let isSynchronizable : Bool?
+  let type: Int?
+  let label: String?
+  let serviceName: String?
+  let server: String?
+  let accessGroup: String?
+  let isSynchronizable: Bool?
 }
 
-public extension LegacyCredentialItem {
-  init (builder : LegacyCreditialItemBuilder) {
+extension LegacyCredentialItem {
+  init(builder: LegacyCreditialItemBuilder) {
     guard let data = builder.dataString.data(
       using: .utf8,
       allowLossyConversion: false
@@ -81,62 +70,56 @@ public extension LegacyCredentialItem {
 }
 
 @available(*, deprecated)
-public class LegacyAddItemObject : ObservableObject {
-  public  init(repository: LegacyCredentialRepository, item: LegacyCreditialItemBuilder = LegacyCreditialItemBuilder(), lastError: KeychainError? = nil) {
+class LegacyAddItemObject: ObservableObject {
+  init(repository: LegacyCredentialRepository, item: LegacyCreditialItemBuilder = LegacyCreditialItemBuilder(), lastError: KeychainError? = nil) {
     self.repository = repository
     self.item = item
     self.lastError = lastError
-    
-    let itemAddResult = self.triggerAddSubject
-      .map { self.item  }
+
+    let itemAddResult = triggerAddSubject
+      .map { self.item }
       .map(LegacyCredentialItem.init(builder:))
       .map { item in
         Result {
           try self.repository.addItem(item)
         }
       }.share()
-    
-    
-    itemAddResult.compactMap{try? $0.get()}.map {
+
+    itemAddResult.compactMap { try? $0.get() }.map {
       LegacyCreditialItemBuilder()
-    }.assign(to: &self.$item)
-    
-    itemAddResult.compactMap{ result -> KeychainError? in
-      guard case .failure(let error as KeychainError) = result else {
+    }.assign(to: &$item)
+
+    itemAddResult.compactMap { result -> KeychainError? in
+      guard case let .failure(error as KeychainError) = result else {
         return nil
       }
-      
+
       return error
-    }.map{$0 as KeychainError?}
-      .assign(to: &self.$lastError)
+    }.map { $0 as KeychainError? }
+      .assign(to: &$lastError)
   }
-  
-  
-  let repository : LegacyCredentialRepository
-  
-  @Published public var item = LegacyCreditialItemBuilder()
+
+  let repository: LegacyCredentialRepository
+
+  @Published var item = LegacyCreditialItemBuilder()
   let triggerAddSubject = PassthroughSubject<Void, Never>()
-  @Published public var lastError : KeychainError?
-  
-  
-  public func addItem () {
+  @Published var lastError: KeychainError?
+
+  func addItem() {
     triggerAddSubject.send()
   }
 }
 
 @available(*, deprecated)
-public enum LegacyItemClass : Int, CaseIterable, CustomStringConvertible, Identifiable, Hashable {
-
-  
- 
-  public var id: Int {
-    return self.rawValue
+enum LegacyItemClass: Int, CaseIterable, CustomStringConvertible, Identifiable, Hashable {
+  var id: Int {
+    rawValue
   }
-  
+
   case generic
   case internet
-  
-  public var description: String {
+
+  var description: String {
     switch self {
     case .generic:
       return "Generic"
@@ -144,11 +127,12 @@ public enum LegacyItemClass : Int, CaseIterable, CustomStringConvertible, Identi
       return "Internet"
     }
   }
-  
-  var classValue : CFString {
+
+  var classValue: CFString {
     switch self {
     case .generic:
       return kSecClassGenericPassword
+
     case .internet:
       return kSecClassInternetPassword
     }

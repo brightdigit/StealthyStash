@@ -1,20 +1,20 @@
 @available(*, deprecated)
-public struct Credentials {
-  public let username: String
-  public let password: String
-  public let token: String?
+struct Credentials {
+  let username: String
+  let password: String
+  let token: String?
 
-  public init(username: String, password: String, token: String? = nil) {
+  init(username: String, password: String, token: String? = nil) {
     self.username = username
     self.password = password
     self.token = token
   }
 
-  public func withToken(_ token: String) -> Credentials {
+  func withToken(_ token: String) -> Credentials {
     Credentials(username: username, password: password, token: token)
   }
 
-  public func withoutToken() -> Credentials {
+  func withoutToken() -> Credentials {
     Credentials(username: username, password: password, token: nil)
   }
 }

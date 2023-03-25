@@ -8,11 +8,11 @@
 
   // swiftlint:disable:next line_length todo
   // TODO: Add support for types and labels -- https://medium.com/macoclock/retrieve-multiple-values-from-keychain-77641248f4a1
-  public struct KeychainContainer: CredentialsContainer {
+  struct KeychainContainer: CredentialsContainer {
     internal let accessGroup: String
     internal let serviceName: String
 
-    public init(accessGroup: String, serviceName: String) {
+    init(accessGroup: String, serviceName: String) {
       self.accessGroup = accessGroup
       self.serviceName = serviceName
     }
@@ -76,7 +76,7 @@
       }
     }
 
-    public func fetch() throws -> Credentials? {
+    func fetch() throws -> Credentials? {
       var item: CFTypeRef?
       let status = SecItemCopyMatching(passwordAccountQuery, &item)
       guard status != errSecItemNotFound else {
@@ -149,13 +149,13 @@
     }
 
     @available(*, deprecated)
-    public func reset() throws -> Credentials.ResetResult {
+    func reset() throws -> Credentials.ResetResult {
       let didDeleteToken = try deleteToken()
       let didDeletePassword = try deletePassword()
       return .init(didDeletePassword: didDeletePassword, didDeleteToken: didDeleteToken)
     }
 
-    public func save(credentials: Credentials) throws {
+    func save(credentials: Credentials) throws {
       try upsertAccount(credentials.username, andPassword: credentials.password)
       if let token = credentials.token {
         try upsertAccount(credentials.username, andToken: token)

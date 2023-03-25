@@ -1,6 +1,6 @@
 import Security
 
-public enum ServerProtocol : String {
+public enum ServerProtocol: String {
   case ftp
   case ftpaccount
   case http
@@ -32,14 +32,15 @@ public enum ServerProtocol : String {
   case imaps
   case ircs
   case pop3s
-  
-public  init?(scheme : String) {
+
+  public init?(scheme: String) {
     switch scheme {
     case "http": self = .http
     default: return nil
     }
   }
-  public var cfValue : CFString {
+
+  var cfValue: CFString {
     switch self {
     case .ftp: return kSecAttrProtocolFTP
     case .ftpaccount: return kSecAttrProtocolFTPAccount
@@ -74,12 +75,13 @@ public  init?(scheme : String) {
     case .pop3s: return kSecAttrProtocolPOP3S
     }
   }
-  public init?(number : CFString) {
+
+  init?(number: CFString) {
     switch number {
     case kSecAttrProtocolFTP: self = .ftp
-      
+
     case kSecAttrProtocolFTPAccount: self = .ftpaccount
-      
+
     case kSecAttrProtocolHTTP: self = .http
 
     case kSecAttrProtocolIRC: self = .irc
@@ -137,6 +139,7 @@ public  init?(scheme : String) {
     case kSecAttrProtocolIRCS: self = .ircs
 
     case kSecAttrProtocolPOP3S: self = .pop3s
+
     default:
       return nil
     }
