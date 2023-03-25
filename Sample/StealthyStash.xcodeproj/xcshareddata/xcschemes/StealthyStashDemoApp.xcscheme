@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B3AA493729A5282F002D40C3"
-               BuildableName = "StealthyStashDemo.app"
-               BlueprintName = "StealthyStashDemo"
-               ReferencedContainer = "container:StealthyStashDemo.xcodeproj">
+               BlueprintIdentifier = "B33A60FD29CE7BBC00A5D29E"
+               BuildableName = "StealthyStashDemoApp.app"
+               BlueprintName = "StealthyStashDemoApp"
+               ReferencedContainer = "container:Sample/StealthyStash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,10 +33,21 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B353398729B7D783006FF22B"
-               BuildableName = "StealthyStashDemoUITests.xctest"
-               BlueprintName = "StealthyStashDemoUITests"
-               ReferencedContainer = "container:StealthyStashDemo.xcodeproj">
+               BlueprintIdentifier = "B33A610C29CE7BBD00A5D29E"
+               BuildableName = "StealthyStashDemoAppTests.xctest"
+               BlueprintName = "StealthyStashDemoAppTests"
+               ReferencedContainer = "container:Sample/StealthyStash.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B33A611629CE7BBE00A5D29E"
+               BuildableName = "StealthyStashDemoAppUITests.xctest"
+               BlueprintName = "StealthyStashDemoAppUITests"
+               ReferencedContainer = "container:Sample/StealthyStash.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,10 +66,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3AA493729A5282F002D40C3"
-            BuildableName = "StealthyStashDemo.app"
-            BlueprintName = "StealthyStashDemo"
-            ReferencedContainer = "container:StealthyStashDemo.xcodeproj">
+            BlueprintIdentifier = "B33A60FD29CE7BBC00A5D29E"
+            BuildableName = "StealthyStashDemoApp.app"
+            BlueprintName = "StealthyStashDemoApp"
+            ReferencedContainer = "container:Sample/StealthyStash.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,10 +83,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3AA493729A5282F002D40C3"
-            BuildableName = "StealthyStashDemo.app"
-            BlueprintName = "StealthyStashDemo"
-            ReferencedContainer = "container:StealthyStashDemo.xcodeproj">
+            BlueprintIdentifier = "B33A60FD29CE7BBC00A5D29E"
+            BuildableName = "StealthyStashDemoApp.app"
+            BlueprintName = "StealthyStashDemoApp"
+            ReferencedContainer = "container:Sample/StealthyStash.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

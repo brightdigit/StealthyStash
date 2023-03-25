@@ -1,0 +1,1254 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		"stealthystash::StealthyStashPackageTests::ProductTarget" /* StealthyStashPackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_99 /* Build configuration list for PBXAggregateTarget "StealthyStashPackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_102 /* PBXTargetDependency */,
+			);
+			name = StealthyStashPackageTests;
+			productName = StealthyStashPackageTests;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		B33A610529CE7BBD00A5D29E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B33A610429CE7BBD00A5D29E /* Assets.xcassets */; };
+		B33A611229CE7BBE00A5D29E /* StealthyStashDemoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A611129CE7BBE00A5D29E /* StealthyStashDemoAppTests.swift */; };
+		B33A614129CE7CFA00A5D29E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B33A612929CE7CF900A5D29E /* Assets.xcassets */; };
+		B33A614229CE7CFA00A5D29E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A612B29CE7CF900A5D29E /* SettingsView.swift */; };
+		B33A614329CE7CFA00A5D29E /* CredentialPropertyFormContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A612C29CE7CF900A5D29E /* CredentialPropertyFormContentView.swift */; };
+		B33A614429CE7CFA00A5D29E /* CredentialPropertyRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A612D29CE7CF900A5D29E /* CredentialPropertyRootView.swift */; };
+		B33A614529CE7CFA00A5D29E /* CredentialPropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A612E29CE7CF900A5D29E /* CredentialPropertyList.swift */; };
+		B33A614629CE7CFA00A5D29E /* CompositeSecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A612F29CE7CF900A5D29E /* CompositeSecretView.swift */; };
+		B33A614729CE7CFA00A5D29E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A613029CE7CF900A5D29E /* ContentView.swift */; };
+		B33A614829CE7CFA00A5D29E /* CredentialPropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A613129CE7CF900A5D29E /* CredentialPropertyView.swift */; };
+		B33A614A29CE7CFA00A5D29E /* CredentialPropertyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A613329CE7CF900A5D29E /* CredentialPropertyObject.swift */; };
+		B33A614C29CE7CFA00A5D29E /* CompositeSecretObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A613529CE7CF900A5D29E /* CompositeSecretObject.swift */; };
+		B33A614D29CE7CFA00A5D29E /* PreviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A613729CE7CF900A5D29E /* PreviewRepository.swift */; };
+		B33A614E29CE7CFA00A5D29E /* credential-properties.json in Resources */ = {isa = PBXBuildFile; fileRef = B33A613829CE7CF900A5D29E /* credential-properties.json */; };
+		B33A614F29CE7CFA00A5D29E /* InternetPasswordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A613929CE7CF900A5D29E /* InternetPasswordData.swift */; };
+		B33A615029CE7CFA00A5D29E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B33A613A29CE7CF900A5D29E /* Preview Assets.xcassets */; };
+		B33A615129CE7CFA00A5D29E /* CredentialPropertyListObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A613B29CE7CF900A5D29E /* CredentialPropertyListObject.swift */; };
+		B33A615229CE7CFA00A5D29E /* CompositeSecretBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A613D29CE7CF900A5D29E /* CompositeSecretBuilder.swift */; };
+		B33A615329CE7CFA00A5D29E /* CompositeCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A613E29CE7CF900A5D29E /* CompositeCredentials.swift */; };
+		B33A615429CE7CFA00A5D29E /* CompositeCredentialsQueryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A613F29CE7CF900A5D29E /* CompositeCredentialsQueryBuilder.swift */; };
+		B33A615529CE7CFA00A5D29E /* StealthyStashDemoAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33A614029CE7CF900A5D29E /* StealthyStashDemoAppApp.swift */; };
+		B3DBC2B329CE90620039ED78 /* KeychainSyncDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DBC2B029CE90620039ED78 /* KeychainSyncDemoUITests.swift */; };
+		B3DBC2B429CE90620039ED78 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DBC2B129CE90620039ED78 /* URL.swift */; };
+		B3DBC2B529CE90620039ED78 /* SampleEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DBC2B229CE90620039ED78 /* SampleEntry.swift */; };
+		OBJ_108 /* FloxBxAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* FloxBxAuthTests.swift */; };
+		OBJ_97 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B33A60A729CE7A9900A5D29E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "stealthystash::StealthyStashTests";
+			remoteInfo = StealthyStashTests;
+		};
+		B33A610E29CE7BBE00A5D29E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B33A60FD29CE7BBC00A5D29E;
+			remoteInfo = StealthyStashDemoApp;
+		};
+		B33A611829CE7BBE00A5D29E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B33A60FD29CE7BBC00A5D29E;
+			remoteInfo = StealthyStashDemoApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B3DBC2AF29CE809C0039ED78 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B33A60FE29CE7BBC00A5D29E /* StealthyStashDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StealthyStashDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B33A610429CE7BBD00A5D29E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B33A610D29CE7BBD00A5D29E /* StealthyStashDemoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StealthyStashDemoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B33A611129CE7BBE00A5D29E /* StealthyStashDemoAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StealthyStashDemoAppTests.swift; sourceTree = "<group>"; };
+		B33A611729CE7BBE00A5D29E /* StealthyStashDemoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StealthyStashDemoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B33A612829CE7C8200A5D29E /* StealthyStashDemoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StealthyStashDemoApp.entitlements; sourceTree = SOURCE_ROOT; };
+		B33A612929CE7CF900A5D29E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B33A612B29CE7CF900A5D29E /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B33A612C29CE7CF900A5D29E /* CredentialPropertyFormContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialPropertyFormContentView.swift; sourceTree = "<group>"; };
+		B33A612D29CE7CF900A5D29E /* CredentialPropertyRootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialPropertyRootView.swift; sourceTree = "<group>"; };
+		B33A612E29CE7CF900A5D29E /* CredentialPropertyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialPropertyList.swift; sourceTree = "<group>"; };
+		B33A612F29CE7CF900A5D29E /* CompositeSecretView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeSecretView.swift; sourceTree = "<group>"; };
+		B33A613029CE7CF900A5D29E /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B33A613129CE7CF900A5D29E /* CredentialPropertyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialPropertyView.swift; sourceTree = "<group>"; };
+		B33A613329CE7CF900A5D29E /* CredentialPropertyObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialPropertyObject.swift; sourceTree = "<group>"; };
+		B33A613529CE7CF900A5D29E /* CompositeSecretObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeSecretObject.swift; sourceTree = "<group>"; };
+		B33A613729CE7CF900A5D29E /* PreviewRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewRepository.swift; sourceTree = "<group>"; };
+		B33A613829CE7CF900A5D29E /* credential-properties.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "credential-properties.json"; sourceTree = "<group>"; };
+		B33A613929CE7CF900A5D29E /* InternetPasswordData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetPasswordData.swift; sourceTree = "<group>"; };
+		B33A613A29CE7CF900A5D29E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B33A613B29CE7CF900A5D29E /* CredentialPropertyListObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialPropertyListObject.swift; sourceTree = "<group>"; };
+		B33A613D29CE7CF900A5D29E /* CompositeSecretBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeSecretBuilder.swift; sourceTree = "<group>"; };
+		B33A613E29CE7CF900A5D29E /* CompositeCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeCredentials.swift; sourceTree = "<group>"; };
+		B33A613F29CE7CF900A5D29E /* CompositeCredentialsQueryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeCredentialsQueryBuilder.swift; sourceTree = "<group>"; };
+		B33A614029CE7CF900A5D29E /* StealthyStashDemoAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StealthyStashDemoAppApp.swift; sourceTree = "<group>"; };
+		B3DBC2B029CE90620039ED78 /* KeychainSyncDemoUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainSyncDemoUITests.swift; path = "Sample/UI Tests/KeychainSyncDemoUITests.swift"; sourceTree = SOURCE_ROOT; };
+		B3DBC2B129CE90620039ED78 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URL.swift; path = "Sample/UI Tests/URL.swift"; sourceTree = SOURCE_ROOT; };
+		B3DBC2B229CE90620039ED78 /* SampleEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SampleEntry.swift; path = "Sample/UI Tests/SampleEntry.swift"; sourceTree = SOURCE_ROOT; };
+		OBJ_10 /* AnySecretProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnySecretProperty.swift; sourceTree = "<group>"; };
+		OBJ_11 /* AuthenticationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationType.swift; sourceTree = "<group>"; };
+		OBJ_12 /* GenericPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericPasswordItem.swift; sourceTree = "<group>"; };
+		OBJ_13 /* InternetPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetPasswordItem.swift; sourceTree = "<group>"; };
+		OBJ_14 /* KeychainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainRepository.swift; sourceTree = "<group>"; };
+		OBJ_15 /* ModelOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelOperation.swift; sourceTree = "<group>"; };
+		OBJ_16 /* ModelQueryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelQueryBuilder.swift; sourceTree = "<group>"; };
+		OBJ_17 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		OBJ_18 /* SecretDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretDictionary.swift; sourceTree = "<group>"; };
+		OBJ_19 /* SecretModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretModel.swift; sourceTree = "<group>"; };
+		OBJ_20 /* SecretProperty+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SecretProperty+Dictionary.swift"; sourceTree = "<group>"; };
+		OBJ_21 /* SecretProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretProperty.swift; sourceTree = "<group>"; };
+		OBJ_22 /* SecretPropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretPropertyType.swift; sourceTree = "<group>"; };
+		OBJ_23 /* SecretsRepository+SecretModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SecretsRepository+SecretModel.swift"; sourceTree = "<group>"; };
+		OBJ_24 /* SecretsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretsRepository.swift; sourceTree = "<group>"; };
+		OBJ_25 /* ServerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerProtocol.swift; sourceTree = "<group>"; };
+		OBJ_26 /* SingletonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonModel.swift; sourceTree = "<group>"; };
+		OBJ_27 /* TypeQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeQuery.swift; sourceTree = "<group>"; };
+		OBJ_28 /* UpdateQuerySet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateQuerySet.swift; sourceTree = "<group>"; };
+		OBJ_29 /* Credentials.ResetResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.ResetResult.swift; sourceTree = "<group>"; };
+		OBJ_30 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		OBJ_31 /* CredentialsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsContainer.swift; sourceTree = "<group>"; };
+		OBJ_33 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		OBJ_34 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		OBJ_35 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		OBJ_36 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		OBJ_37 /* KeychainContainer+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainContainer+Helpers.swift"; sourceTree = "<group>"; };
+		OBJ_38 /* KeychainContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainContainer.swift; sourceTree = "<group>"; };
+		OBJ_39 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
+		OBJ_40 /* Legacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Legacy.swift; sourceTree = "<group>"; };
+		OBJ_41 /* LegacyKeychainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyKeychainRepository.swift; sourceTree = "<group>"; };
+		OBJ_42 /* SecretPropertyBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretPropertyBuilder.swift; sourceTree = "<group>"; };
+		OBJ_45 /* FloxBxAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloxBxAuthTests.swift; sourceTree = "<group>"; };
+		OBJ_49 /* Scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scripts; sourceTree = SOURCE_ROOT; };
+		OBJ_51 /* Mintfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Mintfile; sourceTree = "<group>"; };
+		OBJ_52 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		OBJ_53 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		"stealthystash::StealthyStashTests::Product" /* StealthyStashTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = StealthyStashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B33A60FB29CE7BBC00A5D29E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B33A610A29CE7BBD00A5D29E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B33A611429CE7BBE00A5D29E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_109 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B33A60FF29CE7BBC00A5D29E /* StealthyStashDemoApp */ = {
+			isa = PBXGroup;
+			children = (
+				B33A612929CE7CF900A5D29E /* Assets.xcassets */,
+				B33A613E29CE7CF900A5D29E /* CompositeCredentials.swift */,
+				B33A613F29CE7CF900A5D29E /* CompositeCredentialsQueryBuilder.swift */,
+				B33A613D29CE7CF900A5D29E /* CompositeSecretBuilder.swift */,
+				B33A613529CE7CF900A5D29E /* CompositeSecretObject.swift */,
+				B33A613B29CE7CF900A5D29E /* CredentialPropertyListObject.swift */,
+				B33A613329CE7CF900A5D29E /* CredentialPropertyObject.swift */,
+				B33A613629CE7CF900A5D29E /* Preview Content */,
+				B33A612829CE7C8200A5D29E /* StealthyStashDemoApp.entitlements */,
+				B33A614029CE7CF900A5D29E /* StealthyStashDemoAppApp.swift */,
+				B33A612A29CE7CF900A5D29E /* Views */,
+				B33A610429CE7BBD00A5D29E /* Assets.xcassets */,
+			);
+			name = StealthyStashDemoApp;
+			path = Sample/StealthyStashDemoApp;
+			sourceTree = "<group>";
+		};
+		B33A611029CE7BBE00A5D29E /* StealthyStashDemoAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				B33A611129CE7BBE00A5D29E /* StealthyStashDemoAppTests.swift */,
+			);
+			name = StealthyStashDemoAppTests;
+			path = Sample/StealthyStashDemoAppTests;
+			sourceTree = "<group>";
+		};
+		B33A611A29CE7BBE00A5D29E /* StealthyStashDemoAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B3DBC2B029CE90620039ED78 /* KeychainSyncDemoUITests.swift */,
+				B3DBC2B229CE90620039ED78 /* SampleEntry.swift */,
+				B3DBC2B129CE90620039ED78 /* URL.swift */,
+			);
+			name = StealthyStashDemoAppUITests;
+			path = Sample/StealthyStashDemoAppUITests;
+			sourceTree = "<group>";
+		};
+		B33A612A29CE7CF900A5D29E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B33A612B29CE7CF900A5D29E /* SettingsView.swift */,
+				B33A612C29CE7CF900A5D29E /* CredentialPropertyFormContentView.swift */,
+				B33A612D29CE7CF900A5D29E /* CredentialPropertyRootView.swift */,
+				B33A612E29CE7CF900A5D29E /* CredentialPropertyList.swift */,
+				B33A612F29CE7CF900A5D29E /* CompositeSecretView.swift */,
+				B33A613029CE7CF900A5D29E /* ContentView.swift */,
+				B33A613129CE7CF900A5D29E /* CredentialPropertyView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B33A613629CE7CF900A5D29E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B33A613729CE7CF900A5D29E /* PreviewRepository.swift */,
+				B33A613829CE7CF900A5D29E /* credential-properties.json */,
+				B33A613929CE7CF900A5D29E /* InternetPasswordData.swift */,
+				B33A613A29CE7CF900A5D29E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B3DBC2A929CE80210039ED78 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		B3DBC2AA29CE809C0039ED78 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		OBJ_32 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_33 /* Data.swift */,
+				OBJ_34 /* Dictionary.swift */,
+				OBJ_35 /* Int.swift */,
+				OBJ_36 /* String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		OBJ_43 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_44 /* StealthyStashTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_44 /* StealthyStashTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_45 /* FloxBxAuthTests.swift */,
+			);
+			name = StealthyStashTests;
+			path = Tests/StealthyStashTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_46 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"stealthystash::StealthyStashTests::Product" /* StealthyStashTests.xctest */,
+				B33A60FE29CE7BBC00A5D29E /* StealthyStashDemoApp.app */,
+				B33A610D29CE7BBD00A5D29E /* StealthyStashDemoAppTests.xctest */,
+				B33A611729CE7BBE00A5D29E /* StealthyStashDemoAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_5 = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_43 /* Tests */,
+				B33A60FF29CE7BBC00A5D29E /* StealthyStashDemoApp */,
+				B33A611029CE7BBE00A5D29E /* StealthyStashDemoAppTests */,
+				B33A611A29CE7BBE00A5D29E /* StealthyStashDemoAppUITests */,
+				OBJ_46 /* Products */,
+				OBJ_49 /* Scripts */,
+				OBJ_51 /* Mintfile */,
+				OBJ_52 /* LICENSE */,
+				OBJ_53 /* README.md */,
+				B3DBC2A929CE80210039ED78 /* Recovered References */,
+				B3DBC2AA29CE809C0039ED78 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* StealthyStash */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* StealthyStash */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* Auth */,
+				OBJ_29 /* Credentials.ResetResult.swift */,
+				OBJ_30 /* Credentials.swift */,
+				OBJ_31 /* CredentialsContainer.swift */,
+				OBJ_32 /* Extensions */,
+				OBJ_37 /* KeychainContainer+Helpers.swift */,
+				OBJ_38 /* KeychainContainer.swift */,
+				OBJ_39 /* KeychainError.swift */,
+				OBJ_40 /* Legacy.swift */,
+				OBJ_41 /* LegacyKeychainRepository.swift */,
+				OBJ_42 /* SecretPropertyBuilder.swift */,
+			);
+			name = StealthyStash;
+			path = Sources/StealthyStash;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_9 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_10 /* AnySecretProperty.swift */,
+				OBJ_11 /* AuthenticationType.swift */,
+				OBJ_12 /* GenericPasswordItem.swift */,
+				OBJ_13 /* InternetPasswordItem.swift */,
+				OBJ_14 /* KeychainRepository.swift */,
+				OBJ_15 /* ModelOperation.swift */,
+				OBJ_16 /* ModelQueryBuilder.swift */,
+				OBJ_17 /* Query.swift */,
+				OBJ_18 /* SecretDictionary.swift */,
+				OBJ_19 /* SecretModel.swift */,
+				OBJ_20 /* SecretProperty+Dictionary.swift */,
+				OBJ_21 /* SecretProperty.swift */,
+				OBJ_22 /* SecretPropertyType.swift */,
+				OBJ_23 /* SecretsRepository+SecretModel.swift */,
+				OBJ_24 /* SecretsRepository.swift */,
+				OBJ_25 /* ServerProtocol.swift */,
+				OBJ_26 /* SingletonModel.swift */,
+				OBJ_27 /* TypeQuery.swift */,
+				OBJ_28 /* UpdateQuerySet.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B33A60FD29CE7BBC00A5D29E /* StealthyStashDemoApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B33A611F29CE7BBE00A5D29E /* Build configuration list for PBXNativeTarget "StealthyStashDemoApp" */;
+			buildPhases = (
+				B33A60FA29CE7BBC00A5D29E /* Sources */,
+				B33A60FB29CE7BBC00A5D29E /* Frameworks */,
+				B33A60FC29CE7BBC00A5D29E /* Resources */,
+				B3DBC2AF29CE809C0039ED78 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StealthyStashDemoApp;
+			productName = StealthyStashDemoApp;
+			productReference = B33A60FE29CE7BBC00A5D29E /* StealthyStashDemoApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B33A610C29CE7BBD00A5D29E /* StealthyStashDemoAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B33A612229CE7BBE00A5D29E /* Build configuration list for PBXNativeTarget "StealthyStashDemoAppTests" */;
+			buildPhases = (
+				B33A610929CE7BBD00A5D29E /* Sources */,
+				B33A610A29CE7BBD00A5D29E /* Frameworks */,
+				B33A610B29CE7BBD00A5D29E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B33A610F29CE7BBE00A5D29E /* PBXTargetDependency */,
+			);
+			name = StealthyStashDemoAppTests;
+			productName = StealthyStashDemoAppTests;
+			productReference = B33A610D29CE7BBD00A5D29E /* StealthyStashDemoAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B33A611629CE7BBE00A5D29E /* StealthyStashDemoAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B33A612529CE7BBE00A5D29E /* Build configuration list for PBXNativeTarget "StealthyStashDemoAppUITests" */;
+			buildPhases = (
+				B33A611329CE7BBE00A5D29E /* Sources */,
+				B33A611429CE7BBE00A5D29E /* Frameworks */,
+				B33A611529CE7BBE00A5D29E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B33A611929CE7BBE00A5D29E /* PBXTargetDependency */,
+			);
+			name = StealthyStashDemoAppUITests;
+			productName = StealthyStashDemoAppUITests;
+			productReference = B33A611729CE7BBE00A5D29E /* StealthyStashDemoAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		"stealthystash::StealthyStashTests" /* StealthyStashTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_104 /* Build configuration list for PBXNativeTarget "StealthyStashTests" */;
+			buildPhases = (
+				OBJ_107 /* Sources */,
+				OBJ_109 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StealthyStashTests;
+			productName = StealthyStashTests;
+			productReference = "stealthystash::StealthyStashTests::Product" /* StealthyStashTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"stealthystash::SwiftPMPackageDescription" /* StealthyStashPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_93 /* Build configuration list for PBXNativeTarget "StealthyStashPackageDescription" */;
+			buildPhases = (
+				OBJ_96 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StealthyStashPackageDescription;
+			productName = StealthyStashPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 9999;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					B33A60FD29CE7BBC00A5D29E = {
+						CreatedOnToolsVersion = 14.2;
+						DevelopmentTeam = MLT7M394S7;
+						ProvisioningStyle = Automatic;
+					};
+					B33A610C29CE7BBD00A5D29E = {
+						CreatedOnToolsVersion = 14.2;
+						DevelopmentTeam = MLT7M394S7;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B33A60FD29CE7BBC00A5D29E;
+					};
+					B33A611629CE7BBE00A5D29E = {
+						CreatedOnToolsVersion = 14.2;
+						DevelopmentTeam = MLT7M394S7;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B33A60FD29CE7BBC00A5D29E;
+					};
+				};
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "StealthyStash" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5;
+			productRefGroup = OBJ_46 /* Products */;
+			projectDirPath = ..;
+			projectRoot = "";
+			targets = (
+				"stealthystash::SwiftPMPackageDescription" /* StealthyStashPackageDescription */,
+				"stealthystash::StealthyStashPackageTests::ProductTarget" /* StealthyStashPackageTests */,
+				"stealthystash::StealthyStashTests" /* StealthyStashTests */,
+				B33A60FD29CE7BBC00A5D29E /* StealthyStashDemoApp */,
+				B33A610C29CE7BBD00A5D29E /* StealthyStashDemoAppTests */,
+				B33A611629CE7BBE00A5D29E /* StealthyStashDemoAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B33A60FC29CE7BBC00A5D29E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B33A614129CE7CFA00A5D29E /* Assets.xcassets in Resources */,
+				B33A615029CE7CFA00A5D29E /* Preview Assets.xcassets in Resources */,
+				B33A610529CE7BBD00A5D29E /* Assets.xcassets in Resources */,
+				B33A614E29CE7CFA00A5D29E /* credential-properties.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B33A610B29CE7BBD00A5D29E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B33A611529CE7BBE00A5D29E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B33A60FA29CE7BBC00A5D29E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B33A615129CE7CFA00A5D29E /* CredentialPropertyListObject.swift in Sources */,
+				B33A615429CE7CFA00A5D29E /* CompositeCredentialsQueryBuilder.swift in Sources */,
+				B33A615229CE7CFA00A5D29E /* CompositeSecretBuilder.swift in Sources */,
+				B33A614329CE7CFA00A5D29E /* CredentialPropertyFormContentView.swift in Sources */,
+				B33A614D29CE7CFA00A5D29E /* PreviewRepository.swift in Sources */,
+				B33A614429CE7CFA00A5D29E /* CredentialPropertyRootView.swift in Sources */,
+				B33A615529CE7CFA00A5D29E /* StealthyStashDemoAppApp.swift in Sources */,
+				B33A614729CE7CFA00A5D29E /* ContentView.swift in Sources */,
+				B33A614F29CE7CFA00A5D29E /* InternetPasswordData.swift in Sources */,
+				B33A614229CE7CFA00A5D29E /* SettingsView.swift in Sources */,
+				B33A614529CE7CFA00A5D29E /* CredentialPropertyList.swift in Sources */,
+				B33A614A29CE7CFA00A5D29E /* CredentialPropertyObject.swift in Sources */,
+				B33A615329CE7CFA00A5D29E /* CompositeCredentials.swift in Sources */,
+				B33A614829CE7CFA00A5D29E /* CredentialPropertyView.swift in Sources */,
+				B33A614629CE7CFA00A5D29E /* CompositeSecretView.swift in Sources */,
+				B33A614C29CE7CFA00A5D29E /* CompositeSecretObject.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B33A610929CE7BBD00A5D29E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B33A611229CE7BBE00A5D29E /* StealthyStashDemoAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B33A611329CE7BBE00A5D29E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3DBC2B329CE90620039ED78 /* KeychainSyncDemoUITests.swift in Sources */,
+				B3DBC2B429CE90620039ED78 /* URL.swift in Sources */,
+				B3DBC2B529CE90620039ED78 /* SampleEntry.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_107 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_108 /* FloxBxAuthTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_97 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B33A610F29CE7BBE00A5D29E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B33A60FD29CE7BBC00A5D29E /* StealthyStashDemoApp */;
+			targetProxy = B33A610E29CE7BBE00A5D29E /* PBXContainerItemProxy */;
+		};
+		B33A611929CE7BBE00A5D29E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B33A60FD29CE7BBC00A5D29E /* StealthyStashDemoApp */;
+			targetProxy = B33A611829CE7BBE00A5D29E /* PBXContainerItemProxy */;
+		};
+		OBJ_102 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "stealthystash::StealthyStashTests" /* StealthyStashTests */;
+			targetProxy = B33A60A729CE7A9900A5D29E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B33A612029CE7BBE00A5D29E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = StealthyStashDemoApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Sample/StealthyStashDemoApp/Preview Content\"";
+				DEVELOPMENT_TEAM = MLT7M394S7;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrightDigit.StealthyStashDemoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B33A612129CE7BBE00A5D29E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = StealthyStashDemoApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Sample/StealthyStashDemoApp/Preview Content\"";
+				DEVELOPMENT_TEAM = MLT7M394S7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrightDigit.StealthyStashDemoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B33A612329CE7BBE00A5D29E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MLT7M394S7;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrightDigit.StealthyStashDemoAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StealthyStashDemoApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StealthyStashDemoApp";
+			};
+			name = Debug;
+		};
+		B33A612429CE7BBE00A5D29E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MLT7M394S7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrightDigit.StealthyStashDemoAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StealthyStashDemoApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StealthyStashDemoApp";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B33A612629CE7BBE00A5D29E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MLT7M394S7;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrightDigit.StealthyStashDemoAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StealthyStashDemoApp;
+			};
+			name = Debug;
+		};
+		B33A612729CE7BBE00A5D29E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MLT7M394S7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrightDigit.StealthyStashDemoAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StealthyStashDemoApp;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		OBJ_100 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_101 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_105 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Sample/StealthyStash.xcodeproj/StealthyStashTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = StealthyStashTests;
+				TVOS_DEPLOYMENT_TARGET = 14.0;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Debug;
+		};
+		OBJ_106 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Sample/StealthyStash.xcodeproj/StealthyStashTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = StealthyStashTests;
+				TVOS_DEPLOYMENT_TARGET = 14.0;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Release;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "$(AVAILABLE_PLATFORMS)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "$(AVAILABLE_PLATFORMS)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -package-description-version 5.7.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -package-description-version 5.7.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B33A611F29CE7BBE00A5D29E /* Build configuration list for PBXNativeTarget "StealthyStashDemoApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B33A612029CE7BBE00A5D29E /* Debug */,
+				B33A612129CE7BBE00A5D29E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B33A612229CE7BBE00A5D29E /* Build configuration list for PBXNativeTarget "StealthyStashDemoAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B33A612329CE7BBE00A5D29E /* Debug */,
+				B33A612429CE7BBE00A5D29E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B33A612529CE7BBE00A5D29E /* Build configuration list for PBXNativeTarget "StealthyStashDemoAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B33A612629CE7BBE00A5D29E /* Debug */,
+				B33A612729CE7BBE00A5D29E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_104 /* Build configuration list for PBXNativeTarget "StealthyStashTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_105 /* Debug */,
+				OBJ_106 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_2 /* Build configuration list for PBXProject "StealthyStash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_93 /* Build configuration list for PBXNativeTarget "StealthyStashPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_94 /* Debug */,
+				OBJ_95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_99 /* Build configuration list for PBXAggregateTarget "StealthyStashPackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_100 /* Debug */,
+				OBJ_101 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
+}

@@ -1,0 +1,6 @@
+project: Sample/StealthyStash.xcodeproj
+schemes:
+- StealthyStash
+- StealthyStashDemoApp
+targets:
+- StealthyStash
