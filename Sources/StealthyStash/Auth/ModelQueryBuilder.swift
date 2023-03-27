@@ -1,10 +1,3 @@
-@available(*, deprecated)
-struct DefunctSecretPropertyUpdate {
-  let property: AnySecretProperty
-  @available(*, deprecated)
-  let shouldDelete: Bool
-}
-
 public struct SecretPropertyUpdate {
   public init(previousProperty: AnySecretProperty?, newProperty: AnySecretProperty?) {
     self.previousProperty = previousProperty

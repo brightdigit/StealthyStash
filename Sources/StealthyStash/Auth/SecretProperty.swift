@@ -27,7 +27,7 @@ public protocol SecretProperty: Identifiable, Hashable {
 }
 
 extension SecretProperty {
-  func castAsSameType(secretProperty: (any SecretProperty)?) -> Self? {
-    secretProperty as? Self
-  }
+//  func castAsSameType(secretProperty: (any SecretProperty)?) -> Self? {
+//    secretProperty as? Self
+//  }
 }

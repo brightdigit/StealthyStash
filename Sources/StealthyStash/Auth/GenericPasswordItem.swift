@@ -88,7 +88,7 @@ public struct GenericPasswordItem: Identifiable, Hashable, SecretProperty {
 }
 
 extension GenericPasswordItem {
-  var dataString: String {
+  public var dataString: String {
     String(data: data, encoding: .utf8) ?? ""
   }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import Security
 extension Dictionary {
-  enum MissingValueError<Output>: Error {
+  enum MissingValueError: Error {
     case missingKey(Key)
     case mismatchType(Value)
   }
@@ -27,7 +27,7 @@ extension Dictionary {
       return nil
     }
     guard let value = value as? Output else {
-      throw MissingValueError<Output>.mismatchType(value)
+      throw MissingValueError.mismatchType(value)
     }
     return value
   }
@@ -42,10 +42,10 @@ extension Dictionary {
 
   private func require<Output>(_ key: Key, as _: Output.Type) throws -> Output {
     guard let value = self[key] else {
-      throw MissingValueError<Output>.missingKey(key)
+      throw MissingValueError.missingKey(key)
     }
     guard let value = value as? Output else {
-      throw MissingValueError<Output>.mismatchType(value)
+      throw MissingValueError.mismatchType(value)
     }
     return value
   }

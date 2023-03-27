@@ -40,41 +40,13 @@ public enum ServerProtocol: String {
     }
   }
 
-  var cfValue: CFString {
-    switch self {
-    case .ftp: return kSecAttrProtocolFTP
-    case .ftpaccount: return kSecAttrProtocolFTPAccount
-    case .http: return kSecAttrProtocolHTTP
-    case .irc: return kSecAttrProtocolIRC
-    case .nntp: return kSecAttrProtocolNNTP
-    case .pop3: return kSecAttrProtocolPOP3
-    case .smtp: return kSecAttrProtocolSMTP
-    case .socks: return kSecAttrProtocolSOCKS
-    case .imap: return kSecAttrProtocolIMAP
-    case .ldap: return kSecAttrProtocolLDAP
-    case .appletalk: return kSecAttrProtocolAppleTalk
-    case .afp: return kSecAttrProtocolAFP
-    case .telnet: return kSecAttrProtocolTelnet
-    case .ssh: return kSecAttrProtocolSSH
-    case .ftps: return kSecAttrProtocolFTPS
-    case .https: return kSecAttrProtocolHTTPS
-    case .httpproxy: return kSecAttrProtocolHTTPProxy
-    case .httpsproxy: return kSecAttrProtocolHTTPSProxy
-    case .ftpproxy: return kSecAttrProtocolFTPProxy
-    case .smb: return kSecAttrProtocolSMB
-    case .rtsp: return kSecAttrProtocolRTSP
-    case .rtspproxy: return kSecAttrProtocolRTSPProxy
-    case .daap: return kSecAttrProtocolDAAP
-    case .eppc: return kSecAttrProtocolEPPC
-    case .ipp: return kSecAttrProtocolIPP
-    case .nntps: return kSecAttrProtocolNNTPS
-    case .ldaps: return kSecAttrProtocolLDAPS
-    case .telnets: return kSecAttrProtocolTelnetS
-    case .imaps: return kSecAttrProtocolIMAPS
-    case .ircs: return kSecAttrProtocolIRCS
-    case .pop3s: return kSecAttrProtocolPOP3S
-    }
-  }
+//  var cfValue: CFString {
+//    Self.spMap[self]!
+//  }
+
+//  static let spMap: [ServerProtocol: CFString] = .init(
+//    uniqueKeysWithValues: cfStringMap.map { ($0.value, $0.key) }
+//  )
 
   static let cfStringMap: [CFString: ServerProtocol] = [
     kSecAttrProtocolFTP: .ftp,

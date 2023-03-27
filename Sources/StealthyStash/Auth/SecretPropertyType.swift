@@ -16,18 +16,18 @@ extension SecretPropertyType {
     }
   }
 
-  init?(secClass: CFString) {
-    switch secClass {
-    case kSecClassGenericPassword:
-      self = .generic
-
-    case kSecClassInternetPassword:
-      self = .internet
-
-    default:
-      return nil
-    }
-  }
+//  init?(secClass: CFString) {
+//    switch secClass {
+//    case kSecClassGenericPassword:
+//      self = .generic
+//
+//    case kSecClassInternetPassword:
+//      self = .internet
+//
+//    default:
+//      return nil
+//    }
+//  }
 
   var propertyType: any SecretProperty.Type {
     switch self {
