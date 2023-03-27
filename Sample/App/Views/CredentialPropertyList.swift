@@ -21,16 +21,16 @@ struct CredentialPropertyList: View {
   var body: some View {
     #if os(iOS) || os(watchOS)
       List(object.credentialProperties) { item in
-          NavigationLink(value: item) {
-            HStack {
-              #if !os(watchOS)
-                Image(systemName: item.propertyType.sfSymbolName)
-              #endif
-              Text(item.account).accessibilityIdentifier("accountProperty")
-              Spacer()
-              Text(item.dataString).bold().accessibilityIdentifier("dataProperty")
-            }.lineLimit(1)
-          }
+        NavigationLink(value: item) {
+          HStack {
+            #if !os(watchOS)
+              Image(systemName: item.propertyType.sfSymbolName)
+            #endif
+            Text(item.account).accessibilityIdentifier("accountProperty")
+            Spacer()
+            Text(item.dataString).bold().accessibilityIdentifier("dataProperty")
+          }.lineLimit(1)
+        }
       }
     #else
       Table(object.properties) {

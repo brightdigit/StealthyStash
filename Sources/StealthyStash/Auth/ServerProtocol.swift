@@ -76,72 +76,44 @@ public enum ServerProtocol: String {
     }
   }
 
+  static let cfStringMap: [CFString: ServerProtocol] = [
+    kSecAttrProtocolFTP: .ftp,
+    kSecAttrProtocolFTPAccount: .ftpaccount,
+    kSecAttrProtocolHTTP: .http,
+    kSecAttrProtocolIRC: .irc,
+    kSecAttrProtocolNNTP: .nntp,
+    kSecAttrProtocolPOP3: .pop3,
+    kSecAttrProtocolSMTP: .smtp,
+    kSecAttrProtocolSOCKS: .socks,
+    kSecAttrProtocolIMAP: .imap,
+    kSecAttrProtocolLDAP: .ldap,
+    kSecAttrProtocolAppleTalk: .appletalk,
+    kSecAttrProtocolAFP: .afp,
+    kSecAttrProtocolTelnet: .telnet,
+    kSecAttrProtocolSSH: .ssh,
+    kSecAttrProtocolFTPS: .ftps,
+    kSecAttrProtocolHTTPS: .https,
+    kSecAttrProtocolHTTPProxy: .httpproxy,
+    kSecAttrProtocolHTTPSProxy: .httpsproxy,
+    kSecAttrProtocolFTPProxy: .ftpproxy,
+    kSecAttrProtocolSMB: .smb,
+    kSecAttrProtocolRTSP: .rtsp,
+    kSecAttrProtocolRTSPProxy: .rtspproxy,
+    kSecAttrProtocolDAAP: .daap,
+    kSecAttrProtocolEPPC: .eppc,
+    kSecAttrProtocolIPP: .ipp,
+    kSecAttrProtocolNNTPS: .nntps,
+    kSecAttrProtocolLDAPS: .ldaps,
+    kSecAttrProtocolTelnetS: .telnets,
+    kSecAttrProtocolIMAPS: .imaps,
+    kSecAttrProtocolIRCS: .ircs,
+    kSecAttrProtocolPOP3S: .pop3s
+  ]
+
   init?(number: CFString) {
-    switch number {
-    case kSecAttrProtocolFTP: self = .ftp
-
-    case kSecAttrProtocolFTPAccount: self = .ftpaccount
-
-    case kSecAttrProtocolHTTP: self = .http
-
-    case kSecAttrProtocolIRC: self = .irc
-
-    case kSecAttrProtocolNNTP: self = .nntp
-
-    case kSecAttrProtocolPOP3: self = .pop3
-
-    case kSecAttrProtocolSMTP: self = .smtp
-
-    case kSecAttrProtocolSOCKS: self = .socks
-
-    case kSecAttrProtocolIMAP: self = .imap
-
-    case kSecAttrProtocolLDAP: self = .ldap
-
-    case kSecAttrProtocolAppleTalk: self = .appletalk
-
-    case kSecAttrProtocolAFP: self = .afp
-
-    case kSecAttrProtocolTelnet: self = .telnet
-
-    case kSecAttrProtocolSSH: self = .ssh
-
-    case kSecAttrProtocolFTPS: self = .ftps
-
-    case kSecAttrProtocolHTTPS: self = .https
-
-    case kSecAttrProtocolHTTPProxy: self = .httpproxy
-
-    case kSecAttrProtocolHTTPSProxy: self = .httpsproxy
-
-    case kSecAttrProtocolFTPProxy: self = .ftpproxy
-
-    case kSecAttrProtocolSMB: self = .smb
-
-    case kSecAttrProtocolRTSP: self = .rtsp
-
-    case kSecAttrProtocolRTSPProxy: self = .rtspproxy
-
-    case kSecAttrProtocolDAAP: self = .daap
-
-    case kSecAttrProtocolEPPC: self = .eppc
-
-    case kSecAttrProtocolIPP: self = .ipp
-
-    case kSecAttrProtocolNNTPS: self = .nntps
-
-    case kSecAttrProtocolLDAPS: self = .ldaps
-
-    case kSecAttrProtocolTelnetS: self = .telnets
-
-    case kSecAttrProtocolIMAPS: self = .imaps
-
-    case kSecAttrProtocolIRCS: self = .ircs
-
-    case kSecAttrProtocolPOP3S: self = .pop3s
-
-    default:
+    guard let value = Self.cfStringMap[number] else {
       return nil
     }
+    self = value
   }
 }

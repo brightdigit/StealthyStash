@@ -16,8 +16,14 @@ public struct SecretPropertyUpdate {
 }
 
 extension SecretPropertyUpdate {
-  public init<SecretPropertyType: SecretProperty>(previousProperty: SecretPropertyType?, newProperty: SecretPropertyType?) {
-    self.init(previousProperty: previousProperty.map(AnySecretProperty.init(property:)), newProperty: newProperty.map(AnySecretProperty.init(property:)))
+  public init<SecretPropertyType: SecretProperty>(
+    previousProperty: SecretPropertyType?,
+    newProperty: SecretPropertyType?
+  ) {
+    self.init(
+      previousProperty: previousProperty.map(AnySecretProperty.init(property:)),
+      newProperty: newProperty.map(AnySecretProperty.init(property:))
+    )
   }
 }
 
@@ -27,9 +33,16 @@ public protocol ModelQueryBuilder {
 
   static func queries(from query: QueryType) -> [String: Query]
 
-  static func model(from properties: [String: [AnySecretProperty]]) throws -> SecretModelType?
+  static func model(from properties: [String: [AnySecretProperty]])
+    throws -> SecretModelType?
 
-  static func properties(from model: SecretModelType, for operation: ModelOperation) -> [AnySecretProperty]
+  static func properties(
+    from model: SecretModelType,
+    for operation: ModelOperation
+  ) -> [AnySecretProperty]
 
-  static func updates(from previousItem: SecretModelType, to newItem: SecretModelType) -> [SecretPropertyUpdate]
+  static func updates(
+    from previousItem: SecretModelType,
+    to newItem: SecretModelType
+  ) -> [SecretPropertyUpdate]
 }

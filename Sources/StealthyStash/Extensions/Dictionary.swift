@@ -74,14 +74,15 @@ extension Dictionary where Key == String, Value == Any {
     if let data = self[kSecValueData as String] as? Data {
       values["data_string"] = String(bytes: data, encoding: .utf8)
     }
-    return merging(with: values, overwrite: false).compactMap { (key: String, value: Any?) in
-      guard let value = value._deepUnwrapped else {
-        assertionFailure()
-        return nil
-      }
+    return merging(with: values, overwrite: false)
+      .compactMap { (key: String, value: Any?) in
+        guard let value = value._deepUnwrapped else {
+          assertionFailure()
+          return nil
+        }
 
-      return [key, "\(value)"].joined(separator: ": ")
-    }.joined(separator: ", ")
+        return [key, "\(value)"].joined(separator: ": ")
+      }.joined(separator: ", ")
   }
 }
 

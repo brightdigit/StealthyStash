@@ -31,8 +31,20 @@ public struct GenericPasswordItem: Identifiable, Hashable, SecretProperty {
     .generic
   }
 
-  public init(account: String, data: Data, service: String? = nil, accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, comment: String? = nil, type: Int? = nil, label: String? = nil, gerneic: Data? = nil, isSynchronizable: Bool? = nil) {
-    // assert(service != nil)
+  public init(
+    account: String,
+    data: Data,
+    service: String? = nil,
+    accessGroup: String? = nil,
+    createdAt: Date? = nil,
+    modifiedAt: Date? = nil,
+    description: String? = nil,
+    comment: String? = nil,
+    type: Int? = nil,
+    label: String? = nil,
+    gerneic: Data? = nil,
+    isSynchronizable: Bool? = nil
+  ) {
     self.account = account
     self.data = data
     self.service = service

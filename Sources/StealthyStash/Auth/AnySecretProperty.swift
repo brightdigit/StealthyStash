@@ -6,7 +6,8 @@ public struct AnySecretProperty: Identifiable, Hashable {
   }
 
   public static func == (lhs: AnySecretProperty, rhs: AnySecretProperty) -> Bool {
-    Swift.type(of: lhs.property).propertyType == Swift.type(of: rhs.property).propertyType && lhs.id == rhs.id
+    Swift.type(of: lhs.property).propertyType == Swift.type(of: rhs.property).propertyType
+      && lhs.id == rhs.id
   }
 
   public var id: String {

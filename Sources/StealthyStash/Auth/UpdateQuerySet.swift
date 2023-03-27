@@ -11,7 +11,10 @@ public struct UpdateQuerySet {
 }
 
 extension UpdateQuerySet {
-  init<SecretPropertyType: SecretProperty>(from previousItem: SecretPropertyType, to newItem: SecretPropertyType) {
+  init<SecretPropertyType: SecretProperty>(
+    from previousItem: SecretPropertyType,
+    to newItem: SecretPropertyType
+  ) {
     let query = previousItem.fetchQuery()
     let attributes = newItem.updateQuery()
     self.init(query: query, attributes: attributes, id: newItem.id)

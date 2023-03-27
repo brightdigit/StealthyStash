@@ -3,17 +3,11 @@ import Security
 
 public struct InternetPasswordItem: Identifiable, Hashable, SecretProperty {
   public func uniqueAttributes() -> SecretDictionary {
-    /*
-     For internet passwords, the primary keys include kSecAttrAccount, kSecAttrSecurityDomain, kSecAttrServer, kSecAttrProtocol, kSecAttrAuthenticationType, kSecAttrPort, and kSecAttrPath
-     */
     [
       kSecAttrAccount as String: account,
       kSecAttrAccessGroup as String: accessGroup,
-
-      // kSecAttrSecurityDomain as String, self.account
       kSecAttrServer as String: server,
       kSecAttrProtocol as String: self.protocol,
-      // kSecAttrAuthenticationType as String, self.account
       kSecAttrPort as String: port,
       kSecAttrPath as String: path
     ]
@@ -28,39 +22,6 @@ public struct InternetPasswordItem: Identifiable, Hashable, SecretProperty {
     ]
   }
 
-//
-//  func deleteQuery() -> [String : Any?] {
-//    let addQuery = addQuery()
-//    let uniqueKeys = [kSecAttrService as String, kSecAttrAccount as String]
-//    var query = [String : Any?]()
-//    var attributes = [String : Any?]()
-//    for (key, value) in addQuery {
-//      if uniqueKeys.contains(key) {
-//        query[key] = value
-//      } else {
-//        attributes[key] = value
-//      }
-//    }
-//    query[kSecClass as String] = Self.propertyType.secClass
-//    return query
-//  }
-//
-//  func updateQuerySet() -> UpdateQuerySet {
-//    let addQuery = addQuery()
-//    let uniqueKeys = [kSecAttrServer as String, kSecAttrAccount as String]
-//    var query = [String : Any?]()
-//    var attributes = [String : Any?]()
-//    for (key, value) in addQuery {
-//      if uniqueKeys.contains(key) {
-//        query[key] = value
-//      } else {
-//        attributes[key] = value
-//      }
-//    }
-//    query[kSecClass as String] = Self.propertyType.secClass
-//    return .init(query: query, attributes: attributes, id: self.id)
-//  }
-
   public static let propertyType: SecretPropertyType = .internet
 
   public var id: String {
@@ -72,26 +33,23 @@ public struct InternetPasswordItem: Identifiable, Hashable, SecretProperty {
      path].compactMap { $0 }.joined()
   }
 
-//
-//  func addQuery () -> [String : Any?]
-//  {
-//    [
-//     kSecClass as String: kSecClassInternetPassword,
-//     kSecAttrAccount as String: self.account,
-//     kSecValueData as String: self.data,
-//     kSecAttrServer as String: self.server?.nilTrimmed(),
-//     kSecAttrAccessGroup as String: self.accessGroup?.nilTrimmed(),
-//     kSecAttrSynchronizable as String: self.isSynchronizable,
-//     kSecAttrDescription as String : description?.nilTrimmed(),
-//     kSecAttrType as String : type,
-//     kSecAttrLabel as String : label,
-//     kSecAttrProtocol as String : self.protocol?.cfValue,
-//     kSecAttrAuthenticationType as String : authenticationType,
-//     kSecAttrPort as String : port,
-//     kSecAttrPath as String : path
-//   ]
-//  }
-  public init(account: String, data: Data, accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, comment: String? = nil, type: Int? = nil, label: String? = nil, server: String? = nil, protocol: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
+  public init(
+    account: String,
+    data: Data,
+    accessGroup: String? = nil,
+    createdAt: Date? = nil,
+    modifiedAt: Date? = nil,
+    description: String? = nil,
+    comment: String? = nil,
+    type: Int? = nil,
+    label: String? = nil,
+    server: String? = nil,
+    protocol: ServerProtocol? = nil,
+    authenticationType: AuthenticationType? = nil,
+    port: Int? = nil,
+    path: String? = nil,
+    isSynchronizable: Bool? = nil
+  ) {
     self.account = account
     self.data = data
     self.accessGroup = accessGroup
@@ -128,7 +86,20 @@ public struct InternetPasswordItem: Identifiable, Hashable, SecretProperty {
 }
 
 extension InternetPasswordItem {
-  public init(account: String, data: Data, accessGroup: String? = nil, url: URL? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, comment _: String? = nil, type: Int? = nil, label: String? = nil, authenticationType _: AuthenticationType? = nil, isSynchronizable: Bool? = nil) {
+  public init(
+    account: String,
+    data: Data,
+    accessGroup: String? = nil,
+    url: URL? = nil,
+    createdAt: Date? = nil,
+    modifiedAt: Date? = nil,
+    description: String? = nil,
+    comment _: String? = nil,
+    type: Int? = nil,
+    label: String? = nil,
+    authenticationType _: AuthenticationType? = nil,
+    isSynchronizable: Bool? = nil
+  ) {
     self.init(
       account: account,
       data: data,

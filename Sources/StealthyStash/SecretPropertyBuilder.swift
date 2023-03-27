@@ -2,7 +2,25 @@ import Foundation
 
 public struct SecretPropertyBuilder {
   public let secClass: SecretPropertyType
-  public init(secClass: SecretPropertyType, source: AnySecretProperty? = nil, account: String = "", data: Data = .init(), accessGroup: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, description: String? = nil, type: Int? = nil, label: String? = nil, service: String? = nil, server: String? = nil, protocol: ServerProtocol? = nil, authenticationType: AuthenticationType? = nil, port: Int? = nil, path: String? = nil, isSynchronizable: Bool? = nil) {
+  public init(
+    secClass: SecretPropertyType,
+    source: AnySecretProperty? = nil,
+    account: String = "",
+    data: Data = .init(),
+    accessGroup: String? = nil,
+    createdAt: Date? = nil,
+    modifiedAt: Date? = nil,
+    description: String? = nil,
+    type: Int? = nil,
+    label: String? = nil,
+    service: String? = nil,
+    server: String? = nil,
+    protocol: ServerProtocol? = nil,
+    authenticationType: AuthenticationType? = nil,
+    port: Int? = nil,
+    path: String? = nil,
+    isSynchronizable: Bool? = nil
+  ) {
     self.secClass = secClass
     self.source = source
     self.account = account
