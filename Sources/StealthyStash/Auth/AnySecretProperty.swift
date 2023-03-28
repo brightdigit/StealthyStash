@@ -62,7 +62,7 @@ extension AnySecretProperty {
     property.label
   }
 
-  public var isSynchronizable: Bool? {
+  public var isSynchronizable: Synchronizable {
     property.isSynchronizable
   }
 
@@ -99,11 +99,6 @@ extension AnySecretProperty {
       return nil
     }
     return property.path
-  }
-
-  public init(builder: SecretPropertyBuilder) throws {
-    let property = try builder.secClass.propertyType.init(builder: builder)
-    self.init(property: property)
   }
 }
 

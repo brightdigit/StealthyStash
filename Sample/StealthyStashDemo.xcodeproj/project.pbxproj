@@ -43,8 +43,10 @@
 		B3AA495829A52852002D40C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AA495729A52852002D40C3 /* Preview Assets.xcassets */; };
 		B3B40E8829CD1DCB00015C54 /* StealthyStash in Frameworks */ = {isa = PBXBuildFile; productRef = B3B40E8729CD1DCB00015C54 /* StealthyStash */; };
 		B3B40E8A29CD1DD400015C54 /* StealthyStash in Frameworks */ = {isa = PBXBuildFile; productRef = B3B40E8929CD1DD400015C54 /* StealthyStash */; };
+		B3B7089F29D356D5009D5BFE /* SecretPropertyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7089E29D356D5009D5BFE /* SecretPropertyBuilder.swift */; };
 		B3D3668829CA83F6002A87AC /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D3668729CA83F6002A87AC /* URL.swift */; };
 		B3D6C71529C8918B00236D8B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6C71429C8918B00236D8B /* SettingsView.swift */; };
+		B3DA8B4029D65CC100627444 /* SecretPropertyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7089E29D356D5009D5BFE /* SecretPropertyBuilder.swift */; };
 		B3DBC2CC29CEA2750039ED78 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DBC2CA29CEA2750039ED78 /* String.swift */; };
 		B3DBC2CD29CEA2750039ED78 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DBC2CB29CEA2750039ED78 /* Data.swift */; };
 		B3F984FA29B0009200C0266F /* credential-properties.json in Resources */ = {isa = PBXBuildFile; fileRef = B3F984F929B0009200C0266F /* credential-properties.json */; };
@@ -89,6 +91,7 @@
 		B3AA495429A52852002D40C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3AA495729A52852002D40C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B3B40E8629CD1DB700015C54 /* StealthyStash */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StealthyStash; path = ..; sourceTree = "<group>"; };
+		B3B7089E29D356D5009D5BFE /* SecretPropertyBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretPropertyBuilder.swift; sourceTree = "<group>"; };
 		B3D3668729CA83F6002A87AC /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		B3D6C71429C8918B00236D8B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B3DBC2CA29CEA2750039ED78 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -187,6 +190,7 @@
 				B34ADDB829AF84750072B59F /* CredentialPropertyListObject.swift */,
 				B3DBC2CB29CEA2750039ED78 /* Data.swift */,
 				B3DBC2CA29CEA2750039ED78 /* String.swift */,
+				B3B7089E29D356D5009D5BFE /* SecretPropertyBuilder.swift */,
 				B322978C29CD1E7E006CCAEE /* CredentialPropertyObject.swift */,
 				B3AA494129A52831002D40C3 /* KeychainSyncDemo.entitlements */,
 				B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */,
@@ -398,6 +402,7 @@
 				B34ADDD629AF886C0072B59F /* CredentialPropertyView.swift in Sources */,
 				B3DBC2CD29CEA2750039ED78 /* Data.swift in Sources */,
 				B34ADDBC29AF84750072B59F /* CredentialPropertyRootView.swift in Sources */,
+				B3B7089F29D356D5009D5BFE /* SecretPropertyBuilder.swift in Sources */,
 				B369E21529CBCEF1007C4155 /* CompositeSecretBuilder.swift in Sources */,
 				B31EAE4D29A915E2004C4A56 /* InternetPasswordData.swift in Sources */,
 				B31EAE4529A8F820004C4A56 /* ContentView.swift in Sources */,
@@ -416,6 +421,7 @@
 				B39BF15429A6C116009BBCAC /* KeychainSyncDemoApp.swift in Sources */,
 				B34ADDED29B00B550072B59F /* CredentialPropertyListObject.swift in Sources */,
 				B34ADDF129B00B550072B59F /* CredentialPropertyRootView.swift in Sources */,
+				B3DA8B4029D65CC100627444 /* SecretPropertyBuilder.swift in Sources */,
 				B37C694A29B3C43D00091E0E /* CompositeSecretView.swift in Sources */,
 				B369E21329CB9FD7007C4155 /* SettingsView.swift in Sources */,
 				B34ADDEA29B00B550072B59F /* CredentialPropertyFormContentView.swift in Sources */,

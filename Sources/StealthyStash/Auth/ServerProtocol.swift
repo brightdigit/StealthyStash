@@ -40,13 +40,13 @@ public enum ServerProtocol: String {
     }
   }
 
-//  var cfValue: CFString {
-//    Self.spMap[self]!
-//  }
+  public var cfValue: CFString {
+    Self.spMap[self]!
+  }
 
-//  static let spMap: [ServerProtocol: CFString] = .init(
-//    uniqueKeysWithValues: cfStringMap.map { ($0.value, $0.key) }
-//  )
+  static let spMap: [ServerProtocol: CFString] = .init(
+    uniqueKeysWithValues: cfStringMap.map { ($0.value, $0.key) }
+  )
 
   static let cfStringMap: [CFString: ServerProtocol] = [
     kSecAttrProtocolFTP: .ftp,
