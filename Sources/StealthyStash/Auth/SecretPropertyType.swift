@@ -29,7 +29,7 @@ extension SecretPropertyType {
 //    }
 //  }
 
-  var propertyType: any SecretProperty.Type {
+  public var propertyType: any SecretProperty.Type {
     switch self {
     case .internet:
       return InternetPasswordItem.self

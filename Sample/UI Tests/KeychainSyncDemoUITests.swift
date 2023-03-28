@@ -1,6 +1,45 @@
 @testable import StealthyStash
 import XCTest
 
+
+extension Int {
+  func trimZero() -> Int? {
+    self == 0 ? nil : self
+  }
+}
+extension InternetPasswordItem {
+  public init(
+    account: String,
+    data: Data,
+    accessGroup: String? = nil,
+    url: URL? = nil,
+    createdAt: Date? = nil,
+    modifiedAt: Date? = nil,
+    description: String? = nil,
+    comment: String? = nil,
+    type: Int? = nil,
+    label: String? = nil,
+    authenticationType: AuthenticationType? = nil,
+    isSynchronizable: Synchronizable = .any
+  ) {
+    self.init(
+      account: account,
+      data: data,
+      accessGroup: accessGroup,
+      createdAt: createdAt,
+      modifiedAt: modifiedAt,
+      description: description,
+      comment: comment,
+      type: type?.trimZero(),
+      label: label,
+      server: url?.host,
+      protocol: url.flatMap(\.scheme).flatMap(ServerProtocol.init(scheme:)),
+      port: url?.port?.trimZero(),
+      path: url?.path,
+      isSynchronizable: isSynchronizable
+    )
+  }
+}
 extension InternetPasswordItem {
   static func random() -> InternetPasswordItem {
     let entry = SampleEntry.all.randomElement()!

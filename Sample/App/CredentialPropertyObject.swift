@@ -8,6 +8,7 @@ class CredentialPropertyObject: ObservableObject {
     self.repository = repository
     originalItem = original
 
+    
     let savePublisher = saveTriggerSubject
       .map { self.item }
       .tryMap(AnySecretProperty.init)
@@ -31,6 +32,8 @@ class CredentialPropertyObject: ObservableObject {
     savePublisher
       .map { Error?.none }
       .catch { Just(Optional.some($0)) }
+      .compactMap{$0}
+      .print()
       .compactMap { $0 as? KeychainError }
       .receive(on: DispatchQueue.main)
       .assign(to: &$lastError)
