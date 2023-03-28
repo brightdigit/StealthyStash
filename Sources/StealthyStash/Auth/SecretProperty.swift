@@ -23,7 +23,7 @@ public protocol SecretProperty: Identifiable, Hashable {
   func otherProperties() -> SecretDictionary
 
   init(dictionary: [String: Any]) throws
-  init(builder: SecretPropertyBuilder) throws
+  init(rawDictionary: [String: Any]) throws
 }
 
 extension SecretProperty {

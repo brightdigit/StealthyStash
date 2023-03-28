@@ -148,4 +148,36 @@ extension InternetPasswordItem {
       isSynchronizable: isSynchronizable
     )
   }
+
+  public init(rawDictionary: [String: Any]) throws {
+    let account: String = try rawDictionary.require(kSecAttrAccount)
+    let data: Data = try rawDictionary.require(kSecValueData)
+    let accessGroup: String? = try rawDictionary.requireOptional(kSecAttrAccessGroup)
+    let createdAt: Date? = try rawDictionary.requireOptional(kSecAttrCreationDate)
+    let modifiedAt: Date? = try rawDictionary.requireOptional(kSecAttrModificationDate)
+    let description: String? = try rawDictionary.requireOptional(kSecAttrDescription)
+    let type: Int? = try rawDictionary.requireOptionalCF(kSecAttrType)
+    let label: String? = try rawDictionary.requireOptionalCF(kSecAttrLabel)
+    let server: String? = try rawDictionary.requireOptional(kSecAttrServer)
+    let protocolString: CFString? = try rawDictionary.requireOptional(kSecAttrProtocol)
+    let `protocol`: ServerProtocol? = protocolString.flatMap(ServerProtocol.init(number:))
+    let port: Int? = try rawDictionary.requireOptional(kSecAttrPort)
+    let path: String? = try rawDictionary.requireOptional(kSecAttrPath)
+    let isSynchronizable: Bool? = try rawDictionary.requireOptional(kSecAttrSynchronizable)
+    self.init(
+      account: account,
+      data: data,
+      accessGroup: accessGroup,
+      createdAt: createdAt,
+      modifiedAt: modifiedAt,
+      description: description,
+      type: type?.trimZero(),
+      label: label,
+      server: server,
+      protocol: `protocol`,
+      port: port?.trimZero(),
+      path: path,
+      isSynchronizable: isSynchronizable
+    )
+  }
 }

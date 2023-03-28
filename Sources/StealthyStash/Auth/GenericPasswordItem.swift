@@ -12,21 +12,6 @@ public struct GenericPasswordItem: Identifiable, Hashable, SecretProperty {
     ]
   }
 
-  public init(builder: SecretPropertyBuilder) throws {
-    self.init(
-      account: builder.account,
-      data: builder.data,
-      service: builder.service,
-      accessGroup: builder.accessGroup,
-      createdAt: builder.createdAt,
-      modifiedAt: builder.modifiedAt,
-      description: builder.description,
-      type: builder.type,
-      label: builder.label,
-      isSynchronizable: builder.isSynchronizable
-    )
-  }
-
   public static var propertyType: SecretPropertyType {
     .generic
   }
@@ -106,6 +91,33 @@ extension GenericPasswordItem {
     let service: String = try dictionary.require(kSecAttrService)
     let generic: Data? = try dictionary.requireOptional(kSecAttrGeneric)
     let isSynchronizable: Bool? = try dictionary.requireOptional(kSecAttrSynchronizable)
+    self.init(
+      account: account,
+      data: data,
+      service: service,
+      accessGroup: accessGroup,
+      createdAt: createdAt,
+      modifiedAt: modifiedAt,
+      description: description,
+      type: type?.trimZero(),
+      label: label,
+      gerneic: generic,
+      isSynchronizable: isSynchronizable
+    )
+  }
+
+  public init(rawDictionary: [String: Any]) throws {
+    let account: String = try rawDictionary.require(kSecAttrAccount)
+    let data: Data = try rawDictionary.require(kSecValueData)
+    let accessGroup: String? = try rawDictionary.requireOptional(kSecAttrAccessGroup)
+    let createdAt: Date? = try rawDictionary.requireOptional(kSecAttrCreationDate)
+    let modifiedAt: Date? = try rawDictionary.requireOptional(kSecAttrModificationDate)
+    let description: String? = try rawDictionary.requireOptional(kSecAttrDescription)
+    let type: Int? = try rawDictionary.requireOptionalCF(kSecAttrType)
+    let label: String? = try rawDictionary.requireOptionalCF(kSecAttrLabel)
+    let service: String? = try? rawDictionary.require(kSecAttrService)
+    let generic: Data? = try rawDictionary.requireOptional(kSecAttrGeneric)
+    let isSynchronizable: Bool? = try rawDictionary.requireOptional(kSecAttrSynchronizable)
     self.init(
       account: account,
       data: data,

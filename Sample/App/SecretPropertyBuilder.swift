@@ -1,4 +1,5 @@
 import Foundation
+import StealthyStash
 
 public struct SecretPropertyBuilder {
   public let secClass: SecretPropertyType
@@ -176,23 +177,81 @@ extension SecretPropertyBuilder {
     )
   }
 }
+//
+//extension InternetPasswordItem {
+//  public init(builder: SecretPropertyBuilder) {
+//    self.init(
+//      account: builder.account,
+//      data: builder.data,
+//      accessGroup: builder.accessGroup,
+//      createdAt: builder.createdAt,
+//      modifiedAt: builder.modifiedAt,
+//      description: builder.description,
+//      type: builder.type,
+//      label: builder.label,
+//      server: builder.server,
+//      protocol: builder.protocol,
+//      port: builder.port,
+//      path: builder.path,
+//      isSynchronizable: builder.isSynchronizable
+//    )
+//  }
+//}
+//
+//extension GenericPasswordItem {
+//  public init(builder: SecretPropertyBuilder) throws {
+//    self.init(
+//      account: builder.account,
+//      data: builder.data,
+//      service: builder.service,
+//      accessGroup: builder.accessGroup,
+//      createdAt: builder.createdAt,
+//      modifiedAt: builder.modifiedAt,
+//      description: builder.description,
+//      type: builder.type,
+//      label: builder.label,
+//      isSynchronizable: builder.isSynchronizable
+//    )
+//  }
+//}
 
-extension InternetPasswordItem {
-  public init(builder: SecretPropertyBuilder) {
-    self.init(
-      account: builder.account,
-      data: builder.data,
-      accessGroup: builder.accessGroup,
-      createdAt: builder.createdAt,
-      modifiedAt: builder.modifiedAt,
-      description: builder.description,
-      type: builder.type,
-      label: builder.label,
-      server: builder.server,
-      protocol: builder.protocol,
-      port: builder.port,
-      path: builder.path,
-      isSynchronizable: builder.isSynchronizable
-    )
+extension SecretProperty  {
+  init(builder: SecretPropertyBuilder) throws {
+    
+    try self.init(rawDictionary: .init(builder: builder))
+  }
+}
+
+extension Dictionary where Key == String, Value == Any {
+  init(builder: SecretPropertyBuilder) {
+    let values : [CFString : Any?] = [
+      kSecAttrAccount: builder.account,
+      kSecValueData: builder.data,
+      kSecAttrAccessGroup: builder.accessGroup,
+      kSecAttrCreationDate: builder.createdAt,
+      kSecAttrModificationDate: builder.modifiedAt,
+      kSecAttrDescription: builder.description,
+      kSecAttrType: builder.type,
+      kSecAttrLabel: builder.label,
+      kSecAttrServer: builder.server,
+      kSecAttrProtocol: builder.protocol?.cfValue,
+      kSecAttrPort: builder.port,
+      kSecAttrPath: builder.path,
+      kSecAttrSynchronizable: builder.isSynchronizable,
+      kSecAttrService: builder.service
+    ]
+    
+    self = Dictionary(uniqueKeysWithValues: values.compactMap{ pair in
+      return pair.value.map{(pair.key as String, $0)}
+    })
+  }
+}
+
+extension AnySecretProperty {
+  
+  public init(builder: SecretPropertyBuilder) throws {
+    let propertyType = builder.secClass.propertyType
+    let property = try propertyType.init(builder: builder)
+    self.init(property: property)
   }
 }

@@ -100,11 +100,6 @@ extension AnySecretProperty {
     }
     return property.path
   }
-
-  public init(builder: SecretPropertyBuilder) throws {
-    let property = try builder.secClass.propertyType.init(builder: builder)
-    self.init(property: property)
-  }
 }
 
 // extension AnySecretProperty {
