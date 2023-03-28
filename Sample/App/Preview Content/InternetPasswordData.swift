@@ -27,6 +27,20 @@ extension CredentialPropertyData {
   }()
 }
 
+extension Synchronizable {
+  init(_ booleanValue : Bool?) {
+    switch booleanValue {
+      
+    case .none:
+      self = .any
+    case .some(true):
+      self = .enabled
+    case .some(false):
+      self = .disabled
+    }
+  }
+}
+
 extension GenericPasswordItem {
   init(data: CredentialPropertyData) {
     self.init(
@@ -39,7 +53,7 @@ extension GenericPasswordItem {
       description: data.description,
       type: data.type,
       label: data.label,
-      isSynchronizable: data.isSynchronizable
+      isSynchronizable: .init( data.isSynchronizable)
     )
   }
 }
@@ -59,7 +73,7 @@ extension InternetPasswordItem {
       protocol: data.url?.scheme.flatMap(ServerProtocol.init(scheme:)),
       port: data.url?.port,
       path: data.url?.path,
-      isSynchronizable: data.isSynchronizable
+      isSynchronizable: .init(data.isSynchronizable)
     )
   }
 }
