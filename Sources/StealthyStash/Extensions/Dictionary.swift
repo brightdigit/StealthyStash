@@ -114,7 +114,9 @@ private protocol _OptionalProtocol {
 
 extension Optional: Dictionary.DeepUnwrappable {
   fileprivate var _deepUnwrapped: Any? {
-    if let wrapped = self { return [String: Any?].deepUnwrap(wrapped) }
+    if let wrapped = self {
+      return [String: Any?].deepUnwrap(wrapped)
+    }
     return nil
   }
 }

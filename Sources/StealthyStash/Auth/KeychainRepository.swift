@@ -4,7 +4,7 @@ public struct KeychainRepository: SecretsRepository {
   public func create(_ item: AnySecretProperty) throws {
     let itemDictionary = item.property.addQuery()
 
-    let query = itemDictionary.merging(defaultAddQuery(forType: item.propertyType)) {
+    let query = itemDictionary.merging(defaultNewProperties(forType: item.propertyType)) {
       $0 ?? $1
     }.deepCompactMapValues()
 
@@ -26,7 +26,7 @@ public struct KeychainRepository: SecretsRepository {
       to: item
     )
     .merging(
-      with: defaultAddQuery(forType: SecretPropertyType.propertyType),
+      with: defaultNewProperties(forType: SecretPropertyType.propertyType),
       overwrite: false
     )
 
@@ -49,7 +49,7 @@ public struct KeychainRepository: SecretsRepository {
     let deleteQuery = item.property
       .deleteQuery()
       .deepCompactMapValues()
-      .merging(with: defaultAddQuery(forType: item.propertyType), overwrite: false)
+      .merging(with: defaultNewProperties(forType: item.propertyType), overwrite: false)
 
     logger?.debug("Deleting: \(deleteQuery.loggingDescription())")
     let status = SecItemDelete(deleteQuery.asCFDictionary())
@@ -102,7 +102,7 @@ public struct KeychainRepository: SecretsRepository {
     defaultServiceName: String,
     defaultServerName: String,
     defaultAccessGroup: String? = nil,
-    defaultSynchronizable: Bool? = nil
+    defaultSynchronizable: Synchronizable = .any
   ) {
     self.defaultServiceName = defaultServiceName
     self.defaultServerName = defaultServerName
@@ -113,14 +113,14 @@ public struct KeychainRepository: SecretsRepository {
   let defaultServiceName: String
   let defaultServerName: String
   let defaultAccessGroup: String?
-  let defaultSynchronizable: Bool?
+  let defaultSynchronizable: Synchronizable
 
-  func defaultAddQuery(forType type: SecretPropertyType) -> [String: Any?] {
+  func defaultNewProperties(forType type: SecretPropertyType) -> [String: Any?] {
     [
       kSecAttrService as String: type == .generic ? defaultServiceName : nil,
       kSecAttrServer as String: type == .internet ? defaultServerName : nil,
       kSecAttrAccessGroup as String: defaultAccessGroup,
-      kSecAttrSynchronizable as String: defaultSynchronizable
+      kSecAttrSynchronizable as String: defaultSynchronizable.cfValue
     ]
   }
 }
