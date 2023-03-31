@@ -1,9 +1,6 @@
-<p align="center">
-    <img alt="StealthyStash" title="StealthyStash" src="Assets/logo.svg" height="200">
-</p>
-<h1 align="center"> StealthyStash </h1>
+<h1 align="center">🤐 StealthyStash </h1>
 
-A Swifty interface into the Keychain Services.
+A Swifty database interface into the Keychain Services.
 
 [![SwiftPM](https://img.shields.io/badge/SPM-Linux%20%7C%20iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS-success?logo=swift)](https://swift.org)
 [![Twitter](https://img.shields.io/badge/twitter-@brightdigit-blue.svg?style=flat)](http://twitter.com/brightdigit)
@@ -28,19 +25,13 @@ A Swifty interface into the Keychain Services.
 * [Introduction](#introduction)
    * [Requirements](#requirements)
    * [Installation](#installation)
-   * [Why use Base32Crockford](#why-use-base32crockford)
 * [Usage](#usage)
-   * [Encoding and Decoding Data](#encoding-and-decoding-data)
-      * [How Checksum Works](#how-checksum-works)
-      * [Using Group Separators](#using-group-separators)
-   * [Creating an Identifier](#creating-an-identifier)
-      * [What is ULID?](#what-is-ulid)
 * [References](#references)
 * [License](#license)
 
 # Introduction
 
-**StealthyStash** provides a way to encode data and create identifiers which is both efficient and human-readable. While Base64 is more efficient it is not very human-readable with both both upper case and lower case letters as well as punctuation.
+**StealthyStash** hendrerit velit ut risus sagittis dignissim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur faucibus ornare dolor at convallis. Sed sit amet elit et lacus convallis scelerisque. Ut faucibus et tellus nec maximus placerat.
 
 ## Requirements 
 
@@ -65,216 +56,137 @@ https://github.com/brightdigit/StealthyStash.git
 
 Use version up to `1.0`.
 
-## Why use Base32Crockford
+## Accessing the Keychain like a Database
 
-Base32Crockford offers the most reasonable compromise when it comes to encoding data. Being a super set of Base16, it uses all ten digits and 22 of the 26 Latin upper case characters.
+Undas si tectis optas auctor et videri madent stellatus inmitis vimina cursus
+**et es** cunctis iniuria, amissam lapsus. Mons gurgite, munere. Minor et
+**suam** quoque medio: gloria mundum funestas intrat; in Iunonis humo sorores
+cum?
 
-| Symbol Value   | Decode Symbol   | Encode Symbol   |
-|:------------:  |:-------------:  |:-------------:  |
-| 0              | 0 O o           | 0               |
-| 1              | 1 I i L l       | 1               |
-| 2              | 2               | 2               |
-| 3              | 3               | 3               |
-| 4              | 4               | 4               |
-| 5              | 5               | 5               |
-| 6              | 6               | 6               |
-| 7              | 7               | 7               |
-| 8              | 8               | 8               |
-| 9              | 9               | 9               |
-| 10             | A a             | A               |
-| 11             | B b             | B               |
-| 12             | C c             | C               |
-| 13             | D d             | D               |
-| 14             | E e             | E               |
-| 15             | F f             | F               |
-| 16             | G g             | G               |
-| 17             | H h             | H               |
-| 18             | J j             | J               |
-| 19             | K k             | K               |
-| 20             | M m             | M               |
-| 21             | N n             | N               |
-| 22             | P p             | P               |
-| 23             | Q q             | Q               |
-| 24             | R r             | R               |
-| 25             | S s             | S               |
-| 26             | T t             | T               |
-| 27             | V v             | V               |
-| 28             | W w             | W               |
-| 29             | X x             | X               |
-| 30             | Y y             | Y               |
-| 31             | Z z             | Z               |
+    editor = 2;
+    raw.dvr_solid_social = rtf_data_install(virus(5), server_market_master(
+            restore.hostDegauss(dataParityE, hypertext_web_desktop, cpm_wpa)),
+            plugDriveIp);
+    cifs_post_interactive += petaflops;
+    gnutellaCpaScreenshot(stateOpacityQueue + bittorrentFlaming,
+            camera_ssd_kbps);
+
+Memini in aether; vis his temerare maxima adnuerat Thybrin, repagula. Quod *opem
+cupies ususabstrahit* fiducia rumpitque certe postquam terga viperei quam.
+Adulterium procorum pudet tantus enim **tamen** molimine crimine casus
+obstipuere ruinae dixit tellure illum, ut primus?
+
+*Sermonibus* pallidaque filia prolis extemplo casuraque marmoreoque. Sentirent
+Hister, degenerat venientis iaculum gladios, ponunt *ipse*, capistris? Et exige
+Buten glorior quae tolle et iugulum distuleratque vocatum [clamorque
+pomis](http://triceps-saxo.io/barbaricoque), exsecrere. Ture addidit hunc pueri
+solus quantum esse flava quasque mediis postquam; est sunt undas die?
 
 # Usage
 
-**StealthyStash** enables the encoding and decoding data in _Base32Crockford_ as well as creation of unique identifiers. There are a variety of options available for encoding and decoding.
+**StealthyStash** sic adhuc comitate talis ridet est quid, per. Altera
+rursus vota; huic harum sollicita [quod
+aetherioque](http://illis-vidisti.org/verterit) egressu Lycaon, noster enim
+videt.
 
-## Encoding and Decoding Data
+## Saving Simple Data
 
-All encoding and decoding is done through the `Base32CrockfordEncoding.encoding` object. This provides an interface into encoding and decoding data as well standardizing. 
+Qui illi alta nullus adsuetam fertque gerens sono traiecti serpentem causa.
+Frondibus quoque, prohibete fecundique tellus, geminis habet submovet.
 
-To encode any data call:
+    if (num(cisc_quad_wysiwyg, flashPacket) + unit_del_digital) {
+        vlog_swappable.deprecated = standalone + io_dtd + ppga_wired;
+        constant_push_matrix.media = cisc_expression_wi;
+        backbone.warm *= waveform_print;
+    }
+    applet_illegal_bar.exabyte += hackerUncGibibyte * 1 + file_master_name.e(
+            illegal_terminal, touchscreenVirusDatabase);
+    if (domain_speed(4)) {
+        bar.leopard += fifo;
+        state.vaporwareWi += rasterDataBounce;
+        leaderboard_lock(certificate_encoding_ocr, macroAnalyst);
+    }
 
-```swift
-public func encode(
-    data: Data,
-    options: Base32CrockfordEncodingOptions = .none
-  ) -> String
-```
+Ab artus aut: Cythereiadasque Troiae et et ad in nunc. Dea bis certatimque cum
+coniuge quoque. Reliquit nec iussa sed, at iterum quotiensque primus nepotum,
+funesta dixit?
 
-Therefore to encode a `Data` object, simply call via:
+- Veneris contactu vincere altum mundi hostem adiuvat
+- Se duxit
+- Thalamos me seges
 
-```swift
-let data : Data // 0x00b003786a8d4aa28411f4e268c43629 
-let base32String = Base32CrockfordEncoding.encoding.encode(data: data)
-print(base32String) // P01QGTMD9AH884FMW9MC8DH9
-```
+### Internet vs Generic Passwords
 
-If you wish to decode the string you can call `Base32CrockfordEncoding.decode`:
+Semper [nitor](http://reus-hanc.org/perheu.html) nectare demittant, et qui,
+[laudis](http://www.capax.com/metu-at.php)? Morae satis ipsa eris ita, moratum
+miseram tulit tu visa novam arte.
 
-```swift
-let data = try Base32CrockfordEncoding.encoding.decode(
-    base32Encoded: "P01QGTMD9AH884FMW9MC8DH9"
-) // 0x00b003786a8d4aa28411f4e268c43629
-```
+Tellure nisi. Per huic tangit vero oppositumque pater, Ulixis in duas erubuit
+inposuit erat quamvis, male subit mihi. **Vestigia freta**.
 
-The `Base32CrockfordEncoding.encode` object provides the ability to specify options on formatting and a checksum.
+1. Suo cum petitur
+2. Transit poeniceam fiuntque tenere cum aliquis habetur
+3. Simulatque oculos Alpheos
+4. Terras in adicit
+5. Gravidae miserum consitaque rapit aetas volat iussa
+6. Ignoscere uvis posuerunt nigra nam movent iubet
 
-### How Checksum Works
+Et vultum vultum, vocem Cinyra, magna longo barbaricoque artesque est videtur,
+iste **secutae fugacis**. Herse sua animosa Lelex. Sternit bracchia ab regia et
+Iovem infectus! Forma erat, Eryx metuam.
 
-You can optionally provide a checksum character at the end which allows for detecting transmission and entry errors early and inexpensively.
+## Using a SecretModel
 
-According to the specification:
+Deus sedendo avertit tamen crimina telum rabidi et raptam, nata dubitas minimam
+lacus, sol. Mecum lumina non hiemem eripienda, quae et conditur iniustum,
+potuisse petit ut, quae. Cum et coepta mille iam infamis exstanti prohibebat
+ulla spernimus moenia at fortibus.
 
-> The check symbol encodes the number modulo 37, 37 being the least prime number greater than 32. We introduce 5 additional symbols that are used only for encoding or decoding the check symbol.
+- Est Alcmene vidit tonitrus videtur latus tabellae
+- Vultibus quoque ubi agris simul quoque vincere
+- Simulasse referemus mens fronte
+- Palmis an
 
-The additional 5 symbols are:
+### Creating a ModelQueryBuilder
 
-| Symbol Value   | Decode Symbol   | Encode Symbol   |
-|----  |-----  |---  |
-| 32   | *     | *   |
-| 33   | ~     | ~   |
-| 34   | $     | $   |
-| 35   | =     | =   |
-| 36   | U u   | U   |
+Tollens canum est duas miser ipse gessit aderat tamen caligine mandata. Tibi
+aquas, repagula rara fronti *datur* deus nequiquam quoque. Illis praeceps.
 
-If you wish to include the checksum, pass true for the `withChecksum` property on the `Base32CrockfordEncodingOptions` object:
+1. Pro eius esse sperare coniunx
+2. Dabit molitor venerat
+3. Quibus nam nec quae vidistis
+4. Spatium non movit quod cornua
+5. Lacrimosa receptus inmensum fuit
 
-```swift
-let data : Data // 0xb63d798c4329401684d1d41d3becc95c
-let base32String = Base32CrockfordEncoding.encoding.encode(
-    data: data,
-    options: .init(withChecksum: true)
-)
-print(base32String) // 5P7NWRRGS980B89MEM3MXYSJAW5
-```
+Truncis modo, figuram premebat, digna, noluit transitque fuit audebatis, anima
+Sarpedonis pater castae. Maeandrius fluminis, arat dum inter tyranni verbaque,
+non pereat inquit. Haut colla nam o haud Solem aras quisque, est.
 
-When decoding a string wtih a checksum, you must specify true for the `withChecksum` property on `Base32CrockfordDecodingOptions`:
+    if (windows == keylogger_raw_software.warm(remote)) {
+        file(css(monochrome, graphic_non_plagiarism, compile_bookmark));
+        hdd_bar = tablet_real(im, 1, dvr * hacker_personal);
+    } else {
+        core(optical(-2, openDesktopRedundancy, batchMysqlNewsgroup));
+        matrix.menuDriveRgb /= flashRaidAjax * 5;
+        floodFatPrint.plug += terminal_dvd_cms * 77;
+    }
+    del = plain + 3 * computerArchive(text * hibernateOutputHit);
+    if (dac < superscalarAsp) {
+        cardPptpDisplay = keyboard;
+        serviceVersionDdl = crossplatform - 5 + vdu;
+        unfriend_megahertz_xp.ajaxCcd = noc_webmail;
+    }
+    var rdfSd = forumDefault(2, emulation_xp_model, certificate);
 
-```swift
-let data = try Base32CrockfordEncoding.encoding.decode(
-    base32Encoded: "5P7NWRRGS980B89MEM3MXYSJAW5"a,
-    options: .init(withChecksum: true)
-) // 0xb63d798c4329401684d1d41d3becc95c
-```
-
-Besides adding a checksum, `Base32CrockfordEncodingOptions` also provides the ability to add a grouping separator.
-
-### Using Group Separators
-
-According to the Base32Crockford specification:
-
-> Hyphens (-) can be inserted into symbol strings. This can partition a string into manageable pieces, improving readability by helping to prevent confusion. Hyphens are ignored during decoding.
-
-To insert hyphens to the encoded string, provide the `GroupingOptions` object to `Base32CrockfordEncodingOptions`:
-
-```swift
-let data : Data // 00c9c37484b85a42e8b3e7fbf806f2661b
-let base32StringGroupedBy3 = Base32CrockfordEncoding.encoding.encode(
-    data: data,
-    options: .init(groupingBy: .init(maxLength: 3))
-)
-let base32StringGroupedBy9 = Base32CrockfordEncoding.encoding.encode(
-    data: data,
-    options: .init(groupingBy: .init(maxLength: 9))
-)
-print(base32StringGroupedBy3) // 69R-DT8-9E2-T8B-MB7-SZV-Z03-F4S-GV2
-print(base32StringGroupedBy9) // 69RDT89E2-T8BMB7SZV-Z03F4SGV2
-```
-
-When decoding, hyphens are ignored:
-
-```swift
-let dataNoHyphens = try Base32CrockfordEncoding.encoding.decode(
-    base32Encoded: "69RDT89E2T8BMB7SZVZ03F4SGV2"
-) // 00c9c37484b85a42e8b3e7fbf806f2661b
-
-let dataGroupedBy3 = try Base32CrockfordEncoding.encoding.decode(
-    base32Encoded: "69R-DT8-9E2-T8B-MB7-SZV-Z03-F4S-GV2"
-) // 00c9c37484b85a42e8b3e7fbf806f2661b
-
-let dataGroupedBy9 = try Base32CrockfordEncoding.encoding.decode(
-    base32Encoded: "69RDT89E2-T8BMB7SZV-Z03F4SGV2"
-) // 00c9c37484b85a42e8b3e7fbf806f2661b
-
-assert(dataNoHyphens == dataGroupedBy3) // true
-assert(dataNoHyphens == dataGroupedBy9) // true
-assert(dataGroupedBy3 == dataGroupedBy9) // true
-```
-
-## Creating an Identifier
-
-
-**StealthyStash** offers the ability to create identifiers of different types in a universal factory. 
-While `UUID` has been available to developers, this library provides a interface for creating two other types. To do this you can call `IdentifierFactory/createIdentifier(with:)` on the `Identifier/factory` to create any of the three types provided:
-
-- `UUID` - standard universal identifier
-- `ULID` - [Universally Unique Lexicographically Sortable Identifier](https://github.com/ulid)
-- `UDID` - dynamicly sized random identifier
-
-Each type has corresponding `ComposableIdentifier/Specifications`:
-
-- `UUID` takes no specifications and be created with `IdentifierFactory.createIdentifier(_:)`
-- `ULID` takes `ULID/Specifications`
-- `UDID` takes `AnyIdentifierSpecifications`
-
-Here's an example with `UDID`:
-
-```
-// create an identifier for 1 million unique IDs that is a factor of 5.
-let specs = AnyIdentifierSpecifications(
-  size: .minimumCount(1_000_000, factorOf: 5)
-)
-let identifier: UDID = Identifier.factory.createIdentifier(with: specs)
-```
-
-### What is ULID?
-
-`ULID` serves the purpose of solving several issues with `UUID` while being compatible:
-
-- 1.21e+24 unique ULIDs per millisecond
-- Lexicographically sortable!
-- Monotonic sort order (correctly detects and handles the same millisecond)
-
-Most importantly it Uses Base32Crockford for better efficiency and readability.
-
-To create a ULID you can either use `IdentifierFactory.createIdentifier(with:)` on `Identifier.factory`:
-
-```
-let ulid : ULID = Identifier.factory.createIdentifier(with: .parts(nil, .random(nil)))
-```
-
-or a constructor:
-
-```
-let ulid = ULID(specifications: .parts(nil, .random(nil)))
-```
-
-For most cases the default `ULID.Specifications.default` specification is sufficient. The follows the canonical spec which uses the first 6 bytes for a the timestamp and the last 10 bytes are random. Otherwise you can specify all 16 bytes with `ULID.Specifications.data(_:)` or specify which `Date` to use for the timestamp and the `RandomDataGenerator` to use for the `ULID.randomPart` of the data. 
+Incurvata partem dubio. Poenas stant urar natus luridus respondere promere
+quibus totumque inquit. Nisi Iove vivunt annis, **auro** est vulnera aderat:
+reliqui. Animoque minus et sinistrae nempe ima herba florumque patiar non erat
+non formosae volucri nomine haec deos fasque. Sed quod arma trahit, marinas
+auxiliaris ait natos pallam.
 
 # References
 
 * [Base32 Specifications from crockford.com](https://www.crockford.com/base32.html)
-* [ULID Specifications](https://github.com/ulid/spec)
 
 # License 
 
