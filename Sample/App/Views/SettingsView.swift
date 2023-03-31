@@ -2,7 +2,7 @@ import StealthyStash
 import SwiftUI
 
 struct SettingsView: View {
-  let repository: SecretsRepository
+  let repository: StealthyRepository
   @State var shouldDisplayConfirmationAlert = false
   @State var shouldDisplayClearAllCompleted = false
   @State var keychainError: KeychainError?

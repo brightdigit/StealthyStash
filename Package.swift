@@ -2,6 +2,8 @@
 
 // swiftlint:disable explicit_acl explicit_top_level_acl
 
+// swiftlint:disable explicit_acl explicit_top_level_acl
+
 import PackageDescription
 
 // let swiftSettings: [SwiftSetting] = [

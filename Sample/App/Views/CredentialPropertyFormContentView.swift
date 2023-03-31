@@ -66,7 +66,7 @@ struct CredentialPropertyFormContentView: View {
 struct CredentialPropertyFormContentView_Previews: PreviewProvider {
   static var previews: some View {
     Form {
-      CredentialPropertyFormContentView(object: CredentialPropertyObject(repository: PreviewRepository(items: AnySecretProperty.previewCollection), item: AnySecretProperty.previewCollection.randomElement()!))
+      CredentialPropertyFormContentView(object: CredentialPropertyObject(repository: PreviewRepository(items: AnyStealthyProperty.previewCollection), item: AnyStealthyProperty.previewCollection.randomElement()!))
     }
   }
 }

@@ -3,7 +3,7 @@ import Foundation
 import StealthyStash
 
 class CredentialPropertyListObject: ObservableObject {
-  internal init(repository: SecretsRepository, triggerSet: TriggerSet, internetPasswords: [AnySecretProperty] = [], isLoaded: Bool = false) {
+  internal init(repository: StealthyRepository, triggerSet: TriggerSet, internetPasswords: [AnyStealthyProperty] = [], isLoaded: Bool = false) {
     self.repository = repository
     credentialProperties = internetPasswords
     self.isLoaded = isLoaded
@@ -21,7 +21,7 @@ class CredentialPropertyListObject: ObservableObject {
       .assign(to: &$lastError)
 
     let loadedCompleted = queryPublisher
-      .map([AnySecretProperty]?.some)
+      .map([AnyStealthyProperty]?.some)
       .replaceError(with: nil)
       .compactMap { $0 }
       .share()
@@ -36,8 +36,8 @@ class CredentialPropertyListObject: ObservableObject {
       .assign(to: &$isLoaded)
   }
 
-  let repository: SecretsRepository
-  @Published var credentialProperties: [AnySecretProperty]
+  let repository: StealthyRepository
+  @Published var credentialProperties: [AnyStealthyProperty]
   @Published var isLoaded = false
   let querySubject = PassthroughSubject<Query, Never>()
   @Published var lastError: KeychainError?

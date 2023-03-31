@@ -1,6 +1,6 @@
 import StealthyStash
 
-struct CompositeCredentials: SecretModel {
+struct CompositeCredentials: StealthyModel {
   typealias QueryBuilder = CompositeCredentialsQueryBuilder
 
   internal init(userName: String, password: String?, token: String?) {
