@@ -1,13 +1,40 @@
 import Foundation
 import Security
 
+private protocol _OptionalProtocol {
+  var _deepUnwrapped: Any? { get }
+}
+
 extension Dictionary {
-  enum MissingValueError: Error {
+  // swiftlint:disable:next strict_fileprivate
+  fileprivate typealias DeepUnwrappable = _OptionalProtocol
+
+  internal enum MissingValueError: Error {
     case missingKey(Key)
     case mismatchType(Value)
   }
 
-  func requireOptionalCF<Output>(_ key: CFString) throws -> Output? where Key == String {
+  internal static func deepUnwrap(_ any: Any) -> Any? {
+    if let optional = any as? _OptionalProtocol {
+      return optional._deepUnwrapped
+    }
+    return any
+  }
+
+  internal func merging(with rhs: Self, overwrite: Bool) -> Self {
+    merging(rhs) { lhs, rhs in
+      let value = overwrite ? rhs : lhs
+      return value
+    }
+  }
+
+  internal func deepCompactMapValues() -> Self where Value == Any? {
+    compactMapValues { $0 }.compactMapValues(Self.deepUnwrap).compactMapValues { $0 }
+  }
+
+  internal func requireOptionalCF<Output>(
+    _ key: CFString
+  ) throws -> Output? where Key == String {
     guard let cfString: CFNumber = try requireOptional(key as String) else {
       return nil
     }
@@ -15,11 +42,13 @@ extension Dictionary {
     return value
   }
 
-  func requireOptional<Output>(_ key: CFString) throws -> Output? where Key == String {
+  internal func requireOptional<Output>(
+    _ key: CFString
+  ) throws -> Output? where Key == String {
     try requireOptional(key as String)
   }
 
-  func requireOptional<Output>(_ key: Key) throws -> Output? {
+  internal func requireOptional<Output>(_ key: Key) throws -> Output? {
     try requireOptional(key, as: Output.self)
   }
 
@@ -33,11 +62,11 @@ extension Dictionary {
     return value
   }
 
-  func require<Output>(_ key: Key) throws -> Output {
+  internal func require<Output>(_ key: Key) throws -> Output {
     try require(key, as: Output.self)
   }
 
-  func require<Output>(_ key: CFString) throws -> Output where Key == String {
+  internal func require<Output>(_ key: CFString) throws -> Output where Key == String {
     try require(key as String)
   }
 
@@ -53,7 +82,7 @@ extension Dictionary {
 }
 
 extension Dictionary where Key == String, Value == Any? {
-  func loggingDescription() -> String {
+  internal func loggingDescription() -> String {
     compactMap { (key: String, value: Any?) in
       guard let value = value._deepUnwrapped else {
         // assertionFailure()
@@ -64,56 +93,13 @@ extension Dictionary where Key == String, Value == Any? {
     }.joined(separator: ", ")
   }
 
-  func asCFDictionary() -> CFDictionary {
+  internal func asCFDictionary() -> CFDictionary {
     compactMapValues { $0 } as CFDictionary
   }
 }
 
-extension Dictionary where Key == String, Value == Any {
-  func loggingDescription() -> String {
-    var values = [Key: Value]()
-    if let data = self[kSecValueData as String] as? Data {
-      values["data_string"] = String(bytes: data, encoding: .utf8)
-    }
-    return merging(with: values, overwrite: false)
-      .compactMap { (key: String, value: Any?) in
-        guard let value = value._deepUnwrapped else {
-          assertionFailure()
-          return nil
-        }
-
-        return [key, "\(value)"].joined(separator: ": ")
-      }.joined(separator: ", ")
-  }
-}
-
-extension Dictionary {
-  fileprivate typealias DeepUnwrappable = _OptionalProtocol
-
-  static func deepUnwrap(_ any: Any) -> Any? {
-    if let optional = any as? _OptionalProtocol {
-      return optional._deepUnwrapped
-    }
-    return any
-  }
-
-  func merging(with rhs: Self, overwrite: Bool) -> Self {
-    merging(rhs) { lhs, rhs in
-      let value = overwrite ? rhs : lhs
-      return value
-    }
-  }
-
-  internal func deepCompactMapValues() -> Self where Value == Any? {
-    compactMapValues { $0 }.compactMapValues(Self.deepUnwrap).compactMapValues { $0 }
-  }
-}
-
-private protocol _OptionalProtocol {
-  var _deepUnwrapped: Any? { get }
-}
-
 extension Optional: Dictionary.DeepUnwrappable {
+  // swiftlint:disable:next strict_fileprivate
   fileprivate var _deepUnwrapped: Any? {
     if let wrapped = self {
       return SecretDictionary.deepUnwrap(wrapped)

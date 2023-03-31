@@ -7,7 +7,7 @@ import Foundation
 #if canImport(Darwin)
   import Darwin
 #else
-  typealias OSStatus = Int32
+  public typealias OSStatus = Int32
 #endif
 
 public enum KeychainError: Error, LocalizedError, Equatable {

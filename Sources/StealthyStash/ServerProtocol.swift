@@ -33,22 +33,11 @@ public enum ServerProtocol: String {
   case ircs
   case pop3s
 
-  public init?(scheme: String) {
-    switch scheme {
-    case "http": self = .http
-    default: return nil
-    }
-  }
-
-  public var cfValue: CFString {
-    Self.spMap[self]!
-  }
-
-  static let spMap: [ServerProtocol: CFString] = .init(
+  private static let spMap: [ServerProtocol: CFString] = .init(
     uniqueKeysWithValues: cfStringMap.map { ($0.value, $0.key) }
   )
 
-  static let cfStringMap: [CFString: ServerProtocol] = [
+  private static let cfStringMap: [CFString: ServerProtocol] = [
     kSecAttrProtocolFTP: .ftp,
     kSecAttrProtocolFTPAccount: .ftpaccount,
     kSecAttrProtocolHTTP: .http,
@@ -82,7 +71,22 @@ public enum ServerProtocol: String {
     kSecAttrProtocolPOP3S: .pop3s
   ]
 
-  init?(number: CFString) {
+  public var cfValue: CFString {
+    // swiftlint:disable:next force_unwrapping
+    Self.spMap[self]!
+  }
+
+  public init?(scheme: String) {
+    switch scheme {
+    case "http":
+      self = .http
+
+    default:
+      return nil
+    }
+  }
+
+  internal init?(number: CFString) {
     guard let value = Self.cfStringMap[number] else {
       return nil
     }

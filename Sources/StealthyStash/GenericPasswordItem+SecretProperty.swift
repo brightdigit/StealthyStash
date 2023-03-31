@@ -13,28 +13,11 @@ extension GenericPasswordItem {
     ].compactMap { $0 }.joined()
   }
 
-  public func uniqueAttributes() -> SecretDictionary {
-    [
-      kSecAttrAccount as String: account,
-      kSecAttrService as String: service,
-      kSecAttrAccessGroup as String: accessGroup,
-      kSecAttrSynchronizable as String: isSynchronizable.cfValue
-    ]
-  }
-
-  public func otherProperties() -> SecretDictionary {
-    [
-      kSecAttrGeneric as String: gerneic,
-      kSecAttrDescription as String: description,
-      kSecAttrComment as String: comment,
-      kSecAttrType as String: type,
-      kSecAttrLabel as String: label
-    ]
-  }
-
-  internal init(common: CommonAttributes,
-                service: String? = nil,
-                generic: Data? = nil) {
+  internal init(
+    common: CommonAttributes,
+    service: String? = nil,
+    generic: Data? = nil
+  ) {
     self.init(
       account: common.account,
       data: common.data,
@@ -43,6 +26,7 @@ extension GenericPasswordItem {
       createdAt: common.createdAt,
       modifiedAt: common.modifiedAt,
       description: common.description,
+      comment: common.comment,
       type: common.type,
       label: common.label,
       gerneic: generic,
@@ -70,5 +54,24 @@ extension GenericPasswordItem {
       service: service,
       generic: generic
     )
+  }
+
+  public func uniqueAttributes() -> SecretDictionary {
+    [
+      kSecAttrAccount as String: account,
+      kSecAttrService as String: service,
+      kSecAttrAccessGroup as String: accessGroup,
+      kSecAttrSynchronizable as String: isSynchronizable.cfValue
+    ]
+  }
+
+  public func otherProperties() -> SecretDictionary {
+    [
+      kSecAttrGeneric as String: gerneic,
+      kSecAttrDescription as String: description,
+      kSecAttrComment as String: comment,
+      kSecAttrType as String: type,
+      kSecAttrLabel as String: label
+    ]
   }
 }

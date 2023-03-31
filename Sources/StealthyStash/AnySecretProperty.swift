@@ -1,6 +1,11 @@
 import Foundation
 
 public struct AnySecretProperty: Identifiable, Hashable {
+  public let property: any SecretProperty
+  public var id: String {
+    property.id
+  }
+
   public init(property: any SecretProperty) {
     self.property = property
   }
@@ -9,12 +14,6 @@ public struct AnySecretProperty: Identifiable, Hashable {
     Swift.type(of: lhs.property).propertyType == Swift.type(of: rhs.property).propertyType
       && lhs.id == rhs.id
   }
-
-  public var id: String {
-    property.id
-  }
-
-  public let property: any SecretProperty
 
   public func hash(into hasher: inout Hasher) {
     hasher.combine(property)

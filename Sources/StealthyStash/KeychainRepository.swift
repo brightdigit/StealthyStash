@@ -1,12 +1,38 @@
 import Security
 
 public struct KeychainRepository: SecretsRepository {
+  private let defaultProvider: DefaultProvider
+
+  public init(defaultProvider: DefaultProvider) {
+    self.defaultProvider = defaultProvider
+  }
+
+  private static func itemsFromQuery(
+    dictionary: [String: Any?]
+  ) throws -> [SecretDictionary] {
+    var item: CFTypeRef?
+
+    let status = SecItemCopyMatching(dictionary as CFDictionary, &item)
+
+    guard status != errSecItemNotFound else {
+      return []
+    }
+    guard
+      let itemDictionaries = item as? [SecretDictionary],
+      status == errSecSuccess else {
+      throw KeychainError.unhandledError(status: status)
+    }
+    return itemDictionaries
+  }
+
   public func create(_ item: AnySecretProperty) throws {
     let itemDictionary = item.property.addQuery()
 
-    let query = itemDictionary.merging(defaultNewProperties(forType: item.propertyType)) {
-      $0 ?? $1
-    }.deepCompactMapValues()
+    let query = itemDictionary
+      .merging(defaultProvider.attributesForNewItem(ofType: item.propertyType)) {
+        $0 ?? $1
+      }
+      .deepCompactMapValues()
 
     logger?.debug("Creating: \(query.loggingDescription())")
 
@@ -25,10 +51,6 @@ public struct KeychainRepository: SecretsRepository {
       from: previousItem,
       to: item
     )
-//    .merging(
-//      with: defaultUpdateProperties(forType: SecretPropertyType.propertyType),
-//      overwrite: false
-//    )
 
     logger?.debug("Updating: \(querySet.query.loggingDescription())")
     logger?.debug(
@@ -59,21 +81,16 @@ public struct KeychainRepository: SecretsRepository {
   }
 
   public func query(_ query: Query) throws -> [AnySecretProperty] {
-    let dictionaryAny = query.keychainDictionary().merging(with: defaultQueryProperties(forType: query.type), overwrite: false)
+    let defaultAttributes = defaultProvider.attributesForQuery(ofType: query.type)
+    let dictionaryAny = query
+      .keychainDictionary()
+      .merging(with: defaultAttributes, overwrite: false)
 
-    var item: CFTypeRef?
     let cfQuery = dictionaryAny.deepCompactMapValues()
 
     logger?.debug("Query: \(cfQuery.loggingDescription())")
 
-    let status = SecItemCopyMatching(cfQuery as CFDictionary, &item)
-
-    guard status != errSecItemNotFound else {
-      return []
-    }
-    guard let dictionaries = item as? [SecretDictionary], status == errSecSuccess else {
-      throw KeychainError.unhandledError(status: status)
-    }
+    let dictionaries = try Self.itemsFromQuery(dictionary: cfQuery)
 
     do {
       return try dictionaries.map {
@@ -87,47 +104,21 @@ public struct KeychainRepository: SecretsRepository {
       return []
     }
   }
+}
 
+extension KeychainRepository {
   public init(
     defaultServiceName: String,
     defaultServerName: String,
     defaultAccessGroup: String? = nil,
     defaultSynchronizable: Synchronizable = .any
   ) {
-    self.defaultServiceName = defaultServiceName
-    self.defaultServerName = defaultServerName
-    self.defaultAccessGroup = defaultAccessGroup
-    self.defaultSynchronizable = defaultSynchronizable
-  }
-
-  let defaultServiceName: String
-  let defaultServerName: String
-  let defaultAccessGroup: String?
-  let defaultSynchronizable: Synchronizable
-
-  func defaultQueryProperties(forType type: SecretPropertyType?) -> SecretDictionary {
-    [
-      kSecAttrServer as String: type == .internet ? defaultServerName : nil,
-      kSecAttrService as String: type == .generic ? defaultServiceName : nil,
-      kSecAttrAccessGroup as String: defaultAccessGroup
-    ]
-  }
-
-  func defaultUpdateProperties(forType type: SecretPropertyType) -> SecretDictionary {
-    [
-      kSecAttrService as String: type == .generic ? defaultServiceName : nil,
-      kSecAttrServer as String: type == .internet ? defaultServerName : nil,
-      kSecAttrAccessGroup as String: defaultAccessGroup,
-      kSecAttrSynchronizable as String: defaultSynchronizable.cfValue
-    ]
-  }
-
-  func defaultNewProperties(forType type: SecretPropertyType) -> SecretDictionary {
-    [
-      kSecAttrService as String: type == .generic ? defaultServiceName : nil,
-      kSecAttrServer as String: type == .internet ? defaultServerName : nil,
-      kSecAttrAccessGroup as String: defaultAccessGroup,
-      kSecAttrSynchronizable as String: defaultSynchronizable.cfValue
-    ]
+    let provider = SimpleDefaultProvider(
+      defaultServiceName: defaultServiceName,
+      defaultServerName: defaultServerName,
+      defaultAccessGroup: defaultAccessGroup,
+      defaultSynchronizable: defaultSynchronizable
+    )
+    self.init(defaultProvider: provider)
   }
 }

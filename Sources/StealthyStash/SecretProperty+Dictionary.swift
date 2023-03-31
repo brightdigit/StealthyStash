@@ -1,12 +1,12 @@
 import Security
 
 extension SecretProperty {
-  public func eraseToAnyProperty() -> AnySecretProperty {
-    .init(property: self)
-  }
-
   public var dataString: String {
     String(data: data, encoding: .utf8) ?? ""
+  }
+
+  public func eraseToAnyProperty() -> AnySecretProperty {
+    .init(property: self)
   }
 
   public func dataDictionary() -> SecretDictionary {

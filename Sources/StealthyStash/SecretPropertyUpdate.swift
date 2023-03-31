@@ -1,11 +1,11 @@
 public struct SecretPropertyUpdate {
+  internal let previousProperty: AnySecretProperty?
+  internal let newProperty: AnySecretProperty?
+
   public init(previousProperty: AnySecretProperty?, newProperty: AnySecretProperty?) {
     self.previousProperty = previousProperty
     self.newProperty = newProperty
   }
-
-  let previousProperty: AnySecretProperty?
-  let newProperty: AnySecretProperty?
 }
 
 extension SecretPropertyUpdate {

@@ -6,7 +6,7 @@ public enum SecretPropertyType {
 }
 
 extension SecretPropertyType {
-  var secClass: CFString {
+  public var secClass: CFString {
     switch self {
     case .internet:
       return kSecClassInternetPassword
