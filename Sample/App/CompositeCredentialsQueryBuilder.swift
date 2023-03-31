@@ -1,7 +1,16 @@
 import StealthyStash
 
+extension AnyStealthyProperty {
+  
+}
+
+extension StealthyProperty {
+    public var dataString: String {
+      String(data: data, encoding: .utf8) ?? ""
+    }
+}
 struct CompositeCredentialsQueryBuilder: ModelQueryBuilder {
-  static func updates(from previousItem: CompositeCredentials, to newItem: CompositeCredentials) -> [SecretPropertyUpdate] {
+  static func updates(from previousItem: CompositeCredentials, to newItem: CompositeCredentials) -> [StealthyPropertyUpdate] {
     let newPasswordData = newItem.password.flatMap {
       $0.data(using: .utf8)
     }.map {
@@ -26,17 +35,17 @@ struct CompositeCredentialsQueryBuilder: ModelQueryBuilder {
       GenericPasswordItem(account: newItem.userName, data: $0)
     }
 
-    let passwordUpdate = SecretPropertyUpdate(previousProperty: oldPasswordData, newProperty: newPasswordData)
-    let tokenUpdate = SecretPropertyUpdate(previousProperty: previousTokenData, newProperty: newTokenData)
+    let passwordUpdate = StealthyPropertyUpdate(previousProperty: oldPasswordData, newProperty: newPasswordData)
+    let tokenUpdate = StealthyPropertyUpdate(previousProperty: previousTokenData, newProperty: newTokenData)
     return [passwordUpdate, tokenUpdate]
   }
 
-  static func properties(from model: CompositeCredentials, for _: ModelOperation) -> [AnySecretProperty] {
+  static func properties(from model: CompositeCredentials, for _: ModelOperation) -> [AnyStealthyProperty] {
     let passwordData = model.password.flatMap {
       $0.data(using: .utf8)
     }
 
-    let passwordProperty: AnySecretProperty = .init(
+    let passwordProperty: AnyStealthyProperty = .init(
       property: InternetPasswordItem(
         account: model.userName,
         data: passwordData ?? .init()
@@ -47,7 +56,7 @@ struct CompositeCredentialsQueryBuilder: ModelQueryBuilder {
       $0.data(using: .utf8)
     }
 
-    let tokenProperty: AnySecretProperty = .init(
+    let tokenProperty: AnyStealthyProperty = .init(
       property: GenericPasswordItem(
         account: model.userName,
         data: tokenData ?? .init()
@@ -64,7 +73,7 @@ struct CompositeCredentialsQueryBuilder: ModelQueryBuilder {
     ]
   }
 
-  static func model(from properties: [String: [AnySecretProperty]]) throws -> CompositeCredentials? {
+  static func model(from properties: [String: [AnyStealthyProperty]]) throws -> CompositeCredentials? {
     for internet in properties["password"] ?? [] {
       for generic in properties["token"] ?? [] {
         if internet.account == generic.account {
@@ -93,5 +102,5 @@ struct CompositeCredentialsQueryBuilder: ModelQueryBuilder {
 
   typealias QueryType = Void
 
-  typealias SecretModelType = CompositeCredentials
+  typealias StealthyModelType = CompositeCredentials
 }
