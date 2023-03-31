@@ -1,11 +1,11 @@
 import Foundation
 import StealthyStash
 
-public struct SecretPropertyBuilder {
-  public let secClass: SecretPropertyType
+public struct StealthyPropertyBuilder {
+  public let secClass: StealthyPropertyType
   public init(
-    secClass: SecretPropertyType,
-    source: AnySecretProperty? = nil,
+    secClass: StealthyPropertyType,
+    source: AnyStealthyProperty? = nil,
     account: String = "",
     data: Data = .init(),
     accessGroup: String? = nil,
@@ -44,7 +44,7 @@ public struct SecretPropertyBuilder {
     isSynchronizableSet = isSynchronizable != .any
   }
 
-  public var source: AnySecretProperty?
+  public var source: AnyStealthyProperty?
   public var account: String
   public var data: Data
   public var accessGroup: String?
@@ -65,7 +65,7 @@ public struct SecretPropertyBuilder {
   public var isSynchronizableSet: Bool
 }
 
-extension SecretPropertyBuilder {
+extension StealthyPropertyBuilder {
   public var dataString: String {
     get {
       String(data: data, encoding: .utf8) ?? ""
@@ -131,7 +131,7 @@ extension SecretPropertyBuilder {
     ].first { !$0 } ?? true
   }
 
-  public func saved() throws -> SecretPropertyBuilder {
+  public func saved() throws -> StealthyPropertyBuilder {
     try .init(
       secClass: secClass,
       source: .init(builder: self),
@@ -155,8 +155,8 @@ extension SecretPropertyBuilder {
 }
 
 
-extension SecretPropertyBuilder {
-  public init(item: AnySecretProperty) {
+extension StealthyPropertyBuilder {
+  public init(item: AnyStealthyProperty) {
     assert(item.propertyType == .internet || item.service != nil)
     self.init(
       secClass: item.propertyType,
@@ -178,53 +178,16 @@ extension SecretPropertyBuilder {
     )
   }
 }
-//
-//extension InternetPasswordItem {
-//  public init(builder: SecretPropertyBuilder) {
-//    self.init(
-//      account: builder.account,
-//      data: builder.data,
-//      accessGroup: builder.accessGroup,
-//      createdAt: builder.createdAt,
-//      modifiedAt: builder.modifiedAt,
-//      description: builder.description,
-//      type: builder.type,
-//      label: builder.label,
-//      server: builder.server,
-//      protocol: builder.protocol,
-//      port: builder.port,
-//      path: builder.path,
-//      isSynchronizable: builder.isSynchronizable
-//    )
-//  }
-//}
-//
-//extension GenericPasswordItem {
-//  public init(builder: SecretPropertyBuilder) throws {
-//    self.init(
-//      account: builder.account,
-//      data: builder.data,
-//      service: builder.service,
-//      accessGroup: builder.accessGroup,
-//      createdAt: builder.createdAt,
-//      modifiedAt: builder.modifiedAt,
-//      description: builder.description,
-//      type: builder.type,
-//      label: builder.label,
-//      isSynchronizable: builder.isSynchronizable
-//    )
-//  }
-//}
 
-extension SecretProperty  {
-  init(builder: SecretPropertyBuilder) throws {
+extension StealthyProperty  {
+  init(builder: StealthyPropertyBuilder) throws {
     
     try self.init(rawDictionary: .init(builder: builder))
   }
 }
 
 extension Dictionary where Key == String, Value == Any {
-  init(builder: SecretPropertyBuilder) {
+  init(builder: StealthyPropertyBuilder) {
     let values : [CFString : Any?] = [
       kSecAttrAccount: builder.account,
       kSecValueData: builder.data,
@@ -248,9 +211,9 @@ extension Dictionary where Key == String, Value == Any {
   }
 }
 
-extension AnySecretProperty {
+extension AnyStealthyProperty {
   
-  public init(builder: SecretPropertyBuilder) throws {
+  public init(builder: StealthyPropertyBuilder) throws {
     let propertyType = builder.secClass.propertyType
     let property = try propertyType.init(builder: builder)
     self.init(property: property)

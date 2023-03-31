@@ -11,11 +11,11 @@ class TriggerSet {
   }
 }
 
-class CompositeSecretObject: ObservableObject {
+class CompositeStealthyObject: ObservableObject {
   internal init(
-    repository: SecretsRepository,
+    repository: StealthyRepository,
     triggerSet: TriggerSet,
-    secret: CompositeSecretBuilder = CompositeSecretBuilder()
+    secret: CompositeStealthyBuilder = CompositeStealthyBuilder()
   ) {
     self.repository = repository
     self.secret = secret
@@ -24,7 +24,7 @@ class CompositeSecretObject: ObservableObject {
       .map { self.source }
 
     Publishers.Merge(resetSourcePublisher, $source)
-      .map(CompositeSecretBuilder.init)
+      .map(CompositeStealthyBuilder.init)
       .receive(on: DispatchQueue.main)
       .assign(to: &$secret)
 
@@ -99,7 +99,7 @@ class CompositeSecretObject: ObservableObject {
       .subscribe(triggerSet.saveCompletedTrigger)
   }
 
-  let repository: SecretsRepository
+  let repository: StealthyRepository
 
   let resetPassthrough = PassthroughSubject<Void, Never>()
   let savePassthrough = PassthroughSubject<Void, Never>()
@@ -107,7 +107,7 @@ class CompositeSecretObject: ObservableObject {
 
   @Published var lastError: KeychainError?
   @Published var source: CompositeCredentials?
-  @Published var secret = CompositeSecretBuilder()
+  @Published var secret = CompositeStealthyBuilder()
   @Published var isLoaded = false
 
   var saveSuccessCancellable: AnyCancellable!

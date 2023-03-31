@@ -1,16 +1,16 @@
 import StealthyStash
 
-struct PreviewRepository: SecretsRepository {
-  func delete(_: AnySecretProperty) throws {}
+struct PreviewRepository: StealthyRepository {
+  func delete(_: AnyStealthyProperty) throws {}
 
-  let items: [AnySecretProperty]
-  func create(_: AnySecretProperty) throws {}
+  let items: [AnyStealthyProperty]
+  func create(_: AnyStealthyProperty) throws {}
 
-  func update(_: AnySecretProperty) throws {}
+  func update(_: AnyStealthyProperty) throws {}
 
-  func update<SecretPropertyType>(_: SecretPropertyType, from _: SecretPropertyType) throws where SecretPropertyType: SecretProperty {}
+  func update<StealthyPropertyType>(_: StealthyPropertyType, from _: StealthyPropertyType) throws where StealthyPropertyType: StealthyProperty {}
 
-  func query(_: Query) throws -> [AnySecretProperty] {
+  func query(_: Query) throws -> [AnyStealthyProperty] {
     items
   }
 }

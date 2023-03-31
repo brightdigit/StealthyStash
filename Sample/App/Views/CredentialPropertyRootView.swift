@@ -2,7 +2,7 @@ import StealthyStash
 import SwiftUI
 
 struct CredentialPropertyRootView: View {
-  internal init(repository: SecretsRepository, triggerSet: TriggerSet, internetPasswords: [AnySecretProperty] = [], isLoaded: Bool = false, query: Query, createNewItem: Bool = false) {
+  internal init(repository: StealthyRepository, triggerSet: TriggerSet, internetPasswords: [AnyStealthyProperty] = [], isLoaded: Bool = false, query: Query, createNewItem: Bool = false) {
     _object = StateObject(wrappedValue: .init(repository: repository, triggerSet: triggerSet, internetPasswords: internetPasswords, isLoaded: isLoaded))
     _query = .init(initialValue: query)
     self.createNewItem = createNewItem
@@ -82,7 +82,7 @@ struct CredentialPropertyRootView: View {
         } label: {
           Image(systemName: "plus")
         }
-      }.navigationDestination(for: AnySecretProperty.self) { item in
+      }.navigationDestination(for: AnyStealthyProperty.self) { item in
         CredentialPropertyView(repository: self.object.repository, item: item).navigationTitle(item.account)
       }.navigationDestination(isPresented: self.$createNewItem) {
         CredentialPropertyView(repository: self.object.repository, type: self.query.type).navigationTitle(self.newNavigationTitle)
@@ -96,7 +96,7 @@ struct CredentialPropertyRootView: View {
 struct CredentialPropertyRootView_Previews: PreviewProvider {
   static var previews: some View {
     CredentialPropertyRootView(repository: PreviewRepository(
-      items: AnySecretProperty.previewCollection
-    ), triggerSet: .init(), internetPasswords: AnySecretProperty.previewCollection, query: TypeQuery(type: .internet))
+      items: AnyStealthyProperty.previewCollection
+    ), triggerSet: .init(), internetPasswords: AnyStealthyProperty.previewCollection, query: TypeQuery(type: .internet))
   }
 }
