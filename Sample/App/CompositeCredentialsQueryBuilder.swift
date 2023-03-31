@@ -1,5 +1,14 @@
 import StealthyStash
 
+extension AnyStealthyProperty {
+  
+}
+
+extension StealthyProperty {
+    public var dataString: String {
+      String(data: data, encoding: .utf8) ?? ""
+    }
+}
 struct CompositeCredentialsQueryBuilder: ModelQueryBuilder {
   static func updates(from previousItem: CompositeCredentials, to newItem: CompositeCredentials) -> [StealthyPropertyUpdate] {
     let newPasswordData = newItem.password.flatMap {

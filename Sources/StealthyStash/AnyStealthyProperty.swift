@@ -29,10 +29,6 @@ extension AnyStealthyProperty {
     property.data
   }
 
-  public var dataString: String {
-    property.dataString
-  }
-
   public var accessGroup: String? {
     property.accessGroup
   }
@@ -65,18 +61,18 @@ extension AnyStealthyProperty {
     property.isSynchronizable
   }
 
-  public var server: String? {
-    guard let property = self.property as? InternetPasswordItem else {
-      return nil
-    }
-    return property.server
-  }
-
   public var service: String? {
     guard let property = self.property as? GenericPasswordItem else {
       return nil
     }
     return property.service
+  }
+
+  public var server: String? {
+    guard let property = self.property as? InternetPasswordItem else {
+      return nil
+    }
+    return property.server
   }
 
   public var `protocol`: ServerProtocol? {

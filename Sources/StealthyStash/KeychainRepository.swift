@@ -1,9 +1,9 @@
 import Security
 
 public struct KeychainRepository: StealthyRepository {
-  private let defaultProvider: DefaultProvider
+  private let defaultProvider: DefaultProvider?
 
-  public init(defaultProvider: DefaultProvider) {
+  public init(defaultProvider: DefaultProvider? = nil) {
     self.defaultProvider = defaultProvider
   }
 
@@ -26,10 +26,11 @@ public struct KeychainRepository: StealthyRepository {
   }
 
   public func create(_ item: AnyStealthyProperty) throws {
+    let defaults = defaultProvider?.attributesForNewItem(ofType: item.propertyType) ?? [:]
     let itemDictionary = item.property.addQuery()
 
     let query = itemDictionary
-      .merging(defaultProvider.attributesForNewItem(ofType: item.propertyType)) {
+      .merging(defaults) {
         $0 ?? $1
       }
       .deepCompactMapValues()
@@ -81,10 +82,10 @@ public struct KeychainRepository: StealthyRepository {
   }
 
   public func query(_ query: Query) throws -> [AnyStealthyProperty] {
-    let defaultAttributes = defaultProvider.attributesForQuery(ofType: query.type)
+    let defaults = defaultProvider?.attributesForQuery(ofType: query.type) ?? [:]
     let dictionaryAny = query
       .keychainDictionary()
-      .merging(with: defaultAttributes, overwrite: false)
+      .merging(with: defaults, overwrite: false)
 
     let cfQuery = dictionaryAny.deepCompactMapValues()
 

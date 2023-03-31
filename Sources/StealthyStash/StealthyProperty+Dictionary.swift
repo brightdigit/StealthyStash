@@ -1,10 +1,6 @@
 import Security
 
 extension StealthyProperty {
-  public var dataString: String {
-    String(data: data, encoding: .utf8) ?? ""
-  }
-
   public func eraseToAnyProperty() -> AnyStealthyProperty {
     .init(property: self)
   }
@@ -38,6 +34,6 @@ extension StealthyProperty {
   }
 
   public func updateQuerySet() -> UpdateQuerySet {
-    .init(query: fetchQuery(), attributes: attributesDictionary(), id: id)
+    .init(query: fetchQuery(), attributes: attributesDictionary())
   }
 }

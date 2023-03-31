@@ -1,12 +1,10 @@
 public struct UpdateQuerySet {
   internal let query: StealthyDictionary
   internal let attributes: StealthyDictionary
-  // let id: String
 
-  internal init(query: StealthyDictionary, attributes: StealthyDictionary, id _: String) {
+  public init(query: StealthyDictionary, attributes: StealthyDictionary) {
     self.query = query
     self.attributes = attributes
-    // self.id = id
   }
 }
 
@@ -17,6 +15,6 @@ extension UpdateQuerySet {
   ) {
     let query = previousItem.fetchQuery()
     let attributes = newItem.updateQuery()
-    self.init(query: query, attributes: attributes, id: newItem.id)
+    self.init(query: query, attributes: attributes)
   }
 }
