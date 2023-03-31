@@ -3,7 +3,7 @@ import Foundation
 import StealthyStash
 
 class CredentialPropertyObject: ObservableObject {
-  internal init(repository: SecretsRepository, triggerSet: TriggerSet, item: SecretPropertyBuilder, original: AnySecretProperty?) {
+  internal init(repository: StealthyRepository, triggerSet: TriggerSet, item: StealthyPropertyBuilder, original: AnyStealthyProperty?) {
     self.item = item
     self.repository = repository
     originalItem = original
@@ -11,7 +11,7 @@ class CredentialPropertyObject: ObservableObject {
     
     let savePublisher = saveTriggerSubject
       .map { self.item }
-      .tryMap(AnySecretProperty.init)
+      .tryMap(AnyStealthyProperty.init)
       .tryMap { item in
         try self.repository.upsert(from: self.originalItem, to: item.property)
       }
@@ -46,7 +46,7 @@ class CredentialPropertyObject: ObservableObject {
 
     let deletePublisher = deleteTriggerSubject
       .map { self.item }
-      .tryMap(AnySecretProperty.init)
+      .tryMap(AnyStealthyProperty.init)
       .tryMap { item in
         try self.repository.delete(item)
       }
@@ -83,13 +83,13 @@ class CredentialPropertyObject: ObservableObject {
   }
 
   @Published var lastError: KeychainError?
-  @Published var item: SecretPropertyBuilder
+  @Published var item: StealthyPropertyBuilder
   let saveTriggerSubject = PassthroughSubject<Void, Never>()
   let deleteTriggerSubject = PassthroughSubject<Void, Never>()
   let clearErrorSubject = PassthroughSubject<KeychainError, Never>()
   let updateCompletedSubject = PassthroughSubject<Void, Never>()
-  let repository: SecretsRepository
-  let originalItem: AnySecretProperty?
+  let repository: StealthyRepository
+  let originalItem: AnyStealthyProperty?
   var saveCompletedCancellable: AnyCancellable!
   var updateCompletedCancellable: AnyCancellable!
 
@@ -99,11 +99,11 @@ class CredentialPropertyObject: ObservableObject {
 }
 
 extension CredentialPropertyObject {
-  convenience init(repository: SecretsRepository, item: AnySecretProperty) {
+  convenience init(repository: StealthyRepository, item: AnyStealthyProperty) {
     self.init(repository: repository, triggerSet: .init(), item: .init(item: item), original: item)
   }
 
-  convenience init(repository: SecretsRepository, type: SecretPropertyType) {
+  convenience init(repository: StealthyRepository, type: StealthyPropertyType) {
     self.init(repository: repository, triggerSet: .init(), item: .init(secClass: type), original: nil)
   }
 }

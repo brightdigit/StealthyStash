@@ -1,12 +1,12 @@
 import Foundation
 
-struct CompositeSecretBuilder {
+struct CompositeStealthyBuilder {
   var userName = ""
   var password = ""
   var token = ""
 }
 
-extension CompositeSecretBuilder {
+extension CompositeStealthyBuilder {
   init(secret: CompositeCredentials?) {
     self.init(
       userName: secret?.userName ?? "",
@@ -17,7 +17,7 @@ extension CompositeSecretBuilder {
 }
 
 extension CompositeCredentials {
-  init?(builder: CompositeSecretBuilder) {
+  init?(builder: CompositeStealthyBuilder) {
     guard let userName = builder.userName.nilTrimmed() else {
       return nil
     }

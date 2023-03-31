@@ -1,7 +1,7 @@
 import StealthyStash
 import SwiftUI
 
-extension SecretPropertyType {
+extension StealthyPropertyType {
   var sfSymbolName: String {
     switch self {
     case .internet:
@@ -52,7 +52,7 @@ struct CredentialPropertyList_Previews: PreviewProvider {
     CredentialPropertyList(
       object: .init(repository: PreviewRepository(items: []),
                     triggerSet: .init(),
-                    internetPasswords: AnySecretProperty.previewCollection,
+                    internetPasswords: AnyStealthyProperty.previewCollection,
                     isLoaded: true)
     )
   }
