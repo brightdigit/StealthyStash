@@ -1,39 +1,39 @@
 import Security
 
-extension SecretProperty {
+extension StealthyProperty {
   public var dataString: String {
     String(data: data, encoding: .utf8) ?? ""
   }
 
-  public func eraseToAnyProperty() -> AnySecretProperty {
+  public func eraseToAnyProperty() -> AnyStealthyProperty {
     .init(property: self)
   }
 
-  public func dataDictionary() -> SecretDictionary {
+  public func dataDictionary() -> StealthyDictionary {
     [kSecValueData as String: data]
   }
 
-  public func attributesDictionary() -> SecretDictionary {
+  public func attributesDictionary() -> StealthyDictionary {
     otherProperties().merging(with: dataDictionary(), overwrite: true)
   }
 
-  public func classDictionary() -> SecretDictionary {
+  public func classDictionary() -> StealthyDictionary {
     [kSecClass as String: Self.propertyType.secClass]
   }
 
-  public func fetchQuery() -> SecretDictionary {
+  public func fetchQuery() -> StealthyDictionary {
     uniqueAttributes().merging(with: classDictionary(), overwrite: false)
   }
 
-  public func addQuery() -> SecretDictionary {
+  public func addQuery() -> StealthyDictionary {
     fetchQuery().merging(with: attributesDictionary(), overwrite: false)
   }
 
-  public func updateQuery() -> SecretDictionary {
+  public func updateQuery() -> StealthyDictionary {
     uniqueAttributes().merging(with: attributesDictionary(), overwrite: false)
   }
 
-  public func deleteQuery() -> SecretDictionary {
+  public func deleteQuery() -> StealthyDictionary {
     fetchQuery()
   }
 

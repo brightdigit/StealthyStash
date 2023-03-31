@@ -1,12 +1,12 @@
 import Security
 
 public protocol Query {
-  var type: SecretPropertyType { get }
-  func keychainDictionary() -> SecretDictionary
+  var type: StealthyPropertyType { get }
+  func keychainDictionary() -> StealthyDictionary
 }
 
 extension Query {
-  public func keychainDictionary() -> SecretDictionary {
+  public func keychainDictionary() -> StealthyDictionary {
     [
       kSecClass as String: type.secClass,
       kSecReturnAttributes as String: true,

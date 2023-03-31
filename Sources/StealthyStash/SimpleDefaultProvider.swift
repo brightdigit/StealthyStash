@@ -19,8 +19,8 @@ internal struct SimpleDefaultProvider: DefaultProvider {
   }
 
   internal func attributesForQuery(
-    ofType type: SecretPropertyType?
-  ) -> SecretDictionary {
+    ofType type: StealthyPropertyType?
+  ) -> StealthyDictionary {
     [
       kSecAttrServer as String: type == .internet ? defaultServerName : nil,
       kSecAttrService as String: type == .generic ? defaultServiceName : nil,
@@ -29,8 +29,8 @@ internal struct SimpleDefaultProvider: DefaultProvider {
   }
 
   internal func attributesForNewItem(
-    ofType type: SecretPropertyType
-  ) -> SecretDictionary {
+    ofType type: StealthyPropertyType
+  ) -> StealthyDictionary {
     [
       kSecAttrService as String: type == .generic ? defaultServiceName : nil,
       kSecAttrServer as String: type == .internet ? defaultServerName : nil,

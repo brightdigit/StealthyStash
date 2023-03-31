@@ -1,7 +1,7 @@
 import Foundation
 import Security
 
-public struct GenericPasswordItem: Identifiable, Hashable, SecretProperty {
+public struct GenericPasswordItem: Identifiable, Hashable, StealthyProperty {
   public let account: String
   public let data: Data
   public let service: String?

@@ -1,11 +1,11 @@
 import Foundation
 
-public enum SecretPropertyType {
+public enum StealthyPropertyType {
   case internet
   case generic
 }
 
-extension SecretPropertyType {
+extension StealthyPropertyType {
   public var secClass: CFString {
     switch self {
     case .internet:
@@ -16,20 +16,7 @@ extension SecretPropertyType {
     }
   }
 
-//  init?(secClass: CFString) {
-//    switch secClass {
-//    case kSecClassGenericPassword:
-//      self = .generic
-//
-//    case kSecClassInternetPassword:
-//      self = .internet
-//
-//    default:
-//      return nil
-//    }
-//  }
-
-  public var propertyType: any SecretProperty.Type {
+  public var propertyType: any StealthyProperty.Type {
     switch self {
     case .internet:
       return InternetPasswordItem.self

@@ -1,16 +1,16 @@
 import Foundation
 
-public struct AnySecretProperty: Identifiable, Hashable {
-  public let property: any SecretProperty
+public struct AnyStealthyProperty: Identifiable, Hashable {
+  public let property: any StealthyProperty
   public var id: String {
     property.id
   }
 
-  public init(property: any SecretProperty) {
+  public init(property: any StealthyProperty) {
     self.property = property
   }
 
-  public static func == (lhs: AnySecretProperty, rhs: AnySecretProperty) -> Bool {
+  public static func == (lhs: AnyStealthyProperty, rhs: AnyStealthyProperty) -> Bool {
     Swift.type(of: lhs.property).propertyType == Swift.type(of: rhs.property).propertyType
       && lhs.id == rhs.id
   }
@@ -20,7 +20,7 @@ public struct AnySecretProperty: Identifiable, Hashable {
   }
 }
 
-extension AnySecretProperty {
+extension AnyStealthyProperty {
   public var account: String {
     property.account
   }
@@ -101,15 +101,8 @@ extension AnySecretProperty {
   }
 }
 
-// extension AnySecretProperty {
-//  init(propertyType: SecretPropertyType, dictionary: SecretDictionary) throws {
-//    let property = try propertyType.propertyType.init(dictionary: dictionary)
-//    self.init(property: property)
-//  }
-// }
-
-extension AnySecretProperty {
-  public var propertyType: SecretPropertyType {
+extension AnyStealthyProperty {
+  public var propertyType: StealthyPropertyType {
     Swift.type(of: property).propertyType
   }
 }

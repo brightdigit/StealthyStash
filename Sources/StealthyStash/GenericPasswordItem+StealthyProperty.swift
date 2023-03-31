@@ -2,7 +2,7 @@ import Foundation
 import Security
 
 extension GenericPasswordItem {
-  public static var propertyType: SecretPropertyType {
+  public static var propertyType: StealthyPropertyType {
     .generic
   }
 
@@ -34,7 +34,7 @@ extension GenericPasswordItem {
     )
   }
 
-  public init(dictionary: SecretDictionary) throws {
+  public init(dictionary: StealthyDictionary) throws {
     let common: CommonAttributes = try .init(dictionary: dictionary, isRaw: false)
     let service: String = try dictionary.require(kSecAttrService)
     let generic: Data? = try dictionary.requireOptional(kSecAttrGeneric)
@@ -45,7 +45,7 @@ extension GenericPasswordItem {
     )
   }
 
-  public init(rawDictionary: SecretDictionary) throws {
+  public init(rawDictionary: StealthyDictionary) throws {
     let common: CommonAttributes = try .init(dictionary: rawDictionary, isRaw: true)
     let service: String? = try rawDictionary.requireOptional(kSecAttrService)
     let generic: Data? = try rawDictionary.requireOptional(kSecAttrGeneric)
@@ -56,7 +56,7 @@ extension GenericPasswordItem {
     )
   }
 
-  public func uniqueAttributes() -> SecretDictionary {
+  public func uniqueAttributes() -> StealthyDictionary {
     [
       kSecAttrAccount as String: account,
       kSecAttrService as String: service,
@@ -65,7 +65,7 @@ extension GenericPasswordItem {
     ]
   }
 
-  public func otherProperties() -> SecretDictionary {
+  public func otherProperties() -> StealthyDictionary {
     [
       kSecAttrGeneric as String: gerneic,
       kSecAttrDescription as String: description,

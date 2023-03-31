@@ -135,7 +135,7 @@ Et vultum vultum, vocem Cinyra, magna longo barbaricoque artesque est videtur,
 iste **secutae fugacis**. Herse sua animosa Lelex. Sternit bracchia ab regia et
 Iovem infectus! Forma erat, Eryx metuam.
 
-## Using a SecretModel
+## Using a StealthyModel
 
 Deus sedendo avertit tamen crimina telum rabidi et raptam, nata dubitas minimam
 lacus, sol. Mecum lumina non hiemem eripienda, quae et conditur iniustum,

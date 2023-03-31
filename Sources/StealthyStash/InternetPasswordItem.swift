@@ -1,7 +1,7 @@
 import Foundation
 import Security
 
-public struct InternetPasswordItem: Identifiable, Hashable, SecretProperty {
+public struct InternetPasswordItem: Identifiable, Hashable, StealthyProperty {
   public let account: String
   public let data: Data
 

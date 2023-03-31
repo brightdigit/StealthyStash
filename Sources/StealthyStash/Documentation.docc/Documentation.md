@@ -10,31 +10,32 @@ Lorem Ipsum
 
 ### Accessing the Keychain
 
-* ``SecretsRepository``
+* ``StealthyRepository``
 * ``KeychainRepository``
-* ``SecretDictionary``
+* ``StealthyDictionary``
+* ``DefaultProvider``
 * ``KeychainError``
 
 ### Creating a Model
 
 * ``ModelQueryBuilder``
-* ``SecretModel``
+* ``StealthyModel``
 * ``ModelOperation``
 
 ### Building Queries
 
 * ``Query``
 * ``TypeQuery``
-* ``SecretPropertyUpdate``
+* ``StealthyPropertyUpdate``
 * ``UpdateQuerySet``
 
 ### Keychain Properties
 
-* ``AnySecretProperty``
-* ``SecretProperty``
+* ``AnyStealthyProperty``
+* ``StealthyProperty``
 * ``GenericPasswordItem``
 * ``InternetPasswordItem``
-* ``SecretPropertyType``
+* ``StealthyPropertyType``
 
 ### Property Value Types
 

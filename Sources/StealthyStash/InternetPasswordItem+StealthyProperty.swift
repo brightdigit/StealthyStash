@@ -2,7 +2,7 @@ import Foundation
 import Security
 
 extension InternetPasswordItem {
-  public static let propertyType: SecretPropertyType = .internet
+  public static let propertyType: StealthyPropertyType = .internet
 
   public var id: String {
     [
@@ -15,7 +15,7 @@ extension InternetPasswordItem {
     ].compactMap { $0 }.joined()
   }
 
-  public init(dictionary: SecretDictionary) throws {
+  public init(dictionary: StealthyDictionary) throws {
     let common: CommonAttributes = try .init(dictionary: dictionary, isRaw: false)
     let server: String? = try dictionary.requireOptional(kSecAttrServer)
     let protocolString: CFString? = try dictionary.requireOptional(kSecAttrProtocol)
@@ -31,7 +31,7 @@ extension InternetPasswordItem {
     )
   }
 
-  public init(rawDictionary: SecretDictionary) throws {
+  public init(rawDictionary: StealthyDictionary) throws {
     let common: CommonAttributes = try .init(dictionary: rawDictionary, isRaw: true)
     let server: String? = try rawDictionary.requireOptional(kSecAttrServer)
     let protocolString: CFString? = try rawDictionary.requireOptional(kSecAttrProtocol)
@@ -73,7 +73,7 @@ extension InternetPasswordItem {
     )
   }
 
-  public func uniqueAttributes() -> SecretDictionary {
+  public func uniqueAttributes() -> StealthyDictionary {
     [
       kSecAttrAccount as String: account,
       kSecAttrAccessGroup as String: accessGroup,
@@ -84,7 +84,7 @@ extension InternetPasswordItem {
     ]
   }
 
-  public func otherProperties() -> SecretDictionary {
+  public func otherProperties() -> StealthyDictionary {
     [
       kSecAttrSynchronizable as String: isSynchronizable.cfValue,
       kSecAttrDescription as String: description,

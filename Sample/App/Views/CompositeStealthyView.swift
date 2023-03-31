@@ -2,16 +2,16 @@ import Combine
 import StealthyStash
 import SwiftUI
 
-struct CompositeSecretView: View {
-  internal init(object: CompositeSecretObject) {
+struct CompositeStealthyView: View {
+  internal init(object: CompositeStealthyObject) {
     _object = .init(wrappedValue: object)
   }
 
-  internal init(repository: SecretsRepository, triggerSet: TriggerSet, secret: CompositeSecretBuilder = .init()) {
+  internal init(repository: StealthyRepository, triggerSet: TriggerSet, secret: CompositeStealthyBuilder = .init()) {
     self.init(object: .init(repository: repository, triggerSet: triggerSet, secret: secret))
   }
 
-  @StateObject var object: CompositeSecretObject
+  @StateObject var object: CompositeStealthyObject
 
   var body: some View {
     NavigationView {
@@ -56,8 +56,8 @@ struct CompositeSecretView: View {
   }
 }
 
-struct CompositeSecretView_Previews: PreviewProvider {
+struct CompositeStealthyView_Previews: PreviewProvider {
   static var previews: some View {
-    CompositeSecretView(repository: PreviewRepository(items: []), triggerSet: .init(), secret: .init(userName: "username", password: "password", token: "token"))
+    CompositeStealthyView(repository: PreviewRepository(items: []), triggerSet: .init(), secret: .init(userName: "username", password: "password", token: "token"))
   }
 }

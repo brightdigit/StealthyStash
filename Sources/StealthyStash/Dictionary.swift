@@ -102,7 +102,7 @@ extension Optional: Dictionary.DeepUnwrappable {
   // swiftlint:disable:next strict_fileprivate
   fileprivate var _deepUnwrapped: Any? {
     if let wrapped = self {
-      return SecretDictionary.deepUnwrap(wrapped)
+      return StealthyDictionary.deepUnwrap(wrapped)
     }
     return nil
   }

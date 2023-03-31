@@ -1,6 +1,6 @@
 import Security
 
-public struct KeychainRepository: SecretsRepository {
+public struct KeychainRepository: StealthyRepository {
   private let defaultProvider: DefaultProvider
 
   public init(defaultProvider: DefaultProvider) {
@@ -9,7 +9,7 @@ public struct KeychainRepository: SecretsRepository {
 
   private static func itemsFromQuery(
     dictionary: [String: Any?]
-  ) throws -> [SecretDictionary] {
+  ) throws -> [StealthyDictionary] {
     var item: CFTypeRef?
 
     let status = SecItemCopyMatching(dictionary as CFDictionary, &item)
@@ -18,14 +18,14 @@ public struct KeychainRepository: SecretsRepository {
       return []
     }
     guard
-      let itemDictionaries = item as? [SecretDictionary],
+      let itemDictionaries = item as? [StealthyDictionary],
       status == errSecSuccess else {
       throw KeychainError.unhandledError(status: status)
     }
     return itemDictionaries
   }
 
-  public func create(_ item: AnySecretProperty) throws {
+  public func create(_ item: AnyStealthyProperty) throws {
     let itemDictionary = item.property.addQuery()
 
     let query = itemDictionary
@@ -43,9 +43,9 @@ public struct KeychainRepository: SecretsRepository {
     }
   }
 
-  public func update<SecretPropertyType: SecretProperty>(
-    _ item: SecretPropertyType,
-    from previousItem: SecretPropertyType
+  public func update<StealthyPropertyType: StealthyProperty>(
+    _ item: StealthyPropertyType,
+    from previousItem: StealthyPropertyType
   ) throws {
     let querySet = UpdateQuerySet(
       from: previousItem,
@@ -67,7 +67,7 @@ public struct KeychainRepository: SecretsRepository {
     }
   }
 
-  public func delete(_ item: AnySecretProperty) throws {
+  public func delete(_ item: AnyStealthyProperty) throws {
     let deleteQuery = item.property
       .deleteQuery()
       .deepCompactMapValues()
@@ -80,7 +80,7 @@ public struct KeychainRepository: SecretsRepository {
     }
   }
 
-  public func query(_ query: Query) throws -> [AnySecretProperty] {
+  public func query(_ query: Query) throws -> [AnyStealthyProperty] {
     let defaultAttributes = defaultProvider.attributesForQuery(ofType: query.type)
     let dictionaryAny = query
       .keychainDictionary()
@@ -98,7 +98,7 @@ public struct KeychainRepository: SecretsRepository {
         return $0
       }
       .map(query.type.propertyType.init(dictionary:))
-      .map(AnySecretProperty.init(property:))
+      .map(AnyStealthyProperty.init(property:))
     } catch {
       assertionFailure(error.localizedDescription)
       return []

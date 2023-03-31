@@ -1,7 +1,7 @@
 import Foundation
 
-public protocol SecretProperty: Identifiable, Hashable {
-  static var propertyType: SecretPropertyType { get }
+public protocol StealthyProperty: Identifiable, Hashable {
+  static var propertyType: StealthyPropertyType { get }
 
   var id: String { get }
   var account: String { get }
@@ -16,13 +16,13 @@ public protocol SecretProperty: Identifiable, Hashable {
   var label: String? { get }
   var isSynchronizable: Synchronizable { get }
 
-  init(dictionary: SecretDictionary) throws
-  init(rawDictionary: SecretDictionary) throws
+  init(dictionary: StealthyDictionary) throws
+  init(rawDictionary: StealthyDictionary) throws
 
-  func addQuery() -> SecretDictionary
-  func deleteQuery() -> SecretDictionary
+  func addQuery() -> StealthyDictionary
+  func deleteQuery() -> StealthyDictionary
   func updateQuerySet() -> UpdateQuerySet
 
-  func uniqueAttributes() -> SecretDictionary
-  func otherProperties() -> SecretDictionary
+  func uniqueAttributes() -> StealthyDictionary
+  func otherProperties() -> StealthyDictionary
 }
