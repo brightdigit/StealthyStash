@@ -27,7 +27,7 @@ struct CommonAttributes {
 }
 
 extension CommonAttributes {
-  init(dictionary: [String: Any]) throws {
+  init(dictionary: [String: Any], isRaw: Bool) throws {
     let account: String = try dictionary.require(kSecAttrAccount)
     let data: Data = try dictionary.require(kSecValueData)
     let accessGroup: String? = try dictionary.requireOptional(kSecAttrAccessGroup)
@@ -37,7 +37,13 @@ extension CommonAttributes {
     let comment: String? = try dictionary.requireOptional(kSecAttrComment)
     let type: Int? = try dictionary.requireOptionalCF(kSecAttrType)
     let label: String? = try dictionary.requireOptionalCF(kSecAttrLabel)
-    let isSynchronizable: Int? = try dictionary.requireOptional(kSecAttrSynchronizable)
+    let isSynchronizable: Synchronizable
+    if isRaw {
+      isSynchronizable = dictionary[kSecAttrSynchronizable as String].flatMap(Synchronizable.init(rawDictionaryValue:)) ?? .any
+    } else {
+      let syncValue : Int? = try dictionary.requireOptional(kSecAttrSynchronizable)
+      isSynchronizable = .init(syncValue)
+    }
     self.init(
       account: account,
       data: data,
@@ -48,7 +54,7 @@ extension CommonAttributes {
       comment: comment,
       type: type?.trimZero(),
       label: label,
-      isSynchronizable: .init(isSynchronizable)
+      isSynchronizable: isSynchronizable
     )
   }
 

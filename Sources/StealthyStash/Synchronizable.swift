@@ -7,6 +7,23 @@ public enum Synchronizable {
 }
 
 extension Synchronizable {
+  static let anyStringValue : String = kSecAttrSynchronizableAny as String
+  
+  init?(rawDictionaryValue: Any) {
+    let booleanValue = rawDictionaryValue as? Bool
+    let stringValue = rawDictionaryValue as? String
+    switch (booleanValue, stringValue) {
+    case (true, _):
+      self = .enabled
+    case (false, _):
+      self = .disabled
+    case (_, Self.anyStringValue):
+      self = .any
+    case (_, _):
+      assertionFailure("Unknown value: \(rawDictionaryValue)")
+      return nil
+    }
+  }
   init(_ value: Int?) {
     switch value {
     case 0:
@@ -24,7 +41,7 @@ extension Synchronizable {
     }
   }
 
-  var cfValue: Any? {
+  public var cfValue: Any? {
     switch self {
     case .any:
       return kSecAttrSynchronizableAny

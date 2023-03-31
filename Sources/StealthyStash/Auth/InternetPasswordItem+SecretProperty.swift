@@ -61,7 +61,7 @@ extension InternetPasswordItem {
   }
 
   public init(dictionary: [String: Any]) throws {
-    let common: CommonAttributes = try .init(dictionary: dictionary)
+    let common: CommonAttributes = try .init(dictionary: dictionary, isRaw: false)
     let server: String? = try dictionary.requireOptional(kSecAttrServer)
     let protocolString: CFString? = try dictionary.requireOptional(kSecAttrProtocol)
     let `protocol`: ServerProtocol? = protocolString.flatMap(ServerProtocol.init(number:))
@@ -77,7 +77,7 @@ extension InternetPasswordItem {
   }
 
   public init(rawDictionary: [String: Any]) throws {
-    let common: CommonAttributes = try .init(dictionary: rawDictionary)
+    let common: CommonAttributes = try .init(dictionary: rawDictionary, isRaw: true)
     let server: String? = try rawDictionary.requireOptional(kSecAttrServer)
     let protocolString: CFString? = try rawDictionary.requireOptional(kSecAttrProtocol)
     let `protocol`: ServerProtocol? = protocolString.flatMap(ServerProtocol.init(number:))

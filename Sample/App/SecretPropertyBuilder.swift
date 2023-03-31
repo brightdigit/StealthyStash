@@ -238,7 +238,7 @@ extension Dictionary where Key == String, Value == Any {
       kSecAttrProtocol: builder.protocol?.cfValue,
       kSecAttrPort: builder.port,
       kSecAttrPath: builder.path,
-      kSecAttrSynchronizable: builder.isSynchronizable,
+      kSecAttrSynchronizable: builder.isSynchronizable.cfValue,
       kSecAttrService: builder.service
     ]
     
