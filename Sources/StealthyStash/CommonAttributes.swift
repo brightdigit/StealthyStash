@@ -27,7 +27,7 @@ struct CommonAttributes {
 }
 
 extension CommonAttributes {
-  init(dictionary: [String: Any], isRaw: Bool) throws {
+  init(dictionary: SecretDictionary, isRaw: Bool) throws {
     let account: String = try dictionary.require(kSecAttrAccount)
     let data: Data = try dictionary.require(kSecValueData)
     let accessGroup: String? = try dictionary.requireOptional(kSecAttrAccessGroup)
@@ -41,7 +41,7 @@ extension CommonAttributes {
     if isRaw {
       isSynchronizable = dictionary[kSecAttrSynchronizable as String].flatMap(Synchronizable.init(rawDictionaryValue:)) ?? .any
     } else {
-      let syncValue : Int? = try dictionary.requireOptional(kSecAttrSynchronizable)
+      let syncValue: Int? = try dictionary.requireOptional(kSecAttrSynchronizable)
       isSynchronizable = .init(syncValue)
     }
     self.init(
@@ -57,32 +57,4 @@ extension CommonAttributes {
       isSynchronizable: isSynchronizable
     )
   }
-
-//
-//    public init(rawDictionary: [String: Any]) throws {
-//      let account: String = try rawDictionary.require(kSecAttrAccount)
-//      let data: Data = try rawDictionary.require(kSecValueData)
-//      let accessGroup: String? = try rawDictionary.requireOptional(kSecAttrAccessGroup)
-//      let createdAt: Date? = try rawDictionary.requireOptional(kSecAttrCreationDate)
-//      let modifiedAt: Date? = try rawDictionary.requireOptional(kSecAttrModificationDate)
-//      let description: String? = try rawDictionary.requireOptional(kSecAttrDescription)
-//      let type: Int? = try rawDictionary.requireOptionalCF(kSecAttrType)
-//      let label: String? = try rawDictionary.requireOptionalCF(kSecAttrLabel)
-//      let service: String? = try? rawDictionary.require(kSecAttrService)
-//      let generic: Data? = try rawDictionary.requireOptional(kSecAttrGeneric)
-//      let isSynchronizable: CFBoolean? = try rawDictionary.requireOptional(kSecAttrSynchronizable)
-//      self.init(
-//        account: account,
-//        data: data,
-//        service: service,
-//        accessGroup: accessGroup,
-//        createdAt: createdAt,
-//        modifiedAt: modifiedAt,
-//        description: description,
-//        type: type?.trimZero(),
-//        label: label,
-//        gerneic: generic,
-//        isSynchronizable: .init(isSynchronizable)
-//      )
-//    }
 }

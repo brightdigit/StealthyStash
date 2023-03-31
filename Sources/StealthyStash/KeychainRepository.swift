@@ -25,10 +25,10 @@ public struct KeychainRepository: SecretsRepository {
       from: previousItem,
       to: item
     )
-    .merging(
-      with: defaultNewProperties(forType: SecretPropertyType.propertyType),
-      overwrite: false
-    )
+//    .merging(
+//      with: defaultUpdateProperties(forType: SecretPropertyType.propertyType),
+//      overwrite: false
+//    )
 
     logger?.debug("Updating: \(querySet.query.loggingDescription())")
     logger?.debug(
@@ -49,7 +49,6 @@ public struct KeychainRepository: SecretsRepository {
     let deleteQuery = item.property
       .deleteQuery()
       .deepCompactMapValues()
-      .merging(with: defaultNewProperties(forType: item.propertyType), overwrite: false)
 
     logger?.debug("Deleting: \(deleteQuery.loggingDescription())")
     let status = SecItemDelete(deleteQuery.asCFDictionary())
@@ -60,16 +59,7 @@ public struct KeychainRepository: SecretsRepository {
   }
 
   public func query(_ query: Query) throws -> [AnySecretProperty] {
-    let dictionaryAny = [
-      kSecClass as String: query.type.secClass,
-      kSecAttrServer as String: query.type == .internet ? defaultServerName : nil,
-      kSecAttrService as String: query.type == .generic ? defaultServiceName : nil,
-      kSecReturnAttributes as String: true,
-      kSecReturnData as String: true,
-      kSecAttrAccessGroup as String: defaultAccessGroup,
-      kSecAttrSynchronizable as String: kSecAttrSynchronizableAny,
-      kSecMatchLimit as String: kSecMatchLimitAll
-    ] as [String: Any?]
+    let dictionaryAny = query.keychainDictionary().merging(with: defaultQueryProperties(forType: query.type), overwrite: false)
 
     var item: CFTypeRef?
     let cfQuery = dictionaryAny.deepCompactMapValues()
@@ -81,7 +71,7 @@ public struct KeychainRepository: SecretsRepository {
     guard status != errSecItemNotFound else {
       return []
     }
-    guard let dictionaries = item as? [[String: Any]], status == errSecSuccess else {
+    guard let dictionaries = item as? [SecretDictionary], status == errSecSuccess else {
       throw KeychainError.unhandledError(status: status)
     }
 
@@ -115,7 +105,24 @@ public struct KeychainRepository: SecretsRepository {
   let defaultAccessGroup: String?
   let defaultSynchronizable: Synchronizable
 
-  func defaultNewProperties(forType type: SecretPropertyType) -> [String: Any?] {
+  func defaultQueryProperties(forType type: SecretPropertyType?) -> SecretDictionary {
+    [
+      kSecAttrServer as String: type == .internet ? defaultServerName : nil,
+      kSecAttrService as String: type == .generic ? defaultServiceName : nil,
+      kSecAttrAccessGroup as String: defaultAccessGroup
+    ]
+  }
+
+  func defaultUpdateProperties(forType type: SecretPropertyType) -> SecretDictionary {
+    [
+      kSecAttrService as String: type == .generic ? defaultServiceName : nil,
+      kSecAttrServer as String: type == .internet ? defaultServerName : nil,
+      kSecAttrAccessGroup as String: defaultAccessGroup,
+      kSecAttrSynchronizable as String: defaultSynchronizable.cfValue
+    ]
+  }
+
+  func defaultNewProperties(forType type: SecretPropertyType) -> SecretDictionary {
     [
       kSecAttrService as String: type == .generic ? defaultServiceName : nil,
       kSecAttrServer as String: type == .internet ? defaultServerName : nil,

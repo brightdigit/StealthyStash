@@ -1,12 +1,12 @@
 public struct UpdateQuerySet {
-  init(query: [String: Any?], attributes: [String: Any?], id: String) {
+  init(query: SecretDictionary, attributes: SecretDictionary, id: String) {
     self.query = query
     self.attributes = attributes
     self.id = id
   }
 
-  let query: [String: Any?]
-  let attributes: [String: Any?]
+  let query: SecretDictionary
+  let attributes: SecretDictionary
   let id: String
 }
 

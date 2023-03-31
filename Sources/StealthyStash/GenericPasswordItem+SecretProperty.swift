@@ -50,7 +50,7 @@ extension GenericPasswordItem {
     )
   }
 
-  public init(dictionary: [String: Any]) throws {
+  public init(dictionary: SecretDictionary) throws {
     let common: CommonAttributes = try .init(dictionary: dictionary, isRaw: false)
     let service: String = try dictionary.require(kSecAttrService)
     let generic: Data? = try dictionary.requireOptional(kSecAttrGeneric)
@@ -61,7 +61,7 @@ extension GenericPasswordItem {
     )
   }
 
-  public init(rawDictionary: [String: Any]) throws {
+  public init(rawDictionary: SecretDictionary) throws {
     let common: CommonAttributes = try .init(dictionary: rawDictionary, isRaw: true)
     let service: String? = try rawDictionary.requireOptional(kSecAttrService)
     let generic: Data? = try rawDictionary.requireOptional(kSecAttrGeneric)

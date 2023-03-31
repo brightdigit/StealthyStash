@@ -1,5 +1,6 @@
 import Foundation
 import Security
+
 extension Dictionary {
   enum MissingValueError: Error {
     case missingKey(Key)
@@ -115,7 +116,7 @@ private protocol _OptionalProtocol {
 extension Optional: Dictionary.DeepUnwrappable {
   fileprivate var _deepUnwrapped: Any? {
     if let wrapped = self {
-      return [String: Any?].deepUnwrap(wrapped)
+      return SecretDictionary.deepUnwrap(wrapped)
     }
     return nil
   }

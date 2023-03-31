@@ -103,7 +103,7 @@ extension AnySecretProperty {
 }
 
 // extension AnySecretProperty {
-//  init(propertyType: SecretPropertyType, dictionary: [String: Any]) throws {
+//  init(propertyType: SecretPropertyType, dictionary: SecretDictionary) throws {
 //    let property = try propertyType.propertyType.init(dictionary: dictionary)
 //    self.init(property: property)
 //  }

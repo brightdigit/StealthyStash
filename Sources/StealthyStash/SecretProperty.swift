@@ -16,8 +16,8 @@ public protocol SecretProperty: Identifiable, Hashable {
   var label: String? { get }
   var isSynchronizable: Synchronizable { get }
 
-  init(dictionary: [String: Any]) throws
-  init(rawDictionary: [String: Any]) throws
+  init(dictionary: SecretDictionary) throws
+  init(rawDictionary: SecretDictionary) throws
 
   func addQuery() -> SecretDictionary
   func deleteQuery() -> SecretDictionary
