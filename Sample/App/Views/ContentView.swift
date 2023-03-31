@@ -17,7 +17,7 @@ struct ContentView: View {
           Text("Generic")
         }
 
-      CompositeSecretView(repository: repository, triggerSet: self.triggerSet)
+      CompositeStealthyView(repository: repository, triggerSet: self.triggerSet)
         .tabItem {
           Image(systemName: "person.badge.key.fill")
           Text("Person")
