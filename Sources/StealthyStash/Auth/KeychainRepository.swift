@@ -102,7 +102,7 @@ public struct KeychainRepository: SecretsRepository {
     defaultServiceName: String,
     defaultServerName: String,
     defaultAccessGroup: String? = nil,
-    defaultSynchronizable: Bool? = nil
+    defaultSynchronizable: Synchronizable = .any
   ) {
     self.defaultServiceName = defaultServiceName
     self.defaultServerName = defaultServerName
@@ -113,14 +113,14 @@ public struct KeychainRepository: SecretsRepository {
   let defaultServiceName: String
   let defaultServerName: String
   let defaultAccessGroup: String?
-  let defaultSynchronizable: Bool?
+  let defaultSynchronizable: Synchronizable
 
   func defaultNewProperties(forType type: SecretPropertyType) -> [String: Any?] {
     [
       kSecAttrService as String: type == .generic ? defaultServiceName : nil,
       kSecAttrServer as String: type == .internet ? defaultServerName : nil,
       kSecAttrAccessGroup as String: defaultAccessGroup,
-      kSecAttrSynchronizable as String: defaultSynchronizable
+      kSecAttrSynchronizable as String: defaultSynchronizable.cfValue
     ]
   }
 }

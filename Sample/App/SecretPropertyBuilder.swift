@@ -20,7 +20,7 @@ public struct SecretPropertyBuilder {
     authenticationType: AuthenticationType? = nil,
     port: Int? = nil,
     path: String? = nil,
-    isSynchronizable: Bool? = nil
+    isSynchronizable: Synchronizable = .any
   ) {
     self.secClass = secClass
     self.source = source
@@ -40,8 +40,8 @@ public struct SecretPropertyBuilder {
     self.authenticationType = authenticationType
     self.port = port
     self.path = path
-    isSynchronizableValue = isSynchronizable ?? false
-    isSynchronizableSet = isSynchronizable != nil
+    isSynchronizableValue = isSynchronizable == .enabled
+    isSynchronizableSet = isSynchronizable != .any
   }
 
   public var source: AnySecretProperty?
@@ -110,8 +110,8 @@ extension SecretPropertyBuilder {
     hasType ? typeValue : nil
   }
 
-  public var isSynchronizable: Bool? {
-    isSynchronizableSet ? isSynchronizableValue : nil
+  public var isSynchronizable: Synchronizable {
+    isSynchronizableSet ? .init(isSynchronizableValue) : .any
   }
 
   public var isModified: Bool {
@@ -153,6 +153,7 @@ extension SecretPropertyBuilder {
     )
   }
 }
+
 
 extension SecretPropertyBuilder {
   public init(item: AnySecretProperty) {

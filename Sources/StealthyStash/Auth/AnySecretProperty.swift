@@ -62,7 +62,7 @@ extension AnySecretProperty {
     property.label
   }
 
-  public var isSynchronizable: Bool? {
+  public var isSynchronizable: Synchronizable {
     property.isSynchronizable
   }
 

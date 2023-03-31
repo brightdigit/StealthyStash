@@ -46,6 +46,7 @@
 		B3B7089F29D356D5009D5BFE /* SecretPropertyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7089E29D356D5009D5BFE /* SecretPropertyBuilder.swift */; };
 		B3D3668829CA83F6002A87AC /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D3668729CA83F6002A87AC /* URL.swift */; };
 		B3D6C71529C8918B00236D8B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6C71429C8918B00236D8B /* SettingsView.swift */; };
+		B3DA8B4029D65CC100627444 /* SecretPropertyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7089E29D356D5009D5BFE /* SecretPropertyBuilder.swift */; };
 		B3DBC2CC29CEA2750039ED78 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DBC2CA29CEA2750039ED78 /* String.swift */; };
 		B3DBC2CD29CEA2750039ED78 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DBC2CB29CEA2750039ED78 /* Data.swift */; };
 		B3F984FA29B0009200C0266F /* credential-properties.json in Resources */ = {isa = PBXBuildFile; fileRef = B3F984F929B0009200C0266F /* credential-properties.json */; };
@@ -420,6 +421,7 @@
 				B39BF15429A6C116009BBCAC /* KeychainSyncDemoApp.swift in Sources */,
 				B34ADDED29B00B550072B59F /* CredentialPropertyListObject.swift in Sources */,
 				B34ADDF129B00B550072B59F /* CredentialPropertyRootView.swift in Sources */,
+				B3DA8B4029D65CC100627444 /* SecretPropertyBuilder.swift in Sources */,
 				B37C694A29B3C43D00091E0E /* CompositeSecretView.swift in Sources */,
 				B369E21329CB9FD7007C4155 /* SettingsView.swift in Sources */,
 				B34ADDEA29B00B550072B59F /* CredentialPropertyFormContentView.swift in Sources */,
