@@ -1,14 +1,21 @@
 import Foundation
 
+/// An enumeration representing the synchronization status of a keychain item.
 public enum Synchronizable {
+  /// The item is synchronized with other devices.
   case enabled
+
+  /// The item is not synchronized with other devices.
   case disabled
+
+  /// The item can be synchronized or not, depending on the context.
   case any
 }
 
 extension Synchronizable {
   private static let anyStringValue: String = kSecAttrSynchronizableAny as String
 
+  /// The Core Foundation value corresponding to the enumeration case.
   public var cfValue: Any? {
     switch self {
     case .any:
@@ -22,6 +29,9 @@ extension Synchronizable {
     }
   }
 
+  /// Creates an instance of `Synchronizable` from a raw dictionary value.
+  ///
+  /// - Parameter rawDictionaryValue: The raw value to convert.
   internal init?(rawDictionaryValue: Any) {
     let booleanValue = rawDictionaryValue as? Bool
     let stringValue = rawDictionaryValue as? String
@@ -41,6 +51,9 @@ extension Synchronizable {
     }
   }
 
+  /// Creates an instance of `Synchronizable` from an integer value.
+  ///
+  /// - Parameter value: The integer value to convert.
   internal init(_ value: Int?) {
     switch value {
     case 0:

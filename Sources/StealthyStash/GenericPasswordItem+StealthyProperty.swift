@@ -2,10 +2,12 @@ import Foundation
 import Security
 
 extension GenericPasswordItem {
+  /// The type of the property.
   public static var propertyType: StealthyPropertyType {
     .generic
   }
 
+  /// The unique identifier for the property.
   public var id: String {
     [
       account,
@@ -34,6 +36,8 @@ extension GenericPasswordItem {
     )
   }
 
+  /// Initializes a new instance of the property from a dictionary
+  /// which contains all the required values.
   public init(dictionary: StealthyDictionary) throws {
     let common: CommonAttributes = try .init(dictionary: dictionary, isRaw: false)
     let service: String = try dictionary.require(kSecAttrService)
@@ -45,6 +49,8 @@ extension GenericPasswordItem {
     )
   }
 
+  /// Initializes a new instance of the property from a dictionary
+  /// which may not contain all the required values.
   public init(rawDictionary: StealthyDictionary) throws {
     let common: CommonAttributes = try .init(dictionary: rawDictionary, isRaw: true)
     let service: String? = try rawDictionary.requireOptional(kSecAttrService)
@@ -56,6 +62,7 @@ extension GenericPasswordItem {
     )
   }
 
+  /// Returns a dictionary of unique attributes for fetching property.
   public func uniqueAttributes() -> StealthyDictionary {
     [
       kSecAttrAccount as String: account,
@@ -65,6 +72,7 @@ extension GenericPasswordItem {
     ]
   }
 
+  /// Returns a dictionary of other properties for updating or creating the property.
   public func otherProperties() -> StealthyDictionary {
     [
       kSecAttrGeneric as String: gerneic,

@@ -2,8 +2,10 @@ import Foundation
 import Security
 
 extension InternetPasswordItem {
+  /// The type of the property.
   public static let propertyType: StealthyPropertyType = .internet
 
+  /// The unique identifier for the property.
   public var id: String {
     [
       account,
@@ -15,6 +17,8 @@ extension InternetPasswordItem {
     ].compactMap { $0 }.joined()
   }
 
+  /// Initializes a new instance of the property from a dictionary
+  /// which contains all the required values.
   public init(dictionary: StealthyDictionary) throws {
     let common: CommonAttributes = try .init(dictionary: dictionary, isRaw: false)
     let server: String? = try dictionary.requireOptional(kSecAttrServer)
@@ -31,6 +35,8 @@ extension InternetPasswordItem {
     )
   }
 
+  /// Initializes a new instance of the property from a dictionary
+  /// which may not contain all the required values.
   public init(rawDictionary: StealthyDictionary) throws {
     let common: CommonAttributes = try .init(dictionary: rawDictionary, isRaw: true)
     let server: String? = try rawDictionary.requireOptional(kSecAttrServer)
@@ -73,6 +79,7 @@ extension InternetPasswordItem {
     )
   }
 
+  /// Returns a dictionary of unique attributes for fetching property.
   public func uniqueAttributes() -> StealthyDictionary {
     [
       kSecAttrAccount as String: account,
@@ -84,6 +91,7 @@ extension InternetPasswordItem {
     ]
   }
 
+  /// Returns a dictionary of other properties for updating or creating the property.
   public func otherProperties() -> StealthyDictionary {
     [
       kSecAttrSynchronizable as String: isSynchronizable.cfValue,
