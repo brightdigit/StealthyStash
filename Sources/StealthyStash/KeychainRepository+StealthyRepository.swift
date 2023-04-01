@@ -20,6 +20,8 @@ extension KeychainRepository {
     return itemDictionaries
   }
 
+  /// Creates a new keychain item.
+  /// - Parameter item: Property which will be stored in the keychain.
   public func create(_ item: AnyStealthyProperty) throws {
     let defaults = defaultProvider?.attributesForNewItem(ofType: item.propertyType) ?? [:]
     let itemDictionary = item.property.addQuery()
@@ -39,6 +41,10 @@ extension KeychainRepository {
     }
   }
 
+  /// Updates the keychain item based on the property changes.
+  /// - Parameters:
+  ///   - item: New updated item.
+  ///   - previousItem: The previous item to use for fetching.
   public func update<StealthyPropertyType: StealthyProperty>(
     _ item: StealthyPropertyType,
     from previousItem: StealthyPropertyType
@@ -63,6 +69,8 @@ extension KeychainRepository {
     }
   }
 
+  /// Delete a property from the keychain..
+  /// - Parameter item: The keychain item to delete.
   public func delete(_ item: AnyStealthyProperty) throws {
     let deleteQuery = item.property
       .deleteQuery()
@@ -76,6 +84,9 @@ extension KeychainRepository {
     }
   }
 
+  /// Queries the keychain for items.
+  /// - Parameter query: The query to use.
+  /// - Returns: A collection of keychain items.
   public func query(_ query: Query) throws -> [AnyStealthyProperty] {
     let defaults = defaultProvider?.attributesForQuery(ofType: query.type) ?? [:]
     let dictionaryAny = query

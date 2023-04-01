@@ -1,4 +1,6 @@
 extension StealthyRepository {
+  /// Saves the keychain items based on the model.
+  /// - Parameter model: The model which contains the properties to create.
   public func create<StealthyModelType: StealthyModel>(
     _ model: StealthyModelType
   ) throws {
@@ -8,6 +10,10 @@ extension StealthyRepository {
     }
   }
 
+  /// Updates the keychain based on changes to the model.
+  /// - Parameters:
+  ///   - previousItem: The previous model.
+  ///   - newItem: The updated model.
   public func update<StealthyModelType: StealthyModel>(
     from previousItem: StealthyModelType,
     to newItem: StealthyModelType
@@ -22,6 +28,8 @@ extension StealthyRepository {
     }
   }
 
+  /// Deletes the model's properties from the repository.
+  /// - Parameter model: The model to delete.
   public func delete<StealthyModelType: StealthyModel>(
     _ model: StealthyModelType
   ) throws {
@@ -34,6 +42,9 @@ extension StealthyRepository {
     }
   }
 
+  /// Fetches the model based on the query given.
+  /// - Parameter query: The query.
+  /// - Returns: The Model if it exists.
   public func fetch<StealthyModelType: StealthyModel>(
     _ query: StealthyModelType.QueryBuilder.QueryType
   ) async throws -> StealthyModelType? {
@@ -56,6 +67,8 @@ extension StealthyRepository {
     return try StealthyModelType.QueryBuilder.model(from: properties)
   }
 
+  /// If there should only be one instance in the keychain, this will return that item.
+  /// - Returns: The Model if it exists.
   public func fetch<StealthyModelType: StealthyModel>() async throws -> StealthyModelType?
     where StealthyModelType.QueryBuilder.QueryType == Void {
     try await fetch(())
