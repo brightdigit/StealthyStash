@@ -10,16 +10,18 @@ public enum StealthyPropertyType {
 }
 
 extension StealthyPropertyType {
-  /// The security class for the property type.
-  public var secClass: CFString {
-    switch self {
-    case .internet:
-      return kSecClassInternetPassword
+  #if canImport(Security)
+    /// The security class for the property type.
+    public var secClass: CFString {
+      switch self {
+      case .internet:
+        return kSecClassInternetPassword
 
-    case .generic:
-      return kSecClassGenericPassword
+      case .generic:
+        return kSecClassGenericPassword
+      }
     }
-  }
+  #endif
 
   /// The type of property to use.
   public var propertyType: any StealthyProperty.Type {

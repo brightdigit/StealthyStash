@@ -1,5 +1,4 @@
 import Foundation
-import Security
 
 /// A struct representing an internet password item.
 public struct InternetPasswordItem: Identifiable, Hashable, StealthyProperty {

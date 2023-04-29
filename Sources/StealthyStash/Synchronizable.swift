@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(Security)
+  import Security
+#endif
+
 /// An enumeration representing the synchronization status of a keychain item.
 public enum Synchronizable {
   /// The item is synchronized with other devices.
@@ -13,43 +17,45 @@ public enum Synchronizable {
 }
 
 extension Synchronizable {
-  private static let anyStringValue: String = kSecAttrSynchronizableAny as String
+  #if canImport(Security)
+    private static let anyStringValue: String = kSecAttrSynchronizableAny as String
 
-  /// The Core Foundation value corresponding to the enumeration case.
-  public var cfValue: Any? {
-    switch self {
-    case .any:
-      return kSecAttrSynchronizableAny
+    /// The Core Foundation value corresponding to the enumeration case.
+    public var cfValue: Any? {
+      switch self {
+      case .any:
+        return kSecAttrSynchronizableAny
 
-    case .disabled:
-      return kCFBooleanFalse
+      case .disabled:
+        return kCFBooleanFalse
 
-    case .enabled:
-      return kCFBooleanTrue
+      case .enabled:
+        return kCFBooleanTrue
+      }
     }
-  }
 
-  /// Creates an instance of `Synchronizable` from a raw dictionary value.
-  ///
-  /// - Parameter rawDictionaryValue: The raw value to convert.
-  internal init?(rawDictionaryValue: Any) {
-    let booleanValue = rawDictionaryValue as? Bool
-    let stringValue = rawDictionaryValue as? String
-    switch (booleanValue, stringValue) {
-    case (true, _):
-      self = .enabled
+    /// Creates an instance of `Synchronizable` from a raw dictionary value.
+    ///
+    /// - Parameter rawDictionaryValue: The raw value to convert.
+    internal init?(rawDictionaryValue: Any) {
+      let booleanValue = rawDictionaryValue as? Bool
+      let stringValue = rawDictionaryValue as? String
+      switch (booleanValue, stringValue) {
+      case (true, _):
+        self = .enabled
 
-    case (false, _):
-      self = .disabled
+      case (false, _):
+        self = .disabled
 
-    case (_, Self.anyStringValue):
-      self = .any
+      case (_, Self.anyStringValue):
+        self = .any
 
-    case (_, _):
-      assertionFailure("Unknown value: \(rawDictionaryValue)")
-      return nil
+      case (_, _):
+        assertionFailure("Unknown value: \(rawDictionaryValue)")
+        return nil
+      }
     }
-  }
+  #endif
 
   /// Creates an instance of `Synchronizable` from an integer value.
   ///
