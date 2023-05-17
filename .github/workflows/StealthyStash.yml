@@ -10,6 +10,8 @@ on:
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
+env:
+  CODEQL_ENABLE_EXPERIMENTAL_FEATURES_SWIFT: true  
 jobs:
   build-ubuntu:
     name: Build on Ubuntu
