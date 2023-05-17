@@ -17,7 +17,7 @@ jobs:
       SWIFT_VER: ${{ matrix.swift-version }}
     runs-on: ${{ matrix.runs-on }}
     if: "!contains(github.event.head_commit.message, 'ci skip')"
-        strategy:
+    strategy:
       matrix:
         runs-on: [ubuntu-20.04, ubuntu-22.04]
         swift-version: [5.7.3, 5.8]
