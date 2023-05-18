@@ -1,5 +1,3 @@
-import Security
-
 /// A protocol that provides default values for creating or querying the keychain.
 public protocol DefaultProvider {
   /// Returns the attribute dictionary for the keychain query.

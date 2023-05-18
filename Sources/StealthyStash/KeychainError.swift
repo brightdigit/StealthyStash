@@ -9,6 +9,10 @@ import Foundation
 #else
   // swiftlint:disable:next missing_docs
   public typealias OSStatus = Int32
+  // swiftlint:disable:next identifier_name
+  private func SecCopyErrorMessageString(_: OSStatus, _: Any?) -> String? {
+    nil
+  }
 #endif
 
 /// An error that can occur when interacting with the keychain.
