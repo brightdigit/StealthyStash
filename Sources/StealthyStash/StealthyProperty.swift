@@ -38,26 +38,29 @@ public protocol StealthyProperty: Identifiable, Hashable {
   /// Whether the property is synchronizable.
   var isSynchronizable: Synchronizable { get }
 
-  /// Initializes a new instance of the property from a dictionary
-  /// which contains all the required values.
-  init(dictionary: StealthyDictionary) throws
+  #if canImport(Security)
 
-  /// Initializes a new instance of the property from a dictionary
-  /// which may not contain all the required values.
-  init(rawDictionary: StealthyDictionary) throws
+    /// Initializes a new instance of the property from a dictionary
+    /// which contains all the required values.
+    init(dictionary: StealthyDictionary) throws
 
-  /// Returns a dictionary representing the property for adding to the database.
-  func addQuery() -> StealthyDictionary
+    /// Initializes a new instance of the property from a dictionary
+    /// which may not contain all the required values.
+    init(rawDictionary: StealthyDictionary) throws
 
-  /// Returns a dictionary representing the property for deleting from the database.
-  func deleteQuery() -> StealthyDictionary
+    /// Returns a dictionary representing the property for adding to the database.
+    func addQuery() -> StealthyDictionary
 
-  /// Returns a dictionary representing the property for updating in the database.
-  func updateQuerySet() -> UpdateQuerySet
+    /// Returns a dictionary representing the property for deleting from the database.
+    func deleteQuery() -> StealthyDictionary
 
-  /// Returns a dictionary of unique attributes for fetching property.
-  func uniqueAttributes() -> StealthyDictionary
+    /// Returns a dictionary representing the property for updating in the database.
+    func updateQuerySet() -> UpdateQuerySet
 
-  /// Returns a dictionary of other properties for updating or creating the property.
-  func otherProperties() -> StealthyDictionary
+    /// Returns a dictionary of unique attributes for fetching property.
+    func uniqueAttributes() -> StealthyDictionary
+
+    /// Returns a dictionary of other properties for updating or creating the property.
+    func otherProperties() -> StealthyDictionary
+  #endif
 }

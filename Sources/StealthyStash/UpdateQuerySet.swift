@@ -16,13 +16,15 @@ public struct UpdateQuerySet {
   }
 }
 
-extension UpdateQuerySet {
-  internal init<StealthyPropertyType: StealthyProperty>(
-    from previousItem: StealthyPropertyType,
-    to newItem: StealthyPropertyType
-  ) {
-    let query = previousItem.fetchQuery()
-    let attributes = newItem.updateQuery()
-    self.init(query: query, attributes: attributes)
+#if canImport(Security)
+  extension UpdateQuerySet {
+    internal init<StealthyPropertyType: StealthyProperty>(
+      from previousItem: StealthyPropertyType,
+      to newItem: StealthyPropertyType
+    ) {
+      let query = previousItem.fetchQuery()
+      let attributes = newItem.updateQuery()
+      self.init(query: query, attributes: attributes)
+    }
   }
-}
+#endif

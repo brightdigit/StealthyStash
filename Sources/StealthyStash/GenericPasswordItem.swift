@@ -1,5 +1,4 @@
 import Foundation
-import Security
 
 /// A struct representing a generic password item.
 public struct GenericPasswordItem: Identifiable, Hashable, StealthyProperty {

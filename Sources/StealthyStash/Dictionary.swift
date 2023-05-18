@@ -1,5 +1,4 @@
 import Foundation
-import Security
 
 private protocol _OptionalProtocol {
   var _deepUnwrapped: Any? { get }
@@ -32,21 +31,27 @@ extension Dictionary {
     compactMapValues { $0 }.compactMapValues(Self.deepUnwrap).compactMapValues { $0 }
   }
 
-  internal func requireOptionalCF<Output>(
-    _ key: CFString
-  ) throws -> Output? where Key == String {
-    guard let cfString: CFNumber = try requireOptional(key as String) else {
-      return nil
+  #if canImport(Security)
+    internal func requireOptionalCF<Output>(
+      _ key: CFString
+    ) throws -> Output? where Key == String {
+      guard let cfString: CFNumber = try requireOptional(key as String) else {
+        return nil
+      }
+      let value = cfString as? Output
+      return value
     }
-    let value = cfString as? Output
-    return value
-  }
 
-  internal func requireOptional<Output>(
-    _ key: CFString
-  ) throws -> Output? where Key == String {
-    try requireOptional(key as String)
-  }
+    internal func requireOptional<Output>(
+      _ key: CFString
+    ) throws -> Output? where Key == String {
+      try requireOptional(key as String)
+    }
+
+    internal func require<Output>(_ key: CFString) throws -> Output where Key == String {
+      try require(key as String)
+    }
+  #endif
 
   internal func requireOptional<Output>(_ key: Key) throws -> Output? {
     try requireOptional(key, as: Output.self)
@@ -64,10 +69,6 @@ extension Dictionary {
 
   internal func require<Output>(_ key: Key) throws -> Output {
     try require(key, as: Output.self)
-  }
-
-  internal func require<Output>(_ key: CFString) throws -> Output where Key == String {
-    try require(key as String)
   }
 
   private func require<Output>(_ key: Key, as _: Output.Type) throws -> Output {
@@ -93,9 +94,11 @@ extension Dictionary where Key == String, Value == Any? {
     }.joined(separator: ", ")
   }
 
-  internal func asCFDictionary() -> CFDictionary {
-    compactMapValues { $0 } as CFDictionary
-  }
+  #if canImport(Security)
+    internal func asCFDictionary() -> CFDictionary {
+      compactMapValues { $0 } as CFDictionary
+    }
+  #endif
 }
 
 extension Optional: Dictionary.DeepUnwrappable {
