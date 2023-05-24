@@ -1,6 +1,6 @@
 # ``StealthyStash``
 
-Lorem Ipsum
+**StealthyState** provides an pluggable easy abstract layer for accessing Keychain data as well as an API for encoding and decoding complex data in the Keychain. 
 
 ## Overview
 
