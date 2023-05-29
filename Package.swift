@@ -1,8 +1,18 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 // swiftlint:disable explicit_acl explicit_top_level_acl
 
 import PackageDescription
+
+let swiftSettings: [SwiftSetting] = [
+   .enableUpcomingFeature("BareSlashRegexLiterals"),
+   .enableUpcomingFeature("ConciseMagicFile"),
+   .enableUpcomingFeature("ExistentialAny"),
+   .enableUpcomingFeature("ForwardTrailingClosures"),
+   .enableUpcomingFeature("ImplicitOpenExistentials"),
+   .enableUpcomingFeature("StrictConcurrency"),
+   .unsafeFlags(["-warn-concurrency", "-enable-actor-data-race-checks"]),
+]
 
 let package = Package(
   name: "StealthyStash",
@@ -27,7 +37,8 @@ let package = Package(
           package: "swift-log",
           condition: .when(platforms: [.linux, .android, .windows, .wasi])
         )
-      ]
+      ],
+       swiftSettings: swiftSettings
     ),
     .testTarget(
       name: "StealthyStashTests",

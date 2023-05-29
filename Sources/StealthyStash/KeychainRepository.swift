@@ -3,10 +3,10 @@
   import os
 
   public struct KeychainRepository: StealthyRepository {
-    internal let defaultProvider: DefaultProvider?
+    internal let defaultProvider: (any DefaultProvider)?
     public let logger: Logger?
 
-    public init(defaultProvider: DefaultProvider? = nil, logger: Logger? = nil) {
+    public init(defaultProvider: (any DefaultProvider)? = nil, logger: Logger? = nil) {
       self.defaultProvider = defaultProvider
       self.logger = logger ?? Self.defaultLogger
     }

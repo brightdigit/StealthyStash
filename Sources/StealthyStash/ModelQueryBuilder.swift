@@ -11,7 +11,7 @@ public protocol ModelQueryBuilder {
   /// - Parameter query: The query object to convert to a dictionary of queries.
   ///
   /// - Returns: A dictionary of queries.
-  static func queries(from query: QueryType) -> [String: Query]
+  static func queries(from query: QueryType) -> [String: any Query]
 
   /// Creates a stealthy model from a dictionary of properties.
   ///
