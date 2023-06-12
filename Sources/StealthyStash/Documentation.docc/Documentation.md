@@ -1,10 +1,12 @@
 # ``StealthyStash``
 
-**StealthyState** provides an pluggable easy abstract layer for accessing Keychain data as well as an API for encoding and decoding complex data in the Keychain. 
+A Swifty database interface into the Keychain Services.
 
 ## Overview
 
-### Accessing Your Keychain Passwords
+**StealthyState** provides an pluggable easy abstract layer for accessing Keychain data as well as an API for encoding and decoding complex data in the Keychain. 
+
+### Accessing the Keychain like a Database
 
 **StealthyState** supports the adding, updating, and querying for both generic and internet passwords. To do this you need to create a ``KeychainRepository`` to access the database to.
 
@@ -101,4 +103,3 @@ For more help, take a look at the `Sample` project located in the Swift Package.
 * ``AuthenticationType``
 * ``ServerProtocol``
 * ``Synchronizable``
-

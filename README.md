@@ -31,20 +31,20 @@ A Swifty database interface into the Keychain Services.
 
 # Introduction
 
-**StealthyStash** hendrerit velit ut risus sagittis dignissim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur faucibus ornare dolor at convallis. Sed sit amet elit et lacus convallis scelerisque. Ut faucibus et tellus nec maximus placerat.
+**StealthyState** provides an pluggable easy abstract layer for accessing Keychain data as well as an API for encoding and decoding complex data in the Keychain. 
 
 ## Requirements 
 
 **Apple Platforms**
 
-- Xcode 13.3 or later
-- Swift 5.5.2 or later
-- iOS 14 / watchOS 6 / tvOS 14 / macOS 12 or later deployment targets
+- Xcode 14.3.1 or later
+- Swift 5.8 or later
+- iOS 14 / watchOS 7 / tvOS 14 / macOS 12 or later deployment targets
 
 **Linux**
 
 - Ubuntu 18.04 or later
-- Swift 5.5.2 or later
+- Swift 5.8 or later
 
 ## Installation
 
@@ -56,137 +56,72 @@ https://github.com/brightdigit/StealthyStash.git
 
 Use version up to `1.0`.
 
-## Accessing the Keychain like a Database
-
-Undas si tectis optas auctor et videri madent stellatus inmitis vimina cursus
-**et es** cunctis iniuria, amissam lapsus. Mons gurgite, munere. Minor et
-**suam** quoque medio: gloria mundum funestas intrat; in Iunonis humo sorores
-cum?
-
-    editor = 2;
-    raw.dvr_solid_social = rtf_data_install(virus(5), server_market_master(
-            restore.hostDegauss(dataParityE, hypertext_web_desktop, cpm_wpa)),
-            plugDriveIp);
-    cifs_post_interactive += petaflops;
-    gnutellaCpaScreenshot(stateOpacityQueue + bittorrentFlaming,
-            camera_ssd_kbps);
-
-Memini in aether; vis his temerare maxima adnuerat Thybrin, repagula. Quod *opem
-cupies ususabstrahit* fiducia rumpitque certe postquam terga viperei quam.
-Adulterium procorum pudet tantus enim **tamen** molimine crimine casus
-obstipuere ruinae dixit tellure illum, ut primus?
-
-*Sermonibus* pallidaque filia prolis extemplo casuraque marmoreoque. Sentirent
-Hister, degenerat venientis iaculum gladios, ponunt *ipse*, capistris? Et exige
-Buten glorior quae tolle et iugulum distuleratque vocatum [clamorque
-pomis](http://triceps-saxo.io/barbaricoque), exsecrere. Ture addidit hunc pueri
-solus quantum esse flava quasque mediis postquam; est sunt undas die?
-
 # Usage
 
-**StealthyStash** sic adhuc comitate talis ridet est quid, per. Altera
-rursus vota; huic harum sollicita [quod
-aetherioque](http://illis-vidisti.org/verterit) egressu Lycaon, noster enim
-videt.
+## Accessing the Keychain like a Database
 
-## Saving Simple Data
+**StealthyState** supports the adding, updating, and querying for both generic and internet passwords. To do this you need to create a ``KeychainRepository`` to access the database to.
 
-Qui illi alta nullus adsuetam fertque gerens sono traiecti serpentem causa.
-Frondibus quoque, prohibete fecundique tellus, geminis habet submovet.
+```
+let repository = KeychainRepository(
+  defaultServiceName: "com.brightdigit.KeychainSyncDemo",
+  defaultServerName: "com.brightdigit.KeychainSyncDemo",
+  defaultAccessGroup: "MLT7M394S7.com.brightdigit.KeychainSyncDemo"
+)
+```
 
-    if (num(cisc_quad_wysiwyg, flashPacket) + unit_del_digital) {
-        vlog_swappable.deprecated = standalone + io_dtd + ppga_wired;
-        constant_push_matrix.media = cisc_expression_wi;
-        backbone.warm *= waveform_print;
-    }
-    applet_illegal_bar.exabyte += hackerUncGibibyte * 1 + file_master_name.e(
-            illegal_terminal, touchscreenVirusDatabase);
-    if (domain_speed(4)) {
-        bar.leopard += fifo;
-        state.vaporwareWi += rasterDataBounce;
-        leaderboard_lock(certificate_encoding_ocr, macroAnalyst);
-    }
+To call ``KeychainRepository/init(defaultServiceName:defaultServerName:defaultAccessGroup:defaultSynchronizable:logger:)`` you need to supply a the default ``InternetPasswordItem/server`` and ``GenericPasswordItem/service`` which is required by both types to query and create.
 
-Ab artus aut: Cythereiadasque Troiae et et ad in nunc. Dea bis certatimque cum
-coniuge quoque. Reliquit nec iussa sed, at iterum quotiensque primus nepotum,
-funesta dixit?
+> You can also supply a `logger` to use for logging as well as an ``InternetPasswordItem/accessGroup`` for your ``InternetPasswordItem`` and ``GenericPasswordItem/accessGroup`` for your ``GenericPasswordItem``
 
-- Veneris contactu vincere altum mundi hostem adiuvat
-- Se duxit
-- Thalamos me seges
+To query, update, or add a new password, check out the documentation under ``StealthyRepository``.
 
-### Internet vs Generic Passwords
+## Using `StealthyModel` for Composite Objects
 
-Semper [nitor](http://reus-hanc.org/perheu.html) nectare demittant, et qui,
-[laudis](http://www.capax.com/metu-at.php)? Morae satis ipsa eris ita, moratum
-miseram tulit tu visa novam arte.
+In many cases, you may want to use multiple items to store a single object such as the user's password with ``InternetPasswordItem`` as well as their token via ``GenericPasswordItem``. In this case, you'll want to use a ``StealthyModel``:
 
-Tellure nisi. Per huic tangit vero oppositumque pater, Ulixis in duas erubuit
-inposuit erat quamvis, male subit mihi. **Vestigia freta**.
+```swift
+struct CompositeCredentials: StealthyModel {
+  typealias QueryBuilder = CompositeCredentialsQueryBuilder
 
-1. Suo cum petitur
-2. Transit poeniceam fiuntque tenere cum aliquis habetur
-3. Simulatque oculos Alpheos
-4. Terras in adicit
-5. Gravidae miserum consitaque rapit aetas volat iussa
-6. Ignoscere uvis posuerunt nigra nam movent iubet
+  internal init(userName: String, password: String?, token: String?) {
+    self.userName = userName
+    self.password = password
+    self.token = token
+  }
 
-Et vultum vultum, vocem Cinyra, magna longo barbaricoque artesque est videtur,
-iste **secutae fugacis**. Herse sua animosa Lelex. Sternit bracchia ab regia et
-Iovem infectus! Forma erat, Eryx metuam.
+  let userName: String
 
-## Using a StealthyModel
+  let password: String?
 
-Deus sedendo avertit tamen crimina telum rabidi et raptam, nata dubitas minimam
-lacus, sol. Mecum lumina non hiemem eripienda, quae et conditur iniustum,
-potuisse petit ut, quae. Cum et coepta mille iam infamis exstanti prohibebat
-ulla spernimus moenia at fortibus.
+  let token: String?
+}
+```
 
-- Est Alcmene vidit tonitrus videtur latus tabellae
-- Vultibus quoque ubi agris simul quoque vincere
-- Simulasse referemus mens fronte
-- Palmis an
+This is the perfect use case for ``StealthyModel`` and it only requires the implementation of a ``ModelQueryBuilder`` which defines how to build the queries for creating, updating, and deleting ``StealthyModel`` objects from the keychain:
 
-### Creating a ModelQueryBuilder
+* ``ModelQueryBuilder/updates(from:to:)`` require you to build an array of ``StealthyPropertyUpdate`` object which define the previous and new properties for the Keychain. Both the previous and new are optional in case you are only adding a new item as part of the update or only removing an old item.
 
-Tollens canum est duas miser ipse gessit aderat tamen caligine mandata. Tibi
-aquas, repagula rara fronti *datur* deus nequiquam quoque. Illis praeceps.
+* ``ModelQueryBuilder/properties(from:for:)`` is for creating a new model and requires the individual ``AnyStealthyProperty`` for each item to add to the keychain.
 
-1. Pro eius esse sperare coniunx
-2. Dabit molitor venerat
-3. Quibus nam nec quae vidistis
-4. Spatium non movit quod cornua
-5. Lacrimosa receptus inmensum fuit
+* ``ModelQueryBuilder/model(from:)`` builds the ``StealthyModel`` based on the ``AnyStealthyProperty`` items
 
-Truncis modo, figuram premebat, digna, noluit transitque fuit audebatis, anima
-Sarpedonis pater castae. Maeandrius fluminis, arat dum inter tyranni verbaque,
-non pereat inquit. Haut colla nam o haud Solem aras quisque, est.
+* ``ModelQueryBuilder/queries(from:)`` builds a query dictionary depending the ``ModelQueryBuilder/QueryType`` passed. The keys to the query dictionary will be used by ``ModelQueryBuilder/model(from:)`` to define the keys of their resulting ``AnyStealthyProperty``. If there's only one object in your app, you can define ``ModelQueryBuilder/QueryType`` as `Void`:
 
-    if (windows == keylogger_raw_software.warm(remote)) {
-        file(css(monochrome, graphic_non_plagiarism, compile_bookmark));
-        hdd_bar = tablet_real(im, 1, dvr * hacker_personal);
-    } else {
-        core(optical(-2, openDesktopRedundancy, batchMysqlNewsgroup));
-        matrix.menuDriveRgb /= flashRaidAjax * 5;
-        floodFatPrint.plug += terminal_dvd_cms * 77;
-    }
-    del = plain + 3 * computerArchive(text * hibernateOutputHit);
-    if (dac < superscalarAsp) {
-        cardPptpDisplay = keyboard;
-        serviceVersionDdl = crossplatform - 5 + vdu;
-        unfriend_megahertz_xp.ajaxCcd = noc_webmail;
-    }
-    var rdfSd = forumDefault(2, emulation_xp_model, certificate);
+```
+static func queries(from _: Void) -> [String: Query] {
+  [
+    "password": TypeQuery(type: .internet),
+    "token": TypeQuery(type: .generic)
+  ]
+}
+```
 
-Incurvata partem dubio. Poenas stant urar natus luridus respondere promere
-quibus totumque inquit. Nisi Iove vivunt annis, **auro** est vulnera aderat:
-reliqui. Animoque minus et sinistrae nempe ima herba florumque patiar non erat
-non formosae volucri nomine haec deos fasque. Sed quod arma trahit, marinas
-auxiliaris ait natos pallam.
+For more help, take a look at the `Sample` project located in the Swift Package.
 
 # References
 
-* [Base32 Specifications from crockford.com](https://www.crockford.com/base32.html)
+* [Using the Keychain to Manage User Secret](https://developer.apple.com/documentation/security/keychain_services/keychain_items/using_the_keychain_to_manage_user_secrets)
 
 # License 
 

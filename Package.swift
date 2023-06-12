@@ -16,7 +16,7 @@ let swiftSettings: [SwiftSetting] = [
 
 let package = Package(
   name: "StealthyStash",
-  platforms: [.macOS(.v12), .iOS(.v14), .watchOS(.v7)],
+  platforms: [.macOS(.v12), .iOS(.v14), .watchOS(.v7), .tvOS(.v14)],
   products: [
     .library(
       name: "StealthyStash",
