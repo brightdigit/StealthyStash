@@ -3,7 +3,11 @@ import SwiftUI
 
 struct ContentView: View {
   let triggerSet = TriggerSet()
-  let repository = KeychainRepository(defaultServiceName: "com.brightdigit.KeychainSyncDemo", defaultServerName: "com.brightdigit.KeychainSyncDemo", defaultAccessGroup: "MLT7M394S7.com.brightdigit.KeychainSyncDemo")
+  let repository = KeychainRepository(
+    defaultServiceName: "com.brightdigit.KeychainSyncDemo",
+    defaultServerName: "com.brightdigit.KeychainSyncDemo",
+    defaultAccessGroup: "MLT7M394S7.com.brightdigit.KeychainSyncDemo"
+  )
   var body: some View {
     TabView {
       CredentialPropertyRootView(repository: repository, triggerSet: self.triggerSet, query: TypeQuery(type: .internet)).tabItem {

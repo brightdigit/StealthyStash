@@ -1,5 +1,6 @@
 import Foundation
 
+/// Type-erased ``StealthyProperty``
 public struct AnyStealthyProperty: Identifiable, Hashable {
   public let property: any StealthyProperty
   public var id: String {

@@ -5,13 +5,13 @@
 import PackageDescription
 
 let swiftSettings: [SwiftSetting] = [
-   .enableUpcomingFeature("BareSlashRegexLiterals"),
-   .enableUpcomingFeature("ConciseMagicFile"),
-   .enableUpcomingFeature("ExistentialAny"),
-   .enableUpcomingFeature("ForwardTrailingClosures"),
-   .enableUpcomingFeature("ImplicitOpenExistentials"),
-   .enableUpcomingFeature("StrictConcurrency"),
-   .unsafeFlags(["-warn-concurrency", "-enable-actor-data-race-checks"]),
+  .enableUpcomingFeature("BareSlashRegexLiterals"),
+  .enableUpcomingFeature("ConciseMagicFile"),
+  .enableUpcomingFeature("ExistentialAny"),
+  .enableUpcomingFeature("ForwardTrailingClosures"),
+  .enableUpcomingFeature("ImplicitOpenExistentials"),
+  .enableUpcomingFeature("StrictConcurrency"),
+  .unsafeFlags(["-warn-concurrency", "-enable-actor-data-race-checks"])
 ]
 
 let package = Package(
@@ -24,8 +24,6 @@ let package = Package(
     )
   ],
   dependencies: [
-    // Dependencies declare other packages that this package depends on.
-    // .package(url: /* package url */, from: "1.0.0"),
     .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
   ],
   targets: [
@@ -38,7 +36,7 @@ let package = Package(
           condition: .when(platforms: [.linux, .android, .windows, .wasi])
         )
       ],
-       swiftSettings: swiftSettings
+      swiftSettings: swiftSettings
     ),
     .testTarget(
       name: "StealthyStashTests",

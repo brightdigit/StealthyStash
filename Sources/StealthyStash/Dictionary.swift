@@ -5,9 +5,6 @@ private protocol _OptionalProtocol {
 }
 
 extension Dictionary {
-  // swiftlint:disable:next strict_fileprivate
-  //fileprivate typealias DeepUnwrappable = (any _OptionalProtocol)
-
   internal enum MissingValueError: Error {
     case missingKey(Key)
     case mismatchType(Value)
