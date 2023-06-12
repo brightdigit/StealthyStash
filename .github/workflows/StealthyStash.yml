@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         runs-on: [ubuntu-20.04, ubuntu-22.04]
-        swift-version: [5.7.3, 5.8]
+        swift-version: [5.8]
     steps:
       - uses: actions/checkout@v3
       - name: Set Ubuntu Release DOT
@@ -64,26 +64,8 @@ jobs:
     strategy:
       matrix:
         include:
-#           - runs-on: macos-12
-#             xcode: "/Applications/Xcode_14.0.1.app"
-#             iOSVersion: "16.0"
-#             watchOSVersion: "9.0"
-#             watchName: "Apple Watch Series 8 (41mm)"
-#             iPhoneName: "iPhone 12"
-#           - runs-on: macos-12
-#             xcode: "/Applications/Xcode_14.1.app"
-#             iOSVersion: "16.1"
-#             watchOSVersion: "9.1"
-#             watchName: "Apple Watch Ultra (49mm)"
-#             iPhoneName: "iPhone 13"
-          - runs-on: macos-12
-            xcode: "/Applications/Xcode_14.2.app"
-            iOSVersion: "16.2"
-            watchOSVersion: "9.1"
-            watchName: "Apple Watch Ultra (49mm)"
-            iPhoneName: "iPhone 14"
           - runs-on: macos-13
-            xcode: "/Applications/Xcode_14.3.app"
+            xcode: "/Applications/Xcode_14.3.1.app"
             iOSVersion: "16.4"
             watchOSVersion: "9.4"
             watchName: "Apple Watch Ultra (49mm)"
@@ -132,36 +114,36 @@ jobs:
         uses: github/codeql-action/analyze@v2
       - name: Lint
         run: ./scripts/lint.sh
-        if: ${{ github.ref_name == 'main' && matrix.xcode == '/Applications/Xcode_14.3.app' }}
-      # - name: Dump PIF
-      #   if: startsWith(matrix.xcode,'/Applications/Xcode_14')
-      #   run: |
-      #     swift package dump-pif > /dev/null
-      #     MAX_ATTEMPT=3
-      #     ATTEMPT=0
-      #     while [ -z $SUCCESS ] && [ "$ATTEMPT" -le "$MAX_ATTEMPT" ]; do
-      #       xcodebuild clean -scheme StealthyStash -destination 'generic/platform=iOS' | grep -q "CLEAN SUCCEEDED" && SUCCESS=true
-      #       ATTEMPT=$(($ATTEMPT+1))
-      #     done
-      # - name: Run iOS target tests
-      #   run:  xcodebuild test -scheme StealthyStash -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 13,OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
-      # - uses: sersoft-gmbh/swift-coverage-action@v3
-      #   with:
-      #     fail-on-empty-output: true
-      # - name: Upload iOS coverage to Codecov
-      #   uses: codecov/codecov-action@v3
-      #   with:
-      #     fail_ci_if_error: true
-      #     flags: iOS,iOS-${{ matrix.iOSVersion }}
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-      # - name: Run watchOS target tests
-      #   run: xcodebuild test -scheme StealthyStash -sdk watchsimulator -destination 'platform=watchOS Simulator,name=${{ matrix.watchName }},OS=${{ matrix.watchOSVersion }}' -enableCodeCoverage YES build test
-      # - uses: sersoft-gmbh/swift-coverage-action@v3
-      #   with:
-      #     fail-on-empty-output: true
-      # - name: Upload watchOS coverage to Codecov
-      #   uses: codecov/codecov-action@v3
-      #   with:
-      #     fail_ci_if_error: true
-      #     flags: watchOS,watchOS${{ matrix.watchOSVersion }}
-      #     token: ${{ secrets.CODECOV_TOKEN }}
+        if: ${{ github.ref_name == 'main' && matrix.xcode == '/Applications/Xcode_14.3.1.app' }}
+      - name: Dump PIF
+        if: startsWith(matrix.xcode,'/Applications/Xcode_14')
+        run: |
+          swift package dump-pif > /dev/null
+          MAX_ATTEMPT=3
+          ATTEMPT=0
+          while [ -z $SUCCESS ] && [ "$ATTEMPT" -le "$MAX_ATTEMPT" ]; do
+            xcodebuild clean -scheme StealthyStash -destination 'generic/platform=iOS' | grep -q "CLEAN SUCCEEDED" && SUCCESS=true
+            ATTEMPT=$(($ATTEMPT+1))
+          done
+      - name: Run iOS target tests
+        run:  xcodebuild test -scheme StealthyStash -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 13,OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
+      - uses: sersoft-gmbh/swift-coverage-action@v3
+        with:
+          fail-on-empty-output: true
+      - name: Upload iOS coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: true
+          flags: iOS,iOS-${{ matrix.iOSVersion }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Run watchOS target tests
+        run: xcodebuild test -scheme StealthyStash -sdk watchsimulator -destination 'platform=watchOS Simulator,name=${{ matrix.watchName }},OS=${{ matrix.watchOSVersion }}' -enableCodeCoverage YES build test
+      - uses: sersoft-gmbh/swift-coverage-action@v3
+        with:
+          fail-on-empty-output: true
+      - name: Upload watchOS coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: true
+          flags: watchOS,watchOS${{ matrix.watchOSVersion }}
+          token: ${{ secrets.CODECOV_TOKEN }}
