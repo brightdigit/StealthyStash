@@ -126,7 +126,7 @@ jobs:
             ATTEMPT=$(($ATTEMPT+1))
           done
       - name: Run iOS target tests
-        run:  xcodebuild test -scheme StealthyStash -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 13,OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
+        run:  xcodebuild test -scheme StealthyStash -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ matrix.iPhoneName }},OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
       - uses: sersoft-gmbh/swift-coverage-action@v3
         with:
           fail-on-empty-output: true
