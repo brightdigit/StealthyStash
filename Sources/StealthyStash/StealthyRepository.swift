@@ -37,7 +37,7 @@ public protocol StealthyRepository {
   func delete(_ item: AnyStealthyProperty) throws
 
   /// Queries the repository for `StealthyProperty` objects.
-  func query(_ query: Query) throws -> [AnyStealthyProperty]
+  func query(_ query: any Query) throws -> [AnyStealthyProperty]
 }
 
 extension StealthyRepository {
@@ -72,7 +72,7 @@ extension StealthyRepository {
   }
 
   /// Deletes all `StealthyProperty` objects that match the given queries.
-  internal func deleteAll(basedOn queries: [Query]) throws {
+  internal func deleteAll(basedOn queries: [any Query]) throws {
     let properties = try queries.flatMap(query(_:))
     try properties.forEach(delete(_:))
   }

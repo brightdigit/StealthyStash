@@ -2,11 +2,16 @@
 
   import os
 
+  /// Repository for access the keychain.
   public struct KeychainRepository: StealthyRepository {
-    internal let defaultProvider: DefaultProvider?
+    internal let defaultProvider: (any DefaultProvider)?
     public let logger: Logger?
 
-    public init(defaultProvider: DefaultProvider? = nil, logger: Logger? = nil) {
+    /// Creates a keychain repository.
+    /// - Parameters:
+    ///   - defaultProvider: Provides the default values for each query to the keychain.
+    ///   - logger: Logger to use for each log message.
+    public init(defaultProvider: (any DefaultProvider)? = nil, logger: Logger? = nil) {
       self.defaultProvider = defaultProvider
       self.logger = logger ?? Self.defaultLogger
     }

@@ -5,16 +5,13 @@ private protocol _OptionalProtocol {
 }
 
 extension Dictionary {
-  // swiftlint:disable:next strict_fileprivate
-  fileprivate typealias DeepUnwrappable = _OptionalProtocol
-
   internal enum MissingValueError: Error {
     case missingKey(Key)
     case mismatchType(Value)
   }
 
   internal static func deepUnwrap(_ any: Any) -> Any? {
-    if let optional = any as? _OptionalProtocol {
+    if let optional = any as? (any _OptionalProtocol) {
       return optional._deepUnwrapped
     }
     return any
@@ -101,7 +98,7 @@ extension Dictionary where Key == String, Value == Any? {
   #endif
 }
 
-extension Optional: Dictionary.DeepUnwrappable {
+extension Optional: _OptionalProtocol {
   // swiftlint:disable:next strict_fileprivate
   fileprivate var _deepUnwrapped: Any? {
     if let wrapped = self {

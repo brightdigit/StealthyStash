@@ -88,7 +88,7 @@
     /// Queries the keychain for items.
     /// - Parameter query: The query to use.
     /// - Returns: A collection of keychain items.
-    public func query(_ query: Query) throws -> [AnyStealthyProperty] {
+    public func query(_ query: any Query) throws -> [AnyStealthyProperty] {
       let defaults = defaultProvider?.attributesForQuery(ofType: query.type) ?? [:]
       let dictionaryAny = query
         .keychainDictionary()
