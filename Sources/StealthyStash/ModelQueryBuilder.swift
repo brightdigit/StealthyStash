@@ -1,9 +1,9 @@
-/// A protocol for building queries for a stealthy model.
+/// A protocol for building queries for a ``StealthyModel``
 public protocol ModelQueryBuilder {
   /// The type of query that this builder can create.
   associatedtype QueryType
 
-  /// The type of stealthy model that this builder can create.
+  /// The type of ``StealthyModel`` that this builder can create.
   associatedtype StealthyModelType: StealthyModel
 
   /// Creates a dictionary of queries from a given query object.
@@ -11,19 +11,19 @@ public protocol ModelQueryBuilder {
   /// - Parameter query: The query object to convert to a dictionary of queries.
   ///
   /// - Returns: A dictionary of queries.
-  static func queries(from query: QueryType) -> [String: Query]
+  static func queries(from query: QueryType) -> [String: any Query]
 
-  /// Creates a stealthy model from a dictionary of properties.
+  /// Creates a ``StealthyModel``  from a dictionary of properties.
   ///
   /// - Parameter properties: A dictionary of properties to use to create the model.
   ///
   /// - Throws: An error if the model cannot be created from the given properties.
   ///
-  /// - Returns: A new instance of the stealthy model.
+  /// - Returns: A new instance of the ``StealthyModel``.
   static func model(from properties: [String: [AnyStealthyProperty]])
     throws -> StealthyModelType?
 
-  /// Extracts the properties of a stealthy model for a given operation.
+  /// Extracts the properties of a ``StealthyModel`` for a given operation.
   ///
   /// - Parameters:
   ///   - model: The model to extract properties from.
@@ -35,7 +35,7 @@ public protocol ModelQueryBuilder {
     for operation: ModelOperation
   ) -> [AnyStealthyProperty]
 
-  /// Creates an array of property updates from two versions of a stealthy model.
+  /// Creates an array of property updates from two versions of a ``StealthyModel``.
   ///
   /// - Parameters:
   ///   - previousItem: The previous version of the model.

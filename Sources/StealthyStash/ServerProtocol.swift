@@ -2,6 +2,7 @@
   import Security
 #endif
 
+/// Denotes the item's protocol.
 public enum ServerProtocol: String {
   case ftp
   case ftpaccount
