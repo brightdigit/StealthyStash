@@ -66,18 +66,31 @@ public struct PhoneView: View {
       self.errorDescription = error.localizedDescription
     }
   }
+    
+    #if os(watchOS)
+    let spacing = 0.0
+    #else
+    let spacing = 12.0
+    #endif
+    
+    #if os(watchOS)
+    let buttonStyle : BorderedProminentButtonStyle = DefaultButtonStyle.borderedProminent
+    #else
+    let buttonStyle : DefaultButtonStyle = DefaultButtonStyle.automatic
+    #endif
   
     public var body: some View {
-      VStack {
+        VStack(spacing: spacing) {
         TextField("Internet", text: self.$internet)
         TextField("Generic", text: self.$generic)
         HStack{
           Button("Load") {
             self.load()
-          }
+          }.buttonStyle(.automatic)
+            Spacer()
           Button("Save") {
             self.save()
-          }
+          }.buttonStyle(buttonStyle)
         }
         if let errorDescription = self.errorDescription {
           Button(action: {
