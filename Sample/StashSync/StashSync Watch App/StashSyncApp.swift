@@ -12,7 +12,7 @@ import StashSyncKit
 struct StashSync_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
-            WatchView()
+            PhoneView()
         }
     }
 }
