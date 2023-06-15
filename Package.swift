@@ -35,8 +35,7 @@ let package = Package(
           package: "swift-log",
           condition: .when(platforms: [.linux, .android, .windows, .wasi])
         )
-      ],
-      swiftSettings: swiftSettings
+      ]
     ),
     .testTarget(
       name: "StealthyStashTests",
