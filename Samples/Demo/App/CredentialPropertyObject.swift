@@ -3,12 +3,17 @@ import Foundation
 import StealthyStash
 
 class CredentialPropertyObject: ObservableObject {
-  internal init(repository: StealthyRepository, triggerSet: TriggerSet, item: StealthyPropertyBuilder, original: AnyStealthyProperty?) {
+  // swiftlint:disable:next function_body_length
+  internal init(
+    repository: StealthyRepository,
+    triggerSet: TriggerSet,
+    item: StealthyPropertyBuilder,
+    original: AnyStealthyProperty?
+  ) {
     self.item = item
     self.repository = repository
     originalItem = original
 
-    
     let savePublisher = saveTriggerSubject
       .map { self.item }
       .tryMap(AnyStealthyProperty.init)
@@ -32,7 +37,7 @@ class CredentialPropertyObject: ObservableObject {
     savePublisher
       .map { Error?.none }
       .catch { Just(Optional.some($0)) }
-      .compactMap{$0}
+      .compactMap { $0 }
       .print()
       .compactMap { $0 as? KeychainError }
       .receive(on: DispatchQueue.main)
@@ -64,8 +69,11 @@ class CredentialPropertyObject: ObservableObject {
       .receive(on: DispatchQueue.main)
       .assign(to: &$lastError)
 
-    updateCompletedCancellable = Publishers.Merge(successSavePublisher, successDeletePublisher)
-      .subscribe(updateCompletedSubject)
+    updateCompletedCancellable = Publishers.Merge(
+      successSavePublisher,
+      successDeletePublisher
+    )
+    .subscribe(updateCompletedSubject)
 
     saveCompletedCancellable = updateCompleted.subscribe(triggerSet.saveCompletedTrigger)
   }
@@ -100,10 +108,20 @@ class CredentialPropertyObject: ObservableObject {
 
 extension CredentialPropertyObject {
   convenience init(repository: StealthyRepository, item: AnyStealthyProperty) {
-    self.init(repository: repository, triggerSet: .init(), item: .init(item: item), original: item)
+    self.init(
+      repository: repository,
+      triggerSet: .init(),
+      item: .init(item: item),
+      original: item
+    )
   }
 
   convenience init(repository: StealthyRepository, type: StealthyPropertyType) {
-    self.init(repository: repository, triggerSet: .init(), item: .init(secClass: type), original: nil)
+    self.init(
+      repository: repository,
+      triggerSet: .init(),
+      item: .init(secClass: type),
+      original: nil
+    )
   }
 }

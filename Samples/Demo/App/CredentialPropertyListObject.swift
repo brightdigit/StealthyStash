@@ -3,7 +3,12 @@ import Foundation
 import StealthyStash
 
 class CredentialPropertyListObject: ObservableObject {
-  internal init(repository: StealthyRepository, triggerSet: TriggerSet, internetPasswords: [AnyStealthyProperty] = [], isLoaded: Bool = false) {
+  internal init(
+    repository: StealthyRepository,
+    triggerSet: TriggerSet,
+    internetPasswords: [AnyStealthyProperty] = [],
+    isLoaded: Bool = false
+  ) {
     self.repository = repository
     credentialProperties = internetPasswords
     self.isLoaded = isLoaded

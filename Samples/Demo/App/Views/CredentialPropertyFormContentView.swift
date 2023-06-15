@@ -12,7 +12,11 @@ struct CredentialPropertyFormContentView: View {
       #if os(watchOS)
         TextField("data", text: $object.item.dataString)
       #else
-        TextEditor(text: $object.item.dataString).frame(height: 80.0).accessibilityIdentifier("data")
+        TextEditor(
+          text: $object.item.dataString
+        )
+        .frame(height: 80.0)
+        .accessibilityIdentifier("data")
       #endif
     }
 
@@ -66,7 +70,14 @@ struct CredentialPropertyFormContentView: View {
 struct CredentialPropertyFormContentView_Previews: PreviewProvider {
   static var previews: some View {
     Form {
-      CredentialPropertyFormContentView(object: CredentialPropertyObject(repository: PreviewRepository(items: AnyStealthyProperty.previewCollection), item: AnyStealthyProperty.previewCollection.randomElement()!))
+      CredentialPropertyFormContentView(
+        object: CredentialPropertyObject(
+          repository: PreviewRepository(
+            items: AnyStealthyProperty.previewCollection
+          ),
+          item: AnyStealthyProperty.previewCollection.randomElement()!
+        )
+      )
     }
   }
 }

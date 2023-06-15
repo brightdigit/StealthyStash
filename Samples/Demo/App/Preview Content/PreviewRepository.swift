@@ -8,7 +8,10 @@ struct PreviewRepository: StealthyRepository {
 
   func update(_: AnyStealthyProperty) throws {}
 
-  func update<StealthyPropertyType>(_: StealthyPropertyType, from _: StealthyPropertyType) throws where StealthyPropertyType: StealthyProperty {}
+  func update<StealthyPropertyType>(
+    _: StealthyPropertyType,
+    from _: StealthyPropertyType
+  ) throws where StealthyPropertyType: StealthyProperty {}
 
   func query(_: Query) throws -> [AnyStealthyProperty] {
     items

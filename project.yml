@@ -11,3 +11,8 @@ aggregateTargets:
         name: Lint
         basedOnDependencyAnalysis: false
     schemes: {}
+projectReferences:
+    Demo:
+      path: ./Samples/Demo/StealthyStashDemo.xcodeproj
+    Sync:
+      path: ./Samples/StashSync/StashSync.xcodeproj

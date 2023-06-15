@@ -1,18 +1,11 @@
-//
-//  StashSyncApp.swift
-//  StashSync
-//
-//  Created by Leo Dion on 6/13/23.
-//
-
-import SwiftUI
 import StashSyncKit
+import SwiftUI
 
 @main
 struct StashSyncApp: App {
-    var body: some Scene {
-        WindowGroup {
-          PhoneView()
-        }
+  var body: some Scene {
+    WindowGroup {
+      PhoneView()
     }
+  }
 }

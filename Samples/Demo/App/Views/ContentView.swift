@@ -10,16 +10,25 @@ struct ContentView: View {
   )
   var body: some View {
     TabView {
-      CredentialPropertyRootView(repository: repository, triggerSet: self.triggerSet, query: TypeQuery(type: .internet)).tabItem {
+      CredentialPropertyRootView(
+        repository: repository,
+        triggerSet: self.triggerSet,
+        query: TypeQuery(type: .internet)
+      )
+      .tabItem {
         Image(systemName: "network")
         Text("Internet")
       }
 
-      CredentialPropertyRootView(repository: repository, triggerSet: self.triggerSet, query: TypeQuery(type: .generic))
-        .tabItem {
-          Image(systemName: "key.fill")
-          Text("Generic")
-        }
+      CredentialPropertyRootView(
+        repository: repository,
+        triggerSet: self.triggerSet,
+        query: TypeQuery(type: .generic)
+      )
+      .tabItem {
+        Image(systemName: "key.fill")
+        Text("Generic")
+      }
 
       CompositeStealthyView(repository: repository, triggerSet: self.triggerSet)
         .tabItem {

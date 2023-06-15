@@ -12,6 +12,7 @@ class TriggerSet {
 }
 
 class CompositeStealthyObject: ObservableObject {
+  // swiftlint:disable:next function_body_length
   internal init(
     repository: StealthyRepository,
     triggerSet: TriggerSet,

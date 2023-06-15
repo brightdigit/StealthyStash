@@ -18,26 +18,34 @@ struct SettingsView: View {
           }
         }
       }
-      .alert("All Keychain Items Deleted", isPresented: self.$shouldDisplayClearAllCompleted, actions: {
-        Button("Ok") {}
-      })
-      .alert("Are you sure you want to delete all keychain items?", isPresented: self.$shouldDisplayConfirmationAlert, actions: {
-        Button("No", role: .cancel) {}
-        Button("Yes", role: .destructive) {
-          do {
-            try self.repository.clearAll()
-          } catch let error as KeychainError {
-            Task { @MainActor in
-              self.keychainError = error
+      .alert(
+        "All Keychain Items Deleted",
+        isPresented: self.$shouldDisplayClearAllCompleted, actions: {
+          Button("Ok") {}
+        }
+      )
+      .alert(
+        "Are you sure you want to delete all keychain items?",
+        isPresented: self.$shouldDisplayConfirmationAlert, actions: {
+          Button("No", role: .cancel) {}
+          Button("Yes", role: .destructive) {
+            do {
+              try self.repository.clearAll()
+            } catch let error as KeychainError {
+              Task { @MainActor in
+                self.keychainError = error
+              }
+            } catch {
+              assertionFailure(
+                "unknown error clearing keychain: \(error.localizedDescription)"
+              )
             }
-          } catch {
-            assertionFailure("unknown error clearing keychain: \(error.localizedDescription)")
-          }
-          Task { @MainActor in
-            self.shouldDisplayClearAllCompleted = true
+            Task { @MainActor in
+              self.shouldDisplayClearAllCompleted = true
+            }
           }
         }
-      })
+      )
       .navigationTitle("Settings")
     }
   }

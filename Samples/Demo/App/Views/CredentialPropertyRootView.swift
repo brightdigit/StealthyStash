@@ -2,8 +2,22 @@ import StealthyStash
 import SwiftUI
 
 struct CredentialPropertyRootView: View {
-  internal init(repository: StealthyRepository, triggerSet: TriggerSet, internetPasswords: [AnyStealthyProperty] = [], isLoaded: Bool = false, query: Query, createNewItem: Bool = false) {
-    _object = StateObject(wrappedValue: .init(repository: repository, triggerSet: triggerSet, internetPasswords: internetPasswords, isLoaded: isLoaded))
+  internal init(
+    repository: StealthyRepository,
+    triggerSet: TriggerSet,
+    internetPasswords: [AnyStealthyProperty] = [],
+    isLoaded: Bool = false,
+    query: Query,
+    createNewItem: Bool = false
+  ) {
+    _object = StateObject(
+      wrappedValue: .init(
+        repository: repository,
+        triggerSet: triggerSet,
+        internetPasswords: internetPasswords,
+        isLoaded: isLoaded
+      )
+    )
     _query = .init(initialValue: query)
     self.createNewItem = createNewItem
   }
@@ -54,7 +68,8 @@ struct CredentialPropertyRootView: View {
         Section {
           Group {
             if self.object.isLoaded {
-              CredentialPropertyList(object: object).accessibilityIdentifier("propertyList")
+              CredentialPropertyList(object: object)
+                .accessibilityIdentifier("propertyList")
             } else {
               ProgressView()
             }
@@ -70,11 +85,15 @@ struct CredentialPropertyRootView: View {
       .onReceive(self.object.$lastError, perform: { error in
         self.isErrorAlertVisible = error != nil
       })
-      .alert(isPresented: self.$isErrorAlertVisible, error: self.object.lastError, actions: { _ in
-        Button("OK") {}
-      }, message: { error in
-        Text(error.localizedDescription)
-      })
+      .alert(
+        isPresented: self.$isErrorAlertVisible,
+        error: self.object.lastError,
+        actions: { _ in
+          Button("OK") {}
+        }, message: { error in
+          Text(error.localizedDescription)
+        }
+      )
       .navigationTitle(self.navigationTitle)
       .toolbar {
         Button {
@@ -83,9 +102,17 @@ struct CredentialPropertyRootView: View {
           Image(systemName: "plus")
         }
       }.navigationDestination(for: AnyStealthyProperty.self) { item in
-        CredentialPropertyView(repository: self.object.repository, item: item).navigationTitle(item.account)
+        CredentialPropertyView(
+          repository: self.object.repository,
+          item: item
+        )
+        .navigationTitle(item.account)
       }.navigationDestination(isPresented: self.$createNewItem) {
-        CredentialPropertyView(repository: self.object.repository, type: self.query.type).navigationTitle(self.newNavigationTitle)
+        CredentialPropertyView(
+          repository: self.object.repository,
+          type: self.query.type
+        )
+        .navigationTitle(self.newNavigationTitle)
       }.onAppear {
         self.object.query(self.query)
       }
@@ -95,8 +122,14 @@ struct CredentialPropertyRootView: View {
 
 struct CredentialPropertyRootView_Previews: PreviewProvider {
   static var previews: some View {
-    CredentialPropertyRootView(repository: PreviewRepository(
-      items: AnyStealthyProperty.previewCollection
-    ), triggerSet: .init(), internetPasswords: AnyStealthyProperty.previewCollection, query: TypeQuery(type: .internet))
+    CredentialPropertyRootView(
+      repository: PreviewRepository(
+        items: AnyStealthyProperty.previewCollection
+      ),
+      triggerSet: .init(),
+      internetPasswords: AnyStealthyProperty.previewCollection,
+      query: TypeQuery(type: .internet
+      )
+    )
   }
 }

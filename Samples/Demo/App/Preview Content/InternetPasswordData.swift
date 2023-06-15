@@ -18,6 +18,7 @@ public struct CredentialPropertyData: Codable {
 }
 
 extension CredentialPropertyData {
+  // swiftlint:disable force_try
   static let collection = {
     let decoder = JSONDecoder()
     let url = Bundle.main.url(forResource: "credential-properties", withExtension: "json")
@@ -25,16 +26,19 @@ extension CredentialPropertyData {
     decoder.dateDecodingStrategy = .secondsSince1970
     return try! decoder.decode([CredentialPropertyData].self, from: data)
   }()
+
+  // swiftlint:enable force_try
 }
 
 extension Synchronizable {
-  init(_ booleanValue : Bool?) {
+  init(_ booleanValue: Bool?) {
     switch booleanValue {
-      
     case .none:
       self = .any
+
     case .some(true):
       self = .enabled
+
     case .some(false):
       self = .disabled
     }
@@ -53,7 +57,7 @@ extension GenericPasswordItem {
       description: data.description,
       type: data.type,
       label: data.label,
-      isSynchronizable: .init( data.isSynchronizable)
+      isSynchronizable: .init(data.isSynchronizable)
     )
   }
 }
@@ -89,5 +93,7 @@ extension AnyStealthyProperty {
     self.init(property: property)
   }
 
-  public static let previewCollection = CredentialPropertyData.collection.map(Self.init(data:))
+  public static let previewCollection = CredentialPropertyData.collection.map(
+    Self.init(data:)
+  )
 }

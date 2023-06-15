@@ -4,7 +4,7 @@
 
 import PackageDescription
 
-//let swiftSettings: [SwiftSetting] = [
+// let swiftSettings: [SwiftSetting] = [
 //  .enableUpcomingFeature("BareSlashRegexLiterals"),
 //  .enableUpcomingFeature("ConciseMagicFile"),
 //  .enableUpcomingFeature("ExistentialAny"),
@@ -12,7 +12,7 @@ import PackageDescription
 //  .enableUpcomingFeature("ImplicitOpenExistentials"),
 //  .enableUpcomingFeature("StrictConcurrency"),
 //  .unsafeFlags(["-warn-concurrency", "-enable-actor-data-race-checks"])
-//]
+// ]
 
 let package = Package(
   name: "StealthyStash",

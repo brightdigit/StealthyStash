@@ -1,15 +1,20 @@
+// swiftlint:disable file_length
 import Foundation
 
 extension URL {
-  static func random() -> URL {
-    _list.randomElement()!
-  }
+  private static let _list = Self
+    ._data
+    .components(
+      separatedBy: .whitespacesAndNewlines
+    )
+    .map(
+      URL.init(string:)
+    )
+    .map {
+      $0!
+    }
 
-  static let _list = Self._data.components(separatedBy: .whitespacesAndNewlines).map(URL.init(string:)).map {
-    $0!
-  }
-
-  static let _data = """
+  private static let _data = """
   https://jugem.jp/felis/sed/interdum/venenatis/turpis/enim.png
   http://ow.ly/dui/proin.jpg
   http://vinaora.com/vestibulum/aliquet/ultrices/erat/tortor/sollicitudin/mi.json
@@ -1011,4 +1016,8 @@ extension URL {
   https://mozilla.org/et/ultrices/posuere/cubilia.aspx
   https://army.mil/quisque/erat/eros.jsp
   """
+
+  internal static func random() -> URL {
+    _list.randomElement()!
+  }
 }

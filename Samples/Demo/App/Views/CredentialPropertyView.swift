@@ -21,13 +21,17 @@ struct CredentialPropertyView: View {
     .onReceive(self.object.updateCompleted, perform: { _ in
       self.dismiss()
     })
-    .alert(isPresented: self.$isErrorAlertVisible, error: self.object.lastError, actions: { error in
-      Button("OK") {
-        self.object.clearError(error)
+    .alert(
+      isPresented: self.$isErrorAlertVisible,
+      error: self.object.lastError,
+      actions: { error in
+        Button("OK") {
+          self.object.clearError(error)
+        }
+      }, message: { error in
+        Text(error.localizedDescription)
       }
-    }, message: { error in
-      Text(error.localizedDescription)
-    })
+    )
     .alert("Unsaved Changes", isPresented: self.$shouldConfirmDismiss, actions: {
       Button("Save and Go Back.") {
         self.object.save()

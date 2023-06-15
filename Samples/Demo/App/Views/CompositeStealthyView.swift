@@ -7,8 +7,18 @@ struct CompositeStealthyView: View {
     _object = .init(wrappedValue: object)
   }
 
-  internal init(repository: StealthyRepository, triggerSet: TriggerSet, secret: CompositeStealthyBuilder = .init()) {
-    self.init(object: .init(repository: repository, triggerSet: triggerSet, secret: secret))
+  internal init(
+    repository: StealthyRepository,
+    triggerSet: TriggerSet,
+    secret: CompositeStealthyBuilder = .init()
+  ) {
+    self.init(
+      object: .init(
+        repository: repository,
+        triggerSet: triggerSet,
+        secret: secret
+      )
+    )
   }
 
   @StateObject var object: CompositeStealthyObject
@@ -58,6 +68,10 @@ struct CompositeStealthyView: View {
 
 struct CompositeStealthyView_Previews: PreviewProvider {
   static var previews: some View {
-    CompositeStealthyView(repository: PreviewRepository(items: []), triggerSet: .init(), secret: .init(userName: "username", password: "password", token: "token"))
+    CompositeStealthyView(
+      repository: PreviewRepository(items: []),
+      triggerSet: .init(),
+      secret: .init(userName: "username", password: "password", token: "token")
+    )
   }
 }
