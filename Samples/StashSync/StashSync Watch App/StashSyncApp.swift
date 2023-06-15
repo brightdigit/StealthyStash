@@ -1,18 +1,12 @@
-//
-//  StashSyncApp.swift
-//  StashSync Watch App
-//
-//  Created by Leo Dion on 6/13/23.
-//
-
-import SwiftUI
 import StashSyncKit
+import SwiftUI
 
 @main
+// swiftlint:disable:next type_name
 struct StashSync_Watch_AppApp: App {
-    var body: some Scene {
-        WindowGroup {
-            PhoneView()
-        }
+  var body: some Scene {
+    WindowGroup {
+      PhoneView()
     }
+  }
 }

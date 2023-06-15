@@ -12,6 +12,7 @@ struct SampleEntry {
   }
 }
 
+// swiftlint:disable line_length file_length
 extension SampleEntry {
   static let all = [
     SampleEntry("akloska0", "ylHsWcVS", "553dc970b6506345e80da22c57ead087d83807dadb2c7647c213d76562fe3299"),

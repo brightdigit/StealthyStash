@@ -154,7 +154,6 @@ extension StealthyPropertyBuilder {
   }
 }
 
-
 extension StealthyPropertyBuilder {
   public init(item: AnyStealthyProperty) {
     assert(item.propertyType == .internet || item.service != nil)
@@ -176,46 +175,5 @@ extension StealthyPropertyBuilder {
       path: item.path,
       isSynchronizable: item.isSynchronizable
     )
-  }
-}
-
-extension StealthyProperty  {
-  init(builder: StealthyPropertyBuilder) throws {
-    
-    try self.init(rawDictionary: .init(builder: builder))
-  }
-}
-
-extension Dictionary where Key == String, Value == Any {
-  init(builder: StealthyPropertyBuilder) {
-    let values : [CFString : Any?] = [
-      kSecAttrAccount: builder.account,
-      kSecValueData: builder.data,
-      kSecAttrAccessGroup: builder.accessGroup,
-      kSecAttrCreationDate: builder.createdAt,
-      kSecAttrModificationDate: builder.modifiedAt,
-      kSecAttrDescription: builder.description,
-      kSecAttrType: builder.type,
-      kSecAttrLabel: builder.label,
-      kSecAttrServer: builder.server,
-      kSecAttrProtocol: builder.protocol?.cfValue,
-      kSecAttrPort: builder.port,
-      kSecAttrPath: builder.path,
-      kSecAttrSynchronizable: builder.isSynchronizable.cfValue,
-      kSecAttrService: builder.service
-    ]
-    
-    self = Dictionary(uniqueKeysWithValues: values.compactMap{ pair in
-      return pair.value.map{(pair.key as String, $0)}
-    })
-  }
-}
-
-extension AnyStealthyProperty {
-  
-  public init(builder: StealthyPropertyBuilder) throws {
-    let propertyType = builder.secClass.propertyType
-    let property = try propertyType.init(builder: builder)
-    self.init(property: property)
   }
 }
