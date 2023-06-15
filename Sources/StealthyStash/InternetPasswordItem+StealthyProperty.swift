@@ -91,7 +91,8 @@ extension InternetPasswordItem {
         kSecAttrServer as String: server,
         kSecAttrProtocol as String: self.protocol?.cfValue,
         kSecAttrPort as String: port,
-        kSecAttrPath as String: path
+        kSecAttrPath as String: path,
+        kSecAttrSynchronizable as String: isSynchronizable.cfValue
       ]
     }
 

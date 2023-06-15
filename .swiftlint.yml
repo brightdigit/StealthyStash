@@ -118,6 +118,6 @@ excluded:
   - Tests
   - DerivedData
   - .build
-  - Sample
+  - Samples
 indentation_width:
   indentation_width: 2
