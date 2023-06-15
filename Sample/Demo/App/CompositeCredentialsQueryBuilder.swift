@@ -2,6 +2,9 @@ import StealthyStash
 
 extension AnyStealthyProperty {
   
+    public var dataString: String {
+        self.property.dataString
+    }
 }
 
 extension StealthyProperty {
