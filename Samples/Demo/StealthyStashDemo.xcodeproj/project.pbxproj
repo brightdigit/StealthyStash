@@ -17,6 +17,8 @@
 		B322978F29CD1F50006CCAEE /* PreviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322978E29CD1F50006CCAEE /* PreviewRepository.swift */; };
 		B322979129CD1F69006CCAEE /* StealthyStash in Frameworks */ = {isa = PBXBuildFile; productRef = B322979029CD1F69006CCAEE /* StealthyStash */; };
 		B322979429CD21BA006CCAEE /* SampleEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322979229CD2079006CCAEE /* SampleEntry.swift */; };
+		B334FF062A3B418B00F3F7E4 /* TriggerSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B334FF052A3B418B00F3F7E4 /* TriggerSet.swift */; };
+		B334FF072A3B418B00F3F7E4 /* TriggerSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B334FF052A3B418B00F3F7E4 /* TriggerSet.swift */; };
 		B34ADDBC29AF84750072B59F /* CredentialPropertyRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDB329AF84750072B59F /* CredentialPropertyRootView.swift */; };
 		B34ADDC129AF84750072B59F /* CredentialPropertyListObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDB829AF84750072B59F /* CredentialPropertyListObject.swift */; };
 		B34ADDD129AF86AB0072B59F /* CredentialPropertyFormContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34ADDD029AF86AB0072B59F /* CredentialPropertyFormContentView.swift */; };
@@ -87,6 +89,7 @@
 		B322978C29CD1E7E006CCAEE /* CredentialPropertyObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialPropertyObject.swift; sourceTree = "<group>"; };
 		B322978E29CD1F50006CCAEE /* PreviewRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewRepository.swift; sourceTree = "<group>"; };
 		B322979229CD2079006CCAEE /* SampleEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleEntry.swift; sourceTree = "<group>"; };
+		B334FF052A3B418B00F3F7E4 /* TriggerSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerSet.swift; sourceTree = "<group>"; };
 		B34ADDB329AF84750072B59F /* CredentialPropertyRootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialPropertyRootView.swift; sourceTree = "<group>"; };
 		B34ADDB829AF84750072B59F /* CredentialPropertyListObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialPropertyListObject.swift; sourceTree = "<group>"; };
 		B34ADDD029AF86AB0072B59F /* CredentialPropertyFormContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialPropertyFormContentView.swift; sourceTree = "<group>"; };
@@ -149,6 +152,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B334FF082A3B41F500F3F7E4 /* Reactive */ = {
+			isa = PBXGroup;
+			children = (
+				B334FF052A3B418B00F3F7E4 /* TriggerSet.swift */,
+				B322978C29CD1E7E006CCAEE /* CredentialPropertyObject.swift */,
+				B300756F29D76BE30050778D /* CompositeStealthyObject.swift */,
+			);
+			path = Reactive;
+			sourceTree = "<group>";
+		};
+		B334FF092A3B422600F3F7E4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B3DBC2CB29CEA2750039ED78 /* Data.swift */,
+				B3DBC2CA29CEA2750039ED78 /* String.swift */,
+				B3A19CDE2A3A96100055B3E5 /* AnyStealthyProperty.swift */,
+				B3A19CE12A3A96370055B3E5 /* StealthyProperty.swift */,
+				B3A19CE42A3A98A10055B3E5 /* Dictionary.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B334FF0A2A3B424700F3F7E4 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				B3A2636F29B2B75400CC36B4 /* CompositeCredentials.swift */,
+				B3A2637E29B2B75400CC36B4 /* CompositeCredentialsQueryBuilder.swift */,
+				B34ADDB829AF84750072B59F /* CredentialPropertyListObject.swift */,
+				B3B7089E29D356D5009D5BFE /* StealthyPropertyBuilder.swift */,
+				B369E21429CBCEF1007C4155 /* CompositeStealthyBuilder.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		B334FF0B2A3B425D00F3F7E4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B322979229CD2079006CCAEE /* SampleEntry.swift */,
+				B3D3668729CA83F6002A87AC /* URL.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B334FF0C2A3B426400F3F7E4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B3A19CE82A3A99A40055B3E5 /* GenericPasswordItem.swift */,
+				B3A19CE72A3A99A40055B3E5 /* Int.swift */,
+				B3A19CEA2A3A99A40055B3E5 /* InternetPasswordItem.swift */,
+				B3A19CE92A3A99A40055B3E5 /* StealthyProperty.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B34ADDD429AF884E0072B59F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,13 +223,9 @@
 		B353398929B7D783006FF22B /* UI Tests */ = {
 			isa = PBXGroup;
 			children = (
-				B3A19CE82A3A99A40055B3E5 /* GenericPasswordItem.swift */,
-				B3A19CE72A3A99A40055B3E5 /* Int.swift */,
-				B3A19CEA2A3A99A40055B3E5 /* InternetPasswordItem.swift */,
-				B3A19CE92A3A99A40055B3E5 /* StealthyProperty.swift */,
-				B322979229CD2079006CCAEE /* SampleEntry.swift */,
+				B334FF0C2A3B426400F3F7E4 /* Extensions */,
+				B334FF0B2A3B425D00F3F7E4 /* Data */,
 				B353398A29B7D783006FF22B /* KeychainSyncDemoUITests.swift */,
-				B3D3668729CA83F6002A87AC /* URL.swift */,
 			);
 			path = "UI Tests";
 			sourceTree = "<group>";
@@ -208,23 +261,14 @@
 		B3AA493A29A5282F002D40C3 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				B300756F29D76BE30050778D /* CompositeStealthyObject.swift */,
+				B334FF082A3B41F500F3F7E4 /* Reactive */,
 				B3AA493F29A52831002D40C3 /* Assets.xcassets */,
 				B34ADDD429AF884E0072B59F /* Views */,
-				B3A2636F29B2B75400CC36B4 /* CompositeCredentials.swift */,
-				B3A2637E29B2B75400CC36B4 /* CompositeCredentialsQueryBuilder.swift */,
-				B34ADDB829AF84750072B59F /* CredentialPropertyListObject.swift */,
-				B3DBC2CB29CEA2750039ED78 /* Data.swift */,
-				B3DBC2CA29CEA2750039ED78 /* String.swift */,
-				B3B7089E29D356D5009D5BFE /* StealthyPropertyBuilder.swift */,
-				B322978C29CD1E7E006CCAEE /* CredentialPropertyObject.swift */,
+				B334FF0A2A3B424700F3F7E4 /* Keychain */,
+				B334FF092A3B422600F3F7E4 /* Extensions */,
 				B3AA494129A52831002D40C3 /* KeychainSyncDemo.entitlements */,
 				B3AA493B29A5282F002D40C3 /* KeychainSyncDemoApp.swift */,
 				B3AA494229A52831002D40C3 /* Preview Content */,
-				B369E21429CBCEF1007C4155 /* CompositeStealthyBuilder.swift */,
-				B3A19CDE2A3A96100055B3E5 /* AnyStealthyProperty.swift */,
-				B3A19CE12A3A96370055B3E5 /* StealthyProperty.swift */,
-				B3A19CE42A3A98A10055B3E5 /* Dictionary.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -421,6 +465,7 @@
 				B34ADDD129AF86AB0072B59F /* CredentialPropertyFormContentView.swift in Sources */,
 				B3A2639D29B2B75500CC36B4 /* CompositeCredentialsQueryBuilder.swift in Sources */,
 				B322978D29CD1E7E006CCAEE /* CredentialPropertyObject.swift in Sources */,
+				B334FF062A3B418B00F3F7E4 /* TriggerSet.swift in Sources */,
 				B322978F29CD1F50006CCAEE /* PreviewRepository.swift in Sources */,
 				B34ADDD329AF87F00072B59F /* CredentialPropertyList.swift in Sources */,
 				B3A2637F29B2B75500CC36B4 /* CompositeCredentials.swift in Sources */,
@@ -450,6 +495,7 @@
 				B381C46C2A3A8F34000C92F6 /* Data.swift in Sources */,
 				B3A2638029B2B75500CC36B4 /* CompositeCredentials.swift in Sources */,
 				B300757129D76BE30050778D /* CompositeStealthyObject.swift in Sources */,
+				B334FF072A3B418B00F3F7E4 /* TriggerSet.swift in Sources */,
 				B3A2639E29B2B75500CC36B4 /* CompositeCredentialsQueryBuilder.swift in Sources */,
 				B34ADDE929B00B550072B59F /* CredentialPropertyView.swift in Sources */,
 				B39BF15429A6C116009BBCAC /* KeychainSyncDemoApp.swift in Sources */,

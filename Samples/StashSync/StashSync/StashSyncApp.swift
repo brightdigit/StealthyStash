@@ -5,7 +5,7 @@ import SwiftUI
 struct StashSyncApp: App {
   var body: some Scene {
     WindowGroup {
-      PhoneView()
+      ContentView()
     }
   }
 }

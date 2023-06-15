@@ -2,15 +2,6 @@ import Combine
 import Foundation
 import StealthyStash
 
-class TriggerSet {
-  let saveCompletedTrigger = PassthroughSubject<Void, Never>()
-  // private let receivedUpdate = PassthroughSubject<Void, Never>()
-
-  var receiveUpdatePublisher: AnyPublisher<Void, Never> {
-    saveCompletedTrigger.share().eraseToAnyPublisher()
-  }
-}
-
 class CompositeStealthyObject: ObservableObject {
   // swiftlint:disable:next function_body_length
   internal init(

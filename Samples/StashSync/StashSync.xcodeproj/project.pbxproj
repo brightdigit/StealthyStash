@@ -11,7 +11,6 @@
 		B327C22B2A3A488200DBB432 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B327C22A2A3A488200DBB432 /* Assets.xcassets */; };
 		B327C22E2A3A488200DBB432 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B327C22D2A3A488200DBB432 /* Preview Assets.xcassets */; };
 		B327C2342A3A488200DBB432 /* StashSync Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B327C2332A3A488200DBB432 /* StashSync Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B327C2392A3A488200DBB432 /* StashSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B327C2382A3A488200DBB432 /* StashSyncApp.swift */; };
 		B327C23D2A3A488200DBB432 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B327C23C2A3A488200DBB432 /* Assets.xcassets */; };
 		B327C2402A3A488200DBB432 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B327C23F2A3A488200DBB432 /* Preview Assets.xcassets */; };
 		B327C25A2A3A498000DBB432 /* StashSyncKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B327C2592A3A498000DBB432 /* StashSyncKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -19,8 +18,9 @@
 		B327C25E2A3A498000DBB432 /* StashSyncKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B327C2572A3A498000DBB432 /* StashSyncKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B327C2652A3A499600DBB432 /* StashSyncKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B327C2572A3A498000DBB432 /* StashSyncKit.framework */; };
 		B327C2662A3A499600DBB432 /* StashSyncKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B327C2572A3A498000DBB432 /* StashSyncKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B327C26D2A3A4DB900DBB432 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B327C26C2A3A4DB900DBB432 /* PhoneView.swift */; };
+		B327C26D2A3A4DB900DBB432 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B327C26C2A3A4DB900DBB432 /* ContentView.swift */; };
 		B327C2702A3A4DE100DBB432 /* StealthyStash in Frameworks */ = {isa = PBXBuildFile; productRef = B327C26F2A3A4DE100DBB432 /* StealthyStash */; };
+		B334FF0D2A3B428300F3F7E4 /* StashSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B327C2262A3A488100DBB432 /* StashSyncApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,14 +89,13 @@
 		B327C22A2A3A488200DBB432 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B327C22D2A3A488200DBB432 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B327C2332A3A488200DBB432 /* StashSync Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StashSync Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B327C2382A3A488200DBB432 /* StashSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StashSyncApp.swift; sourceTree = "<group>"; };
 		B327C23C2A3A488200DBB432 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B327C23F2A3A488200DBB432 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B327C2502A3A48E800DBB432 /* StashSync Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "StashSync Watch App.entitlements"; sourceTree = "<group>"; };
 		B327C2512A3A48FC00DBB432 /* StashSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StashSync.entitlements; sourceTree = "<group>"; };
 		B327C2572A3A498000DBB432 /* StashSyncKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StashSyncKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B327C2592A3A498000DBB432 /* StashSyncKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StashSyncKit.h; sourceTree = "<group>"; };
-		B327C26C2A3A4DB900DBB432 /* PhoneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
+		B327C26C2A3A4DB900DBB432 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				B327C2502A3A48E800DBB432 /* StashSync Watch App.entitlements */,
-				B327C2382A3A488200DBB432 /* StashSyncApp.swift */,
 				B327C23C2A3A488200DBB432 /* Assets.xcassets */,
 				B327C23E2A3A488200DBB432 /* Preview Content */,
 			);
@@ -196,7 +194,7 @@
 		B327C2582A3A498000DBB432 /* StashSyncKit */ = {
 			isa = PBXGroup;
 			children = (
-				B327C26C2A3A4DB900DBB432 /* PhoneView.swift */,
+				B327C26C2A3A4DB900DBB432 /* ContentView.swift */,
 				B327C2592A3A498000DBB432 /* StashSyncKit.h */,
 			);
 			path = StashSyncKit;
@@ -367,7 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B327C2392A3A488200DBB432 /* StashSyncApp.swift in Sources */,
+				B334FF0D2A3B428300F3F7E4 /* StashSyncApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B327C26D2A3A4DB900DBB432 /* PhoneView.swift in Sources */,
+				B327C26D2A3A4DB900DBB432 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

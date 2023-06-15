@@ -1,7 +1,7 @@
 import StealthyStash
 import SwiftUI
 
-public struct PhoneView: View {
+public struct ContentView: View {
   public init(
     oldGeneric: GenericPasswordItem? = nil,
     oldInternet: InternetPasswordItem? = nil,
@@ -118,5 +118,5 @@ public struct PhoneView: View {
 }
 
 #Preview {
-  PhoneView(errorDescription: "Test Error")
+  ContentView(errorDescription: "Test Error")
 }
