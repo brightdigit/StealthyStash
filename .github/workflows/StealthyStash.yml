@@ -147,3 +147,14 @@ jobs:
           fail_ci_if_error: true
           flags: watchOS,watchOS${{ matrix.watchOSVersion }}
           token: ${{ secrets.CODECOV_TOKEN }}
+      - name: iOS UI Tests
+        run: xcodebuild test -project Samples/Demo/StealthyStashDemo.xcodeproj  -scheme StealthyStashDemoUITests -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ matrix.iPhoneName }},OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
+      - uses: sersoft-gmbh/swift-coverage-action@v3
+        with:
+          fail-on-empty-output: true
+      - name: Upload iOS UI coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: true
+          flags: iOS,iOS-${{ matrix.iOSVersion }},UI
+          token: ${{ secrets.CODECOV_TOKEN }}
