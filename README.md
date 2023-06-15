@@ -70,9 +70,9 @@ let repository = KeychainRepository(
 )
 ```
 
-To call ``KeychainRepository/init(defaultServiceName:defaultServerName:defaultAccessGroup:defaultSynchronizable:logger:)`` you need to supply a the default ``InternetPasswordItem/server`` and ``GenericPasswordItem/service`` which is required by both types to query and create.
+To call ``KeychainRepository.init(defaultServiceName:defaultServerName:defaultAccessGroup:defaultSynchronizable:logger:)`` you need to supply a the default ``InternetPasswordItem/server`` and ``GenericPasswordItem/service`` which is required by both types to query and create.
 
-> You can also supply a `logger` to use for logging as well as an ``InternetPasswordItem/accessGroup`` for your ``InternetPasswordItem`` and ``GenericPasswordItem/accessGroup`` for your ``GenericPasswordItem``
+> You can also supply a `logger` to use for logging as well as an ``InternetPasswordItem.accessGroup`` for your ``InternetPasswordItem`` and ``GenericPasswordItem.accessGroup`` for your ``GenericPasswordItem``
 
 To query, update, or add a new password, check out the documentation under ``StealthyRepository``.
 
@@ -100,13 +100,13 @@ struct CompositeCredentials: StealthyModel {
 
 This is the perfect use case for ``StealthyModel`` and it only requires the implementation of a ``ModelQueryBuilder`` which defines how to build the queries for creating, updating, and deleting ``StealthyModel`` objects from the keychain:
 
-* ``ModelQueryBuilder/updates(from:to:)`` require you to build an array of ``StealthyPropertyUpdate`` object which define the previous and new properties for the Keychain. Both the previous and new are optional in case you are only adding a new item as part of the update or only removing an old item.
+* ``ModelQueryBuilder.updates(from:to:)`` require you to build an array of ``StealthyPropertyUpdate`` object which define the previous and new properties for the Keychain. Both the previous and new are optional in case you are only adding a new item as part of the update or only removing an old item.
 
-* ``ModelQueryBuilder/properties(from:for:)`` is for creating a new model and requires the individual ``AnyStealthyProperty`` for each item to add to the keychain.
+* ``ModelQueryBuilder.properties(from:for:)`` is for creating a new model and requires the individual ``AnyStealthyProperty`` for each item to add to the keychain.
 
-* ``ModelQueryBuilder/model(from:)`` builds the ``StealthyModel`` based on the ``AnyStealthyProperty`` items
+* ``ModelQueryBuilder.model(from:)`` builds the ``StealthyModel`` based on the ``AnyStealthyProperty`` items
 
-* ``ModelQueryBuilder/queries(from:)`` builds a query dictionary depending the ``ModelQueryBuilder/QueryType`` passed. The keys to the query dictionary will be used by ``ModelQueryBuilder/model(from:)`` to define the keys of their resulting ``AnyStealthyProperty``. If there's only one object in your app, you can define ``ModelQueryBuilder/QueryType`` as `Void`:
+* ``ModelQueryBuilder.queries(from:)`` builds a query dictionary depending the ``ModelQueryBuilder.QueryType`` passed. The keys to the query dictionary will be used by ``ModelQueryBuilder.model(from:)`` to define the keys of their resulting ``AnyStealthyProperty``. If there's only one object in your app, you can define ``ModelQueryBuilder.QueryType`` as `Void`:
 
 ```
 static func queries(from _: Void) -> [String: Query] {
