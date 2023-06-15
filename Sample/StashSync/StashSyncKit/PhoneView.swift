@@ -74,9 +74,10 @@ public struct PhoneView: View {
     #endif
     
     #if os(watchOS)
-    let buttonStyle : BorderedProminentButtonStyle = DefaultButtonStyle.borderedProminent
+    let buttonStyle : BorderedProminentButtonStyle = BorderedProminentButtonStyle.borderedProminent
     #else
     let buttonStyle : DefaultButtonStyle = DefaultButtonStyle.automatic
+
     #endif
   
     public var body: some View {
@@ -86,7 +87,7 @@ public struct PhoneView: View {
         HStack{
           Button("Load") {
             self.load()
-          }.buttonStyle(.automatic)
+          }.buttonStyle(buttonStyle)
             Spacer()
           Button("Save") {
             self.save()
