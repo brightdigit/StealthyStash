@@ -1,0 +1,5 @@
+version: 1
+builder:
+  configs:
+    - documentation_targets: [StealthyStash]
+      swift_version: 5.9
