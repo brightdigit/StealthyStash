@@ -1,4 +1,7 @@
-<h1 align="center">🤐 StealthyStash </h1>
+<p align="center">
+    <img alt="StealthyStash" title="StealthyStash" src="Sources/StealthyStash/Documentation.docc/Resources/SleathlyStash-Icon.png" height="125">
+</p>
+<h1 align="center">StealthyStash</h1>
 
 A Swifty database interface into the Keychain Services.
 
@@ -26,6 +29,7 @@ A Swifty database interface into the Keychain Services.
    * [Requirements](#requirements)
    * [Installation](#installation)
 * [Usage](#usage)
+   * [Further Documentation](#further-documentation)     
 * [References](#references)
 * [License](#license)
 
@@ -117,7 +121,11 @@ static func queries(from _: Void) -> [String: Query] {
 }
 ```
 
-For more help, take a look at the `Sample` project located in the Swift Package.
+For more help, take a look at the [`Sample` projects located in the Swift Package.](https://github.com/brightdigit/StealthyStash/tree/main/Samples)
+
+## Further Documentation
+
+Further documentation is available at [the Swift Package Index.](https://swiftpackageindex.com/brightdigit/StealthyStash/1.0.0/documentation/stealthystash)
 
 # References
 

@@ -4,6 +4,8 @@ A Swifty database interface into the Keychain Services.
 
 ## Overview
 
+![StealthyStash Logo](SleathlyStash-Icon@128px.png)
+
 **StealthyState** provides an pluggable easy abstract layer for accessing Keychain data as well as an API for encoding and decoding complex data in the Keychain. 
 
 ### Accessing the Keychain like a Database
