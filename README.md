@@ -29,6 +29,7 @@ A Swifty database interface into the Keychain Services.
    * [Requirements](#requirements)
    * [Installation](#installation)
 * [Usage](#usage)
+   * [Further Documentation](#further-documentation)     
 * [References](#references)
 * [License](#license)
 
@@ -120,7 +121,11 @@ static func queries(from _: Void) -> [String: Query] {
 }
 ```
 
-For more help, take a look at the `Sample` project located in the Swift Package.
+For more help, take a look at the [`Sample` projects located in the Swift Package.](https://github.com/brightdigit/StealthyStash/tree/main/Samples)
+
+## Further Documentation
+
+Further documentation is available at [the Swift Package Index.](https://swiftpackageindex.com/brightdigit/StealthyStash/1.0.0/documentation/stealthystash)
 
 # References
 
