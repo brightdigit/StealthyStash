@@ -1,4 +1,7 @@
-<h1 align="center">🤐 StealthyStash </h1>
+<p align="center">
+    <img alt="StealthyStash" title="StealthyStash" src="Sources/StealthyStash/Documentation.docc/Resources/SleathlyStash-Icon.png" height="125">
+</p>
+<h1 align="center">StealthyStash</h1>
 
 A Swifty database interface into the Keychain Services.
 
