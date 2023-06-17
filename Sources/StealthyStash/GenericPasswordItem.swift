@@ -33,7 +33,7 @@ public struct GenericPasswordItem: Identifiable, Hashable, StealthyProperty {
   public let label: String?
 
   /// The generic data associated with the password.
-  public let gerneic: Data?
+  public let generic: Data?
 
   /// Whether the password is synchronizable.
   public let isSynchronizable: Synchronizable
@@ -50,7 +50,7 @@ public struct GenericPasswordItem: Identifiable, Hashable, StealthyProperty {
     comment: String? = nil,
     type: Int? = nil,
     label: String? = nil,
-    gerneic: Data? = nil,
+    generic: Data? = nil,
     isSynchronizable: Synchronizable = .any
   ) {
     self.account = account
@@ -63,7 +63,7 @@ public struct GenericPasswordItem: Identifiable, Hashable, StealthyProperty {
     self.comment = comment
     self.type = type
     self.label = label
-    self.gerneic = gerneic
+    self.generic = generic
     self.isSynchronizable = isSynchronizable
   }
 }

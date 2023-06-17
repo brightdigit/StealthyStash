@@ -35,7 +35,7 @@ extension GenericPasswordItem {
         comment: common.comment,
         type: common.type,
         label: common.label,
-        gerneic: generic,
+        generic: generic,
         isSynchronizable: common.isSynchronizable
       )
     }
@@ -79,7 +79,7 @@ extension GenericPasswordItem {
     /// Returns a dictionary of other properties for updating or creating the property.
     public func otherProperties() -> StealthyDictionary {
       [
-        kSecAttrGeneric as String: gerneic,
+        kSecAttrGeneric as String: generic,
         kSecAttrDescription as String: description,
         kSecAttrComment as String: comment,
         kSecAttrType as String: type,
