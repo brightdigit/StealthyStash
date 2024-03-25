@@ -1,5 +1,6 @@
 import StealthyStash
 
+@available(*, deprecated, message: "Use internal builder.")
 struct CompositeCredentialsQueryBuilder: ModelQueryBuilder {
   static func updates(
     from previousItem: CompositeCredentials,
