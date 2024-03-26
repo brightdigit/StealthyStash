@@ -124,13 +124,13 @@ struct CompositeCredentials {
 //    typealias StealthyModelType = CompositeCredentials
 //  }
 
-  internal init(userName: String, password: String?, token: String?) {
-    self.userName = userName
+  internal init(account: String, password: String?, token: String?) {
+    self.account = account
     self.password = password
     self.token = token
   }
 
-  let userName: String
+  let account: String
 
   let password: String?
 
