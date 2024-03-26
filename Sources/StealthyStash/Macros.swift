@@ -9,4 +9,6 @@ import Foundation
 
 
 
-@attached(extension, conformances: StealthyModel) public macro StealthyModelMacro() = #externalMacro(module: "StealthyStashMacros", type: "StealthyModelMacro")
+@attached(member, names: named(QueryBuilder))
+@attached(extension, conformances: StealthyModel)
+public macro StealthyModel() = #externalMacro(module: "StealthyStashMacros", type: "StealthyModelMacro")

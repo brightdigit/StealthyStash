@@ -20,6 +20,7 @@ class CompositeStealthyObject: ObservableObject {
       .receive(on: DispatchQueue.main)
       .assign(to: &$secret)
 
+    //print(CompositeCredentials.QueryBuilder.QueryType)
     let loadResult = Publishers.Merge(loadPassthrough, triggerSet.receiveUpdatePublisher)
       .map {
         Future<CompositeCredentials?, Error> { completed in

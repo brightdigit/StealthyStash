@@ -4,6 +4,7 @@ extension StealthyRepository {
   public func create<StealthyModelType: StealthyModel>(
     _ model: StealthyModelType
   ) throws {
+    
     let properties = StealthyModelType.QueryBuilder.properties(from: model, for: .adding)
     for property in properties {
       try create(property)
