@@ -35,14 +35,22 @@ public struct StealthyModelMacro :  MemberMacro, ExtensionMacro {
     guard let structDecl = declaration.as(StructDeclSyntax.self) else {
       throw CustomError.message("Type must be struct.")
     }
-    let members : [TokenSyntax] = structDecl.memberBlock.members.flatMap { syntax -> [TokenSyntax] in
+    let members : [(TokenSyntax, [AttributeSyntax])] = structDecl.memberBlock.members.flatMap { syntax -> [(TokenSyntax, [AttributeSyntax])] in
       guard let variable = syntax.decl.as(VariableDeclSyntax.self) else {
         return []
       }
+      let attributes = variable.attributes.compactMap { element -> AttributeSyntax? in
+        guard case let .attribute( attribute) = element else {
+          return nil
+        }
+        return attribute
+      }
       return variable.bindings.compactMap { syntax in
         syntax.pattern.as(IdentifierPatternSyntax.self)?.identifier.trimmed
+      }.map { token in
+        (token, attributes)
       }
-    }.filter{ $0.text != "account" }
+    }.filter{ $0.0.text != "account" }
   
     //context.makeUniqueName(<#T##name: String##String#>)
     let sample =
