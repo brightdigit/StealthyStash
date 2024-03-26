@@ -1,5 +1,6 @@
 import StealthyStash
 
+
 struct CompositeCredentials: StealthyModel {
   //typealias QueryBuilder = CompositeCredentialsQueryBuilder
 

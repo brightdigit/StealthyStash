@@ -39,6 +39,7 @@ let package = Package(
     .target(
       name: "StealthyStash",
       dependencies: [
+        "StealthyStashMacros",
         .product(
           name: "Logging",
           package: "swift-log",
