@@ -29,7 +29,7 @@ struct CompositeStealthyView: View {
         if object.isLoaded {
           Form {
             Section("User Name") {
-              TextField("User name", text: self.$object.secret.userName)
+              TextField("User name", text: self.$object.secret.account)
             }
 
             Section("Password") {
@@ -71,7 +71,7 @@ struct CompositeStealthyView_Previews: PreviewProvider {
     CompositeStealthyView(
       repository: PreviewRepository(items: []),
       triggerSet: .init(),
-      secret: .init(userName: "username", password: "password", token: "token")
+      secret: .init(account: "username", password: "password", token: "token")
     )
   }
 }

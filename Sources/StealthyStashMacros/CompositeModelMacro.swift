@@ -26,8 +26,82 @@ public struct StealthyModelMacro :  MemberMacro, ExtensionMacro {
   
   
   struct StealthyPropertyUpdateSyntax {
-    init (syntax : TokenSyntax) {
-      
+    enum PropertyType : String{
+      case internet
+      case generic
+    }
+    internal init(propertiesDataToken: TokenSyntax, propertiesPropertyToken: TokenSyntax, updateToken: TokenSyntax, previousToken: TokenSyntax, newToken: TokenSyntax, propertyToken: TokenSyntax, propertyType : PropertyType = .generic) {
+      self.propertiesDataToken = propertiesDataToken
+      self.propertiesPropertyToken = propertiesPropertyToken
+      self.updateToken = updateToken
+      self.previousToken = previousToken
+      self.newToken = newToken
+      self.propertyToken = propertyToken
+      self.propertyType = propertyType
+    }
+    
+
+    
+    let propertiesDataToken : TokenSyntax
+    let propertiesPropertyToken : TokenSyntax
+    let updateToken : TokenSyntax
+    let previousToken : TokenSyntax
+    let newToken : TokenSyntax
+    let propertyToken : TokenSyntax
+    let propertyType: PropertyType
+    
+    init (syntax : TokenSyntax, attributes: [AttributeSyntax], uniqueID : @escaping @Sendable (String) -> TokenSyntax) {
+      let previousToken = uniqueID("previous")
+let newToken =  uniqueID("new")
+      let updateToken = uniqueID("update")
+      self.init(propertiesDataToken: uniqueID("propertyData"), propertiesPropertyToken: uniqueID("property") , updateToken: updateToken, previousToken: previousToken, newToken: newToken, propertyToken: syntax)
+    }
+    
+    
+    func syntax () -> String {
+      """
+      let \(previousToken) = previousItem.\(propertyToken).flatMap {
+        $0.data(using: .utf8)
+      }.map {
+        GenericPasswordItem(account: previousItem.account, data: $0)
+      }
+
+      let \(newToken) = newItem.\(propertyToken).flatMap {
+        $0.data(using: .utf8)
+      }.map {
+        GenericPasswordItem(account: newItem.account, data: $0)
+      }
+      """
+    }
+    
+    func updateSyntax () -> String {
+      """
+      let \(updateToken) = StealthyPropertyUpdate(
+        previousProperty: \(previousToken),
+        newProperty: \(newToken)
+      )
+"""
+    }
+    
+    func propertiesSyntax () -> String {
+      """
+      let \(propertiesDataToken) = model.\(propertyToken).flatMap {
+        $0.data(using: .utf8)
+      }
+
+      let \(propertiesPropertyToken): AnyStealthyProperty = .init(
+        property: GenericPasswordItem(
+          account: model.account,
+          data: \(propertiesDataToken) ?? .init()
+        )
+      )
+"""
+    }
+    
+    func queryPairString () -> String {
+      """
+      "\(self.propertyToken)": TypeQuery(type: .\(self.propertyType))
+      """
     }
   }
   
@@ -35,6 +109,7 @@ public struct StealthyModelMacro :  MemberMacro, ExtensionMacro {
     guard let structDecl = declaration.as(StructDeclSyntax.self) else {
       throw CustomError.message("Type must be struct.")
     }
+    
     let members : [(TokenSyntax, [AttributeSyntax])] = structDecl.memberBlock.members.flatMap { syntax -> [(TokenSyntax, [AttributeSyntax])] in
       guard let variable = syntax.decl.as(VariableDeclSyntax.self) else {
         return []
@@ -50,23 +125,31 @@ public struct StealthyModelMacro :  MemberMacro, ExtensionMacro {
       }.map { token in
         (token, attributes)
       }
-    }.filter{ $0.0.text != "account" }
-  
+    }
+      .filter{ $0.0.text != "account" }
+      
+    let updates = members.map{
+      StealthyPropertyUpdateSyntax(syntax: $0.0, attributes: $0.1, uniqueID: context.makeUniqueName(_:))
+    }
+    
+    let syntaxStrings = updates.map{$0.syntax()}.joined(separator: "\n")
+    let updateStrings = updates.map{$0.updateSyntax()}.joined(separator: "\n")
+    let propertiesStrings = updates.map{$0.propertiesSyntax()}.joined(separator: "\n")
     //context.makeUniqueName(<#T##name: String##String#>)
-    let sample =
-    """
-    let previousTokenData = previousItem.token.flatMap {
-      $0.data(using: .utf8)
-    }.map {
-      GenericPasswordItem(account: previousItem.account, data: $0)
-    }
-
-    let newTokenData = newItem.token.flatMap {
-      $0.data(using: .utf8)
-    }.map {
-      GenericPasswordItem(account: newItem.account, data: $0)
-    }
-    """
+//    let sample =
+//    """
+//    let previousTokenData = previousItem.token.flatMap {
+//      $0.data(using: .utf8)
+//    }.map {
+//      GenericPasswordItem(account: previousItem.account, data: $0)
+//    }
+//
+//    let newTokenData = newItem.token.flatMap {
+//      $0.data(using: .utf8)
+//    }.map {
+//      GenericPasswordItem(account: newItem.account, data: $0)
+//    }
+//    """
     
     
     let typeName = structDecl.name.trimmed
@@ -95,114 +178,69 @@ public struct StealthyModelMacro :  MemberMacro, ExtensionMacro {
       from previousItem: \(typeName),
       to newItem: \(typeName)
     ) -> [StealthyPropertyUpdate] {
-//      let newPasswordData = newItem.password.flatMap {
-//        $0.data(using: .utf8)
-//      }.map {
-//        InternetPasswordItem(account: newItem.account, data: $0)
-//      }
-//
-//      let oldPasswordData = previousItem.password.flatMap {
-//        $0.data(using: .utf8)
-//      }.map {
-//        InternetPasswordItem(account: previousItem.account, data: $0)
-//      }
 
-      let previousTokenData = previousItem.token.flatMap {
-        $0.data(using: .utf8)
-      }.map {
-        GenericPasswordItem(account: previousItem.account, data: $0)
-      }
+      \(raw: syntaxStrings)
 
-      let newTokenData = newItem.token.flatMap {
-        $0.data(using: .utf8)
-      }.map {
-        GenericPasswordItem(account: newItem.account, data: $0)
-      }
-
-      let passwordUpdate = StealthyPropertyUpdate(
-        previousProperty: oldPasswordData,
-        newProperty: newPasswordData
-      )
-      let tokenUpdate = StealthyPropertyUpdate(
-        previousProperty: previousTokenData,
-        newProperty: newTokenData
-      )
-      return [passwordUpdate, tokenUpdate]
+      \(raw: updateStrings)
+      return [\(raw: updates.map{$0.updateToken.text}.joined(separator: ","))]
     }
 
     static func properties(
       from model: \(typeName),
       for _: ModelOperation
     ) -> [AnyStealthyProperty] {
-      let passwordData = model.password.flatMap {
-        $0.data(using: .utf8)
-      }
+      \(raw: propertiesStrings)
 
-      let passwordProperty: AnyStealthyProperty = .init(
-        property: InternetPasswordItem(
-          account: model.account,
-          data: passwordData ?? .init()
-        )
-      )
-
-      let tokenData = model.token.flatMap {
-        $0.data(using: .utf8)
-      }
-
-      let tokenProperty: AnyStealthyProperty = .init(
-        property: GenericPasswordItem(
-          account: model.account,
-          data: tokenData ?? .init()
-        )
-      )
-
-      return [passwordProperty, tokenProperty]
+      return [\(raw: updates.map{$0.propertiesPropertyToken.text}.joined(separator: ","))]
     }
 
     static func queries(from _: Void) -> [String: Query] {
       [
-        "password": TypeQuery(type: .internet),
-        "token": TypeQuery(type: .generic)
+        \(raw: updates.map{$0.queryPairString()}.joined(separator: ","))
       ]
     }
 
     static func model(
       from properties: [String: [AnyStealthyProperty]]
     ) throws -> \(typeName)? {
-      for internet in properties["password"] ?? [] {
-        for generic in properties["token"] ?? [] {
-          if internet.account == generic.account {
-            return .init(
-              account: internet.account,
-              password: internet.dataString,
-              token: generic.dataString
-            )
-          }
-        }
-      }
-      let properties = properties.values.flatMap { $0 }.enumerated().sorted { lhs, rhs in
-        if lhs.element.propertyType == rhs.element.propertyType {
-          return lhs.offset < rhs.offset
-        } else {
-          return lhs.element.propertyType == .internet
-        }
-      }.map(\\.element)
-
-      guard let account = properties.map(\\.account).first else {
-        return nil
-      }
-      let password = properties
-        .first { $0.propertyType == .internet }?
-        .data
-      let token = properties.first {
-        $0.propertyType == .generic && $0.account == account
-      }?.data
-
-      return \(typeName)(
-        account: account,
-        password: password?.string(),
-        token: token?.string()
-      )
+      return dictionary(
+for:
+        [\(raw: updates.map{"\"\($0.propertyToken)\""}.joined(separator: ","))],
+  from: properties).flatMap(\(typeName).init(properties:))
+//      for internet in properties["password"] ?? [] {
+//        for generic in properties["token"] ?? [] {
+//          if internet.account == generic.account {
+//            return .init(
+//              account: internet.account,
+//              password: internet.dataString,
+//              token: generic.dataString
+//            )
+//          }
+//        }
+//      }
+//      let properties = properties.values.flatMap { $0 }.enumerated().sorted { lhs, rhs in
+//        if lhs.element.propertyType == rhs.element.propertyType {
+//          return lhs.offset < rhs.offset
+//        } else {
+//          return lhs.element.propertyType == .internet
+//        }
+//      }.map(\\.element)
+//
+//      guard let account = properties.map(\\.account).first else {
+//        return nil
+//      }
+//      let password = properties
+//        .first { $0.propertyType == .internet }?
+//        .data
+//      let token = properties.first {
+//        $0.propertyType == .generic && $0.account == account
+//      }?.data
+//
+//      return \(typeName)(
+//        account: account,
+//        password: password?.string(),
+//        token: token?.string()
+//      )
     }
 
     internal typealias QueryType = Void
