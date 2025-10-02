@@ -70,22 +70,21 @@ public enum ServerProtocol: String, Sendable {
       kSecAttrProtocolIRCS as String: .ircs,
       kSecAttrProtocolPOP3S as String: .pop3s
     ]
-    
+
     private static let spMap: [ServerProtocol: String] = .init(
       uniqueKeysWithValues: cfStringMap.map { ($0.value, $0.key) }
     )
 
-    
     internal var cfValue: String {
       Self.spMap[self]!
     }
-  
-  internal init?(number: String) {
-    guard let value = Self.cfStringMap[number] else {
-      return nil
+
+    internal init?(number: String) {
+      guard let value = Self.cfStringMap[number] else {
+        return nil
+      }
+      self = value
     }
-    self = value
-  }
 
     internal init?(number: CFString) {
       self.init(number: number as String)

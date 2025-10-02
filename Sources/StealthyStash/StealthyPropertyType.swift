@@ -1,7 +1,7 @@
 #if swift(>=6.0)
-public import Foundation
+  public import Foundation
 #else
-import Foundation
+  import Foundation
 #endif
 
 /// An enumeration of property types that can be stored securely.

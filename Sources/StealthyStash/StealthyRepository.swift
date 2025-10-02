@@ -1,14 +1,13 @@
 #if canImport(os)
   #if swift(>=6.0)
-  public import os
+    public import os
   #else
-  import os
   #endif
 #endif
 #if swift(>=6.0)
-public import Foundation
+  public import Foundation
 #else
-import Foundation
+  import Foundation
 #endif
 
 /// A default logger for the `StealthyRepository` protocol.
@@ -18,21 +17,18 @@ private enum StealthyRepositoryDefaultLogger {
       Logger(subsystem: $0, category: "secrets")
     }
   #else
-  #if swift(>=6.0)
-    nonisolated(unsafe) static let logger: Any? = nil
-  #else
-    static let logger: Any? = nil
-  #endif
+    static let logger: (any Sendable)? = nil
+
   #endif
 }
 
 /// A protocol for a repository that stores and retrieves `StealthyProperty` objects.
-public protocol StealthyRepository : Sendable {
+public protocol StealthyRepository: Sendable {
   /// A logger for the repository.
   #if canImport(os)
-  var logger: Logger? { get }
+    var logger: Logger? { get }
   #else
-  var logger: Any? { get }
+    var logger: Any? { get }
   #endif
 
   /// Creates a new `StealthyProperty` object in the repository.
@@ -53,23 +49,23 @@ public protocol StealthyRepository : Sendable {
 
 extension StealthyRepository {
   #if canImport(os)
-  internal static var defaultLogger: Logger? {
-    StealthyRepositoryDefaultLogger.logger
-  }
+    internal static var defaultLogger: Logger? {
+      StealthyRepositoryDefaultLogger.logger
+    }
 
-  /// A default logger for the `StealthyRepository` protocol.
-  public var logger: Logger? {
-    Self.defaultLogger
-  }
+    /// A default logger for the `StealthyRepository` protocol.
+    public var logger: Logger? {
+      Self.defaultLogger
+    }
   #else
-  internal static var defaultLogger: Any? {
-    StealthyRepositoryDefaultLogger.logger
-  }
+    internal static var defaultLogger: Any? {
+      StealthyRepositoryDefaultLogger.logger
+    }
 
-  /// A default logger for the `StealthyRepository` protocol.
-  public var logger: Any? {
-    Self.defaultLogger
-  }
+    /// A default logger for the `StealthyRepository` protocol.
+    public var logger: Any? {
+      Self.defaultLogger
+    }
   #endif
 
   /// Updates or creates a `StealthyProperty` object in the repository.

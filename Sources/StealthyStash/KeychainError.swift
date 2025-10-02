@@ -1,7 +1,7 @@
 #if swift(>=6.0)
-public import Foundation
+  public import Foundation
 #else
-import Foundation
+  import Foundation
 #endif
 
 #if canImport(FoundationNetworking)
