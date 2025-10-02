@@ -1,11 +1,6 @@
 #if canImport(os)
-  #if swift(>=6.0)
-    public import os
-  #else
-  #endif
-#endif
-#if swift(>=6.0)
   public import Foundation
+  public import os
 #else
   import Foundation
 #endif
