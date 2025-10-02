@@ -74,7 +74,6 @@ let swiftSettings: [SwiftSetting] = [
   ])
 ]
 
-
 let package = Package(
   name: "StealthyStash",
   platforms: [.macOS(.v12), .iOS(.v14), .watchOS(.v7), .tvOS(.v14)],
@@ -84,19 +83,11 @@ let package = Package(
       targets: ["StealthyStash"]
     )
   ],
-  dependencies: [
-    .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
-  ],
+  dependencies: [],
   targets: [
     .target(
       name: "StealthyStash",
-      dependencies: [
-        .product(
-          name: "Logging",
-          package: "swift-log",
-          condition: .when(platforms: [.linux, .android, .windows, .wasi])
-        )
-      ],
+      dependencies: [],
       swiftSettings: swiftSettings
     ),
     .testTarget(

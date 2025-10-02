@@ -14,7 +14,8 @@
       }
       guard
         let itemDictionaries = item as? [StealthyDictionary],
-        status == errSecSuccess else {
+        status == errSecSuccess
+      else {
         throw KeychainError.unhandledError(status: status)
       }
       return itemDictionaries
@@ -23,11 +24,13 @@
     /// Creates a new keychain item.
     /// - Parameter item: Property which will be stored in the keychain.
     public func create(_ item: AnyStealthyProperty) throws {
-      let defaults = defaultProvider?
+      let defaults =
+        defaultProvider?
         .attributesForNewItem(ofType: item.propertyType) ?? [:]
       let itemDictionary = item.property.addQuery()
 
-      let query = itemDictionary
+      let query =
+        itemDictionary
         .merging(defaults) {
           $0 ?? $1
         }
@@ -90,7 +93,8 @@
     /// - Returns: A collection of keychain items.
     public func query(_ query: any Query) throws -> [AnyStealthyProperty] {
       let defaults = defaultProvider?.attributesForQuery(ofType: query.type) ?? [:]
-      let dictionaryAny = query
+      let dictionaryAny =
+        query
         .keychainDictionary()
         .merging(with: defaults, overwrite: false)
 

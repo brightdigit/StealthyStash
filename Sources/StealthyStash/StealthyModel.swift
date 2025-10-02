@@ -2,5 +2,5 @@
 public protocol StealthyModel {
   /// The type of ``ModelQueryBuilder`` that can be used with this model.
   associatedtype QueryBuilder: ModelQueryBuilder
-    where QueryBuilder.StealthyModelType == Self
+  where QueryBuilder.StealthyModelType == Self
 }

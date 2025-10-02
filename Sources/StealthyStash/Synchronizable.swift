@@ -5,7 +5,7 @@ import Foundation
 #endif
 
 /// An enumeration representing the synchronization status of a keychain item.
-public enum Synchronizable : Sendable {
+public enum Synchronizable: Sendable {
   /// The item is synchronized with other devices.
   case enabled
 

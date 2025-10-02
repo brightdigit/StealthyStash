@@ -1,10 +1,9 @@
 #if canImport(os)
-  import os
+  public import os
+  public import Foundation
 #else
-  import Logging
+  public import Foundation
 #endif
-
-import Foundation
 
 /// A default logger for the `StealthyRepository` protocol.
 private enum StealthyRepositoryDefaultLogger {
@@ -13,14 +12,12 @@ private enum StealthyRepositoryDefaultLogger {
       Logger(subsystem: $0, category: "secrets")
     }
   #else
-    static let logger = Bundle.main.bundleIdentifier.map {
-      Logger(label: $0)
-    }
+    static let logger: Logger? = nil
   #endif
 }
 
 /// A protocol for a repository that stores and retrieves `StealthyProperty` objects.
-public protocol StealthyRepository {
+public protocol StealthyRepository : Sendable {
   /// A logger for the repository.
   var logger: Logger? { get }
 
