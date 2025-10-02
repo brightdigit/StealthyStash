@@ -1,5 +1,5 @@
 /// A protocol that provides default values for creating or querying the keychain.
-public protocol DefaultProvider {
+public protocol DefaultProvider : Sendable {
   /// Returns the attribute dictionary for the keychain query.
   ///   - Parameter type: The type of keychain item to query.
   ///   - Returns: The attribute dictionary.

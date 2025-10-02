@@ -1,4 +1,4 @@
-import Foundation
+public import Foundation
 
 #if canImport(FoundationNetworking)
   import FoundationNetworking
@@ -6,8 +6,7 @@ import Foundation
 
 #if canImport(Darwin)
   import Darwin
-#else
-  // swiftlint:disable:next missing_docs
+#else  // swiftlint:disable:next missing_docs
   public typealias OSStatus = Int32
   // swiftlint:disable:next identifier_name
   private func SecCopyErrorMessageString(_: OSStatus, _: Any?) -> String? {
@@ -34,8 +33,10 @@ public enum KeychainError: Error, LocalizedError, Equatable {
     switch self {
     case .unexpectedPasswordData:
       return "The password data was not in the expected format."
+
     case .noPassword:
       return "No password was found."
+
     case let .unhandledError(status: status):
       if let description = SecCopyErrorMessageString(status, nil) {
         return description as String

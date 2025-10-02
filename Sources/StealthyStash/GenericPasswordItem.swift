@@ -1,7 +1,7 @@
 #if swift(>=6.0)
-import Foundation
+  public import Foundation
 #else
-@preconcurrency import Foundation
+  @preconcurrency import Foundation
 #endif
 
 /// A struct representing a generic password item.

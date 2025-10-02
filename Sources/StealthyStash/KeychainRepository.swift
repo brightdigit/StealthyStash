@@ -1,6 +1,6 @@
 #if canImport(Security)
 
-  import os
+  public import os
 
   /// Repository for access the keychain.
   public struct KeychainRepository: StealthyRepository {

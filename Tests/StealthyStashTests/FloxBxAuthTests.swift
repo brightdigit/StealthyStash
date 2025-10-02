@@ -1,5 +1,6 @@
-@testable import StealthyStash
 import XCTest
+
+@testable import StealthyStash
 
 final class FloxBxAuthTests: XCTestCase {
   func testExample() throws {

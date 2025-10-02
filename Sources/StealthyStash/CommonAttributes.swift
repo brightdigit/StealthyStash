@@ -11,30 +11,6 @@ internal struct CommonAttributes {
   internal let type: Int?
   internal let label: String?
   internal let isSynchronizable: Synchronizable
-
-  internal init(
-    account: String,
-    data: Data,
-    accessGroup: String?,
-    createdAt: Date?,
-    modifiedAt: Date?,
-    description: String?,
-    comment: String?,
-    type: Int?,
-    label: String?,
-    isSynchronizable: Synchronizable
-  ) {
-    self.account = account
-    self.data = data
-    self.accessGroup = accessGroup
-    self.createdAt = createdAt
-    self.modifiedAt = modifiedAt
-    self.description = description
-    self.comment = comment
-    self.type = type
-    self.label = label
-    self.isSynchronizable = isSynchronizable
-  }
 }
 
 #if canImport(Security)
