@@ -1,4 +1,8 @@
-public import Foundation
+#if canImport(Security)
+  public import Foundation
+#else
+  import Foundation
+#endif
 
 internal struct CommonAttributes {
   internal let account: String
