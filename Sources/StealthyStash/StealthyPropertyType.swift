@@ -1,4 +1,8 @@
+#if swift(>=6.0)
 public import Foundation
+#else
+import Foundation
+#endif
 
 /// An enumeration of property types that can be stored securely.
 public enum StealthyPropertyType: Sendable {

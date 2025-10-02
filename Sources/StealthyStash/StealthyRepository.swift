@@ -1,8 +1,14 @@
 #if canImport(os)
+  #if swift(>=6.0)
   public import os
-  public import Foundation
+  #else
+  import os
+  #endif
+#endif
+#if swift(>=6.0)
+public import Foundation
 #else
-  public import Foundation
+import Foundation
 #endif
 
 /// A default logger for the `StealthyRepository` protocol.
@@ -12,7 +18,11 @@ private enum StealthyRepositoryDefaultLogger {
       Logger(subsystem: $0, category: "secrets")
     }
   #else
+  #if swift(>=6.0)
     nonisolated(unsafe) static let logger: Any? = nil
+  #else
+    static let logger: Any? = nil
+  #endif
   #endif
 }
 
