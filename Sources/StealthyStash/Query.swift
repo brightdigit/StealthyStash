@@ -21,8 +21,8 @@ public protocol Query: Sendable {
         kSecClass as String: type.secClass,
         kSecReturnAttributes as String: true,
         kSecReturnData as String: true,
-        kSecAttrSynchronizable as String: kSecAttrSynchronizableAny,
-        kSecMatchLimit as String: kSecMatchLimitAll
+        kSecAttrSynchronizable as String: kSecAttrSynchronizableAny as String,
+        kSecMatchLimit as String: kSecMatchLimitAll as String
       ]
     }
   }

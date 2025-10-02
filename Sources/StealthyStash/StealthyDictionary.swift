@@ -1,4 +1,4 @@
 import Foundation
 
-/// A dictionary with string keys and optional values of any type.
-public typealias StealthyDictionary = [String: Any?]
+/// A dictionary with string keys and optional sendable values.
+public typealias StealthyDictionary = [String: (any Sendable)?]

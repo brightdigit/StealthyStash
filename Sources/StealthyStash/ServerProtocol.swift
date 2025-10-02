@@ -37,11 +37,11 @@ public enum ServerProtocol: String, Sendable {
   case pop3s
 
   #if canImport(Security)
-    private static let spMap: [ServerProtocol: CFString] = .init(
+    private static nonisolated(unsafe) let spMap: [ServerProtocol: CFString] = .init(
       uniqueKeysWithValues: cfStringMap.map { ($0.value, $0.key) }
     )
 
-    private static let cfStringMap: [CFString: ServerProtocol] = [
+    private static nonisolated(unsafe) let cfStringMap: [CFString: ServerProtocol] = [
       kSecAttrProtocolFTP: .ftp,
       kSecAttrProtocolFTPAccount: .ftpaccount,
       kSecAttrProtocolHTTP: .http,
@@ -75,8 +75,8 @@ public enum ServerProtocol: String, Sendable {
       kSecAttrProtocolPOP3S: .pop3s
     ]
 
-    public var cfValue: CFString {
-      Self.spMap[self]!
+    internal var cfValue: String {
+      Self.spMap[self]! as String
     }
 
     internal init?(number: CFString) {
