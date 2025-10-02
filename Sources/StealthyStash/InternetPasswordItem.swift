@@ -1,4 +1,9 @@
+#if swift(>=6.0)
 import Foundation
+#else
+@preconcurrency import Foundation
+#endif
+
 
 /// A struct representing an internet password item.
 public struct InternetPasswordItem: Identifiable, Hashable, StealthyProperty {

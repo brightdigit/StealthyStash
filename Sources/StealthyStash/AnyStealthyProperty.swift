@@ -1,7 +1,7 @@
 import Foundation
 
 /// Type-erased ``StealthyProperty``
-public struct AnyStealthyProperty: Identifiable, Hashable {
+public struct AnyStealthyProperty: Identifiable, Hashable, Sendable {
   public let property: any StealthyProperty
   public var id: String {
     property.id

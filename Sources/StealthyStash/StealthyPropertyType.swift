@@ -1,7 +1,7 @@
 import Foundation
 
 /// An enumeration of property types that can be stored securely.
-public enum StealthyPropertyType {
+public enum StealthyPropertyType : Sendable {
   /// An internet password.
   case internet
 

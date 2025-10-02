@@ -3,7 +3,7 @@
 #endif
 
 /// Denotes the item's protocol.
-public enum ServerProtocol: String {
+public enum ServerProtocol: String, Sendable {
   case ftp
   case ftpaccount
   case http

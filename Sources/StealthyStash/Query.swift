@@ -1,5 +1,5 @@
 /// A protocol for queries to the keychain.
-public protocol Query {
+public protocol Query : Sendable {
   /// The type of property being queried.
   var type: StealthyPropertyType { get }
 

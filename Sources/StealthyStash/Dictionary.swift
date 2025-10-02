@@ -1,16 +1,16 @@
 import Foundation
 
 private protocol _OptionalProtocol {
-  var _deepUnwrapped: Any? { get }
+  var _deepUnwrapped: (any Sendable)? { get }
 }
 
-extension Dictionary {
+extension Dictionary where Key: Sendable, Value: Sendable {
   internal enum MissingValueError: Error {
     case missingKey(Key)
     case mismatchType(Value)
   }
 
-  internal static func deepUnwrap(_ any: Any) -> Any? {
+  internal static func deepUnwrap(_ any: (any Sendable)?) -> (any Sendable)? {
     if let optional = any as? (any _OptionalProtocol) {
       return optional._deepUnwrapped
     }
@@ -24,7 +24,7 @@ extension Dictionary {
     }
   }
 
-  internal func deepCompactMapValues() -> Self where Value == Any? {
+  internal func deepCompactMapValues() -> Self where Value == (any Sendable)? {
     compactMapValues { $0 }.compactMapValues(Self.deepUnwrap).compactMapValues { $0 }
   }
 
@@ -79,7 +79,7 @@ extension Dictionary {
   }
 }
 
-extension Dictionary where Key == String, Value == Any? {
+extension Dictionary where Key == String, Value == (any Sendable)? {
   internal func loggingDescription() -> String {
     compactMap { (key: String, value: Any?) in
       guard let value = value._deepUnwrapped else {
@@ -98,9 +98,9 @@ extension Dictionary where Key == String, Value == Any? {
   #endif
 }
 
-extension Optional: _OptionalProtocol {
+extension Optional: _OptionalProtocol  {
   // swiftlint:disable:next strict_fileprivate
-  fileprivate var _deepUnwrapped: Any? {
+  fileprivate var _deepUnwrapped: (any Sendable)? {
     if let wrapped = self {
       return StealthyDictionary.deepUnwrap(wrapped)
     }

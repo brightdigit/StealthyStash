@@ -1,4 +1,8 @@
+#if swift(>=6.0)
 import Foundation
+#else
+@preconcurrency import Foundation
+#endif
 
 /// A struct representing a generic password item.
 public struct GenericPasswordItem: Identifiable, Hashable, StealthyProperty {

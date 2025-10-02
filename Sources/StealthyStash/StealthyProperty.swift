@@ -1,7 +1,7 @@
 import Foundation
 
 /// A protocol for properties that can be stored securely.
-public protocol StealthyProperty: Identifiable, Hashable {
+public protocol StealthyProperty: Identifiable, Hashable, Sendable {
   /// The type of the property.
   static var propertyType: StealthyPropertyType { get }
 
