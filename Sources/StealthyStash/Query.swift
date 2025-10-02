@@ -11,7 +11,7 @@ public protocol Query: Sendable {
 }
 
 #if canImport(Security)
-  import Security
+  public import Security
 
   extension Query {
     /// Returns a dictionary of keychain query parameters.

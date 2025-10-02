@@ -1,4 +1,4 @@
-import Foundation
+public import Foundation
 
 private protocol _OptionalProtocol {
   var _deepUnwrapped: (any Sendable)? { get }

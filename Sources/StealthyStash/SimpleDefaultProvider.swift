@@ -1,5 +1,5 @@
 #if canImport(Security)
-  import Security
+  public import Security
 
   /// A default provider for `Stealthy`.
   internal struct SimpleDefaultProvider: DefaultProvider {

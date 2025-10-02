@@ -1,5 +1,5 @@
 #if canImport(Security)
-  import Security
+  public import Security
   extension StealthyProperty {
     /// Returns an `AnyStealthyProperty` instance that wraps this `StealthyProperty`.
     public func eraseToAnyProperty() -> AnyStealthyProperty {
