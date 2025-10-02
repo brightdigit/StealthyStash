@@ -1,4 +1,4 @@
-import Foundation
+public import Foundation
 
 /// Type-erased ``StealthyProperty``
 public struct AnyStealthyProperty: Identifiable, Hashable, Sendable {

@@ -59,7 +59,8 @@ extension StealthyRepository {
         }
       }
 
-      return try await taskGroup
+      return
+        try await taskGroup
         .reduce(into: [String: [AnyStealthyProperty]]()) { result, pair in
           result[pair.0] = pair.1
         }
@@ -70,7 +71,7 @@ extension StealthyRepository {
   /// If there should only be one instance in the keychain, this will return that item.
   /// - Returns: The Model if it exists.
   public func fetch<StealthyModelType: StealthyModel>() async throws -> StealthyModelType?
-    where StealthyModelType.QueryBuilder.QueryType == Void {
+  where StealthyModelType.QueryBuilder.QueryType == Void {
     try await fetch(())
   }
 }

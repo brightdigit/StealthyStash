@@ -98,7 +98,7 @@ extension Dictionary where Key == String, Value == (any Sendable)? {
   #endif
 }
 
-extension Optional: _OptionalProtocol  {
+extension Optional: _OptionalProtocol {
   // swiftlint:disable:next strict_fileprivate
   fileprivate var _deepUnwrapped: (any Sendable)? {
     if let wrapped = self {
