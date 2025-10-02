@@ -1,5 +1,10 @@
 #if canImport(Security)
   import Security
+  import Foundation
+
+  #if canImport(os)
+    import os
+  #endif
 
   extension KeychainRepository {
     private static func itemsFromQuery(

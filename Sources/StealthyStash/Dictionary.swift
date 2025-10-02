@@ -81,7 +81,7 @@ extension Dictionary where Key: Sendable, Value: Sendable {
 
 extension Dictionary where Key == String, Value == (any Sendable)? {
   internal func loggingDescription() -> String {
-    compactMap { (key: String, value: Any?) in
+    compactMap { (key: String, value: (any Sendable)?) in
       guard let value = value._deepUnwrapped else {
         // assertionFailure()
         return nil
@@ -101,9 +101,23 @@ extension Dictionary where Key == String, Value == (any Sendable)? {
 extension Optional: _OptionalProtocol {
   // swiftlint:disable:next strict_fileprivate
   fileprivate var _deepUnwrapped: (any Sendable)? {
-    if let wrapped = self {
-      return StealthyDictionary.deepUnwrap(wrapped)
+    guard let wrapped = self else { return nil }
+
+    // Since we can't safely cast to Sendable in all cases, we'll handle common types
+    switch wrapped {
+    case let string as String:
+      return StealthyDictionary.deepUnwrap(string)
+    case let int as Int:
+      return StealthyDictionary.deepUnwrap(int)
+    case let bool as Bool:
+      return StealthyDictionary.deepUnwrap(bool)
+    case let data as Data:
+      return StealthyDictionary.deepUnwrap(data)
+    case let date as Date:
+      return StealthyDictionary.deepUnwrap(date)
+    default:
+      // For unknown types, convert to string
+      return "\(wrapped)"
     }
-    return nil
   }
 }

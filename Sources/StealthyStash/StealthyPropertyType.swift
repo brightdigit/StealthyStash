@@ -12,13 +12,13 @@ public enum StealthyPropertyType: Sendable {
 extension StealthyPropertyType {
   #if canImport(Security)
     /// The security class for the property type.
-    public var secClass: CFString {
+    internal var secClass: String {
       switch self {
       case .internet:
-        return kSecClassInternetPassword
+        return kSecClassInternetPassword as String
 
       case .generic:
-        return kSecClassGenericPassword
+        return kSecClassGenericPassword as String
       }
     }
   #endif

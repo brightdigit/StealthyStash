@@ -21,16 +21,16 @@ extension Synchronizable {
     private static let anyStringValue: String = kSecAttrSynchronizableAny as String
 
     /// The Core Foundation value corresponding to the enumeration case.
-    public var cfValue: Any? {
+    public var cfValue: (any Sendable)? {
       switch self {
       case .any:
-        return kSecAttrSynchronizableAny
+        return kSecAttrSynchronizableAny as String
 
       case .disabled:
-        return kCFBooleanFalse
+        return false
 
       case .enabled:
-        return kCFBooleanTrue
+        return true
       }
     }
 
