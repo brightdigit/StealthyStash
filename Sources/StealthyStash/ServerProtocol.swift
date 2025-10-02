@@ -37,54 +37,58 @@ public enum ServerProtocol: String, Sendable {
   case pop3s
 
   #if canImport(Security)
-    private static let cfStringMap: [CFString: ServerProtocol] = [
-      kSecAttrProtocolFTP: .ftp,
-      kSecAttrProtocolFTPAccount: .ftpaccount,
-      kSecAttrProtocolHTTP: .http,
-      kSecAttrProtocolIRC: .irc,
-      kSecAttrProtocolNNTP: .nntp,
-      kSecAttrProtocolPOP3: .pop3,
-      kSecAttrProtocolSMTP: .smtp,
-      kSecAttrProtocolSOCKS: .socks,
-      kSecAttrProtocolIMAP: .imap,
-      kSecAttrProtocolLDAP: .ldap,
-      kSecAttrProtocolAppleTalk: .appletalk,
-      kSecAttrProtocolAFP: .afp,
-      kSecAttrProtocolTelnet: .telnet,
-      kSecAttrProtocolSSH: .ssh,
-      kSecAttrProtocolFTPS: .ftps,
-      kSecAttrProtocolHTTPS: .https,
-      kSecAttrProtocolHTTPProxy: .httpproxy,
-      kSecAttrProtocolHTTPSProxy: .httpsproxy,
-      kSecAttrProtocolFTPProxy: .ftpproxy,
-      kSecAttrProtocolSMB: .smb,
-      kSecAttrProtocolRTSP: .rtsp,
-      kSecAttrProtocolRTSPProxy: .rtspproxy,
-      kSecAttrProtocolDAAP: .daap,
-      kSecAttrProtocolEPPC: .eppc,
-      kSecAttrProtocolIPP: .ipp,
-      kSecAttrProtocolNNTPS: .nntps,
-      kSecAttrProtocolLDAPS: .ldaps,
-      kSecAttrProtocolTelnetS: .telnets,
-      kSecAttrProtocolIMAPS: .imaps,
-      kSecAttrProtocolIRCS: .ircs,
-      kSecAttrProtocolPOP3S: .pop3s
+    private static let cfStringMap: [String: ServerProtocol] = [
+      kSecAttrProtocolFTP as String: .ftp,
+      kSecAttrProtocolFTPAccount as String: .ftpaccount,
+      kSecAttrProtocolHTTP as String: .http,
+      kSecAttrProtocolIRC as String: .irc,
+      kSecAttrProtocolNNTP as String: .nntp,
+      kSecAttrProtocolPOP3 as String: .pop3,
+      kSecAttrProtocolSMTP as String: .smtp,
+      kSecAttrProtocolSOCKS as String: .socks,
+      kSecAttrProtocolIMAP as String: .imap,
+      kSecAttrProtocolLDAP as String: .ldap,
+      kSecAttrProtocolAppleTalk as String: .appletalk,
+      kSecAttrProtocolAFP as String: .afp,
+      kSecAttrProtocolTelnet as String: .telnet,
+      kSecAttrProtocolSSH as String: .ssh,
+      kSecAttrProtocolFTPS as String: .ftps,
+      kSecAttrProtocolHTTPS as String: .https,
+      kSecAttrProtocolHTTPProxy as String: .httpproxy,
+      kSecAttrProtocolHTTPSProxy as String: .httpsproxy,
+      kSecAttrProtocolFTPProxy as String: .ftpproxy,
+      kSecAttrProtocolSMB as String: .smb,
+      kSecAttrProtocolRTSP as String: .rtsp,
+      kSecAttrProtocolRTSPProxy as String: .rtspproxy,
+      kSecAttrProtocolDAAP as String: .daap,
+      kSecAttrProtocolEPPC as String: .eppc,
+      kSecAttrProtocolIPP as String: .ipp,
+      kSecAttrProtocolNNTPS as String: .nntps,
+      kSecAttrProtocolLDAPS as String: .ldaps,
+      kSecAttrProtocolTelnetS as String: .telnets,
+      kSecAttrProtocolIMAPS as String: .imaps,
+      kSecAttrProtocolIRCS as String: .ircs,
+      kSecAttrProtocolPOP3S as String: .pop3s
     ]
     
-    private static let spMap: [ServerProtocol: CFString] = .init(
+    private static let spMap: [ServerProtocol: String] = .init(
       uniqueKeysWithValues: cfStringMap.map { ($0.value, $0.key) }
     )
 
     
     internal var cfValue: String {
-      Self.spMap[self]! as String
+      Self.spMap[self]!
     }
+  
+  internal init?(number: String) {
+    guard let value = Self.cfStringMap[number] else {
+      return nil
+    }
+    self = value
+  }
 
     internal init?(number: CFString) {
-      guard let value = Self.cfStringMap[number] else {
-        return nil
-      }
-      self = value
+      self.init(number: number as String)
     }
   #endif
 
