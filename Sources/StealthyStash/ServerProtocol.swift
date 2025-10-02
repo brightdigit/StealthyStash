@@ -1,5 +1,5 @@
 #if canImport(Security)
-  import Security
+  public import Security
 #endif
 
 /// Denotes the item's protocol.
