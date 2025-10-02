@@ -1,4 +1,4 @@
-#if swift(>=6.0)
+#if canImport(Security)
   public import Foundation
 #else
   import Foundation
