@@ -1,8 +1,4 @@
-#if swift(>=6.0)
-  public import Foundation
-#else
-  import Foundation
-#endif
+public import Foundation
 
 /// Type-erased ``StealthyProperty``
 public struct AnyStealthyProperty: Identifiable, Hashable, Sendable {

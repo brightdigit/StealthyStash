@@ -11,6 +11,7 @@ let swiftSettings: [SwiftSetting] = [
  .enableUpcomingFeature("ForwardTrailingClosures"),
  .enableUpcomingFeature("ImplicitOpenExistentials"),
  .enableUpcomingFeature("StrictConcurrency"),
+ .enableExperimentalFeature("AccessLevelOnImport"),
  .unsafeFlags(["-warn-concurrency", "-enable-actor-data-race-checks",
     // Warn about functions with >100 lines
     "-Xfrontend", "-warn-long-function-bodies=100",
