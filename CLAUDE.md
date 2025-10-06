@@ -27,7 +27,11 @@ swift build
 
 ### Testing
 ```bash
+# Run all tests
 swift test
+
+# Run specific test
+swift test --filter <test-name>
 ```
 
 ### Documentation
@@ -35,13 +39,21 @@ The library includes DocC documentation in `Sources/StealthyStash/Documentation.
 
 ## Swift Configuration
 
-This project uses Swift 6.0 with extensive upcoming and experimental features enabled, including:
+This project has two package manifests:
+- `Package.swift`: Uses Swift 5.8 tools version with basic upcoming features
+- `Package@swift-6.0.swift`: Uses Swift 6.0 with extensive experimental features
+
+Key compiler settings (especially in Swift 6.0 manifest):
 - Strict concurrency checking (`-strict-concurrency=complete`)
 - Actor data race checks
 - Long function/expression warnings (>100 lines/ms)
-- Various Swift 6.1+ and experimental features
+- Experimental features: `BitwiseCopyable`, `NoncopyableGenerics`, `MoveOnlyClasses`, `VariadicGenerics`, and many more
 
-When adding new code, ensure it follows the strict concurrency model and Swift 6 requirements.
+When adding new code:
+- Ensure it follows the strict concurrency model (all types must be `Sendable` where appropriate)
+- Avoid long functions or expressions (>100 lines)
+- Use `#if swift(>=6.0)` for Swift version-specific code
+- Use `#if canImport(Security)` for platform-specific code (Apple platforms vs Linux)
 
 ## Platform Support
 
@@ -49,6 +61,15 @@ When adding new code, ensure it follows the strict concurrency model and Swift 6
 - **Linux**: Ubuntu 18.04+
 - **Swift**: 5.8+ (Swift 6.0+ for development)
 
-## Sample Code
+## Working with StealthyModel and ModelQueryBuilder
 
-The `Samples/Demo/App/` directory contains example implementations showing how to use `StealthyModel` and `ModelQueryBuilder` for composite credential objects.
+`StealthyModel` allows composite objects spanning multiple keychain items. A `ModelQueryBuilder` implementation must provide:
+
+1. **`queries(from:)`**: Returns dictionary of Query objects keyed by property names
+2. **`model(from:)`**: Builds model from dictionary of `[String: [AnyStealthyProperty]]`
+3. **`properties(from:for:)`**: Extracts `AnyStealthyProperty` array from model for create/delete operations
+4. **`updates(from:to:)`**: Creates `StealthyPropertyUpdate` array for model updates
+
+Example implementations in `Samples/Demo/App/Keychain/`:
+- `CompositeCredentials.swift`: Simple model with username, password, and token
+- `CompositeCredentialsQueryBuilder.swift`: Full `ModelQueryBuilder` implementation pattern

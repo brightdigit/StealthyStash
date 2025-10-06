@@ -1,9 +1,9 @@
 #if canImport(os)
-  public import os
-  public import Foundation
-#else
-  public import Foundation
+    public import os
 #endif
+
+  public import Foundation
+
 
 /// A default logger for the `StealthyRepository` protocol.
 private enum StealthyRepositoryDefaultLogger {
@@ -12,17 +12,18 @@ private enum StealthyRepositoryDefaultLogger {
       Logger(subsystem: $0, category: "secrets")
     }
   #else
-    nonisolated(unsafe) static let logger: Any? = nil
+    static let logger: (any Sendable)? = nil
+
   #endif
 }
 
 /// A protocol for a repository that stores and retrieves `StealthyProperty` objects.
-public protocol StealthyRepository : Sendable {
+public protocol StealthyRepository: Sendable {
   /// A logger for the repository.
   #if canImport(os)
-  var logger: Logger? { get }
+    var logger: Logger? { get }
   #else
-  var logger: Any? { get }
+    var logger: Any? { get }
   #endif
 
   /// Creates a new `StealthyProperty` object in the repository.
@@ -43,23 +44,23 @@ public protocol StealthyRepository : Sendable {
 
 extension StealthyRepository {
   #if canImport(os)
-  internal static var defaultLogger: Logger? {
-    StealthyRepositoryDefaultLogger.logger
-  }
+    internal static var defaultLogger: Logger? {
+      StealthyRepositoryDefaultLogger.logger
+    }
 
-  /// A default logger for the `StealthyRepository` protocol.
-  public var logger: Logger? {
-    Self.defaultLogger
-  }
+    /// A default logger for the `StealthyRepository` protocol.
+    public var logger: Logger? {
+      Self.defaultLogger
+    }
   #else
-  internal static var defaultLogger: Any? {
-    StealthyRepositoryDefaultLogger.logger
-  }
+    internal static var defaultLogger: Any? {
+      StealthyRepositoryDefaultLogger.logger
+    }
 
-  /// A default logger for the `StealthyRepository` protocol.
-  public var logger: Any? {
-    Self.defaultLogger
-  }
+    /// A default logger for the `StealthyRepository` protocol.
+    public var logger: Any? {
+      Self.defaultLogger
+    }
   #endif
 
   /// Updates or creates a `StealthyProperty` object in the repository.

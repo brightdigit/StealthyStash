@@ -1,9 +1,9 @@
 #if canImport(Security)
-  import Security
-  import Foundation
+  public import Foundation
+  public import Security
 
   #if canImport(os)
-    import os
+    public import os
   #endif
 
   extension KeychainRepository {

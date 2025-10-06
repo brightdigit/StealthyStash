@@ -1,4 +1,4 @@
-import Foundation
+public import Foundation
 
 internal struct CommonAttributes {
   internal let account: String
