@@ -16,7 +16,6 @@ jobs:
       matrix:
         os: [noble, jammy]
         swift:
-          - version: "5.8"
           - version: "5.9"
           - version: "5.10"
           - version: "6.0"
@@ -26,9 +25,6 @@ jobs:
           - version: "6.2"
             nightly: true
         exclude:
-          - os: noble
-            swift:
-              version: "5.8"
           - os: noble
             swift:
               version: "5.9"
@@ -117,9 +113,9 @@ jobs:
           # iOS Build Matrix
           - type: ios
             runs-on: macos-14
-            xcode: "/Applications/Xcode_15.0.app"
+            xcode: "/Applications/Xcode_15.2.app"
             deviceName: "iPhone 15"
-            osVersion: "17.0"
+            osVersion: "17.2"
             download-platform: true
 
           - type: ios

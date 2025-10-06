@@ -1,7 +1,7 @@
-import Foundation
+public import Foundation
 
 #if canImport(Security)
-  import Security
+  public import Security
 #endif
 
 /// An enumeration representing the synchronization status of a keychain item.

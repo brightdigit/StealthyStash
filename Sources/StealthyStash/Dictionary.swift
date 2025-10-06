@@ -1,4 +1,4 @@
-import Foundation
+public import Foundation
 
 private protocol _OptionalProtocol {
   var _deepUnwrapped: (any Sendable)? { get }
@@ -107,14 +107,19 @@ extension Optional: _OptionalProtocol {
     switch wrapped {
     case let string as String:
       return StealthyDictionary.deepUnwrap(string)
+
     case let int as Int:
       return StealthyDictionary.deepUnwrap(int)
+
     case let bool as Bool:
       return StealthyDictionary.deepUnwrap(bool)
+
     case let data as Data:
       return StealthyDictionary.deepUnwrap(data)
+
     case let date as Date:
       return StealthyDictionary.deepUnwrap(date)
+
     default:
       // For unknown types, convert to string
       return "\(wrapped)"
