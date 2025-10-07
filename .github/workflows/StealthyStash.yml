@@ -12,7 +12,6 @@ jobs:
     container: ${{ matrix.swift.nightly && format('swiftlang/swift:nightly-{0}-{1}', matrix.swift.version, matrix.os) || format('swift:{0}-{1}', matrix.swift.version, matrix.os) }}
     if: ${{ !contains(github.event.head_commit.message, 'ci skip') }}
     strategy:
-      fail-fast: false
       matrix:
         os: [noble, jammy]
         swift:
@@ -47,7 +46,6 @@ jobs:
     name: Build on Windows
     runs-on: ${{ matrix.runs-on }}
     strategy:
-      fail-fast: false
       matrix:
         runs-on: [windows-2022, windows-2025]
         swift:
@@ -77,7 +75,6 @@ jobs:
     runs-on: ${{ matrix.runs-on }}
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     strategy:
-      fail-fast: false
       matrix:
         include:
           # SPM Build Matrix
