@@ -5,18 +5,21 @@
 import PackageDescription
 
 let swiftSettings: [SwiftSetting] = [
- .enableUpcomingFeature("BareSlashRegexLiterals"),
- .enableUpcomingFeature("ConciseMagicFile"),
- .enableUpcomingFeature("ExistentialAny"),
- .enableUpcomingFeature("ForwardTrailingClosures"),
- .enableUpcomingFeature("ImplicitOpenExistentials"),
- .enableUpcomingFeature("StrictConcurrency"),
- .enableExperimentalFeature("AccessLevelOnImport"),
- .unsafeFlags(["-warn-concurrency", "-enable-actor-data-race-checks",
+  .enableUpcomingFeature("BareSlashRegexLiterals"),
+  .enableUpcomingFeature("ConciseMagicFile"),
+  .enableUpcomingFeature("ExistentialAny"),
+  .enableUpcomingFeature("ForwardTrailingClosures"),
+  .enableUpcomingFeature("ImplicitOpenExistentials"),
+  .enableUpcomingFeature("StrictConcurrency"),
+  .enableExperimentalFeature("AccessLevelOnImport"),
+  .unsafeFlags([
+    "-warn-concurrency",
+    "-enable-actor-data-race-checks",
     // Warn about functions with >100 lines
     "-Xfrontend", "-warn-long-function-bodies=100",
     // Warn about slow type checking expressions
-    "-Xfrontend", "-warn-long-expression-type-checking=100"])
+    "-Xfrontend", "-warn-long-expression-type-checking=100"
+  ])
 ]
 
 let package = Package(
@@ -42,3 +45,4 @@ let package = Package(
     )
   ]
 )
+// swiftlint:enable explicit_acl explicit_top_level_acl

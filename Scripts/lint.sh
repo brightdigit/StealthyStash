@@ -51,9 +51,11 @@ if [ "$LINT_MODE" = "NONE" ]; then
 elif [ "$LINT_MODE" = "STRICT" ]; then
 	SWIFTFORMAT_OPTIONS="--strict --configuration .swift-format"
 	SWIFTLINT_OPTIONS="--strict"
+	STRINGSLINT_OPTIONS="--config .strict.stringslint.yml"
 else 
 	SWIFTFORMAT_OPTIONS="--configuration .swift-format"
 	SWIFTLINT_OPTIONS=""
+	STRINGSLINT_OPTIONS="--config .stringslint.yml"
 fi
 
 pushd $PACKAGE_DIR
@@ -69,12 +71,15 @@ if [ -z "$FORMAT_ONLY" ]; then
     run_command $MINT_RUN swiftlint lint $SWIFTLINT_OPTIONS
 fi
 
-if [ -z "$CI" ]; then
-    run_command $MINT_RUN periphery scan --disable-update-check
-fi
+$PACKAGE_DIR/Scripts/header.sh -d  $PACKAGE_DIR/Sources -c "Leo Dion" -o "BrightDigit" -p "StealthyStash"
 
 run_command $MINT_RUN swiftlint lint $SWIFTLINT_OPTIONS
 run_command $MINT_RUN swift-format lint --recursive --parallel $SWIFTFORMAT_OPTIONS Sources Tests
+
+if [ -z "$CI" ]; then
+    run_command $MINT_RUN periphery scan $PERIPHERY_OPTIONS --disable-update-check
+fi
+
 
 popd
 

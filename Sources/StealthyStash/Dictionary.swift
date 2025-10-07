@@ -1,7 +1,36 @@
+//
+//  Dictionary.swift
+//  StealthyStash
+//
+//  Created by Leo Dion.
+//  Copyright © 2025 BrightDigit.
+//
+//  Permission is hereby granted, free of charge, to any person
+//  obtaining a copy of this software and associated documentation
+//  files (the “Software”), to deal in the Software without
+//  restriction, including without limitation the rights to use,
+//  copy, modify, merge, publish, distribute, sublicense, and/or
+//  sell copies of the Software, and to permit persons to whom the
+//  Software is furnished to do so, subject to the following
+//  conditions:
+//
+//  The above copyright notice and this permission notice shall be
+//  included in all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+//  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+//  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+//  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+//  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+//  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+//  OTHER DEALINGS IN THE SOFTWARE.
+//
+
 public import Foundation
 
-private protocol _OptionalProtocol {
-  var _deepUnwrapped: (any Sendable)? { get }
+private protocol OptionalProtocol {
+  var deepUnwrapped: (any Sendable)? { get }
 }
 
 extension Dictionary where Key: Sendable, Value: Sendable {
@@ -11,8 +40,8 @@ extension Dictionary where Key: Sendable, Value: Sendable {
   }
 
   internal static func deepUnwrap(_ any: (any Sendable)?) -> (any Sendable)? {
-    if let optional = any as? (any _OptionalProtocol) {
-      return optional._deepUnwrapped
+    if let optional = any as? (any OptionalProtocol) {
+      return optional.deepUnwrapped
     }
     return any
   }
@@ -82,7 +111,7 @@ extension Dictionary where Key: Sendable, Value: Sendable {
 extension Dictionary where Key == String, Value == (any Sendable)? {
   internal func loggingDescription() -> String {
     compactMap { (key: String, value: (any Sendable)?) in
-      guard let value = value._deepUnwrapped else {
+      guard let value = value.deepUnwrapped else {
         // assertionFailure()
         return nil
       }
@@ -98,10 +127,11 @@ extension Dictionary where Key == String, Value == (any Sendable)? {
   #endif
 }
 
-extension Optional: _OptionalProtocol {
-  // swiftlint:disable:next strict_fileprivate
-  fileprivate var _deepUnwrapped: (any Sendable)? {
-    guard let wrapped = self else { return nil }
+extension Optional: OptionalProtocol {
+  fileprivate var deepUnwrapped: (any Sendable)? {
+    guard let wrapped = self else {
+      return nil
+    }
 
     // Since we can't safely cast to Sendable in all cases, we'll handle common types
     switch wrapped {
