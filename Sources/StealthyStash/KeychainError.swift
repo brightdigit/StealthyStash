@@ -72,7 +72,7 @@ public enum KeychainError: Error, LocalizedError, Equatable {
       if let description = SecCopyErrorMessageString(status, nil) {
         return description as String
       } else {
-        return "Unhandled error with status code: \(status)\n"
+        return "Unhandled error with status code: \(status)"
       }
 
     case let .unsupportedClass(className):
