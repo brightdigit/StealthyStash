@@ -16,7 +16,6 @@ jobs:
       matrix:
         os: [noble, jammy]
         swift:
-          - version: "5.8"
           - version: "5.9"
           - version: "5.10"
           - version: "6.0"
@@ -26,9 +25,6 @@ jobs:
           - version: "6.2"
             nightly: true
         exclude:
-          - os: noble
-            swift:
-              version: "5.8"
           - os: noble
             swift:
               version: "5.9"
@@ -94,8 +90,11 @@ jobs:
           - runs-on: macos-15
             xcode: "/Applications/Xcode_16.4.app"
 
-          - runs-on: macos-15
+          - runs-on: macos-26
             xcode: "/Applications/Xcode_26.0.app"
+
+          - runs-on: macos-26
+            xcode: "/Applications/Xcode_26.1.app"
 
           # macOS Build Matrix
           - type: macos
@@ -111,15 +110,19 @@ jobs:
             xcode: "/Applications/Xcode_16.4.app"
 
           - type: macos
-            runs-on: macos-15
+            runs-on: macos-26
             xcode: "/Applications/Xcode_26.0.app"
+
+          - type: macos
+            runs-on: macos-26
+            xcode: "/Applications/Xcode_26.1.app"
                       
           # iOS Build Matrix
           - type: ios
             runs-on: macos-14
-            xcode: "/Applications/Xcode_15.0.app"
+            xcode: "/Applications/Xcode_15.2.app"
             deviceName: "iPhone 15"
-            osVersion: "17.0"
+            osVersion: "17.2"
             download-platform: true
 
           - type: ios
@@ -130,10 +133,17 @@ jobs:
             download-platform: true
   
           - type: ios
-            runs-on: macos-15
+            runs-on: macos-26
             xcode: "/Applications/Xcode_26.0.app"
             deviceName: "iPhone 17 Pro"
             osVersion: "26.0"
+            download-platform: true
+
+          - type: ios
+            runs-on: macos-26
+            xcode: "/Applications/Xcode_26.1.app"
+            deviceName: "iPhone 17 Pro"
+            osVersion: "26.1"
             download-platform: true
   
           # watchOS Build Matrix
@@ -152,10 +162,17 @@ jobs:
             download-platform: true
 
           - type: watchos
-            runs-on: macos-15
+            runs-on: macos-26
             xcode: "/Applications/Xcode_26.0.app"
             deviceName: "Apple Watch Ultra 3 (49mm)"
             osVersion: "26.0"
+            download-platform: true
+
+          - type: watchos
+            runs-on: macos-26
+            xcode: "/Applications/Xcode_26.1.app"
+            deviceName: "Apple Watch Ultra 3 (49mm)"
+            osVersion: "26.1"
             download-platform: true
 
           # tvOS Build Matrix
@@ -174,10 +191,17 @@ jobs:
             download-platform: true
 
           - type: tvos
-            runs-on: macos-15
+            runs-on: macos-26
             xcode: "/Applications/Xcode_26.0.app"
             deviceName: "Apple TV"
             osVersion: "26.0"
+            download-platform: true
+
+          - type: tvos
+            runs-on: macos-26
+            xcode: "/Applications/Xcode_26.1.app"
+            deviceName: "Apple TV"
+            osVersion: "26.1"
             download-platform: true
 
           # visionOS Build Matrix
@@ -189,10 +213,17 @@ jobs:
             download-platform: true
               
           - type: visionos
-            runs-on: macos-15
+            runs-on: macos-26
             xcode: "/Applications/Xcode_26.0.app"
             deviceName: "Apple Vision Pro"
             osVersion: "26.0"
+            download-platform: true
+
+          - type: visionos
+            runs-on: macos-26
+            xcode: "/Applications/Xcode_26.1.app"
+            deviceName: "Apple Vision Pro"
+            osVersion: "26.1"
             download-platform: true
   
     steps:
