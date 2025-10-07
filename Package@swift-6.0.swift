@@ -3,7 +3,7 @@
 // swiftlint:disable explicit_acl explicit_top_level_acl
 
 import PackageDescription
-// swiftlint:disable:next explicit_top_level_acl explicit_acl
+
 let swiftSettings: [SwiftSetting] = [
   // Swift 6.2 Upcoming Features (not yet enabled by default)
   // SE-0335: Introduce existential `any`
@@ -97,3 +97,4 @@ let package = Package(
     )
   ]
 )
+// swiftlint:enable explicit_acl explicit_top_level_acl
