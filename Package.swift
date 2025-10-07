@@ -4,15 +4,23 @@
 
 import PackageDescription
 
-// let swiftSettings: [SwiftSetting] = [
-//  .enableUpcomingFeature("BareSlashRegexLiterals"),
-//  .enableUpcomingFeature("ConciseMagicFile"),
-//  .enableUpcomingFeature("ExistentialAny"),
-//  .enableUpcomingFeature("ForwardTrailingClosures"),
-//  .enableUpcomingFeature("ImplicitOpenExistentials"),
-//  .enableUpcomingFeature("StrictConcurrency"),
-//  .unsafeFlags(["-warn-concurrency", "-enable-actor-data-race-checks"])
-// ]
+let swiftSettings: [SwiftSetting] = [
+  .enableUpcomingFeature("BareSlashRegexLiterals"),
+  .enableUpcomingFeature("ConciseMagicFile"),
+  .enableUpcomingFeature("ExistentialAny"),
+  .enableUpcomingFeature("ForwardTrailingClosures"),
+  .enableUpcomingFeature("ImplicitOpenExistentials"),
+  .enableUpcomingFeature("StrictConcurrency"),
+  .enableExperimentalFeature("AccessLevelOnImport"),
+  // .unsafeFlags([
+  //   "-warn-concurrency",
+  //   "-enable-actor-data-race-checks",
+  //   // Warn about functions with >100 lines
+  //   "-Xfrontend", "-warn-long-function-bodies=100",
+  //   // Warn about slow type checking expressions
+  //   "-Xfrontend", "-warn-long-expression-type-checking=100"
+  // ])
+]
 
 let package = Package(
   name: "StealthyStash",
@@ -23,23 +31,18 @@ let package = Package(
       targets: ["StealthyStash"]
     )
   ],
-  dependencies: [
-    .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
-  ],
+  dependencies: [],
   targets: [
     .target(
       name: "StealthyStash",
-      dependencies: [
-        .product(
-          name: "Logging",
-          package: "swift-log",
-          condition: .when(platforms: [.linux, .android, .windows, .wasi])
-        )
-      ]
+      dependencies: [],
+      swiftSettings: swiftSettings
     ),
     .testTarget(
       name: "StealthyStashTests",
-      dependencies: ["StealthyStash"]
+      dependencies: ["StealthyStash"],
+      swiftSettings: swiftSettings
     )
   ]
 )
+// swiftlint:enable explicit_acl explicit_top_level_acl

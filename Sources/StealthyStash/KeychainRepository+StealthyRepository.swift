@@ -1,5 +1,39 @@
+//
+//  KeychainRepository+StealthyRepository.swift
+//  StealthyStash
+//
+//  Created by Leo Dion.
+//  Copyright © 2025 BrightDigit.
+//
+//  Permission is hereby granted, free of charge, to any person
+//  obtaining a copy of this software and associated documentation
+//  files (the “Software”), to deal in the Software without
+//  restriction, including without limitation the rights to use,
+//  copy, modify, merge, publish, distribute, sublicense, and/or
+//  sell copies of the Software, and to permit persons to whom the
+//  Software is furnished to do so, subject to the following
+//  conditions:
+//
+//  The above copyright notice and this permission notice shall be
+//  included in all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+//  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+//  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+//  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+//  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+//  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+//  OTHER DEALINGS IN THE SOFTWARE.
+//
+
 #if canImport(Security)
-  import Security
+  public import Foundation
+  public import Security
+
+  #if canImport(os)
+    public import os
+  #endif
 
   extension KeychainRepository {
     private static func itemsFromQuery(
@@ -14,7 +48,8 @@
       }
       guard
         let itemDictionaries = item as? [StealthyDictionary],
-        status == errSecSuccess else {
+        status == errSecSuccess
+      else {
         throw KeychainError.unhandledError(status: status)
       }
       return itemDictionaries
@@ -23,11 +58,13 @@
     /// Creates a new keychain item.
     /// - Parameter item: Property which will be stored in the keychain.
     public func create(_ item: AnyStealthyProperty) throws {
-      let defaults = defaultProvider?
+      let defaults =
+        defaultProvider?
         .attributesForNewItem(ofType: item.propertyType) ?? [:]
       let itemDictionary = item.property.addQuery()
 
-      let query = itemDictionary
+      let query =
+        itemDictionary
         .merging(defaults) {
           $0 ?? $1
         }
@@ -90,7 +127,8 @@
     /// - Returns: A collection of keychain items.
     public func query(_ query: any Query) throws -> [AnyStealthyProperty] {
       let defaults = defaultProvider?.attributesForQuery(ofType: query.type) ?? [:]
-      let dictionaryAny = query
+      let dictionaryAny =
+        query
         .keychainDictionary()
         .merging(with: defaults, overwrite: false)
 
