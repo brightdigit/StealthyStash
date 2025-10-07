@@ -8,7 +8,6 @@ A Swifty database interface into the Keychain Services.
 [![SwiftPM](https://img.shields.io/badge/SPM-Linux%20%7C%20iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS-success?logo=swift)](https://swift.org)
 [![Twitter](https://img.shields.io/badge/twitter-@brightdigit-blue.svg?style=flat)](http://twitter.com/brightdigit)
 ![GitHub](https://img.shields.io/github/license/brightdigit/StealthyStash)
-![GitHub issues](https://img.shields.io/github/issues/brightdigit/StealthyStash)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/brightdigit/StealthyStash/StealthyStash.yml?label=actions&logo=github&?branch=main)
 
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FStealthyStash%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/brightdigit/StealthyStash)
@@ -17,11 +16,7 @@ A Swifty database interface into the Keychain Services.
 
 [![Codecov](https://img.shields.io/codecov/c/github/brightdigit/StealthyStash)](https://codecov.io/gh/brightdigit/StealthyStash)
 [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/brightdigit/StealthyStash)](https://www.codefactor.io/repository/github/brightdigit/StealthyStash)
-[![codebeat badge](https://codebeat.co/badges/54695d4b-98c8-4f0f-855e-215500163094)](https://codebeat.co/projects/github-com-brightdigit-StealthyStash-main)
-[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/brightdigit/StealthyStash)](https://codeclimate.com/github/brightdigit/StealthyStash)
-[![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/brightdigit/StealthyStash?label=debt)](https://codeclimate.com/github/brightdigit/StealthyStash)
-[![Code Climate issues](https://img.shields.io/codeclimate/issues/brightdigit/StealthyStash)](https://codeclimate.com/github/brightdigit/StealthyStash)
-[![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
+[![Maintainability](https://qlty.sh/gh/brightdigit/projects/StealthyStash/maintainability.svg)](https://qlty.sh/gh/brightdigit/projects/StealthyStash)
 
 # Table of Contents
 
