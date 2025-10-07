@@ -1,6 +1,5 @@
 public import Foundation
 
-
 /// A struct representing a generic password item.
 public struct GenericPasswordItem: Identifiable, Hashable, StealthyProperty {
   /// The account name associated with the password.

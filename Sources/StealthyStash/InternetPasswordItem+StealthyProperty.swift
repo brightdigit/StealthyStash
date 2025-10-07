@@ -16,7 +16,7 @@ extension InternetPasswordItem {
       self.protocol?.rawValue,
       authenticationType,
       port?.description,
-      path
+      path,
     ].compactMap { $0 }.joined()
   }
 
@@ -92,7 +92,7 @@ extension InternetPasswordItem {
         kSecAttrProtocol as String: self.protocol?.cfValue,
         kSecAttrPort as String: port,
         kSecAttrPath as String: path,
-        kSecAttrSynchronizable as String: isSynchronizable.cfValue
+        kSecAttrSynchronizable as String: isSynchronizable.cfValue,
       ]
     }
 
@@ -102,7 +102,7 @@ extension InternetPasswordItem {
         kSecAttrSynchronizable as String: isSynchronizable.cfValue,
         kSecAttrDescription as String: description,
         kSecAttrType as String: type,
-        kSecAttrLabel as String: label
+        kSecAttrLabel as String: label,
       ]
     }
   #endif

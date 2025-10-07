@@ -44,7 +44,7 @@
       [
         kSecAttrServer as String: type == .internet ? defaultServerName : nil,
         kSecAttrService as String: type == .generic ? defaultServiceName : nil,
-        kSecAttrAccessGroup as String: defaultAccessGroup
+        kSecAttrAccessGroup as String: defaultAccessGroup,
       ]
     }
 
@@ -59,7 +59,7 @@
         kSecAttrService as String: type == .generic ? defaultServiceName : nil,
         kSecAttrServer as String: type == .internet ? defaultServerName : nil,
         kSecAttrAccessGroup as String: defaultAccessGroup,
-        kSecAttrSynchronizable as String: defaultSynchronizable.cfValue
+        kSecAttrSynchronizable as String: defaultSynchronizable.cfValue,
       ]
     }
   }

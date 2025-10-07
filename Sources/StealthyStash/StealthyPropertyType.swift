@@ -1,5 +1,4 @@
-
-  public import Foundation
+public import Foundation
 
 /// An enumeration of property types that can be stored securely.
 public enum StealthyPropertyType: Sendable {

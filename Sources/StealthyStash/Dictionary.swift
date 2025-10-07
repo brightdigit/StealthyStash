@@ -1,7 +1,7 @@
 public import Foundation
 
-private protocol _OptionalProtocol {
-  var _deepUnwrapped: (any Sendable)? { get }
+private protocol OptionalProtocol {
+  var deepUnwrapped: (any Sendable)? { get }
 }
 
 extension Dictionary where Key: Sendable, Value: Sendable {
@@ -11,8 +11,8 @@ extension Dictionary where Key: Sendable, Value: Sendable {
   }
 
   internal static func deepUnwrap(_ any: (any Sendable)?) -> (any Sendable)? {
-    if let optional = any as? (any _OptionalProtocol) {
-      return optional._deepUnwrapped
+    if let optional = any as? (any OptionalProtocol) {
+      return optional.deepUnwrapped
     }
     return any
   }
@@ -82,7 +82,7 @@ extension Dictionary where Key: Sendable, Value: Sendable {
 extension Dictionary where Key == String, Value == (any Sendable)? {
   internal func loggingDescription() -> String {
     compactMap { (key: String, value: (any Sendable)?) in
-      guard let value = value._deepUnwrapped else {
+      guard let value = value.deepUnwrapped else {
         // assertionFailure()
         return nil
       }
@@ -98,10 +98,11 @@ extension Dictionary where Key == String, Value == (any Sendable)? {
   #endif
 }
 
-extension Optional: _OptionalProtocol {
-  // swiftlint:disable:next strict_fileprivate
-  fileprivate var _deepUnwrapped: (any Sendable)? {
-    guard let wrapped = self else { return nil }
+extension Optional: OptionalProtocol {
+  fileprivate var deepUnwrapped: (any Sendable)? {
+    guard let wrapped = self else {
+      return nil
+    }
 
     // Since we can't safely cast to Sendable in all cases, we'll handle common types
     switch wrapped {

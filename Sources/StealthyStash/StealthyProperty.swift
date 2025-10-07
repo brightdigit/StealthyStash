@@ -1,6 +1,4 @@
-
-  public import Foundation
-
+public import Foundation
 
 /// A protocol for properties that can be stored securely.
 public protocol StealthyProperty: Identifiable, Hashable, Sendable {

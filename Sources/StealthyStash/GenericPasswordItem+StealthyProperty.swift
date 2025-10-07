@@ -15,7 +15,7 @@ extension GenericPasswordItem {
   public var id: String {
     [
       account,
-      service
+      service,
     ].compactMap { $0 }.joined()
   }
 
@@ -73,7 +73,7 @@ extension GenericPasswordItem {
         kSecAttrAccount as String: account,
         kSecAttrService as String: service,
         kSecAttrAccessGroup as String: accessGroup,
-        kSecAttrSynchronizable as String: isSynchronizable.cfValue
+        kSecAttrSynchronizable as String: isSynchronizable.cfValue,
       ]
     }
 
@@ -84,7 +84,7 @@ extension GenericPasswordItem {
         kSecAttrDescription as String: description,
         kSecAttrComment as String: comment,
         kSecAttrType as String: type,
-        kSecAttrLabel as String: label
+        kSecAttrLabel as String: label,
       ]
     }
   #endif

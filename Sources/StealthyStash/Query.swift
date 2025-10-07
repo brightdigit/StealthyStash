@@ -22,7 +22,7 @@ public protocol Query: Sendable {
         kSecReturnAttributes as String: true,
         kSecReturnData as String: true,
         kSecAttrSynchronizable as String: kSecAttrSynchronizableAny as String,
-        kSecMatchLimit as String: kSecMatchLimitAll as String
+        kSecMatchLimit as String: kSecMatchLimitAll as String,
       ]
     }
   }

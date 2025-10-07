@@ -68,7 +68,7 @@ public enum ServerProtocol: String, Sendable {
       kSecAttrProtocolTelnetS as String: .telnets,
       kSecAttrProtocolIMAPS as String: .imaps,
       kSecAttrProtocolIRCS as String: .ircs,
-      kSecAttrProtocolPOP3S as String: .pop3s
+      kSecAttrProtocolPOP3S as String: .pop3s,
     ]
 
     private static let spMap: [ServerProtocol: String] = .init(

@@ -1,9 +1,8 @@
+public import Foundation
+
 #if canImport(os)
-    public import os
+  public import os
 #endif
-
-  public import Foundation
-
 
 /// A default logger for the `StealthyRepository` protocol.
 private enum StealthyRepositoryDefaultLogger {

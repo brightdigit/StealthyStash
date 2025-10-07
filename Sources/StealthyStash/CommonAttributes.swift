@@ -15,7 +15,6 @@ internal struct CommonAttributes {
 
 #if canImport(Security)
   extension CommonAttributes {
-    // swiftlint:disable:next function_body_length
     internal init(dictionary: StealthyDictionary, isRaw: Bool) throws {
       let account: String = try dictionary.require(kSecAttrAccount)
       let data: Data = try dictionary.require(kSecValueData)

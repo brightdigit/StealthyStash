@@ -1,6 +1,4 @@
-
-  public import Foundation
-
+public import Foundation
 
 #if canImport(FoundationNetworking)
   import FoundationNetworking
@@ -8,7 +6,8 @@
 
 #if canImport(Darwin)
   import Darwin
-#else  // swiftlint:disable:next missing_docs
+#else
+// swiftlint:disable:next missing_docs
   public typealias OSStatus = Int32
   // swiftlint:disable:next identifier_name
   private func SecCopyErrorMessageString(_: OSStatus, _: Any?) -> String? {
